@@ -50,7 +50,9 @@ func IsValidPrivateKey(sk string) bool {
 func EtherToWei(value float64) *big.Int {
 	one := math.Pow10(18)
 	res := value * one
-	return new(big.Int).SetUint64(uint64(res))
+	result := new(big.Int)
+	big.NewFloat(res).Int(result)
+	return result
 }
 
 // transfer private key to str

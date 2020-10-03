@@ -9,7 +9,7 @@ import (
 )
 
 func TestTransfer(t *testing.T) {
-	toAddress := "0xE9b15a2D396B349ABF60e53ec66Bcf9af262D449"
+	toAddress := _const.ToAddress
 	beginBalance, _ := GetEtherBalance(toAddress)
 	fmt.Println("balance before transfer:", beginBalance)
 	authClient, err := _rpc.NewAuthClient(_const.SuperSk)

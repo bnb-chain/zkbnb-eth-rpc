@@ -2,6 +2,7 @@ package chain
 
 import (
 	"context"
+	"crypto/ecdsa"
 	"eva-go-rpc/_const"
 	"eva-go-rpc/_rpc"
 	"eva-go-rpc/_utils"
@@ -49,7 +50,7 @@ func Transfer(authCli *_rpc.AuthClient, to string, amount *big.Int, data []byte,
 	}
 	toAddress := common.HexToAddress(to)
 	tx := types.NewTransaction(nonce, toAddress, amount, gasLimit, gasPrice, data)
-	signedTx, err := signTx(authCli, tx)
+	signedTx, err := SignTx(authCli, tx)
 	if err != nil {
 		return "", err
 	}
@@ -58,7 +59,7 @@ func Transfer(authCli *_rpc.AuthClient, to string, amount *big.Int, data []byte,
 }
 
 // sign transaction
-func signTx(authCli *_rpc.AuthClient, tx *types.Transaction) (signedTx *types.Transaction, err error) {
+func SignTx(authCli *_rpc.AuthClient, tx *types.Transaction) (signedTx *types.Transaction, err error) {
 	// check if it is valid params
 	if authCli.ChainId == nil || authCli.PrivateKey == nil {
 		return nil, _rpc.InvalidAuthClientParams
@@ -94,11 +95,13 @@ func DeployContract(authCli *_rpc.AuthClient, gasPrice *big.Int, abiPath string,
 		}
 	}
 	// create authentication
-	auth := bind.NewKeyedTransactor(authCli.PrivateKey)
-	auth.Nonce = big.NewInt(int64(nonce))
-	auth.Value = big.NewInt(0)
-	auth.GasLimit = _const.SuggestContractGasLimit
-	auth.GasPrice = gasPrice
+	auth := CreateAuthentication(
+		authCli.PrivateKey,
+		big.NewInt(int64(nonce)),
+		big.NewInt(0),
+		_const.SuggestContractGasLimit,
+		gasPrice,
+	)
 	// get abi
 	abiData, err := ioutil.ReadFile(abiPath)
 	if err != nil {
@@ -168,4 +171,13 @@ func DeployContractUntil(authCli *_rpc.AuthClient, gasPrice *big.Int, abiPath st
 		return false, contractAddress, txHash, err
 	}
 	return status, contractAddress, txHash, nil
+}
+
+func CreateAuthentication(privateKey *ecdsa.PrivateKey, nonce *big.Int, value *big.Int, gasLimit uint64, gasPrice *big.Int) *bind.TransactOpts {
+	auth := bind.NewKeyedTransactor(privateKey)
+	auth.Nonce = nonce
+	auth.Value = value
+	auth.GasLimit = _const.SuggestContractGasLimit
+	auth.GasPrice = gasPrice
+	return auth
 }

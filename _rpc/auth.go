@@ -5,6 +5,8 @@ import (
 	"crypto/ecdsa"
 	"eva-go-rpc/_const"
 	"eva-go-rpc/_utils"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"math/big"
 )
@@ -17,6 +19,8 @@ func GetConnection() (cli *ethclient.Client, err error) {
 // auth of user
 type AuthClient struct {
 	PrivateKey *ecdsa.PrivateKey `json:"private_key"`
+	PublicKey  *ecdsa.PublicKey  `json:"public_key"`
+	Address    common.Address    `json:"address"`
 	ChainId    *big.Int          `json:"chain_id"`
 }
 
@@ -31,6 +35,9 @@ func NewAuthClient(priKey string) (authCli *AuthClient, err error) {
 	if err != nil {
 		return nil, err
 	}
+	// get public key
+	publicKey := privateKey.PublicKey
+	address := crypto.PubkeyToAddress(publicKey)
 	// create connection
 	cli, err := GetConnection()
 	if err != nil {
@@ -40,5 +47,5 @@ func NewAuthClient(priKey string) (authCli *AuthClient, err error) {
 	if err != nil {
 		return nil, err
 	}
-	return &AuthClient{PrivateKey: privateKey, ChainId: chainID}, nil
+	return &AuthClient{PrivateKey: privateKey, PublicKey: &publicKey, Address: address, ChainId: chainID}, nil
 }
