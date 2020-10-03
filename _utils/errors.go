@@ -1,4 +1,4 @@
-package eutils
+package _utils
 
 import "errors"
 

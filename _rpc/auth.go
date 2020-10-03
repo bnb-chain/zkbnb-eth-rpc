@@ -1,17 +1,17 @@
-package erpc
+package _rpc
 
 import (
 	"context"
 	"crypto/ecdsa"
-	"eva-go-rpc/econst"
-	"eva-go-rpc/eutils"
+	"eva-go-rpc/_const"
+	"eva-go-rpc/_utils"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"math/big"
 )
 
 // get connection of ethereum or rinkeby network
 func GetConnection() (cli *ethclient.Client, err error) {
-	return ethclient.Dial(econst.InfuraRinkebyNetwork)
+	return ethclient.Dial(_const.InfuraRinkebyNetwork)
 }
 
 // auth of user
@@ -23,11 +23,11 @@ type AuthClient struct {
 // create a new auth client
 func NewAuthClient(priKey string) (authCli *AuthClient, err error) {
 	// validate private key
-	if !eutils.IsValidPrivateKey(priKey) {
+	if !_utils.IsValidPrivateKey(priKey) {
 		return nil, InvalidPrivateKey
 	}
 	// transfer private key str to private key
-	privateKey, err := eutils.DecodePrivateKey(priKey)
+	privateKey, err := _utils.DecodePrivateKey(priKey)
 	if err != nil {
 		return nil, err
 	}

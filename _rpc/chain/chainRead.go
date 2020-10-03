@@ -3,8 +3,8 @@ package chain
 import (
 	"context"
 	"crypto/ecdsa"
-	"eva-go-rpc/erpc"
-	"eva-go-rpc/eutils"
+	"eva-go-rpc/_rpc"
+	"eva-go-rpc/_utils"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
@@ -14,14 +14,14 @@ import (
 // get balance
 func GetBalance(address string) (balance *big.Int, err error) {
 	// check address
-	isValid := eutils.IsValidEthAddress(address)
+	isValid := _utils.IsValidEthAddress(address)
 	if !isValid {
-		return nil, erpc.InvalidAddress
+		return nil, _rpc.InvalidAddress
 	}
 	// get address
 	account := common.HexToAddress(address)
 	// get connection
-	cli, err := erpc.GetConnection()
+	cli, err := _rpc.GetConnection()
 	if err != nil {
 		return nil, err
 	}
@@ -36,18 +36,18 @@ func GetEtherBalance(address string) (etherBalance *big.Float, err error) {
 	if err != nil {
 		return nil, err
 	}
-	etherBalance = eutils.WeiToEther(balance)
+	etherBalance = _utils.WeiToEther(balance)
 	return etherBalance, nil
 }
 
 // check if the address is a contract address
 // @address: address of ethereum
 func IsContract(address string) (isContract bool, err error) {
-	isValidEthAddress := eutils.IsValidEthAddress(address)
+	isValidEthAddress := _utils.IsValidEthAddress(address)
 	if !isValidEthAddress {
-		return false, erpc.InvalidAddress
+		return false, _rpc.InvalidAddress
 	}
-	cli, err := erpc.GetConnection()
+	cli, err := _rpc.GetConnection()
 	if err != nil {
 		return false, err
 	}
@@ -68,7 +68,7 @@ func GetLatestBlockHeader() (header *types.Header, err error) {
 
 // get block header by hash
 func GetBlockHeaderByHash(blockHash string) (header *types.Header, err error) {
-	cli, err := erpc.GetConnection()
+	cli, err := _rpc.GetConnection()
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ func GetLatestBlockInfo() (blockInfo *types.Block, err error) {
 
 // get block info by hash
 func GetBlockInfoByHash(blockHash string) (blockInfo *types.Block, err error) {
-	cli, err := erpc.GetConnection()
+	cli, err := _rpc.GetConnection()
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ func GetBlockInfoByHash(blockHash string) (blockInfo *types.Block, err error) {
 
 // get block header by number
 func GetBlockHeaderByNumber(height *big.Int) (header *types.Header, err error) {
-	cli, err := erpc.GetConnection()
+	cli, err := _rpc.GetConnection()
 	if err != nil {
 		return nil, err
 	}
@@ -112,7 +112,7 @@ func GetBlockHeaderByNumber(height *big.Int) (header *types.Header, err error) {
 
 // get block info by number
 func GetBlockInfoByNumber(height *big.Int) (blockInfo *types.Block, err error) {
-	cli, err := erpc.GetConnection()
+	cli, err := _rpc.GetConnection()
 	if err != nil {
 		return nil, err
 	}
@@ -123,7 +123,7 @@ func GetBlockInfoByNumber(height *big.Int) (blockInfo *types.Block, err error) {
 
 // get block height
 func GetHeight() (height uint64, err error) {
-	cli, err := erpc.GetConnection()
+	cli, err := _rpc.GetConnection()
 	if err != nil {
 		return 0, err
 	}
@@ -135,10 +135,10 @@ func GetHeight() (height uint64, err error) {
 // get transaction info by hash
 func GetTransactionByHash(transactionHash string) (tx *types.Transaction, isPending bool, err error) {
 	// validate hash value
-	if !eutils.IsValidHashValue(transactionHash) {
-		return nil, false, erpc.InvalidHashValue
+	if !_utils.IsValidHashValue(transactionHash) {
+		return nil, false, _rpc.InvalidHashValue
 	}
-	cli, err := erpc.GetConnection()
+	cli, err := _rpc.GetConnection()
 	if err != nil {
 		return nil, false, err
 	}
@@ -151,10 +151,10 @@ func GetTransactionByHash(transactionHash string) (tx *types.Transaction, isPend
 // get transaction receipt
 func GetTransactionReceipt(transactionHash string) (receipt *types.Receipt, err error) {
 	// validate hash value
-	if !eutils.IsValidHashValue(transactionHash) {
-		return nil, erpc.InvalidHashValue
+	if !_utils.IsValidHashValue(transactionHash) {
+		return nil, _rpc.InvalidHashValue
 	}
-	cli, err := erpc.GetConnection()
+	cli, err := _rpc.GetConnection()
 	if err != nil {
 		return nil, err
 	}
@@ -166,14 +166,14 @@ func GetTransactionReceipt(transactionHash string) (receipt *types.Receipt, err 
 
 func GetPendingNonce(address string) (nonce uint64, err error) {
 	// validate address
-	isValidEthAddress := eutils.IsValidEthAddress(address)
+	isValidEthAddress := _utils.IsValidEthAddress(address)
 	if !isValidEthAddress {
-		return 0, erpc.InvalidAddress
+		return 0, _rpc.InvalidAddress
 	}
 	// transfer to address
 	account := common.HexToAddress(address)
 	// get connection
-	cli, err := erpc.GetConnection()
+	cli, err := _rpc.GetConnection()
 	if err != nil {
 		return 0, err
 	}
@@ -187,7 +187,7 @@ func PrivateKeyToAddress(privateKey *ecdsa.PrivateKey) (address common.Address, 
 	pubKey := privateKey.Public()
 	publicKeyECDSA, ok := pubKey.(*ecdsa.PublicKey)
 	if !ok {
-		return common.Address{}, erpc.InvalidPrivateKey
+		return common.Address{}, _rpc.InvalidPrivateKey
 	}
 	// get address
 	address = crypto.PubkeyToAddress(*publicKeyECDSA)

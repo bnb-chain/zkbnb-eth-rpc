@@ -1,1 +1,1 @@
-# EVA-go-sdk
+# EVA-go-rpc

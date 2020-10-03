@@ -1,9 +1,9 @@
-package eutils
+package _utils
 
 import (
 	"bytes"
 	"crypto/ecdsa"
-	"eva-go-rpc/econst"
+	"eva-go-rpc/_const"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto"
 	"math"
@@ -20,13 +20,13 @@ func WeiToEther(_balance *big.Int) *big.Float {
 
 // check if it is a valid hash value
 func IsValidHashValue(hash string) bool {
-	re := regexp.MustCompile(econst.HashRegexp)
+	re := regexp.MustCompile(_const.HashRegexp)
 	return re.MatchString(hash)
 }
 
 // check if it is a valid address
 func IsValidEthAddress(address string) bool {
-	re := regexp.MustCompile(econst.AddressRegexp)
+	re := regexp.MustCompile(_const.AddressRegexp)
 	return re.MatchString(address)
 }
 
@@ -35,9 +35,9 @@ func IsValidPrivateKey(sk string) bool {
 	// if sk starts with 0x
 	var re *regexp.Regexp
 	if len(sk) == 66 && sk[:2] == "0x" {
-		re = regexp.MustCompile(econst.SkRegexp0x)
+		re = regexp.MustCompile(_const.SkRegexp0x)
 	} else if len(sk) == 64 {
-		re = regexp.MustCompile(econst.SkRegexp)
+		re = regexp.MustCompile(_const.SkRegexp)
 	}
 	if re == nil {
 		return false

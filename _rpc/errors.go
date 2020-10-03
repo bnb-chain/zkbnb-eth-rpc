@@ -1,4 +1,4 @@
-package erpc
+package _rpc
 
 import "errors"
 

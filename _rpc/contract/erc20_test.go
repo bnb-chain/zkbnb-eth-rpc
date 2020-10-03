@@ -1,13 +1,13 @@
 package contract
 
 import (
-	"eva-go-rpc/econst"
+	"eva-go-rpc/_const"
 	"fmt"
 	"testing"
 )
 
 func TestGetErc20Balance(t *testing.T) {
-	balance, err := GetErc20EtherBalance(econst.SuperAddress)
+	balance, err := GetErc20EtherBalance(_const.SuperAddress)
 	if err != nil {
 		panic(err)
 	}

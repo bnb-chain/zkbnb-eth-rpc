@@ -1,4 +1,4 @@
-package econst
+package _const
 
 import "time"
 
