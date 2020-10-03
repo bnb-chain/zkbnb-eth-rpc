@@ -1,4 +1,4 @@
-module eva-go-sdk
+module eva-go-rpc
 
 go 1.15
 

@@ -3,8 +3,8 @@ package erpc
 import (
 	"context"
 	"crypto/ecdsa"
-	"eva-go-sdk/econst"
-	"eva-go-sdk/eutils"
+	"eva-go-rpc/econst"
+	"eva-go-rpc/eutils"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"math/big"
 )

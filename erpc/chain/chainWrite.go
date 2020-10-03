@@ -2,9 +2,9 @@ package chain
 
 import (
 	"context"
-	"eva-go-sdk/econst"
-	"eva-go-sdk/erpc"
-	"eva-go-sdk/eutils"
+	"eva-go-rpc/econst"
+	"eva-go-rpc/erpc"
+	"eva-go-rpc/eutils"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"

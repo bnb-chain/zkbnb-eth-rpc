@@ -1,7 +1,7 @@
 package contract
 
 import (
-	"eva-go-sdk/econst"
+	"eva-go-rpc/econst"
 	"fmt"
 	"testing"
 )

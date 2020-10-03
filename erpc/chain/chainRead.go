@@ -3,8 +3,8 @@ package chain
 import (
 	"context"
 	"crypto/ecdsa"
-	"eva-go-sdk/erpc"
-	"eva-go-sdk/eutils"
+	"eva-go-rpc/erpc"
+	"eva-go-rpc/eutils"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"

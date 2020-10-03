@@ -3,7 +3,7 @@ package eutils
 import (
 	"bytes"
 	"crypto/ecdsa"
-	"eva-go-sdk/econst"
+	"eva-go-rpc/econst"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto"
 	"math"

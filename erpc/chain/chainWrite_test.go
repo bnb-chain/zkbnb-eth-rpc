@@ -1,9 +1,9 @@
 package chain
 
 import (
-	"eva-go-sdk/econst"
-	"eva-go-sdk/erpc"
-	"eva-go-sdk/eutils"
+	"eva-go-rpc/econst"
+	"eva-go-rpc/erpc"
+	"eva-go-rpc/eutils"
 	"fmt"
 	"testing"
 )
