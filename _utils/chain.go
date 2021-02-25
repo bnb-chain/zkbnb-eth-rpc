@@ -3,12 +3,12 @@ package _utils
 import (
 	"bytes"
 	"crypto/ecdsa"
-	"eva-go-rpc/_const"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto"
 	"math"
 	"math/big"
 	"regexp"
+	"zksneak-eth-rpc/_const"
 )
 
 // transfer wei to ether balance/10^{18}

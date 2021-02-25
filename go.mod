@@ -1,4 +1,4 @@
-module eva-go-rpc
+module zksneak-eth-rpc
 
 go 1.15
 

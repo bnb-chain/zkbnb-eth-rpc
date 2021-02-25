@@ -4,7 +4,7 @@ import "errors"
 
 var (
 	InvalidAddress          = errors.New("Input address is not valid! ")
-	InvalidAuthClientParams = errors.New("Auth client params is not valid! ")
+	InvalidAuthClientParams = errors.New("Auth cli params is not valid! ")
 	InvalidParams           = errors.New("Input params are not valid! ")
 	InvalidHashValue        = errors.New("Input hash value is not valid! ")
 	InvalidPrivateKey       = errors.New("Input private key is not valid! ")

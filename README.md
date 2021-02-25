@@ -1,1 +1,1 @@
-# EVA-go-rpc
+# ZKSneak-eth-rpc

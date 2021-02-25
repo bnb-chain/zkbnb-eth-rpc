@@ -2,30 +2,24 @@ package contract
 
 import (
 	"context"
-	"eva-go-rpc/_const"
-	"eva-go-rpc/_rpc"
-	"eva-go-rpc/_rpc/chain"
-	"eva-go-rpc/_rpc/contract/_interface/erc20"
-	"eva-go-rpc/_utils"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"golang.org/x/crypto/sha3"
 	"math/big"
+	"zksneak-eth-rpc/_const"
+	"zksneak-eth-rpc/_rpc"
+	"zksneak-eth-rpc/_rpc/contract/_interface/erc20"
+	"zksneak-eth-rpc/_utils"
 )
 
 // get erc20 token balance
-func GetErc20Balance(address string, tokenAddress string) (balance *big.Int, err error) {
+func GetErc20Balance(cli *_rpc.ProviderClient, address string, tokenAddress string) (balance *big.Int, err error) {
 	// validate the address
 	if !_utils.IsValidEthAddress(address) {
 		return nil, _rpc.InvalidAddress
 	}
-	cli, err := _rpc.GetConnection()
-	if err != nil {
-		return nil, err
-	}
-	defer cli.Close()
 	account := common.HexToAddress(address)
 	tokenContractAddress := common.HexToAddress(tokenAddress)
 	token, err := erc20.NewToken(tokenContractAddress, cli)
@@ -35,8 +29,8 @@ func GetErc20Balance(address string, tokenAddress string) (balance *big.Int, err
 	return token.BalanceOf(&bind.CallOpts{}, account)
 }
 
-func GetErc20EtherBalance(address string, tokenAddress string) (balance *big.Float, err error) {
-	_balance, err := GetErc20Balance(address, tokenAddress)
+func GetErc20EtherBalance(cli *_rpc.ProviderClient, address string, tokenAddress string) (balance *big.Float, err error) {
+	_balance, err := GetErc20Balance(cli, address, tokenAddress)
 	if err != nil {
 		return nil, err
 	}
@@ -44,21 +38,15 @@ func GetErc20EtherBalance(address string, tokenAddress string) (balance *big.Flo
 	return balance, nil
 }
 
-func TransferErc20(authClient *_rpc.AuthClient, toAddress string, amount *big.Int, gasPrice *big.Int, tokenAddress string) (txHash string, err error) {
-	// validate auth client
-	isContract, err := chain.IsContract(tokenAddress)
+func TransferErc20(cli *_rpc.ProviderClient, authClient *_rpc.AuthClient, toAddress string, amount *big.Int, gasPrice *big.Int, tokenAddress string) (txHash string, err error) {
+	// validate auth cli
+	isContract, err := cli.IsContract(tokenAddress)
 	if err != nil {
 		return "", _rpc.InvalidParams
 	}
 	if authClient == nil || !_utils.IsValidEthAddress(toAddress) || !isContract {
 		return "", _rpc.InvalidParams
 	}
-	// get connection
-	cli, err := _rpc.GetConnection()
-	if err != nil {
-		return "", err
-	}
-	defer cli.Close()
 	// get account and token address
 	toAccount := common.HexToAddress(toAddress)
 	tokenContractAddress := common.HexToAddress(tokenAddress)
@@ -84,7 +72,7 @@ func TransferErc20(authClient *_rpc.AuthClient, toAddress string, amount *big.In
 		gasLimit = _const.SuggestFunctionGasLimit
 	}
 	// get nonce of address
-	nonce, err := chain.GetPendingNonce(authClient.Address.String())
+	nonce, err := cli.GetPendingNonce(authClient.Address.String())
 	if err != nil {
 		return "", err
 	}
@@ -98,7 +86,7 @@ func TransferErc20(authClient *_rpc.AuthClient, toAddress string, amount *big.In
 	// construct transaction
 	transaction := types.NewTransaction(nonce, tokenContractAddress, big.NewInt(0), gasLimit, gasPrice, data)
 	// sign transaction
-	signedTx, err := chain.SignTx(authClient, transaction)
+	signedTx, err := _rpc.SignTx(authClient, transaction)
 	if err != nil {
 		return "", err
 	}

@@ -1,11 +1,8 @@
-package chain
+package _rpc
 
 import (
 	"context"
 	"crypto/ecdsa"
-	"eva-go-rpc/_const"
-	"eva-go-rpc/_rpc"
-	"eva-go-rpc/_utils"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
@@ -14,25 +11,21 @@ import (
 	"math/big"
 	"strings"
 	"time"
+	"zksneak-eth-rpc/_const"
+	"zksneak-eth-rpc/_utils"
 )
 
 // transfer eth
-func Transfer(authCli *_rpc.AuthClient, to string, amount *big.Int, data []byte, gasLimit uint64) (txHash string, err error) {
+func (cli *ProviderClient) Transfer(authCli *AuthClient, to string, amount *big.Int, data []byte, gasLimit uint64) (txHash string, err error) {
 	// validate amount,it can't less than zero
 	if amount.Cmp(new(big.Int).SetUint64(0)) < 0 {
-		return "", _rpc.AmountLessThanZero
+		return "", AmountLessThanZero
 	}
 	// check address
 	isValidTo := _utils.IsValidEthAddress(to)
 	if !isValidTo {
-		return "", _rpc.InvalidAddress
+		return "", InvalidAddress
 	}
-	// get connection
-	cli, err := _rpc.GetConnection()
-	if err != nil {
-		return "", err
-	}
-	defer cli.Close()
 	// transfer private key to address
 	fromAddress, err := PrivateKeyToAddress(authCli.PrivateKey)
 	if err != nil {
@@ -58,20 +51,11 @@ func Transfer(authCli *_rpc.AuthClient, to string, amount *big.Int, data []byte,
 	return signedTx.Hash().String(), err
 }
 
-// sign transaction
-func SignTx(authCli *_rpc.AuthClient, tx *types.Transaction) (signedTx *types.Transaction, err error) {
-	// check if it is valid params
-	if authCli.ChainId == nil || authCli.PrivateKey == nil {
-		return nil, _rpc.InvalidAuthClientParams
-	}
-	return types.SignTx(tx, types.NewEIP155Signer(authCli.ChainId), authCli.PrivateKey)
-}
-
 // deploy contract
-func DeployContract(authCli *_rpc.AuthClient, gasPrice *big.Int, abiPath string, binPath string, params []interface{}) (contractAddress common.Address, txHash common.Hash, err error) {
+func (cli *ProviderClient) DeployContract(authCli *AuthClient, gasPrice *big.Int, abiPath string, binPath string, params []interface{}) (contractAddress common.Address, txHash common.Hash, err error) {
 	// check authCli
 	if authCli == nil || abiPath == "" || binPath == "" {
-		return contractAddress, txHash, _rpc.InvalidParams
+		return contractAddress, txHash, InvalidParams
 	}
 	// transfer private key to address
 	address, err := PrivateKeyToAddress(authCli.PrivateKey)
@@ -79,13 +63,7 @@ func DeployContract(authCli *_rpc.AuthClient, gasPrice *big.Int, abiPath string,
 		return contractAddress, txHash, err
 	}
 	// get pending nonce
-	nonce, err := GetPendingNonce(address.String())
-	// get connection
-	cli, err := _rpc.GetConnection()
-	if err != nil {
-		return contractAddress, txHash, err
-	}
-	defer cli.Close()
+	nonce, err := cli.GetPendingNonce(address.String())
 	// get gas price
 	if gasPrice == nil {
 		// get suggest gas price
@@ -126,24 +104,24 @@ func DeployContract(authCli *_rpc.AuthClient, gasPrice *big.Int, abiPath string,
 }
 
 // wait until transaction is completed
-func WaitingTransactionStatus(txHash string) (status bool, err error) {
+func (cli *ProviderClient) WaitingTransactionStatus(txHash string) (status bool, err error) {
 	// set ticker
 	ticker := time.NewTicker(_const.TryTimeInterval)
 	defer ticker.Stop()
 	count := 0
 	for {
 		if count > _const.MaxTryTimes {
-			return false, _rpc.ErrorGetBlockStatus
+			return false, ErrorGetBlockStatus
 		}
 		// get transaction info
-		_, isPending, err := GetTransactionByHash(txHash)
+		_, isPending, err := cli.GetTransactionByHash(txHash)
 		if err != nil {
 			return false, err
 		}
 		// if transaction execution is completed
 		if !isPending {
 			// get receipt of transaction
-			receipt, err := GetTransactionReceipt(txHash)
+			receipt, err := cli.GetTransactionReceipt(txHash)
 			if err != nil {
 				return false, err
 			}
@@ -160,13 +138,13 @@ func WaitingTransactionStatus(txHash string) (status bool, err error) {
 }
 
 // deploy smart contract until it is completed
-func DeployContractUntil(authCli *_rpc.AuthClient, gasPrice *big.Int, abiPath string, binPath string, params []interface{}) (status bool, contractAddress common.Address, txHash common.Hash, err error) {
-	contractAddress, txHash, err = DeployContract(authCli, gasPrice, abiPath, binPath, params)
+func (cli *ProviderClient) DeployContractUntil(authCli *AuthClient, gasPrice *big.Int, abiPath string, binPath string, params []interface{}) (status bool, contractAddress common.Address, txHash common.Hash, err error) {
+	contractAddress, txHash, err = cli.DeployContract(authCli, gasPrice, abiPath, binPath, params)
 	if err != nil {
 		return false, contractAddress, txHash, err
 	}
 	// waiting transaction
-	status, err = WaitingTransactionStatus(txHash.String())
+	status, err = cli.WaitingTransactionStatus(txHash.String())
 	if err != nil {
 		return false, contractAddress, txHash, err
 	}

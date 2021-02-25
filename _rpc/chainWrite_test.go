@@ -1,41 +1,45 @@
-package chain
+package _rpc
 
 import (
-	"eva-go-rpc/_const"
-	"eva-go-rpc/_rpc"
-	"eva-go-rpc/_utils"
 	"fmt"
 	"testing"
+	"zksneak-eth-rpc/_const"
+	"zksneak-eth-rpc/_rpc"
+	"zksneak-eth-rpc/_utils"
 )
 
 func TestTransfer(t *testing.T) {
+	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	defer cli.Close()
 	toAddress := _const.ToAddress
-	beginBalance, _ := GetEtherBalance(toAddress)
+	beginBalance, _ := cli.GetEtherBalance(toAddress)
 	fmt.Println("balance before transfer:", beginBalance)
 	authClient, err := _rpc.NewAuthClient(_const.SuperSk)
 	if err != nil {
 		t.Error(err)
 	}
-	txHash, err := Transfer(authClient, toAddress, _utils.EtherToWei(0.1), nil, _const.SuggestGasLimit)
+	txHash, err := cli.Transfer(authClient, toAddress, _utils.EtherToWei(0.1), nil, _const.SuggestGasLimit)
 	if err != nil {
 		t.Error(err)
 	}
-	status, err := WaitingTransactionStatus(txHash)
+	status, err := cli.WaitingTransactionStatus(txHash)
 	if err != nil {
 		t.Error(err)
 	}
 	fmt.Println("tx status:", status)
-	endBalance, _ := GetEtherBalance(toAddress)
+	endBalance, _ := cli.GetEtherBalance(toAddress)
 	fmt.Println("balance after transfer:", endBalance)
 	fmt.Println("transaction hash:", txHash)
 }
 
 func TestDeployContract(t *testing.T) {
+	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	defer cli.Close()
 	authClient, err := _rpc.NewAuthClient(_const.SuperSk)
 	if err != nil {
 		panic(err)
 	}
-	contractAddress, txHash, err := DeployContract(authClient, nil, "../contract/_interface/example/Store_sol_Store.abi", "../contract/_interface/example/Store_sol_Store.bin", []interface{}{"1.0"})
+	contractAddress, txHash, err := cli.DeployContract(authClient, nil, "../contract/_interface/example/Store_sol_Store.abi", "../contract/_interface/example/Store_sol_Store.bin", []interface{}{"1.0"})
 	if err != nil {
 		panic(err)
 	}
@@ -44,11 +48,13 @@ func TestDeployContract(t *testing.T) {
 }
 
 func TestDeployContractUntil(t *testing.T) {
+	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	defer cli.Close()
 	authClient, err := _rpc.NewAuthClient(_const.SuperSk)
 	if err != nil {
 		panic(err)
 	}
-	status, contractAddress, txHash, err := DeployContractUntil(authClient, nil, "../contract/_interface/example/Store_sol_Store.abi", "../contract/_interface/example/Store_sol_Store.bin", []interface{}{"1.0"})
+	status, contractAddress, txHash, err := cli.DeployContractUntil(authClient, nil, "../contract/_interface/example/Store_sol_Store.abi", "../contract/_interface/example/Store_sol_Store.bin", []interface{}{"1.0"})
 	if err != nil {
 		panic(err)
 	}

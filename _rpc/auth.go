@@ -3,17 +3,16 @@ package _rpc
 import (
 	"context"
 	"crypto/ecdsa"
-	"eva-go-rpc/_const"
-	"eva-go-rpc/_utils"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"math/big"
+	"zksneak-eth-rpc/_utils"
 )
 
 // get connection of ethereum or rinkeby network
-func GetConnection() (cli *ethclient.Client, err error) {
-	return ethclient.Dial(_const.InfuraRinkebyNetwork)
+func GetConnection(provider string) (cli *ethclient.Client, err error) {
+	return
 }
 
 // auth of user
@@ -24,8 +23,8 @@ type AuthClient struct {
 	ChainId    *big.Int          `json:"chain_id"`
 }
 
-// create a new auth client
-func NewAuthClient(priKey string) (authCli *AuthClient, err error) {
+// create a new auth cli
+func NewAuthClient(priKey string, cli *ProviderClient) (authCli *AuthClient, err error) {
 	// validate private key
 	if !_utils.IsValidPrivateKey(priKey) {
 		return nil, InvalidPrivateKey
@@ -38,11 +37,6 @@ func NewAuthClient(priKey string) (authCli *AuthClient, err error) {
 	// get public key
 	publicKey := privateKey.PublicKey
 	address := crypto.PubkeyToAddress(publicKey)
-	// create connection
-	cli, err := GetConnection()
-	if err != nil {
-		return nil, err
-	}
 	chainID, err := cli.ChainID(context.Background())
 	if err != nil {
 		return nil, err

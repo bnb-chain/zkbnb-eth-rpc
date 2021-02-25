@@ -1,12 +1,12 @@
 package contract
 
 import (
-	"eva-go-rpc/_const"
-	"eva-go-rpc/_rpc"
-	"eva-go-rpc/_rpc/chain"
-	"eva-go-rpc/_utils"
 	"fmt"
 	"testing"
+	"zksneak-eth-rpc/_const"
+	"zksneak-eth-rpc/_rpc"
+	"zksneak-eth-rpc/_rpc/chain"
+	"zksneak-eth-rpc/_utils"
 )
 
 func TestGetErc20Balance(t *testing.T) {

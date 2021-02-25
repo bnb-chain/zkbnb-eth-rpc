@@ -1,4 +1,4 @@
-package chain
+package _rpc
 
 import (
 	"crypto/ecdsa"
@@ -7,19 +7,21 @@ import (
 	"math/big"
 	"reflect"
 	"testing"
+	"zksneak-eth-rpc/_const"
 
 	"github.com/ethereum/go-ethereum/common"
 )
 
 func TestGetBalance(t *testing.T) {
 	toAddress := "0xE9b15a2D396B349ABF60e53ec66Bcf9af262D449"
-	balance, err := GetBalance(toAddress)
+	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	balance, err := cli.GetBalance(toAddress)
 	if err != nil {
 		panic(err)
 	}
 	fmt.Println("balance:", balance)
 
-	etherBalance, err := GetEtherBalance(toAddress)
+	etherBalance, err := cli.GetEtherBalance(toAddress)
 	if err != nil {
 		panic(err)
 	}
@@ -30,6 +32,7 @@ func TestIsContract(t *testing.T) {
 	type args struct {
 		address string
 	}
+	cli, _ := NewClient(_const.InfuraRinkebyNetwork)
 	tests := []struct {
 		name           string
 		args           args
@@ -57,7 +60,7 @@ func TestIsContract(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			gotIsContract, err := IsContract(tt.args.address)
+			gotIsContract, err := cli.IsContract(tt.args.address)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("IsContract() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -70,7 +73,9 @@ func TestIsContract(t *testing.T) {
 }
 
 func TestGetBlockHeaderByNumber(t *testing.T) {
-	header, err := GetBlockHeaderByNumber(big.NewInt(7298401))
+	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	defer cli.Close()
+	header, err := cli.GetBlockHeaderByNumber(big.NewInt(7298401))
 	if err != nil {
 		t.Error(err)
 	}
@@ -78,7 +83,9 @@ func TestGetBlockHeaderByNumber(t *testing.T) {
 }
 
 func TestGetBlockInfoByNumber(t *testing.T) {
-	blockInfo, err := GetBlockInfoByNumber(big.NewInt(7298401))
+	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	defer cli.Close()
+	blockInfo, err := cli.GetBlockInfoByNumber(big.NewInt(7298401))
 	if err != nil {
 		t.Error(err)
 	}
@@ -86,7 +93,9 @@ func TestGetBlockInfoByNumber(t *testing.T) {
 }
 
 func TestGetHeight(t *testing.T) {
-	height, err := GetHeight()
+	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	defer cli.Close()
+	height, err := cli.GetHeight()
 	if err != nil {
 		t.Error(err)
 	}
@@ -94,8 +103,10 @@ func TestGetHeight(t *testing.T) {
 }
 
 func TestGetTransactionByHash(t *testing.T) {
+	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	defer cli.Close()
 	hash := "0xf900253477a50a1cd808f61058f68eb2e73afcb0161c31e82ecafa034d7c8eec"
-	tx, isPending, err := GetTransactionByHash(hash)
+	tx, isPending, err := cli.GetTransactionByHash(hash)
 	if err != nil {
 		t.Error(err)
 	}
@@ -108,8 +119,10 @@ func TestGetTransactionByHash(t *testing.T) {
 }
 
 func TestGetTransactionReceipt(t *testing.T) {
+	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	defer cli.Close()
 	successHash := "0xf900253477a50a1cd808f61058f68eb2e73afcb0161c31e82ecafa034d7c8eec"
-	receipt, err := GetTransactionReceipt(successHash)
+	receipt, err := cli.GetTransactionReceipt(successHash)
 	if err != nil {
 		t.Error(err)
 	}
@@ -119,7 +132,7 @@ func TestGetTransactionReceipt(t *testing.T) {
 	}
 	fmt.Println("success receipt:", string(receiptBytes))
 	errorHash := "0x782d3bd436bea25d6d687daa8527abb2487b4d73eb5f9e1350ab70a11adf13b3"
-	receipt, err = GetTransactionReceipt(errorHash)
+	receipt, err = cli.GetTransactionReceipt(errorHash)
 	if err != nil {
 		t.Error(err)
 	}
