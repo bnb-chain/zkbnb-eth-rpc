@@ -24,7 +24,7 @@ type AuthClient struct {
 }
 
 // create a new auth cli
-func NewAuthClient(priKey string, cli *ProviderClient) (authCli *AuthClient, err error) {
+func NewAuthClient(cli *ProviderClient, priKey string) (authCli *AuthClient, err error) {
 	// validate private key
 	if !_utils.IsValidPrivateKey(priKey) {
 		return nil, InvalidPrivateKey
