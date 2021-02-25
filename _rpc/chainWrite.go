@@ -2,7 +2,6 @@ package _rpc
 
 import (
 	"context"
-	"crypto/ecdsa"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
@@ -149,13 +148,4 @@ func (cli *ProviderClient) DeployContractUntil(authCli *AuthClient, gasPrice *bi
 		return false, contractAddress, txHash, err
 	}
 	return status, contractAddress, txHash, nil
-}
-
-func CreateAuthentication(privateKey *ecdsa.PrivateKey, nonce *big.Int, value *big.Int, gasLimit uint64, gasPrice *big.Int) *bind.TransactOpts {
-	auth := bind.NewKeyedTransactor(privateKey)
-	auth.Nonce = nonce
-	auth.Value = value
-	auth.GasLimit = _const.SuggestContractGasLimit
-	auth.GasPrice = gasPrice
-	return auth
 }

@@ -5,15 +5,9 @@ import (
 	"crypto/ecdsa"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/ethclient"
 	"math/big"
 	"zksneak-eth-rpc/_utils"
 )
-
-// get connection of ethereum or rinkeby network
-func GetConnection(provider string) (cli *ethclient.Client, err error) {
-	return
-}
 
 // auth of user
 type AuthClient struct {

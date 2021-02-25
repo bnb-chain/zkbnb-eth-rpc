@@ -4,7 +4,9 @@ import "time"
 
 const (
 	// test network
-	InfuraRinkebyNetwork = "https://rinkeby.infura.io/v3/3ea7b84f02e34f36874d9e26a104b6e9"
+	InfuraRinkebyNetwork = "https://rinkeby.infura.io/v3/787bc04c3f044d77a538d519ef26b53e"
+	RopstenNetwork       = "https://ropsten.infura.io/v3/787bc04c3f044d77a538d519ef26b53e"
+	LocalNetwork         = "http://localhost:8545"
 	// max try times
 	MaxTryTimes = 10
 	// time interval for obtaining transaction status

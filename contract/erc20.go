@@ -10,8 +10,8 @@ import (
 	"math/big"
 	"zksneak-eth-rpc/_const"
 	"zksneak-eth-rpc/_rpc"
-	"zksneak-eth-rpc/_rpc/contract/_interface/erc20"
 	"zksneak-eth-rpc/_utils"
+	"zksneak-eth-rpc/contract/_interface/erc20"
 )
 
 // get erc20 token balance

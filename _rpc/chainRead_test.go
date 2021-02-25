@@ -73,9 +73,9 @@ func TestIsContract(t *testing.T) {
 }
 
 func TestGetBlockHeaderByNumber(t *testing.T) {
-	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	cli, err := NewClient(_const.LocalNetwork)
 	defer cli.Close()
-	header, err := cli.GetBlockHeaderByNumber(big.NewInt(7298401))
+	header, err := cli.GetBlockHeaderByNumber(big.NewInt(1))
 	if err != nil {
 		t.Error(err)
 	}
@@ -85,7 +85,7 @@ func TestGetBlockHeaderByNumber(t *testing.T) {
 func TestGetBlockInfoByNumber(t *testing.T) {
 	cli, err := NewClient(_const.InfuraRinkebyNetwork)
 	defer cli.Close()
-	blockInfo, err := cli.GetBlockInfoByNumber(big.NewInt(7298401))
+	blockInfo, err := cli.GetBlockInfoByNumber(big.NewInt(2))
 	if err != nil {
 		t.Error(err)
 	}

@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"testing"
 	"zksneak-eth-rpc/_const"
-	"zksneak-eth-rpc/_rpc"
 	"zksneak-eth-rpc/_utils"
 )
 
@@ -14,7 +13,7 @@ func TestTransfer(t *testing.T) {
 	toAddress := _const.ToAddress
 	beginBalance, _ := cli.GetEtherBalance(toAddress)
 	fmt.Println("balance before transfer:", beginBalance)
-	authClient, err := _rpc.NewAuthClient(_const.SuperSk)
+	authClient, err := NewAuthClient(cli, _const.SuperSk)
 	if err != nil {
 		t.Error(err)
 	}
@@ -35,7 +34,7 @@ func TestTransfer(t *testing.T) {
 func TestDeployContract(t *testing.T) {
 	cli, err := NewClient(_const.InfuraRinkebyNetwork)
 	defer cli.Close()
-	authClient, err := _rpc.NewAuthClient(_const.SuperSk)
+	authClient, err := NewAuthClient(cli, _const.SuperSk)
 	if err != nil {
 		panic(err)
 	}
@@ -50,7 +49,7 @@ func TestDeployContract(t *testing.T) {
 func TestDeployContractUntil(t *testing.T) {
 	cli, err := NewClient(_const.InfuraRinkebyNetwork)
 	defer cli.Close()
-	authClient, err := _rpc.NewAuthClient(_const.SuperSk)
+	authClient, err := NewAuthClient(cli, _const.SuperSk)
 	if err != nil {
 		panic(err)
 	}
