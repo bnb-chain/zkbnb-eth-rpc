@@ -11,7 +11,7 @@ import (
 func TestGetErc20Balance(t *testing.T) {
 	cli, err := _rpc.NewClient(_const.InfuraRinkebyNetwork)
 	defer cli.Close()
-	balance, err := GetErc20EtherBalance(cli, _const.SuperAddress, _const.EVATokenAddress)
+	balance, err := GetErc20EtherBalance(cli, _const.RinkebySuperAddress, _const.EVATokenAddress)
 	if err != nil {
 		panic(err)
 	}
@@ -24,7 +24,7 @@ func TestTransferErc20(t *testing.T) {
 	toAddress := _const.ToAddress
 	beforeBalance, _ := GetErc20EtherBalance(cli, toAddress, _const.EVATokenAddress)
 	fmt.Println("balance before transfer:", beforeBalance)
-	authCli, _ := _rpc.NewAuthClient(cli, _const.SuperSk)
+	authCli, _ := _rpc.NewAuthClient(cli, _const.RinkebySuperSk)
 	txHash, err := TransferErc20(cli, authCli, toAddress, _utils.EtherToWei(100.0), nil, _const.EVATokenAddress)
 	if err != nil {
 		t.Error(err)

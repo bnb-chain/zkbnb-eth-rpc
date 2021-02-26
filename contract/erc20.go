@@ -22,7 +22,7 @@ func GetErc20Balance(cli *_rpc.ProviderClient, address string, tokenAddress stri
 	}
 	account := common.HexToAddress(address)
 	tokenContractAddress := common.HexToAddress(tokenAddress)
-	token, err := erc20.NewToken(tokenContractAddress, cli)
+	token, err := erc20.NewErc20(tokenContractAddress, cli)
 	if err != nil {
 		return nil, err
 	}

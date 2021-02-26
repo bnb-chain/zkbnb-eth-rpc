@@ -13,7 +13,7 @@ func TestTransfer(t *testing.T) {
 	toAddress := _const.ToAddress
 	beginBalance, _ := cli.GetEtherBalance(toAddress)
 	fmt.Println("balance before transfer:", beginBalance)
-	authClient, err := NewAuthClient(cli, _const.SuperSk)
+	authClient, err := NewAuthClient(cli, _const.RinkebySuperSk)
 	if err != nil {
 		t.Error(err)
 	}
@@ -34,7 +34,7 @@ func TestTransfer(t *testing.T) {
 func TestDeployContract(t *testing.T) {
 	cli, err := NewClient(_const.InfuraRinkebyNetwork)
 	defer cli.Close()
-	authClient, err := NewAuthClient(cli, _const.SuperSk)
+	authClient, err := NewAuthClient(cli, _const.RinkebySuperSk)
 	if err != nil {
 		panic(err)
 	}
@@ -49,7 +49,7 @@ func TestDeployContract(t *testing.T) {
 func TestDeployContractUntil(t *testing.T) {
 	cli, err := NewClient(_const.InfuraRinkebyNetwork)
 	defer cli.Close()
-	authClient, err := NewAuthClient(cli, _const.SuperSk)
+	authClient, err := NewAuthClient(cli, _const.RinkebySuperSk)
 	if err != nil {
 		panic(err)
 	}

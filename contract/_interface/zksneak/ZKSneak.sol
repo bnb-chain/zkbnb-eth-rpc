@@ -5,27 +5,20 @@ pragma experimental ABIEncoderV2;
 
 contract ZKSneak{
 
-    bytes32 accountRoot;
+    bytes32 public accountRoot;
 
     event Deposit(bytes32 addr,uint256 amount);
 
-    event RootUpdateForTransfer(bytes32 oldRoot,bytes32 newRoot);
-
-    event RootUpdateForSwap(bytes32 oldRoot,bytes32 newRoot);
+    event NewBlock(bytes32 oldRoot,bytes32 newRoot);
 
     function deposit(bytes32 pk) public payable{
         require(msg.value > 0,"you should deposit some money");
         emit Deposit(pk, msg.value);
     }
 
-    function verifyTransfer(bytes32 newRoot) public{
+    function verifyBlock(bytes32 newRoot) public{
         accountRoot = newRoot;
-        emit RootUpdateForTransfer(accountRoot,newRoot);
-    }
-
-    function verifyAtomicSwap(bytes32 newRoot) public{
-        accountRoot = newRoot;
-        emit RootUpdateForSwap(accountRoot,newRoot);
+        emit NewBlock(accountRoot,newRoot);
     }
 
     function withdraw(address payable _addr,uint256 amount) public{
