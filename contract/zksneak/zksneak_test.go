@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"golang.org/x/crypto/sha3"
 	"testing"
-	"zksneak-eth-rpc/_const"
-	"zksneak-eth-rpc/_rpc"
-	"zksneak-eth-rpc/_utils"
+	"ZKSneak-eth-rpc/_const"
+	"ZKSneak-eth-rpc/_rpc"
+	"ZKSneak-eth-rpc/_utils"
 )
 
 func TestDeployZKSneakContract(t *testing.T) {

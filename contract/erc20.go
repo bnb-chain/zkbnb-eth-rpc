@@ -1,6 +1,10 @@
 package contract
 
 import (
+	"ZKSneak-eth-rpc/_const"
+	"ZKSneak-eth-rpc/_rpc"
+	"ZKSneak-eth-rpc/_utils"
+	"ZKSneak-eth-rpc/contract/_interface/erc20"
 	"context"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -8,10 +12,6 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"golang.org/x/crypto/sha3"
 	"math/big"
-	"zksneak-eth-rpc/_const"
-	"zksneak-eth-rpc/_rpc"
-	"zksneak-eth-rpc/_utils"
-	"zksneak-eth-rpc/contract/_interface/erc20"
 )
 
 // get erc20 token balance

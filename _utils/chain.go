@@ -8,7 +8,7 @@ import (
 	"math"
 	"math/big"
 	"regexp"
-	"zksneak-eth-rpc/_const"
+	"ZKSneak-eth-rpc/_const"
 )
 
 // transfer wei to ether balance/10^{18}

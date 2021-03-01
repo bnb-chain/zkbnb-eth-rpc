@@ -6,7 +6,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"math/big"
-	"zksneak-eth-rpc/_utils"
+	"ZKSneak-eth-rpc/_utils"
 )
 
 // auth of user

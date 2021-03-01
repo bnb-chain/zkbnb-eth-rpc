@@ -4,7 +4,7 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
-	"zksneak-eth-rpc/_rpc"
+	"ZKSneak-eth-rpc/_rpc"
 )
 
 func DeployZKSneakContract(cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, gasPrice *big.Int, gasLimit uint64) (addr string, txHash string, err error) {
