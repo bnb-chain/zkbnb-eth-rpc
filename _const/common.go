@@ -37,7 +37,7 @@ const (
 
 	// Token address
 	EVATokenAddress = "0x59e39e65fc4e35f7b1a21d51962109fa9eed47df"
-	ZKSNeakAddress  = "0x95F45C568f146c409F92321B1123505Cbe84719B"
+	ZKSneakAddress  = "0x95F45C568f146c409F92321B1123505Cbe84719B"
 
 	// Transaction status
 	TransactionSuccess = uint64(1)

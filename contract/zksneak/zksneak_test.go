@@ -28,7 +28,7 @@ func TestDeposit(t *testing.T) {
 	defer cli.Close()
 	authCli, _ := _rpc.NewAuthClient(cli, _const.LocalSuperSk)
 	gasPrice, _ := cli.SuggestGasPrice(context.Background())
-	instance, err := LoadZKSneakInstance(cli, _const.ZKSNeakAddress)
+	instance, err := LoadZKSneakInstance(cli, _const.ZKSneakAddress)
 	if err != nil {
 		panic(err)
 	}
@@ -45,7 +45,7 @@ func TestDeposit(t *testing.T) {
 func TestGetRoot(t *testing.T) {
 	cli, _ := _rpc.NewClient(_const.LocalNetwork)
 	defer cli.Close()
-	instance, err := LoadZKSneakInstance(cli, _const.ZKSNeakAddress)
+	instance, err := LoadZKSneakInstance(cli, _const.ZKSneakAddress)
 	if err != nil {
 		panic(err)
 	}
@@ -58,7 +58,7 @@ func TestVerifyBlock(t *testing.T) {
 	defer cli.Close()
 	authCli, _ := _rpc.NewAuthClient(cli, _const.LocalSuperSk)
 	gasPrice, _ := cli.SuggestGasPrice(context.Background())
-	instance, err := LoadZKSneakInstance(cli, _const.ZKSNeakAddress)
+	instance, err := LoadZKSneakInstance(cli, _const.ZKSneakAddress)
 	if err != nil {
 		panic(err)
 	}
@@ -78,7 +78,7 @@ func TestWithdraw(t *testing.T) {
 	defer cli.Close()
 	authCli, _ := _rpc.NewAuthClient(cli, _const.LocalSuperSk)
 	gasPrice, _ := cli.SuggestGasPrice(context.Background())
-	instance, err := LoadZKSneakInstance(cli, _const.ZKSNeakAddress)
+	instance, err := LoadZKSneakInstance(cli, _const.ZKSneakAddress)
 	if err != nil {
 		panic(err)
 	}
