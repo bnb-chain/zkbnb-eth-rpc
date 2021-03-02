@@ -1,10 +1,10 @@
 package zksneak
 
 import (
+	"ZKSneak-eth-rpc/_rpc"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
-	"ZKSneak-eth-rpc/_rpc"
 )
 
 func DeployZKSneakContract(cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, gasPrice *big.Int, gasLimit uint64) (addr string, txHash string, err error) {
@@ -29,6 +29,7 @@ func Deposit(cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *Zksne
 	if err != nil {
 		return "", err
 	}
+	transactOpts.Value = value
 	tx, err := instance.Deposit(transactOpts, pk)
 	if err != nil {
 		return "", err

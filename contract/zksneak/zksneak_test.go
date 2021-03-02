@@ -34,7 +34,7 @@ func TestDeposit(t *testing.T) {
 	}
 	var pk [32]byte
 	copy(pk[:], []byte("test"))
-	value := _utils.EtherToWei(1)
+	value := _utils.EtherToWei(10)
 	hash, err := Deposit(cli, authCli, instance, value, pk, gasPrice, _const.SuggestContractGasLimit)
 	if err != nil {
 		panic(err)
