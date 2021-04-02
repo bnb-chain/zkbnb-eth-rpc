@@ -3,9 +3,9 @@ package contract
 import (
 	"fmt"
 	"testing"
-	"ZKSneak-eth-rpc/_const"
-	"ZKSneak-eth-rpc/_rpc"
-	"ZKSneak-eth-rpc/_utils"
+	"PrivaL-eth-rpc/_const"
+	"PrivaL-eth-rpc/_rpc"
+	"PrivaL-eth-rpc/_utils"
 )
 
 func TestGetErc20Balance(t *testing.T) {

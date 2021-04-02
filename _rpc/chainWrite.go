@@ -10,8 +10,8 @@ import (
 	"math/big"
 	"strings"
 	"time"
-	"ZKSneak-eth-rpc/_const"
-	"ZKSneak-eth-rpc/_utils"
+	"PrivaL-eth-rpc/_const"
+	"PrivaL-eth-rpc/_utils"
 )
 
 // transfer eth

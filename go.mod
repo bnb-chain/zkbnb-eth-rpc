@@ -1,4 +1,4 @@
-module ZKSneak-eth-rpc
+module PrivaL-eth-rpc
 
 go 1.15
 

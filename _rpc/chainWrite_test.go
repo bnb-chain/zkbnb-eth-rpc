@@ -3,8 +3,8 @@ package _rpc
 import (
 	"fmt"
 	"testing"
-	"ZKSneak-eth-rpc/_const"
-	"ZKSneak-eth-rpc/_utils"
+	"PrivaL-eth-rpc/_const"
+	"PrivaL-eth-rpc/_utils"
 )
 
 func TestTransfer(t *testing.T) {

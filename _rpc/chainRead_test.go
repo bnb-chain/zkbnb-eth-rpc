@@ -7,7 +7,7 @@ import (
 	"math/big"
 	"reflect"
 	"testing"
-	"ZKSneak-eth-rpc/_const"
+	"PrivaL-eth-rpc/_const"
 
 	"github.com/ethereum/go-ethereum/common"
 )

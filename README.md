@@ -1,1 +1,1 @@
-# ZKSneak-eth-rpc
+# PrivaL-eth-rpc

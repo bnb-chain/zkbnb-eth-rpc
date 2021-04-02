@@ -1,10 +1,10 @@
 package contract
 
 import (
-	"ZKSneak-eth-rpc/_const"
-	"ZKSneak-eth-rpc/_rpc"
-	"ZKSneak-eth-rpc/_utils"
-	"ZKSneak-eth-rpc/contract/_interface/erc20"
+	"PrivaL-eth-rpc/_const"
+	"PrivaL-eth-rpc/_rpc"
+	"PrivaL-eth-rpc/_utils"
+	"PrivaL-eth-rpc/contract/_interface/erc20"
 	"context"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"

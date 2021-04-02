@@ -7,7 +7,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"math/big"
-	"ZKSneak-eth-rpc/_utils"
+	"PrivaL-eth-rpc/_utils"
 )
 
 // get balance
