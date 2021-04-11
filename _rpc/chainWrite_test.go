@@ -3,8 +3,8 @@ package _rpc
 import (
 	"fmt"
 	"testing"
-	"PrivaL-eth-rpc/_const"
-	"PrivaL-eth-rpc/_utils"
+	"Zecrey-eth-rpc/_const"
+	"Zecrey-eth-rpc/_utils"
 )
 
 func TestTransfer(t *testing.T) {

@@ -1,7 +1,7 @@
 package zksneak
 
 import (
-	"PrivaL-eth-rpc/_rpc"
+	"Zecrey-eth-rpc/_rpc"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"

@@ -3,9 +3,9 @@ package contract
 import (
 	"fmt"
 	"testing"
-	"PrivaL-eth-rpc/_const"
-	"PrivaL-eth-rpc/_rpc"
-	"PrivaL-eth-rpc/_utils"
+	"Zecrey-eth-rpc/_const"
+	"Zecrey-eth-rpc/_rpc"
+	"Zecrey-eth-rpc/_utils"
 )
 
 func TestGetErc20Balance(t *testing.T) {

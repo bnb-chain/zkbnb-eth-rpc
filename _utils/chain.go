@@ -8,7 +8,7 @@ import (
 	"math"
 	"math/big"
 	"regexp"
-	"PrivaL-eth-rpc/_const"
+	"Zecrey-eth-rpc/_const"
 )
 
 // transfer wei to ether balance/10^{18}

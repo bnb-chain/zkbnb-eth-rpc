@@ -5,7 +5,7 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/core/types"
 	"math/big"
-	"PrivaL-eth-rpc/_const"
+	"Zecrey-eth-rpc/_const"
 )
 
 // sign transaction

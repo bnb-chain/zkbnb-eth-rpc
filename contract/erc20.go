@@ -1,10 +1,10 @@
 package contract
 
 import (
-	"PrivaL-eth-rpc/_const"
-	"PrivaL-eth-rpc/_rpc"
-	"PrivaL-eth-rpc/_utils"
-	"PrivaL-eth-rpc/contract/_interface/erc20"
+	"Zecrey-eth-rpc/_const"
+	"Zecrey-eth-rpc/_rpc"
+	"Zecrey-eth-rpc/_utils"
+	"Zecrey-eth-rpc/contract/_interface/erc20"
 	"context"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"

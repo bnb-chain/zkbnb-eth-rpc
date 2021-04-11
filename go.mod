@@ -1,4 +1,4 @@
-module PrivaL-eth-rpc
+module Zecrey-eth-rpc
 
 go 1.15
 

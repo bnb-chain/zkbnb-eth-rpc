@@ -1,1 +1,1 @@
-# PrivaL-eth-rpc
+# Zecrey-eth-rpc

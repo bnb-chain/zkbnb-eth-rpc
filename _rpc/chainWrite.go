@@ -10,8 +10,8 @@ import (
 	"math/big"
 	"strings"
 	"time"
-	"PrivaL-eth-rpc/_const"
-	"PrivaL-eth-rpc/_utils"
+	"Zecrey-eth-rpc/_const"
+	"Zecrey-eth-rpc/_utils"
 )
 
 // transfer eth
