@@ -21,7 +21,7 @@ type AuthClient struct {
 func NewAuthClient(cli *ProviderClient, priKey string) (authCli *AuthClient, err error) {
 	// validate private key
 	if !_utils.IsValidPrivateKey(priKey) {
-		return nil, InvalidPrivateKey
+		return nil, ErrInvalidPrivateKey
 	}
 	// transfer private key str to private key
 	privateKey, err := _utils.DecodePrivateKey(priKey)

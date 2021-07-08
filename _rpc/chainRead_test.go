@@ -1,13 +1,13 @@
 package _rpc
 
 import (
+	"Zecrey-eth-rpc/_const"
 	"crypto/ecdsa"
 	"fmt"
 	"github.com/ethereum/go-ethereum/crypto"
 	"math/big"
 	"reflect"
 	"testing"
-	"Zecrey-eth-rpc/_const"
 
 	"github.com/ethereum/go-ethereum/common"
 )
@@ -20,12 +20,6 @@ func TestGetBalance(t *testing.T) {
 		panic(err)
 	}
 	fmt.Println("balance:", balance)
-
-	etherBalance, err := cli.GetEtherBalance(toAddress)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println("ether balance:", etherBalance)
 }
 
 func TestIsContract(t *testing.T) {

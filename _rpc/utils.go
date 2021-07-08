@@ -1,18 +1,18 @@
 package _rpc
 
 import (
+	"Zecrey-eth-rpc/_const"
 	"crypto/ecdsa"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/core/types"
 	"math/big"
-	"Zecrey-eth-rpc/_const"
 )
 
 // sign transaction
 func SignTx(authCli *AuthClient, tx *types.Transaction) (signedTx *types.Transaction, err error) {
 	// check if it is valid params
 	if authCli.ChainId == nil || authCli.PrivateKey == nil {
-		return nil, InvalidAuthClientParams
+		return nil, ErrInvalidAuthClientParams
 	}
 	return types.SignTx(tx, types.NewEIP155Signer(authCli.ChainId), authCli.PrivateKey)
 }

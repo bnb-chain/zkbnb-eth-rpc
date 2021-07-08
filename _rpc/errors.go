@@ -3,11 +3,11 @@ package _rpc
 import "errors"
 
 var (
-	InvalidAddress          = errors.New("Input address is not valid! ")
-	InvalidAuthClientParams = errors.New("Auth cli params is not valid! ")
-	InvalidParams           = errors.New("Input params are not valid! ")
-	InvalidHashValue        = errors.New("Input hash value is not valid! ")
-	InvalidPrivateKey       = errors.New("Input private key is not valid! ")
-	ErrorGetBlockStatus     = errors.New("Error when get status from chain! ")
-	AmountLessThanZero      = errors.New("Input amount value can not less than 0! ")
+	ErrInvalidAddress          = errors.New("err: input address is not valid! ")
+	ErrInvalidAuthClientParams = errors.New("err: auth cli params is not valid! ")
+	ErrInvalidParams           = errors.New("err: input params are not valid! ")
+	ErrInvalidHashValue        = errors.New("err: input hash value is not valid! ")
+	ErrInvalidPrivateKey       = errors.New("err: input private key is not valid! ")
+	ErrGetBlockStatus          = errors.New("err: error when get status from chain! ")
+	ErrAmountLessThanZero      = errors.New("err: input amount value can not less than 0! ")
 )

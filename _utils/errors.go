@@ -3,7 +3,7 @@ package _utils
 import "errors"
 
 var (
-	InvalidPrivateKey      = errors.New("Input private key is not valid! ")
-	InvalidPublicKey       = errors.New("Input nil public key is not valid! ")
-	InvalidVerifySigPubKey = errors.New("Input public key is not valid for the signature! ")
+	ErrInvalidPrivateKey      = errors.New("err: input private key is not valid! ")
+	ErrInvalidPublicKey       = errors.New("err: input nil public key is not valid! ")
+	ErrInvalidVerifySigPubKey = errors.New("err: input public key is not valid for the signature! ")
 )
