@@ -1,13 +1,13 @@
 package _rpc
 
 import (
+	"Zecrey-eth-rpc/_utils"
 	"context"
 	"crypto/ecdsa"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"math/big"
-	"Zecrey-eth-rpc/_utils"
 )
 
 // get balance
@@ -15,7 +15,7 @@ func (cli *ProviderClient) GetBalance(address string) (balance *big.Int, err err
 	// check address
 	isValid := _utils.IsValidEthAddress(address)
 	if !isValid {
-		return nil, InvalidAddress
+		return nil, ErrInvalidAddress
 	}
 	// get address
 	account := common.HexToAddress(address)
@@ -23,22 +23,12 @@ func (cli *ProviderClient) GetBalance(address string) (balance *big.Int, err err
 	return cli.BalanceAt(context.Background(), account, nil)
 }
 
-// get balacne by ether
-func (cli *ProviderClient) GetEtherBalance(address string) (etherBalance *big.Float, err error) {
-	balance, err := cli.GetBalance(address)
-	if err != nil {
-		return nil, err
-	}
-	etherBalance = _utils.WeiToEther(balance)
-	return etherBalance, nil
-}
-
 // check if the address is a contract address
 // @address: address of ethereum
 func (cli *ProviderClient) IsContract(address string) (isContract bool, err error) {
 	isValidEthAddress := _utils.IsValidEthAddress(address)
 	if !isValidEthAddress {
-		return false, InvalidAddress
+		return false, ErrInvalidAddress
 	}
 	contract := common.HexToAddress(address)
 	bytecode, err := cli.CodeAt(context.Background(), contract, nil)
@@ -99,7 +89,7 @@ func (cli *ProviderClient) GetHeight() (height uint64, err error) {
 func (cli *ProviderClient) GetTransactionByHash(transactionHash string) (tx *types.Transaction, isPending bool, err error) {
 	// validate hash value
 	if !_utils.IsValidHashValue(transactionHash) {
-		return nil, false, InvalidHashValue
+		return nil, false, ErrInvalidHashValue
 	}
 	// get hash value
 	hash := common.HexToHash(transactionHash)
@@ -110,7 +100,7 @@ func (cli *ProviderClient) GetTransactionByHash(transactionHash string) (tx *typ
 func (cli *ProviderClient) GetTransactionReceipt(transactionHash string) (receipt *types.Receipt, err error) {
 	// validate hash value
 	if !_utils.IsValidHashValue(transactionHash) {
-		return nil, InvalidHashValue
+		return nil, ErrInvalidHashValue
 	}
 	// get hash value
 	hash := common.HexToHash(transactionHash)
@@ -121,7 +111,7 @@ func (cli *ProviderClient) GetPendingNonce(address string) (nonce uint64, err er
 	// validate address
 	isValidEthAddress := _utils.IsValidEthAddress(address)
 	if !isValidEthAddress {
-		return 0, InvalidAddress
+		return 0, ErrInvalidAddress
 	}
 	// transfer to address
 	account := common.HexToAddress(address)
@@ -134,7 +124,7 @@ func PrivateKeyToAddress(privateKey *ecdsa.PrivateKey) (address common.Address, 
 	pubKey := privateKey.Public()
 	publicKeyECDSA, ok := pubKey.(*ecdsa.PublicKey)
 	if !ok {
-		return common.Address{}, InvalidPrivateKey
+		return common.Address{}, ErrInvalidPrivateKey
 	}
 	// get address
 	address = crypto.PubkeyToAddress(*publicKeyECDSA)

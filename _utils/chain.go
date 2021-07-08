@@ -58,7 +58,7 @@ func EtherToWei(value float64) *big.Int {
 // transfer private key to str
 func EncodePrivateKey(sk *ecdsa.PrivateKey) (priKey string, err error) {
 	if sk == nil {
-		return "", InvalidPrivateKey
+		return "", ErrInvalidPrivateKey
 	}
 	// remove "0x"
 	return hexutil.Encode(crypto.FromECDSA(sk)), nil
@@ -68,7 +68,7 @@ func EncodePrivateKey(sk *ecdsa.PrivateKey) (priKey string, err error) {
 func DecodePrivateKey(sk string) (privateKey *ecdsa.PrivateKey, err error) {
 	isValidPrivateKey := IsValidPrivateKey(sk)
 	if !isValidPrivateKey {
-		return nil, InvalidPrivateKey
+		return nil, ErrInvalidPrivateKey
 	}
 	// add "0x"
 	if sk[:2] != "0x" {
@@ -84,7 +84,7 @@ func DecodePrivateKey(sk string) (privateKey *ecdsa.PrivateKey, err error) {
 // public key to str
 func EncodePubKey(pk *ecdsa.PublicKey) (pubKey string, err error) {
 	if pk == nil {
-		return "", InvalidPublicKey
+		return "", ErrInvalidPublicKey
 	}
 	return hexutil.Encode(crypto.FromECDSAPub(pk)), nil
 }
@@ -131,7 +131,7 @@ func VerifySig(pk string, sig []byte, data []byte) (res bool, err error) {
 	// compare two public keys
 	isEqual := bytes.Equal(sigPubKeyBytes, pubKeyBytes)
 	if !isEqual {
-		return false, InvalidVerifySigPubKey
+		return false, ErrInvalidVerifySigPubKey
 	}
 	// get signature recover id
 	signatureNoRecoverID := sig[:len(sig)-1] // remove recovery ID

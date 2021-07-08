@@ -1,6 +1,8 @@
 package _rpc
 
 import (
+	"Zecrey-eth-rpc/_const"
+	"Zecrey-eth-rpc/_utils"
 	"context"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -10,20 +12,18 @@ import (
 	"math/big"
 	"strings"
 	"time"
-	"Zecrey-eth-rpc/_const"
-	"Zecrey-eth-rpc/_utils"
 )
 
 // transfer eth
 func (cli *ProviderClient) Transfer(authCli *AuthClient, to string, amount *big.Int, data []byte, gasLimit uint64) (txHash string, err error) {
 	// validate amount,it can't less than zero
 	if amount.Cmp(new(big.Int).SetUint64(0)) < 0 {
-		return "", AmountLessThanZero
+		return "", ErrAmountLessThanZero
 	}
 	// check address
 	isValidTo := _utils.IsValidEthAddress(to)
 	if !isValidTo {
-		return "", InvalidAddress
+		return "", ErrInvalidAddress
 	}
 	// transfer private key to address
 	fromAddress, err := PrivateKeyToAddress(authCli.PrivateKey)
@@ -54,7 +54,7 @@ func (cli *ProviderClient) Transfer(authCli *AuthClient, to string, amount *big.
 func (cli *ProviderClient) DeployContract(authCli *AuthClient, gasPrice *big.Int, abiPath string, binPath string, params []interface{}) (contractAddress common.Address, txHash common.Hash, err error) {
 	// check authCli
 	if authCli == nil || abiPath == "" || binPath == "" {
-		return contractAddress, txHash, InvalidParams
+		return contractAddress, txHash, ErrInvalidParams
 	}
 	// transfer private key to address
 	address, err := PrivateKeyToAddress(authCli.PrivateKey)
@@ -110,7 +110,7 @@ func (cli *ProviderClient) WaitingTransactionStatus(txHash string) (status bool,
 	count := 0
 	for {
 		if count > _const.MaxTryTimes {
-			return false, ErrorGetBlockStatus
+			return false, ErrGetBlockStatus
 		}
 		// get transaction info
 		_, isPending, err := cli.GetTransactionByHash(txHash)
