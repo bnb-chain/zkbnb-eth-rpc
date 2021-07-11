@@ -12,11 +12,12 @@ import (
 	"time"
 )
 
-const ZecreyAddr = "0x29e2fDf110019A894eE08C3E1b9415098979fC30"
+const ZecreyAddr = "0x18766657eC1Bf9DbFc0d229258f205d88D736c38"
+const RinkebyZecreyAddr = "0x8D5ad3bCc10492286bDeDC0A992bEd99F1e5729c"
 
 func TestDeployZecreyContract(t *testing.T) {
 	elapse := time.Now()
-	addr, txHash, err := DeployZecreyContract(cli, authCli, ZecreyVerifierAddr, GovernanceAddr, gasPrice, _const.SuggestHighGasLimit)
+	addr, txHash, err := DeployZecreyContract(cli, authCli, RinkebyZecreyVerifierAddr, RinkebyGovernanceAddr, gasPrice, _const.SuggestHighGasLimit)
 	if err != nil {
 		t.Fatal(err)
 	}

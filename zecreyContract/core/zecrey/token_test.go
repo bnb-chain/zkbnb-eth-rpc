@@ -8,7 +8,8 @@ import (
 	"time"
 )
 
-const ZecreyTokenAddr = "0xdd542d4e6AA059D4235169E0e1e019827d12196e"
+const ZecreyTokenAddr = "0xCd44483447D3dbe166e1D8c74c6DC0705dFcDAc2"
+const RinkebyZecreyTokenAddr = "0x8F8c88B6133C790289fc44b602F5B8570706c6f0"
 
 func TestDeployZecreyTokenContract(t *testing.T) {
 	elapse := time.Now()

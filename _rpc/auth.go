@@ -1,12 +1,11 @@
 package _rpc
 
 import (
-	"context"
+	"Zecrey-eth-rpc/_utils"
 	"crypto/ecdsa"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"math/big"
-	"Zecrey-eth-rpc/_utils"
 )
 
 // auth of user
@@ -18,7 +17,7 @@ type AuthClient struct {
 }
 
 // create a new auth cli
-func NewAuthClient(cli *ProviderClient, priKey string) (authCli *AuthClient, err error) {
+func NewAuthClient(cli *ProviderClient, priKey string, chainId *big.Int) (authCli *AuthClient, err error) {
 	// validate private key
 	if !_utils.IsValidPrivateKey(priKey) {
 		return nil, ErrInvalidPrivateKey
@@ -31,9 +30,5 @@ func NewAuthClient(cli *ProviderClient, priKey string) (authCli *AuthClient, err
 	// get public key
 	publicKey := privateKey.PublicKey
 	address := crypto.PubkeyToAddress(publicKey)
-	chainID, err := cli.ChainID(context.Background())
-	if err != nil {
-		return nil, err
-	}
-	return &AuthClient{PrivateKey: privateKey, PublicKey: &publicKey, Address: address, ChainId: chainID}, nil
+	return &AuthClient{PrivateKey: privateKey, PublicKey: &publicKey, Address: address, ChainId: chainId}, nil
 }

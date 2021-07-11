@@ -7,7 +7,8 @@ import (
 	"time"
 )
 
-const ZecreyVerifierAddr = "0x7473A7322c188583b1E11Df6352680f6bA7c8866"
+const ZecreyVerifierAddr = "0x9E19EE8FfCB5C3810975724eb4e772144f348a65"
+const RinkebyZecreyVerifierAddr = "0xFb2Bf454615C7eb6485C323Fc1a961736efb3485"
 
 func TestDeployZecreyVerifierContract(t *testing.T) {
 	elapse := time.Now()
