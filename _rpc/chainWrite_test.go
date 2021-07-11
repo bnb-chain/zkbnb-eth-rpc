@@ -11,7 +11,7 @@ func TestTransfer(t *testing.T) {
 	cli, err := NewClient(_const.InfuraRinkebyNetwork)
 	defer cli.Close()
 	toAddress := _const.ToAddress
-	authClient, err := NewAuthClient(cli, _const.RinkebySuperSk)
+	authClient, err := NewAuthClient(cli, _const.RinkebySuperSk, RinkebyChainId)
 	if err != nil {
 		t.Error(err)
 	}
@@ -30,7 +30,7 @@ func TestTransfer(t *testing.T) {
 func TestDeployContract(t *testing.T) {
 	cli, err := NewClient(_const.InfuraRinkebyNetwork)
 	defer cli.Close()
-	authClient, err := NewAuthClient(cli, _const.RinkebySuperSk)
+	authClient, err := NewAuthClient(cli, _const.RinkebySuperSk, RinkebyChainId)
 	if err != nil {
 		panic(err)
 	}
@@ -45,7 +45,7 @@ func TestDeployContract(t *testing.T) {
 func TestDeployContractUntil(t *testing.T) {
 	cli, err := NewClient(_const.InfuraRinkebyNetwork)
 	defer cli.Close()
-	authClient, err := NewAuthClient(cli, _const.RinkebySuperSk)
+	authClient, err := NewAuthClient(cli, _const.RinkebySuperSk, RinkebyChainId)
 	if err != nil {
 		panic(err)
 	}
