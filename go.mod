@@ -1,4 +1,4 @@
-module Zecrey-eth-rpc
+module github.com/zecrey-labs/zecrey-eth-rpc
 
 go 1.15
 

@@ -1,10 +1,10 @@
 package _rpc
 
 import (
-	"Zecrey-eth-rpc/_const"
 	"crypto/ecdsa"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/zecrey-labs/zecrey-eth-rpc/_const"
 	"math/big"
 )
 

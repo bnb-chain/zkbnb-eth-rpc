@@ -1,8 +1,8 @@
 package zecrey
 
 import (
-	"Zecrey-eth-rpc/_rpc"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/zecrey-labs/zecrey-eth-rpc/_rpc"
 	"math/big"
 )
 

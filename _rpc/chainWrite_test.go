@@ -1,21 +1,21 @@
 package _rpc
 
 import (
-	"Zecrey-eth-rpc/_const"
-	"Zecrey-eth-rpc/_utils"
 	"fmt"
+	"github.com/zecrey-labs/zecrey-eth-rpc/_const"
+	"github.com/zecrey-labs/zecrey-eth-rpc/_utils"
 	"testing"
 )
 
 func TestTransfer(t *testing.T) {
-	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	cli, err := NewClient(_const.LocalNetwork)
 	defer cli.Close()
-	toAddress := _const.ToAddress
-	authClient, err := NewAuthClient(cli, _const.RinkebySuperSk, RinkebyChainId)
+	toAddress := "0x89D37ea8a0f102D90C424141F897A6a764A291AF"
+	authClient, err := NewAuthClient(cli, "3f0b8ba8bf289106b7de0f75a659f4e9a7f17812c568298e8e83e789c64933c2", RinkebyChainId)
 	if err != nil {
 		t.Error(err)
 	}
-	txHash, err := cli.Transfer(authClient, toAddress, _utils.EtherToWei(0.1), nil, _const.SuggestGasLimit)
+	txHash, err := cli.Transfer(authClient, toAddress, _utils.EtherToWei(99), nil, _const.SuggestGasLimit)
 	if err != nil {
 		t.Error(err)
 	}

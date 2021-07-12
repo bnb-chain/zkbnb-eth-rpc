@@ -1,7 +1,7 @@
 package _rpc
 
 import (
-	"Zecrey-eth-rpc/_const"
+	"github.com/zecrey-labs/zecrey-eth-rpc/_const"
 	"crypto/ecdsa"
 	"fmt"
 	"github.com/ethereum/go-ethereum/crypto"
