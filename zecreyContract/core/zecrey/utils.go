@@ -1,9 +1,9 @@
 package zecrey
 
 import (
-	"Zecrey-eth-rpc/_rpc"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/zecrey-labs/zecrey-eth-rpc/_rpc"
 	"math/big"
 )
 
@@ -23,6 +23,7 @@ func ConstructTransactOpts(cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, g
 	transactOpts.Nonce = big.NewInt(int64(nonce))
 	transactOpts.GasPrice = gasPrice
 	transactOpts.GasLimit = gasLimit
+	transactOpts.From = authCli.Address
 	transactOpts.Value = big.NewInt(0)
 	return transactOpts, nil
 }
@@ -64,12 +65,11 @@ func ConstructCommitBlock(blockNumber uint32, accountRoot []byte, publicData []b
 	}
 }
 
-func ConstructProcessBlock(blockInfo StorageBlock, onchainOperationsIndexes []*big.Int, a [2]*big.Int, b [2][2]*big.Int, c [2]*big.Int) ZecreyProcessBlock {
+func ConstructProcessBlock(blockInfo StorageBlock, a [2]*big.Int, b [2][2]*big.Int, c [2]*big.Int) ZecreyProcessBlock {
 	return ZecreyProcessBlock{
-		BlockInfo:                blockInfo,
-		OnchainOperationsIndexes: onchainOperationsIndexes,
-		A:                        a,
-		B:                        b,
-		C:                        c,
+		BlockInfo: blockInfo,
+		A:         a,
+		B:         b,
+		C:         c,
 	}
 }

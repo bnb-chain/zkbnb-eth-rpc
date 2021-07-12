@@ -1,8 +1,8 @@
 package zecrey
 
 import (
-	"Zecrey-eth-rpc/_rpc"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/zecrey-labs/zecrey-eth-rpc/_rpc"
 	"math/big"
 )
 
@@ -52,6 +52,7 @@ func Deposit(cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *Zecre
 	if err != nil {
 		return "", err
 	}
+	transactOpts.From = authCli.Address
 	transactOpts.Value = amount
 	tx, err := instance.Deposit(transactOpts, assetId, zecreyAddr, amount)
 	if err != nil {

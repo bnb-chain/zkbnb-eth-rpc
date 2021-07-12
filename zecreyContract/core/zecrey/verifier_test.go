@@ -1,8 +1,8 @@
 package zecrey
 
 import (
-	"Zecrey-eth-rpc/_const"
 	"fmt"
+	"github.com/zecrey-labs/zecrey-eth-rpc/_const"
 	"testing"
 	"time"
 )
@@ -12,7 +12,7 @@ const RinkebyZecreyVerifierAddr = "0xFb2Bf454615C7eb6485C323Fc1a961736efb3485"
 
 func TestDeployZecreyVerifierContract(t *testing.T) {
 	elapse := time.Now()
-	addr, txHash, err := DeployZecreyTokenContract(cli, authCli, InitialTokenSupply, gasPrice, _const.SuggestHighGasLimit)
+	addr, txHash, err := DeployZecreyTokenContract(localCli, localAuthCli, InitialTokenSupply, gasPrice, _const.SuggestHighGasLimit)
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -1,23 +1,24 @@
 package zecrey
 
 import (
-	"Zecrey-eth-rpc/_const"
-	"Zecrey-eth-rpc/_utils"
 	"context"
 	"fmt"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/zecrey-labs/zecrey-eth-rpc/_const"
+	"github.com/zecrey-labs/zecrey-eth-rpc/_utils"
 	"math/big"
 	"testing"
 	"time"
 )
 
-const ZecreyAddr = "0x18766657eC1Bf9DbFc0d229258f205d88D736c38"
-const RinkebyZecreyAddr = "0x8D5ad3bCc10492286bDeDC0A992bEd99F1e5729c"
+const ZecreyAddr = "0x61A746B3692B8D6bAE5CD6662C287715388Acf68"
+const RinkebyZecreyAddr = "0xD370440dC770445B6C38b9123B4A6c9A2698fc6d"
 
 func TestDeployZecreyContract(t *testing.T) {
 	elapse := time.Now()
-	addr, txHash, err := DeployZecreyContract(cli, authCli, RinkebyZecreyVerifierAddr, RinkebyGovernanceAddr, gasPrice, _const.SuggestHighGasLimit)
+	addr, txHash, err := DeployZecreyContract(localCli, localAuthCli, ZecreyVerifierAddr, GovernanceAddr, gasPrice, _const.SuggestHighGasLimit)
+	//addr, txHash, err := DeployZecreyContract(rinkebyCli, rinkebyAuthCli, RinkebyZecreyVerifierAddr, RinkebyGovernanceAddr, gasPrice, _const.SuggestHighGasLimit)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -27,24 +28,24 @@ func TestDeployZecreyContract(t *testing.T) {
 }
 
 func LoadZecrey() *Zecrey {
-	instance, _ := LoadZecreyInstance(cli, ZecreyAddr)
+	instance, _ := LoadZecreyInstance(localCli, ZecreyAddr)
 	return instance
 }
 
 func TestDeposit(t *testing.T) {
 	instance := LoadZecrey()
 	depositAmount, _ := new(big.Int).SetString("1000000000000000000", 10)
-	oldBalance, err := cli.GetBalance(_const.LocalSuperAddress)
+	oldBalance, err := localCli.GetBalance(_const.LocalSuperAddress)
 	if err != nil {
 		t.Fatal(err)
 	}
 	fmt.Println(_utils.WeiToEther(oldBalance).String())
-	txHash, err := Deposit(cli, authCli, instance, 0, "sher", depositAmount, gasPrice, _const.SuggestHighGasLimit)
+	txHash, err := Deposit(localCli, localAuthCli, instance, 0, "sher", depositAmount, gasPrice, _const.SuggestHighGasLimit)
 	if err != nil {
 		t.Fatal(err)
 	}
 	fmt.Println(txHash)
-	newBalance, err := cli.GetBalance(_const.LocalSuperAddress)
+	newBalance, err := localCli.GetBalance(_const.LocalSuperAddress)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -66,12 +67,12 @@ func TestCommitBlocks(t *testing.T) {
 		withdrawOperations,
 		1625562034)
 	commitBlocks := []ZecreyCommitBlock{commitBlock}
-	txHash, err := CommitBlocks(cli, authCli, instance, block, commitBlocks, gasPrice, _const.SuggestHighGasLimit)
+	txHash, err := CommitBlocks(localCli, localAuthCli, instance, block, commitBlocks, gasPrice, _const.SuggestHighGasLimit)
 	if err != nil {
 		t.Fatal(err)
 	}
 	fmt.Println(txHash)
-	committedCount, err := GetTotalBlocksCommitted(cli, instance)
+	committedCount, err := GetTotalBlocksCommitted(localCli, instance)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -80,7 +81,7 @@ func TestCommitBlocks(t *testing.T) {
 
 func TestProcessBlocks(t *testing.T) {
 	instance := LoadZecrey()
-	oldBalance, err := cli.GetBalance(_const.LocalSuperAddress)
+	oldBalance, err := localCli.GetBalance(_const.LocalSuperAddress)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -95,23 +96,22 @@ func TestProcessBlocks(t *testing.T) {
 	b[1][0] = big.NewInt(0)
 	b[1][1] = big.NewInt(0)
 	processBlock := ConstructProcessBlock(block,
-		[]*big.Int{big.NewInt(0), big.NewInt(1)},
 		[2]*big.Int{big.NewInt(0), big.NewInt(0)},
 		b,
 		[2]*big.Int{big.NewInt(0),
 			big.NewInt(0)})
 	processBlocks := []ZecreyProcessBlock{processBlock}
-	txHash, err := ProcessBlocks(cli, authCli, instance, processBlocks, gasPrice, _const.SuggestHighGasLimit)
+	txHash, err := ProcessBlocks(localCli, localAuthCli, instance, processBlocks, gasPrice, _const.SuggestHighGasLimit)
 	if err != nil {
 		t.Fatal(err)
 	}
 	fmt.Println(txHash)
-	processedCount, err := GetTotalBlocksProcessed(cli, instance)
+	processedCount, err := GetTotalBlocksProcessed(localCli, instance)
 	if err != nil {
 		t.Fatal(err)
 	}
 	fmt.Println(processedCount)
-	newBalance, err := cli.GetBalance(_const.LocalSuperAddress)
+	newBalance, err := localCli.GetBalance(_const.LocalSuperAddress)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -120,11 +120,11 @@ func TestProcessBlocks(t *testing.T) {
 
 func TestLoadLogs(t *testing.T) {
 	instance := LoadZecrey()
-	depositLogs, err := instance.ZecreyFilterer.FilterDeposit(&bind.FilterOpts{Start: 535, End: nil, Context: context.Background()})
+	depositLogs, err := instance.ZecreyFilterer.FilterDeposit(&bind.FilterOpts{Start: 547, End: nil, Context: context.Background()})
 	if err != nil {
 		t.Fatal(err)
 	}
 	for depositLogs.Next() {
-		fmt.Println(depositLogs.Event.DepositAmount)
+		fmt.Println(depositLogs.Event.ZecreyAddr)
 	}
 }
