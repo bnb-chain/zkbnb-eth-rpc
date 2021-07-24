@@ -14,11 +14,11 @@ const GovernanceAddr = "0x0668F761a5428B4c650cCeEF5410277a262407e1"
 const RinkebyGovernanceAddr = "0xdAdf3DE3B613efd0a93282DE4151Aab8062c5f77"
 
 var (
-	localCli     *_rpc.ProviderClient
-	localAuthCli *_rpc.AuthClient
+	localCli       *_rpc.ProviderClient
+	localAuthCli   *_rpc.AuthClient
 	rinkebyCli     *_rpc.ProviderClient
 	rinkebyAuthCli *_rpc.AuthClient
-	gasPrice     *big.Int
+	gasPrice       *big.Int
 )
 
 func init() {
@@ -56,7 +56,7 @@ func TestAddAsset(t *testing.T) {
 
 func TestUpdateRollupProvider(t *testing.T) {
 	instance := LoadGovernance()
-	txHash, err := UpdateRollupProvider(localCli, localAuthCli, instance, _const.RinkebySuperAddress, true, gasPrice, _const.SuggestHighGasLimit)
+	txHash, err := UpdateRollupProvider(localCli, localAuthCli, instance, _const.LocalSuperAddress, true, gasPrice, _const.SuggestHighGasLimit)
 	if err != nil {
 		t.Fatal(err)
 	}
