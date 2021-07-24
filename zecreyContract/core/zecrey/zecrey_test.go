@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-const ZecreyAddr = "0x61A746B3692B8D6bAE5CD6662C287715388Acf68"
+const ZecreyAddr = "0xc3Fdb4A4A8F596BD227195Aa8F889C87a261c7ca"
 const RinkebyZecreyAddr = "0xD370440dC770445B6C38b9123B4A6c9A2698fc6d"
 
 func TestDeployZecreyContract(t *testing.T) {
@@ -127,4 +127,49 @@ func TestLoadLogs(t *testing.T) {
 	for depositLogs.Next() {
 		fmt.Println(depositLogs.Event.ZecreyAddr)
 	}
+}
+
+func TestGetTotalBlocksCommitted(t *testing.T) {
+	instance := LoadZecrey()
+	blocksCommitted, err := GetTotalBlocksCommitted(localCli, instance)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(blocksCommitted)
+}
+
+func TestCommittedHash(t *testing.T) {
+	instance := LoadZecrey()
+	blockHashes, err := instance.StoredBlockHashes(EmptyCallOpts(), 6)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(common.BytesToHash(blockHashes[:]))
+}
+
+func TestZecreyCaller_PendingOperationsCount(t *testing.T) {
+	instance := LoadZecrey()
+	count, err := instance.PendingOperationsCount(EmptyCallOpts())
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(count.String())
+}
+
+func TestZecreyCaller_OnchainOperationsCount(t *testing.T) {
+	instance := LoadZecrey()
+	count, err := instance.OnchainOperationsCount(EmptyCallOpts())
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(count.String())
+}
+
+func TestZecreyCaller_OnchainOperations(t *testing.T) {
+	instance := LoadZecrey()
+	operations, err := instance.OnchainOperations(EmptyCallOpts(), big.NewInt(0))
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(operations.AssetId)
 }
