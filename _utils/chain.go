@@ -3,12 +3,13 @@ package _utils
 import (
 	"bytes"
 	"crypto/ecdsa"
+	"errors"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/zecrey-labs/zecrey-eth-rpc/_const"
 	"math"
 	"math/big"
 	"regexp"
-	"github.com/zecrey-labs/zecrey-eth-rpc/_const"
 )
 
 // transfer wei to ether balance/10^{18}
@@ -79,6 +80,18 @@ func DecodePrivateKey(sk string) (privateKey *ecdsa.PrivateKey, err error) {
 		return nil, err
 	}
 	return crypto.ToECDSA(privateKeyBytes)
+}
+
+func DecodePrivateKeyBigInt(skStr string) (privateKey *ecdsa.PrivateKey, err error) {
+	sk, b := new(big.Int).SetString(skStr, 10)
+	if !b {
+		return nil, errors.New("err: invalid private key")
+	}
+	privateKey, err = crypto.ToECDSA(sk.Bytes())
+	if err != nil {
+		return nil, err
+	}
+	return privateKey, nil
 }
 
 // public key to str

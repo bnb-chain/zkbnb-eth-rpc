@@ -13,7 +13,7 @@ const RinkebyZecreyTokenAddr = "0x8F8c88B6133C790289fc44b602F5B8570706c6f0"
 
 func TestDeployZecreyTokenContract(t *testing.T) {
 	elapse := time.Now()
-	addr, txHash, err := DeployZecreyTokenContract(localCli, localAuthCli, InitialTokenSupply, gasPrice, _const.SuggestHighGasLimit)
+	addr, txHash, err := DeployZecreyTokenContract(localCli, localAuthCli, InitialTokenSupply, localGasPrice, _const.SuggestHighGasLimit)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -39,7 +39,7 @@ func TestGetREYBalance(t *testing.T) {
 func TestGetAllowance(t *testing.T) {
 	instance := LoadZecreyToken()
 	toAddr := "0xbE008826B14b8E65Dee9104fB67D47a09Cdbbd0E"
-	txHash, err := ApproveREY(localCli, localAuthCli, instance, toAddr, InitialTokenSupply, gasPrice, _const.SuggestFunctionGasLimit)
+	txHash, err := ApproveREY(localCli, localAuthCli, instance, toAddr, InitialTokenSupply, localGasPrice, _const.SuggestFunctionGasLimit)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -54,7 +54,7 @@ func TestGetAllowance(t *testing.T) {
 func TestTransferREY(t *testing.T) {
 	instance := LoadZecreyToken()
 	toAddr := "0xbE008826B14b8E65Dee9104fB67D47a09Cdbbd0E"
-	txHash, err := TransferREY(localCli, localAuthCli, instance, toAddr, big.NewInt(1000000), gasPrice, _const.SuggestHighGasLimit)
+	txHash, err := TransferREY(localCli, localAuthCli, instance, toAddr, big.NewInt(1000000), localGasPrice, _const.SuggestHighGasLimit)
 	if err != nil {
 		t.Fatal(err)
 	}

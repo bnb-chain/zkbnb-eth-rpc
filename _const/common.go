@@ -9,6 +9,8 @@ const (
 	LocalNetwork         = "http://localhost:8545"
 	AuroraTestNetwork    = "https://testnet.aurora.dev"
 	AuroraMainNetwork    = "https://mainnet.aurora.dev"
+	ArbitrumTestNetwork  = "https://rinkeby.arbitrum.io/rpc"
+	PolyTestNetwork      = "https://matic-mumbai.chainstacklabs.com"
 
 	// max try times
 	MaxTryTimes = 10
@@ -20,8 +22,9 @@ const (
 	RinkebySuperSk      = "acbaa269bd7573ff12361be4b97201aef019776ea13384681d4e5ba6a88367d9"
 
 	// local network super account
-	LocalSuperAddress = "0x89D37ea8a0f102D90C424141F897A6a764A291AF"
-	LocalSuperSk      = "ad6ad08487f7d8c96450f71dba9d8a4dc7e0924bdd62eda59962685577db1068"
+	LocalSuperAddress  = "0x89D37ea8a0f102D90C424141F897A6a764A291AF"
+	LocalSuperSk       = "ad6ad08487f7d8c96450f71dba9d8a4dc7e0924bdd62eda59962685577db1068"
+	LocalSuperSkBigInt = "78438847730043804073117709805401039734901665551211393154078937917603918319720"
 
 	// test address
 	ToAddress = "0xbE008826B14b8E65Dee9104fB67D47a09Cdbbd0E"

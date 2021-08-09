@@ -12,13 +12,17 @@ import (
 	"time"
 )
 
-const ZecreyAddr = "0xc3Fdb4A4A8F596BD227195Aa8F889C87a261c7ca"
-const RinkebyZecreyAddr = "0xD370440dC770445B6C38b9123B4A6c9A2698fc6d"
+const ZecreyAddr = "0x6d551E6b91f94c422Db90786A8c9Cd9eDBcbb911"
+const RinkebyZecreyAddr = "0x95bBA8D93C794717eFF37d37d5F5d6573e713321"
+const AuroraZecreyAddr = "0x56C4e158658551d9C20AB430A5d09fb4d4f0DDa8"
+const ArbitrumZecreyAddr = "0x56C4e158658551d9C20AB430A5d09fb4d4f0DDa8"
+const PolyTestZecreyAddr = "0x56C4e158658551d9C20AB430A5d09fb4d4f0DDa8"
 
 func TestDeployZecreyContract(t *testing.T) {
 	elapse := time.Now()
-	addr, txHash, err := DeployZecreyContract(localCli, localAuthCli, ZecreyVerifierAddr, GovernanceAddr, gasPrice, _const.SuggestHighGasLimit)
-	//addr, txHash, err := DeployZecreyContract(rinkebyCli, rinkebyAuthCli, RinkebyZecreyVerifierAddr, RinkebyGovernanceAddr, gasPrice, _const.SuggestHighGasLimit)
+	//addr, txHash, err := DeployZecreyContract(localCli, localAuthCli, ZecreyVerifierAddr, GovernanceAddr, localGasPrice, _const.SuggestHighGasLimit)
+	addr, txHash, err := DeployZecreyContract(rinkebyCli, rinkebyAuthCli, RinkebyZecreyVerifierAddr, RinkebyGovernanceAddr, localGasPrice, _const.SuggestHighGasLimit)
+	//addr, txHash, err := DeployZecreyContract(polyTestCli, polyTestAuthCli, PolyTestVerifierAddr, PolyTestNetGovernanceAddr, big.NewInt(1000000000), _const.SuggestHighGasLimit)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -28,24 +32,29 @@ func TestDeployZecreyContract(t *testing.T) {
 }
 
 func LoadZecrey() *Zecrey {
-	instance, _ := LoadZecreyInstance(localCli, ZecreyAddr)
+	instance, _ := LoadZecreyInstance(polyTestCli, PolyTestZecreyAddr)
 	return instance
 }
 
 func TestDeposit(t *testing.T) {
 	instance := LoadZecrey()
-	depositAmount, _ := new(big.Int).SetString("1000000000000000000", 10)
-	oldBalance, err := localCli.GetBalance(_const.LocalSuperAddress)
+	depositAmount, _ := new(big.Int).SetString("10000000000000000", 10)
+	oldBalance, err := polyTestCli.GetBalance(_const.RinkebySuperAddress)
 	if err != nil {
 		t.Fatal(err)
 	}
+	info, err := polyTestCli.GetHeight()
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println("current height:", info)
 	fmt.Println(_utils.WeiToEther(oldBalance).String())
-	txHash, err := Deposit(localCli, localAuthCli, instance, 0, "sher", depositAmount, gasPrice, _const.SuggestHighGasLimit)
+	txHash, err := Deposit(polyTestCli, polyTestAuthCli, instance, 0, "name4.zecrey", depositAmount, polyGasPrice, _const.SuggestHighGasLimit)
 	if err != nil {
 		t.Fatal(err)
 	}
 	fmt.Println(txHash)
-	newBalance, err := localCli.GetBalance(_const.LocalSuperAddress)
+	newBalance, err := polyTestCli.GetBalance(_const.RinkebySuperAddress)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -67,7 +76,7 @@ func TestCommitBlocks(t *testing.T) {
 		withdrawOperations,
 		1625562034)
 	commitBlocks := []ZecreyCommitBlock{commitBlock}
-	txHash, err := CommitBlocks(localCli, localAuthCli, instance, block, commitBlocks, gasPrice, _const.SuggestHighGasLimit)
+	txHash, err := CommitBlocks(localCli, localAuthCli, instance, block, commitBlocks, localGasPrice, _const.SuggestHighGasLimit)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -101,7 +110,7 @@ func TestProcessBlocks(t *testing.T) {
 		[2]*big.Int{big.NewInt(0),
 			big.NewInt(0)})
 	processBlocks := []ZecreyProcessBlock{processBlock}
-	txHash, err := ProcessBlocks(localCli, localAuthCli, instance, processBlocks, gasPrice, _const.SuggestHighGasLimit)
+	txHash, err := ProcessBlocks(localCli, localAuthCli, instance, processBlocks, localGasPrice, _const.SuggestHighGasLimit)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -120,7 +129,7 @@ func TestProcessBlocks(t *testing.T) {
 
 func TestLoadLogs(t *testing.T) {
 	instance := LoadZecrey()
-	depositLogs, err := instance.ZecreyFilterer.FilterDeposit(&bind.FilterOpts{Start: 547, End: nil, Context: context.Background()})
+	depositLogs, err := instance.ZecreyFilterer.FilterDeposit(&bind.FilterOpts{Start: 641, End: nil, Context: context.Background()})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -172,4 +181,37 @@ func TestZecreyCaller_OnchainOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	fmt.Println(operations.AssetId)
+}
+
+func TestConstructDepositSignedTx(t *testing.T) {
+	nonce, err := localCli.GetPendingNonce(_const.LocalSuperAddress)
+	if err != nil {
+		t.Fatal(err)
+	}
+	amount := _utils.EtherToWei(0.1)
+	gasPrice, err := localCli.SuggestGasPrice(context.Background())
+	if err != nil {
+		t.Fatal(err)
+	}
+	txStr, err := ConstructDepositSignedTx(_const.LocalSuperSk, localAuthCli.ChainId.Int64(), nonce, ZecreyAddr, 0, "sher", amount, gasPrice, _const.SuggestHighGasLimit)
+	if err != nil {
+		t.Fatal(err)
+	}
+	signedTx, err := DecodeSignedTx(txStr)
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = localCli.SendTransaction(context.Background(), signedTx)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println("txHash:", signedTx.Hash().Hex())
+}
+
+func TestGetBlockHeight(t *testing.T) {
+	height, err := arbitrumCli.GetHeight()
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(height)
 }

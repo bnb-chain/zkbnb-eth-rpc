@@ -1,8 +1,12 @@
 package zecrey
 
 import (
+	"encoding/hex"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/rlp"
 	"github.com/zecrey-labs/zecrey-eth-rpc/_rpc"
+	"github.com/zecrey-labs/zecrey-eth-rpc/_utils"
 	"math/big"
 )
 
@@ -59,6 +63,69 @@ func Deposit(cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *Zecre
 		return "", err
 	}
 	return tx.Hash().Hex(), nil
+}
+
+func SignTransaction(chainID int64, tx *types.Transaction, privateKeyStr string) (string, error) {
+	privateKey, err := _utils.DecodePrivateKeyBigInt(privateKeyStr)
+	if err != nil {
+		return "", err
+	}
+	signedTx, err := types.SignTx(tx, types.NewEIP155Signer(big.NewInt(chainID)), privateKey)
+	//signedTx, err := types.SignTx(tx, types.HomesteadSigner{}, privateKey)
+	if err != nil {
+		return "", nil
+	}
+
+	return EncodeSignedTx(signedTx)
+}
+
+/*
+	ConstructDepositSignedTx: helper function, construct deposit signed tx
+*/
+func ConstructDepositSignedTx(
+	skStr string,
+	chainId int64,
+	nonce uint64,
+	toContractAddress string,
+	assetId uint32,
+	zecreyAddr string,
+	amount *big.Int,
+	gasPrice *big.Int,
+	gasLimit uint64,
+) (signedTx string, err error) {
+	// define types
+	data, err := zecreyABI.Pack("deposit", assetId, zecreyAddr, amount)
+	if err != nil {
+		return "", err
+	}
+	// construct tx
+	tx := types.NewTransaction(nonce, common.HexToAddress(toContractAddress), amount, gasLimit, gasPrice, data)
+	// sign transaction
+	signedTx, err = SignTransaction(chainId, tx, skStr)
+	if err != nil {
+		return "", err
+	}
+	return signedTx, nil
+}
+
+func EncodeSignedTx(signedTx *types.Transaction) (string, error) {
+	txBytes, err := rlp.EncodeToBytes(signedTx)
+	if err != nil {
+		return "", err
+	}
+	return hex.EncodeToString(txBytes), nil
+}
+
+func DecodeSignedTx(txStr string) (signedTx *types.Transaction, err error) {
+	txBytes, err := hex.DecodeString(txStr)
+	if err != nil {
+		return nil, err
+	}
+	err = rlp.DecodeBytes(txBytes, &signedTx)
+	if err != nil {
+		return nil, err
+	}
+	return signedTx, nil
 }
 
 func CommitBlocks(cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *Zecrey, storageBlock StorageBlock, commitBlocks []ZecreyCommitBlock, gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
