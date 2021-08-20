@@ -13,15 +13,18 @@ import (
 )
 
 const ZecreyAddr = "0x6d551E6b91f94c422Db90786A8c9Cd9eDBcbb911"
-const RinkebyZecreyAddr = "0x95bBA8D93C794717eFF37d37d5F5d6573e713321"
+
+//const RinkebyZecreyAddr = "0x95bBA8D93C794717eFF37d37d5F5d6573e713321"
+// new withdraw
+const RinkebyZecreyAddr = "0xD27feF89f65675d5344D9BCE6ecd64c6F76EDaeb"
 const AuroraZecreyAddr = "0x56C4e158658551d9C20AB430A5d09fb4d4f0DDa8"
 const ArbitrumZecreyAddr = "0x56C4e158658551d9C20AB430A5d09fb4d4f0DDa8"
-const PolyTestZecreyAddr = "0x56C4e158658551d9C20AB430A5d09fb4d4f0DDa8"
+const PolyTestZecreyAddr = "0xA6A1A15c7331C87b8C5fd712a91B8D9e5A63077e"
 
 func TestDeployZecreyContract(t *testing.T) {
 	elapse := time.Now()
 	//addr, txHash, err := DeployZecreyContract(localCli, localAuthCli, ZecreyVerifierAddr, GovernanceAddr, localGasPrice, _const.SuggestHighGasLimit)
-	addr, txHash, err := DeployZecreyContract(rinkebyCli, rinkebyAuthCli, RinkebyZecreyVerifierAddr, RinkebyGovernanceAddr, localGasPrice, _const.SuggestHighGasLimit)
+	addr, txHash, err := DeployZecreyContract(rinkebyCli, rinkebyAuthCli, 1, RinkebyGovernanceAddr, RinkebyZecreyVerifierAddr, localGasPrice, _const.SuggestHighGasLimit)
 	//addr, txHash, err := DeployZecreyContract(polyTestCli, polyTestAuthCli, PolyTestVerifierAddr, PolyTestNetGovernanceAddr, big.NewInt(1000000000), _const.SuggestHighGasLimit)
 	if err != nil {
 		t.Fatal(err)
@@ -32,29 +35,39 @@ func TestDeployZecreyContract(t *testing.T) {
 }
 
 func LoadZecrey() *Zecrey {
-	instance, _ := LoadZecreyInstance(polyTestCli, PolyTestZecreyAddr)
+	instance, _ := LoadZecreyInstance(rinkebyCli, RinkebyZecreyAddr)
 	return instance
+}
+
+func TestApproveREY(t *testing.T) {
+	instance := LoadZecreyToken()
+	txHash, err := ApproveREY(rinkebyCli, rinkebyAuthCli, instance, RinkebyZecreyAddr, big.NewInt(1000000000000000000), localGasPrice, _const.SuggestHighGasLimit)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(txHash)
 }
 
 func TestDeposit(t *testing.T) {
 	instance := LoadZecrey()
-	depositAmount, _ := new(big.Int).SetString("10000000000000000", 10)
-	oldBalance, err := polyTestCli.GetBalance(_const.RinkebySuperAddress)
+	depositAmount, _ := new(big.Int).SetString("1000000000000000000", 10)
+	oldBalance, err := rinkebyCli.GetBalance(_const.RinkebySuperAddress)
 	if err != nil {
 		t.Fatal(err)
 	}
-	info, err := polyTestCli.GetHeight()
+	info, err := rinkebyCli.GetHeight()
 	if err != nil {
 		t.Fatal(err)
 	}
 	fmt.Println("current height:", info)
 	fmt.Println(_utils.WeiToEther(oldBalance).String())
-	txHash, err := Deposit(polyTestCli, polyTestAuthCli, instance, 0, "name4.zecrey", depositAmount, polyGasPrice, _const.SuggestHighGasLimit)
+	fmt.Println(localGasPrice.String())
+	txHash, err := Deposit(rinkebyCli, rinkebyAuthCli, instance, 0, "name4.zecrey", depositAmount, localGasPrice, _const.SuggestHighGasLimit)
 	if err != nil {
 		t.Fatal(err)
 	}
 	fmt.Println(txHash)
-	newBalance, err := polyTestCli.GetBalance(_const.RinkebySuperAddress)
+	newBalance, err := rinkebyCli.GetBalance(_const.RinkebySuperAddress)
 	if err != nil {
 		t.Fatal(err)
 	}
