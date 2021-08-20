@@ -60,31 +60,31 @@ func TestDeployGovernanceContract(t *testing.T) {
 	//if err != nil {
 	//	t.Fatal(err)
 	//}
-	//addr, txHash, err := DeployGovernanceContract(rinkebyCli, rinkebyAuthCli, localGasPrice, _const.SuggestHighGasLimit)
-	//if err != nil {
-	//	t.Fatal(err)
-	//}
+	addr, txHash, err := DeployGovernanceContract(rinkebyCli, rinkebyAuthCli, localGasPrice, _const.SuggestHighGasLimit)
+	if err != nil {
+		t.Fatal(err)
+	}
 	//addr, txHash, err := DeployGovernanceContract(arbitrumCli, arbitrumAuthCli, big.NewInt(20000000000000), _const.SuggestHighGasLimit)
 	//if err != nil {
 	//	t.Fatal(err)
 	//}
-	addr, txHash, err := DeployGovernanceContract(polyTestCli, polyTestAuthCli, big.NewInt(1000000000), _const.SuggestHighGasLimit)
-	if err != nil {
-		t.Fatal(err)
-	}
+	//addr, txHash, err := DeployGovernanceContract(polyTestCli, polyTestAuthCli, big.NewInt(1000000000), _const.SuggestHighGasLimit)
+	//if err != nil {
+	//	t.Fatal(err)
+	//}
 	fmt.Println(time.Since(elapse))
 	fmt.Println("contract address:", addr)
 	fmt.Println("deploy contract tx hash:", txHash)
 }
 
 func LoadGovernance() *Governance {
-	instance, _ := LoadGovernanceInstance(localCli, GovernanceAddr)
+	instance, _ := LoadGovernanceInstance(rinkebyCli, RinkebyGovernanceAddr)
 	return instance
 }
 
 func TestAddAsset(t *testing.T) {
 	governance := LoadGovernance()
-	txHash, err := AddAsset(localCli, localAuthCli, governance, RinkebyZecreyAddr, localGasPrice, _const.SuggestHighGasLimit)
+	txHash, err := AddAsset(rinkebyCli, rinkebyAuthCli, governance, RinkebyZecreyTokenAddr, localGasPrice, _const.SuggestHighGasLimit)
 	if err != nil {
 		t.Fatal(err)
 	}

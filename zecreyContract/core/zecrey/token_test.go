@@ -9,7 +9,7 @@ import (
 )
 
 const ZecreyTokenAddr = "0xCd44483447D3dbe166e1D8c74c6DC0705dFcDAc2"
-const RinkebyZecreyTokenAddr = "0x8F8c88B6133C790289fc44b602F5B8570706c6f0"
+const RinkebyZecreyTokenAddr = "0x95bBA8D93C794717eFF37d37d5F5d6573e713321"
 
 func TestDeployZecreyTokenContract(t *testing.T) {
 	elapse := time.Now()
@@ -23,7 +23,7 @@ func TestDeployZecreyTokenContract(t *testing.T) {
 }
 
 func LoadZecreyToken() *ZecreyToken {
-	instance, _ := LoadZecreyTokenInstance(localCli, ZecreyTokenAddr)
+	instance, _ := LoadZecreyTokenInstance(rinkebyCli, RinkebyZecreyTokenAddr)
 	return instance
 }
 

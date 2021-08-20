@@ -10,7 +10,7 @@ import (
 	"math/big"
 )
 
-func DeployZecreyContract(cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, verifierAddr string, governanceAddr string, gasPrice *big.Int, gasLimit uint64) (addr string, txHash string, err error) {
+func DeployZecreyContract(cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, chainId uint8, governanceAddr string, verifierAddr string, gasPrice *big.Int, gasLimit uint64) (addr string, txHash string, err error) {
 	// construct transaction ops
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
 	if err != nil {
@@ -36,7 +36,7 @@ func DeployZecreyContract(cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, ve
 	verifier := common.HexToAddress(verifierAddr)
 	governance := common.HexToAddress(governanceAddr)
 	// deploy zecrey contract
-	address, tx, _, err := DeployZecrey(transactOpts, *cli, verifier, governance)
+	address, tx, _, err := DeployZecrey(transactOpts, *cli, chainId, verifier, governance)
 	if err != nil {
 		return "", "", err
 	}
@@ -57,7 +57,9 @@ func Deposit(cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *Zecre
 		return "", err
 	}
 	transactOpts.From = authCli.Address
-	transactOpts.Value = amount
+	if assetId == 0 {
+		transactOpts.Value = amount
+	}
 	tx, err := instance.Deposit(transactOpts, assetId, zecreyAddr, amount)
 	if err != nil {
 		return "", err
