@@ -16,7 +16,7 @@ const ZecreyAddr = "0x6d551E6b91f94c422Db90786A8c9Cd9eDBcbb911"
 
 //const RinkebyZecreyAddr = "0x95bBA8D93C794717eFF37d37d5F5d6573e713321"
 // new withdraw
-const RinkebyZecreyAddr = "0xD27feF89f65675d5344D9BCE6ecd64c6F76EDaeb"
+const RinkebyZecreyAddr = "0x35BbE60005Fd7e64d35420FD83E44E2Ed4c645C8"
 const AuroraZecreyAddr = "0x56C4e158658551d9C20AB430A5d09fb4d4f0DDa8"
 const ArbitrumZecreyAddr = "0x56C4e158658551d9C20AB430A5d09fb4d4f0DDa8"
 const PolyTestZecreyAddr = "0xA6A1A15c7331C87b8C5fd712a91B8D9e5A63077e"

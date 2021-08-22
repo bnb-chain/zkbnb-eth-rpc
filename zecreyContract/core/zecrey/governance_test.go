@@ -11,7 +11,7 @@ import (
 )
 
 const GovernanceAddr = "0x0668F761a5428B4c650cCeEF5410277a262407e1"
-const RinkebyGovernanceAddr = "0xdAdf3DE3B613efd0a93282DE4151Aab8062c5f77"
+const RinkebyGovernanceAddr = "0x7FeBCF0f823d1ad4fD076cFF7031CDB898C9628B"
 const AuroraTestNetGovernanceAddr = "0x1142982cd9f7d292Ff1B94Ae33c53087D5Cec3E4"
 const AribitrumTestNetGovernanceAddr = "0x1142982cd9f7d292Ff1B94Ae33c53087D5Cec3E4"
 const PolyTestNetGovernanceAddr = "0x1142982cd9f7d292Ff1B94Ae33c53087D5Cec3E4"
