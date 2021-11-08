@@ -1,0 +1,1 @@
+[{"inputs":[{"internalType":"uint8","name":"_chainId","type":"uint8"},{"internalType":"uint16","name":"_nativeAssetId","type":"uint16"},{"internalType":"uint16","name":"_maxPendingBlocks","type":"uint16"}],"stateMutability":"nonpayable","type":"constructor"}]
