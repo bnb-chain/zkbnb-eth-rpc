@@ -1,0 +1,1 @@
+[{"inputs":[{"internalType":"address","name":"newTarget","type":"address"},{"internalType":"bytes","name":"newTargetInitializationParameters","type":"bytes"}],"name":"upgradeTarget","outputs":[],"stateMutability":"nonpayable","type":"function"}]

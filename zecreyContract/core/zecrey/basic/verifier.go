@@ -1,4 +1,4 @@
-package zecrey
+package basic
 
 import (
 	"github.com/ethereum/go-ethereum/common"
@@ -6,7 +6,13 @@ import (
 	"math/big"
 )
 
-func DeployZecreyVerifierContract(cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, gasPrice *big.Int, gasLimit uint64) (addr string, txHash string, err error) {
+/*
+	DeployVerifierContract: deploy verifier
+*/
+func DeployVerifierContract(
+	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient,
+	gasPrice *big.Int, gasLimit uint64,
+) (addr string, txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
 	if err != nil {
 		return "", "", err
@@ -19,9 +25,9 @@ func DeployZecreyVerifierContract(cli *_rpc.ProviderClient, authCli *_rpc.AuthCl
 }
 
 /*
-	LoadZecreyVerifierInstance: load zecrey verifier instance if it is already deployed
+	LoadVerifierInstance: load verifier instance if it is already deployed
 */
-func LoadZecreyVerifierInstance(cli *_rpc.ProviderClient, addr string) (instance *Verifier, err error) {
+func LoadVerifierInstance(cli *_rpc.ProviderClient, addr string) (instance *Verifier, err error) {
 	instance, err = NewVerifier(common.HexToAddress(addr), *cli)
 	return instance, err
 }
