@@ -21,3 +21,10 @@ func init() {
 	// set log info
 	log.SetFlags(log.Lshortfile | log.Ldate | log.Lmicroseconds)
 }
+
+type ZecreyContracts struct {
+	GovernanceAddr      string
+	AssetGovernanceAddr string
+	VerifierAddr        string
+	ZecreyAddr          string
+}

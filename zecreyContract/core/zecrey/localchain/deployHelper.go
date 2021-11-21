@@ -1,9 +1,10 @@
 package localchain
 
 import (
-	"fmt"
+	"encoding/json"
 	"github.com/zecrey-labs/zecrey-eth-rpc/_const"
 	"github.com/zecrey-labs/zecrey-eth-rpc/zecreyContract/core/zecrey/basic"
+	"io/ioutil"
 	"log"
 	"math/big"
 )
@@ -16,6 +17,15 @@ func FirstDeployment() {
 		SuggestGasPrice, _const.SuggestHighGasLimit)
 	if err != nil {
 		log.Println("err:", err)
+		return
 	}
-	fmt.Println(addrs)
+	addrBytes, err := json.Marshal(addrs)
+	if err != nil {
+		log.Println("err:", err)
+		return
+	}
+	err = ioutil.WriteFile(AddrFileName, addrBytes, 666)
+	if err != nil {
+		panic(err)
+	}
 }
