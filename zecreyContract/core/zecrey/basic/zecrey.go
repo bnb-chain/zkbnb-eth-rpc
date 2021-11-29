@@ -37,7 +37,7 @@ func LoadZecreyInstance(cli *_rpc.ProviderClient, addr string) (instance *Zecrey
 	return instance, err
 }
 
-func packZecreyInitializeParams(
+func PackInitializeZecreyParams(
 	governanceAddr string,
 	verifierAddr string,
 	genesisBlockNumber uint32,
@@ -47,7 +47,7 @@ func packZecreyInitializeParams(
 	genesisCommitment []byte,
 ) ([]byte, error) {
 	if len(genesisOnchainOpsRoot) != Bytes32Len || len(genesisStateRoot) != Bytes32Len || len(genesisCommitment) != Bytes32Len {
-		return nil, errors.New("[packZecreyInitializeParams] invalid bytes32")
+		return nil, errors.New("[PackInitializeZecreyParams] invalid bytes32")
 	}
 	arguments := abi.Arguments{
 		{Type: AddressType},
@@ -95,7 +95,7 @@ func ZecreyInitialize(
 	if err != nil {
 		return "", err
 	}
-	params, err := packZecreyInitializeParams(
+	params, err := PackInitializeZecreyParams(
 		governanceAddr,
 		verifierAddr,
 		genesisBlockNumber,

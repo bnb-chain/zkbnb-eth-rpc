@@ -3,6 +3,7 @@ package basic
 import (
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"log"
+	"math/big"
 )
 
 const (
@@ -15,6 +16,8 @@ var (
 	Uint32Type, _       = abi.NewType("uint32", "", nil)
 	Uint256Type, _      = abi.NewType("uint256", "", nil)
 	MerkleHelperType, _ = abi.NewType("bool[4]", "", nil)
+
+	InitialSupply, _ = new(big.Int).SetString("100000000000000000000000000", 10)
 )
 
 func init() {
