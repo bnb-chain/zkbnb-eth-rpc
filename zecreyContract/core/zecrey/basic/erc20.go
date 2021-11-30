@@ -11,7 +11,6 @@ import (
 */
 func DeployErc20Contract(
 	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient,
-	l2ChainId uint8, nativeAssetId uint16, maxPendingBlocks uint16,
 	gasPrice *big.Int, gasLimit uint64,
 ) (addr string, txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)

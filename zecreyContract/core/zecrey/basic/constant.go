@@ -30,4 +30,14 @@ type ZecreyContracts struct {
 	AssetGovernanceAddr string
 	VerifierAddr        string
 	ZecreyAddr          string
+	ReyERC20Addr        string
+	EthERC20Addr        string
+	MaticERC20Addr      string
+	NearERC20Addr       string
+	AvaxERC20Addr       string
+	BitERC20Addr        string
+	UsdtERC20Addr       string
+	UsdcERC20Addr       string
+	DaiERC20Addr        string
+	BnbERC20Addr        string
 }

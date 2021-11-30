@@ -45,6 +45,7 @@ func PackInitializeZecreyParams(
 	genesisStateRoot []byte,
 	genesisTimestamp *big.Int,
 	genesisCommitment []byte,
+	merkleHelper [OnChainOpsTreeHelperDepth]bool,
 ) ([]byte, error) {
 	if len(genesisOnchainOpsRoot) != Bytes32Len || len(genesisStateRoot) != Bytes32Len || len(genesisCommitment) != Bytes32Len {
 		return nil, errors.New("[PackInitializeZecreyParams] invalid bytes32")
@@ -67,6 +68,7 @@ func PackInitializeZecreyParams(
 		SetFixed32Bytes(genesisStateRoot),
 		genesisTimestamp,
 		SetFixed32Bytes(genesisCommitment),
+		merkleHelper,
 	)
 	if err != nil {
 		return nil, err
@@ -86,6 +88,7 @@ func ZecreyInitialize(
 	genesisStateRoot []byte,
 	genesisTimestamp *big.Int,
 	genesisCommitment []byte,
+	genesisMerkleHelper [OnChainOpsTreeHelperDepth]bool,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	if !IsValidAddress(governanceAddr) || !IsValidAddress(verifierAddr) {
@@ -103,6 +106,7 @@ func ZecreyInitialize(
 		genesisStateRoot,
 		genesisTimestamp,
 		genesisCommitment,
+		genesisMerkleHelper,
 	)
 	if err != nil {
 		return "", err
