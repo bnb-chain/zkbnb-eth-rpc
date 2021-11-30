@@ -13,7 +13,7 @@ const (
 	PolyTestNetwork      = "https://matic-mumbai.chainstacklabs.com"
 
 	// max try times
-	MaxTryTimes = 10
+	MaxTryTimes = 20
 	// time interval for obtaining transaction status
 	TryTimeInterval = time.Second * 2
 

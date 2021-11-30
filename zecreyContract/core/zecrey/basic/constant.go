@@ -3,6 +3,7 @@ package basic
 import (
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"log"
+	"math/big"
 )
 
 const (
@@ -15,6 +16,8 @@ var (
 	Uint32Type, _       = abi.NewType("uint32", "", nil)
 	Uint256Type, _      = abi.NewType("uint256", "", nil)
 	MerkleHelperType, _ = abi.NewType("bool[4]", "", nil)
+
+	InitialSupply, _ = new(big.Int).SetString("100000000000000000000000000", 10)
 )
 
 func init() {
@@ -27,4 +30,14 @@ type ZecreyContracts struct {
 	AssetGovernanceAddr string
 	VerifierAddr        string
 	ZecreyAddr          string
+	ReyERC20Addr        string
+	EthERC20Addr        string
+	MaticERC20Addr      string
+	NearERC20Addr       string
+	AvaxERC20Addr       string
+	BitERC20Addr        string
+	UsdtERC20Addr       string
+	UsdcERC20Addr       string
+	DaiERC20Addr        string
+	BnbERC20Addr        string
 }

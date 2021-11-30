@@ -37,7 +37,7 @@ func LoadZecreyInstance(cli *_rpc.ProviderClient, addr string) (instance *Zecrey
 	return instance, err
 }
 
-func packZecreyInitializeParams(
+func PackInitializeZecreyParams(
 	governanceAddr string,
 	verifierAddr string,
 	genesisBlockNumber uint32,
@@ -45,9 +45,10 @@ func packZecreyInitializeParams(
 	genesisStateRoot []byte,
 	genesisTimestamp *big.Int,
 	genesisCommitment []byte,
+	merkleHelper [OnChainOpsTreeHelperDepth]bool,
 ) ([]byte, error) {
 	if len(genesisOnchainOpsRoot) != Bytes32Len || len(genesisStateRoot) != Bytes32Len || len(genesisCommitment) != Bytes32Len {
-		return nil, errors.New("[packZecreyInitializeParams] invalid bytes32")
+		return nil, errors.New("[PackInitializeZecreyParams] invalid bytes32")
 	}
 	arguments := abi.Arguments{
 		{Type: AddressType},
@@ -67,6 +68,7 @@ func packZecreyInitializeParams(
 		SetFixed32Bytes(genesisStateRoot),
 		genesisTimestamp,
 		SetFixed32Bytes(genesisCommitment),
+		merkleHelper,
 	)
 	if err != nil {
 		return nil, err
@@ -86,6 +88,7 @@ func ZecreyInitialize(
 	genesisStateRoot []byte,
 	genesisTimestamp *big.Int,
 	genesisCommitment []byte,
+	genesisMerkleHelper [OnChainOpsTreeHelperDepth]bool,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	if !IsValidAddress(governanceAddr) || !IsValidAddress(verifierAddr) {
@@ -95,7 +98,7 @@ func ZecreyInitialize(
 	if err != nil {
 		return "", err
 	}
-	params, err := packZecreyInitializeParams(
+	params, err := PackInitializeZecreyParams(
 		governanceAddr,
 		verifierAddr,
 		genesisBlockNumber,
@@ -103,6 +106,7 @@ func ZecreyInitialize(
 		genesisStateRoot,
 		genesisTimestamp,
 		genesisCommitment,
+		genesisMerkleHelper,
 	)
 	if err != nil {
 		return "", err

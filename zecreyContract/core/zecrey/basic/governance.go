@@ -35,7 +35,7 @@ func LoadGovernanceInstance(cli *_rpc.ProviderClient, addr string) (instance *Go
 	return instance, err
 }
 
-func packInitializeGovernanceParams(owner string) ([]byte, error) {
+func PackInitializeGovernanceParams(owner string) ([]byte, error) {
 	arguments := abi.Arguments{
 		{Type: AddressType},
 	}
@@ -64,7 +64,7 @@ func GovernanceInitialize(
 		return "", err
 	}
 	// pack params
-	params, err := packInitializeGovernanceParams(owner)
+	params, err := PackInitializeGovernanceParams(owner)
 	if err != nil {
 		return "", err
 	}

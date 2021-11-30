@@ -1,31 +1,25 @@
 package localchain
 
 import (
-	"encoding/json"
-	"github.com/zecrey-labs/zecrey-eth-rpc/_const"
 	"github.com/zecrey-labs/zecrey-eth-rpc/zecreyContract/core/zecrey/basic"
-	"io/ioutil"
-	"log"
 	"math/big"
 )
 
-func FirstDeployment() {
-	addrs, err := basic.FirstDeployment(
+func FirstDeployment(
+	governor string,
+	l2ChainId uint8, nativeAssetId uint16, maxPendingBlocks uint16,
+	listingFeeTokenAddr string, listingFee *big.Int, listingCap uint16, treasuryAddr string,
+	genesisBlockNumber uint32, genesisOnchainOpsRoot []byte, genesisStateRoot []byte, genesisTimestamp *big.Int,
+	genesisCommitment []byte, genesisMerkleHelper [OnChainOpsTreeHelperDepth]bool,
+	gasPrice *big.Int, gasLimit uint64,
+) (addrs *basic.ZecreyContracts, err error) {
+	return basic.FirstDeployment(
 		Cli, AuthCli,
-		L2ChainId, 1, 50,
-		"0x5ee4C56aab8F8A1E3dC524A890E06D2f0c9073cE", big.NewInt(100), 100, "0x5ee4C56aab8F8A1E3dC524A890E06D2f0c9073cE",
-		SuggestGasPrice, _const.SuggestHighGasLimit)
-	if err != nil {
-		log.Println("err:", err)
-		return
-	}
-	addrBytes, err := json.Marshal(addrs)
-	if err != nil {
-		log.Println("err:", err)
-		return
-	}
-	err = ioutil.WriteFile(AddrFileName, addrBytes, 666)
-	if err != nil {
-		panic(err)
-	}
+		governor,
+		l2ChainId, nativeAssetId, maxPendingBlocks,
+		listingFeeTokenAddr, listingFee, listingCap, treasuryAddr,
+		genesisBlockNumber, genesisOnchainOpsRoot, genesisStateRoot, genesisTimestamp,
+		genesisCommitment, genesisMerkleHelper,
+		gasPrice, gasLimit,
+	)
 }
