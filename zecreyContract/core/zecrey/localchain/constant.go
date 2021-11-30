@@ -28,4 +28,6 @@ var (
 	Cli, _             = _rpc.NewClient(NetworkEndPoint)
 	SuggestGasPrice, _ = Cli.SuggestGasPrice(context.Background())
 	AuthCli, _         = _rpc.NewAuthClient(Cli, SuperSk, ChainId)
+
+	ZecreyInstance, _ = basic.LoadZecreyInstance(Cli, "0x17A5C2514093c73AB571217A62e76196C0B7dB8e")
 )
