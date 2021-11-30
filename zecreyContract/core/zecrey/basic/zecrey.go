@@ -205,7 +205,6 @@ func ZecreyWithdrawPendingBalance(
 func ZecreyComputeOnchainOpsHash(
 	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *Zecrey,
 	onchainOpsPubData []byte,
-	gasPrice *big.Int, gasLimit uint64,
 ) (hashVal []byte, err error) {
 	val, err := instance.ComputeOnchainOpsHash(EmptyCallOpts(), onchainOpsPubData)
 	return val[:], err
