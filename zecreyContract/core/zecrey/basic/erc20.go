@@ -11,13 +11,14 @@ import (
 */
 func DeployErc20Contract(
 	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient,
+	name string, symbol string,
 	gasPrice *big.Int, gasLimit uint64,
 ) (addr string, txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
 	if err != nil {
 		return "", "", err
 	}
-	address, tx, _, err := DeployErc20(transactOpts, *cli, InitialSupply, "Zecrey", "REY")
+	address, tx, _, err := DeployErc20(transactOpts, *cli, InitialSupply, name, symbol)
 	if err != nil {
 		return "", "", err
 	}
