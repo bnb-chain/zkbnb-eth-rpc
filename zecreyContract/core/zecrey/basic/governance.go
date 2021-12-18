@@ -218,7 +218,7 @@ func GovernanceSetMonitor(
 	GovernanceValidateAssetAddress: get related asset id of asset address
 */
 func GovernanceValidateAssetAddress(
-	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *Governance,
+	instance *Governance,
 	assetAddr string,
 ) (uint16, error) {
 	if !IsValidAddress(assetAddr) {

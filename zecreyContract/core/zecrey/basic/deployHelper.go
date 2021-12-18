@@ -5,13 +5,14 @@ import (
 	"github.com/zecrey-labs/zecrey-eth-rpc/_rpc"
 	"log"
 	"math/big"
+	"time"
 )
 
 /*
 	FirstDeployment: helper method to deploy all contracts
 */
 func FirstDeployment(
-	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient,
+	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, waitTime time.Duration,
 	governor string,
 	l2ChainId uint8, nativeAssetId uint16, maxPendingBlocks uint16,
 	listingFeeTokenAddr string, listingFee *big.Int, listingCap uint16, treasuryAddr string,
@@ -20,11 +21,12 @@ func FirstDeployment(
 	gasPrice *big.Int, gasLimit uint64,
 ) (addrs *ZecreyContracts, err error) {
 	// deploy REY ERC20
-	reyErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, gasPrice, gasLimit)
+	reyErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, ERC20_REY_Name, ERC20_REY_Symbol, gasPrice, gasLimit)
 	if err != nil {
 		log.Println("[FirstDeployment] err info:", err)
 		return nil, err
 	}
+	time.Sleep(waitTime)
 	// wait status of deployment
 	status, err := cli.WaitingTransactionStatus(txHash)
 	if err != nil {
@@ -36,11 +38,12 @@ func FirstDeployment(
 		return nil, errors.New("[FirstDeployment] invalid tx, cannot get status")
 	}
 	// deploy ETH ERC20
-	ethErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, gasPrice, gasLimit)
+	ethErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, ERC20_ETH_Name, ERC20_ETH_Symbol, gasPrice, gasLimit)
 	if err != nil {
 		log.Println("[FirstDeployment] err info:", err)
 		return nil, err
 	}
+	time.Sleep(waitTime)
 	// wait status of deployment
 	status, err = cli.WaitingTransactionStatus(txHash)
 	if err != nil {
@@ -52,11 +55,12 @@ func FirstDeployment(
 		return nil, errors.New("[FirstDeployment] invalid tx, cannot get status")
 	}
 	// deploy MATIC ERC20
-	maticErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, gasPrice, gasLimit)
+	maticErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, ERC20_MATIC_Name, ERC20_MATIC_Symbol, gasPrice, gasLimit)
 	if err != nil {
 		log.Println("[FirstDeployment] err info:", err)
 		return nil, err
 	}
+	time.Sleep(waitTime)
 	// wait status of deployment
 	status, err = cli.WaitingTransactionStatus(txHash)
 	if err != nil {
@@ -68,11 +72,12 @@ func FirstDeployment(
 		return nil, errors.New("[FirstDeployment] invalid tx, cannot get status")
 	}
 	// deploy NEAR ERC20
-	nearErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, gasPrice, gasLimit)
+	nearErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, ERC20_NEAR_Name, ERC20_NEAR_Symbol, gasPrice, gasLimit)
 	if err != nil {
 		log.Println("[FirstDeployment] err info:", err)
 		return nil, err
 	}
+	time.Sleep(waitTime)
 	// wait status of deployment
 	status, err = cli.WaitingTransactionStatus(txHash)
 	if err != nil {
@@ -84,11 +89,12 @@ func FirstDeployment(
 		return nil, errors.New("[FirstDeployment] invalid tx, cannot get status")
 	}
 	// deploy AVAX ERC20
-	avaxErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, gasPrice, gasLimit)
+	avaxErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, ERC20_AVAX_Name, ERC20_AVAX_Symbol, gasPrice, gasLimit)
 	if err != nil {
 		log.Println("[FirstDeployment] err info:", err)
 		return nil, err
 	}
+	time.Sleep(waitTime)
 	// wait status of deployment
 	status, err = cli.WaitingTransactionStatus(txHash)
 	if err != nil {
@@ -100,11 +106,12 @@ func FirstDeployment(
 		return nil, errors.New("[FirstDeployment] invalid tx, cannot get status")
 	}
 	// deploy BIT ERC20
-	bitErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, gasPrice, gasLimit)
+	bitErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, ERC20_BIT_Name, ERC20_BIT_Symbol, gasPrice, gasLimit)
 	if err != nil {
 		log.Println("[FirstDeployment] err info:", err)
 		return nil, err
 	}
+	time.Sleep(waitTime)
 	// wait status of deployment
 	status, err = cli.WaitingTransactionStatus(txHash)
 	if err != nil {
@@ -116,11 +123,12 @@ func FirstDeployment(
 		return nil, errors.New("[FirstDeployment] invalid tx, cannot get status")
 	}
 	// deploy USDT ERC20
-	usdtErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, gasPrice, gasLimit)
+	usdtErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, ERC20_USDT_Name, ERC20_USDT_Symbol, gasPrice, gasLimit)
 	if err != nil {
 		log.Println("[FirstDeployment] err info:", err)
 		return nil, err
 	}
+	time.Sleep(waitTime)
 	// wait status of deployment
 	status, err = cli.WaitingTransactionStatus(txHash)
 	if err != nil {
@@ -132,11 +140,12 @@ func FirstDeployment(
 		return nil, errors.New("[FirstDeployment] invalid tx, cannot get status")
 	}
 	// deploy USDC ERC20
-	usdcErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, gasPrice, gasLimit)
+	usdcErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, ERC20_USDC_Name, ERC20_USDC_Symbol, gasPrice, gasLimit)
 	if err != nil {
 		log.Println("[FirstDeployment] err info:", err)
 		return nil, err
 	}
+	time.Sleep(waitTime)
 	// wait status of deployment
 	status, err = cli.WaitingTransactionStatus(txHash)
 	if err != nil {
@@ -148,11 +157,12 @@ func FirstDeployment(
 		return nil, errors.New("[FirstDeployment] invalid tx, cannot get status")
 	}
 	// deploy DAI ERC20
-	daiErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, gasPrice, gasLimit)
+	daiErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, ERC20_DAI_Name, ERC20_DAI_Symbol, gasPrice, gasLimit)
 	if err != nil {
 		log.Println("[FirstDeployment] err info:", err)
 		return nil, err
 	}
+	time.Sleep(waitTime)
 	// wait status of deployment
 	status, err = cli.WaitingTransactionStatus(txHash)
 	if err != nil {
@@ -164,11 +174,12 @@ func FirstDeployment(
 		return nil, errors.New("[FirstDeployment] invalid tx, cannot get status")
 	}
 	// deploy BNB ERC20
-	bnbErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, gasPrice, gasLimit)
+	bnbErc20Addr, txHash, err := DeployErc20Contract(cli, authCli, ERC20_BNB_Name, ERC20_BNB_Symbol, gasPrice, gasLimit)
 	if err != nil {
 		log.Println("[FirstDeployment] err info:", err)
 		return nil, err
 	}
+	time.Sleep(waitTime)
 	// wait status of deployment
 	status, err = cli.WaitingTransactionStatus(txHash)
 	if err != nil {
@@ -185,6 +196,7 @@ func FirstDeployment(
 		log.Println("[FirstDeployment] err info:", err)
 		return nil, err
 	}
+	time.Sleep(waitTime)
 	// wait status of deployment
 	status, err = cli.WaitingTransactionStatus(txHash)
 	if err != nil {
@@ -201,12 +213,14 @@ func FirstDeployment(
 		log.Println("[FirstDeployment] err info:", err)
 		return nil, err
 	}
+	time.Sleep(waitTime)
 	// initialize governance contract
 	txHash, err = GovernanceInitialize(cli, authCli, governanceInstance, governor, gasPrice, gasLimit)
 	if err != nil {
 		log.Println("[FirstDeployment] err info:", err)
 		return nil, err
 	}
+	time.Sleep(waitTime)
 	// wait status of deployment
 	status, err = cli.WaitingTransactionStatus(txHash)
 	if err != nil {
@@ -218,11 +232,15 @@ func FirstDeployment(
 		return nil, errors.New("[FirstDeployment] invalid tx, cannot get status")
 	}
 	// deploy asset governance contract
-	assetGovernanceAddr, txHash, err := DeployAssetGovernanceContract(cli, authCli, governanceAddr, listingFeeTokenAddr, listingFee, listingCap, treasuryAddr, gasPrice, gasLimit)
+	assetGovernanceAddr, txHash, err := DeployAssetGovernanceContract(
+		cli, authCli, governanceAddr,
+		listingFeeTokenAddr, listingFee, listingCap, treasuryAddr, gasPrice, gasLimit,
+	)
 	if err != nil {
 		log.Println("[FirstDeployment] err info:", err)
 		return nil, err
 	}
+	time.Sleep(waitTime)
 	// wait status of deployment
 	status, err = cli.WaitingTransactionStatus(txHash)
 	if err != nil {
@@ -233,12 +251,36 @@ func FirstDeployment(
 		log.Println("[FirstDeployment] invalid tx, cannot get status")
 		return nil, errors.New("[FirstDeployment] invalid tx, cannot get status")
 	}
+	//// get instance of asset governance
+	//assetGovernanceInstance, err := LoadAssetGovernanceInstance(cli, assetGovernanceAddr)
+	//if err != nil {
+	//	log.Println("[FirstDeployment] err info:", err)
+	//	return nil, err
+	//}
+	//// set lister
+	//txHash, err = AssetGovernanceSetLister(cli, authCli, assetGovernanceInstance, governor, true, gasPrice, gasLimit)
+	//if err != nil {
+	//	log.Println("[FirstDeployment] err info:", err)
+	//	return nil, err
+	//}
+	//time.Sleep(waitTime)
+	//// wait status of deployment
+	//status, err = cli.WaitingTransactionStatus(txHash)
+	//if err != nil {
+	//	log.Println("[FirstDeployment] err info:", err)
+	//	return nil, err
+	//}
+	//if !status {
+	//	log.Println("[FirstDeployment] invalid tx, cannot get status")
+	//	return nil, errors.New("[FirstDeployment] invalid tx, cannot get status")
+	//}
 	// deploy verifier contract
 	verifierAddr, txHash, err := DeployVerifierContract(cli, authCli, gasPrice, gasLimit)
 	if err != nil {
 		log.Println("[FirstDeployment] err info:", err)
 		return nil, err
 	}
+	time.Sleep(waitTime)
 	// wait status of deployment
 	status, err = cli.WaitingTransactionStatus(txHash)
 	if err != nil {
@@ -255,6 +297,7 @@ func FirstDeployment(
 		log.Println("[FirstDeployment] err info:", err)
 		return nil, err
 	}
+	time.Sleep(waitTime)
 	// wait status of deployment
 	status, err = cli.WaitingTransactionStatus(txHash)
 	if err != nil {
@@ -287,6 +330,7 @@ func FirstDeployment(
 		log.Println("[FirstDeployment] err info:", err)
 		return nil, err
 	}
+	time.Sleep(waitTime)
 	// wait status of deployment
 	status, err = cli.WaitingTransactionStatus(txHash)
 	if err != nil {
