@@ -37,6 +37,35 @@ func LoadZecreyInstance(cli *_rpc.ProviderClient, addr string) (instance *Zecrey
 	return instance, err
 }
 
+func ZecreyComputeCommitment(hashVal []byte, newBlock ZecreyCommitBlockInfo) (value []byte, err error) {
+	arguments := abi.Arguments{
+		{Type: Bytes32Type},
+		{Type: Uint32Type},
+		{Type: Bytes32Type},
+		{Type: Bytes32Type},
+		{Type: Uint256Type},
+	}
+	value, err = arguments.Pack(
+		SetFixed32Bytes(hashVal),
+		newBlock.BlockNumber,
+		newBlock.OnchainOpsRoot,
+		newBlock.NewAccountRoot,
+		newBlock.Timestamp,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return value, nil
+}
+
+func ZecreyGetStoredBlockHashesByHeight(instance *Zecrey, height uint32) (res []byte, err error) {
+	hashes, err := instance.StoredBlockHeaderHashes(EmptyCallOpts(), height)
+	if err != nil {
+		return nil, err
+	}
+	return hashes[:], nil
+}
+
 func PackInitializeZecreyParams(
 	governanceAddr string,
 	verifierAddr string,

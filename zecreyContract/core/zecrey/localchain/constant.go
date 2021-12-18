@@ -8,8 +8,8 @@ import (
 
 const (
 	NetworkEndPoint = "http://localhost:8545"
-	SuperAddress    = "0x5ee4C56aab8F8A1E3dC524A890E06D2f0c9073cE"
-	SuperSk         = "f2c99690a0c10dcdfefeffcb8d1e088533261bc47b73ea790eb7275b03afcaeb"
+	SuperAddress    = "0xDA00601380Bc7aE4fe67dA2EB78f9161570c9EB4"
+	SuperSk         = "a36902d14b35e3ed9a288bebd513baa77b3772c6263d6fefff70fadf12fe097a"
 	L2ChainId       = uint8(0)
 	AddrFileName    = "contractAddresses.txt"
 

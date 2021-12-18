@@ -10,8 +10,8 @@ import (
 func TestTransfer(t *testing.T) {
 	cli, err := NewClient(_const.LocalNetwork)
 	defer cli.Close()
-	toAddress := "0x89D37ea8a0f102D90C424141F897A6a764A291AF"
-	authClient, err := NewAuthClient(cli, "3f0b8ba8bf289106b7de0f75a659f4e9a7f17812c568298e8e83e789c64933c2", RinkebyChainId)
+	toAddress := "0xE9b15a2D396B349ABF60e53ec66Bcf9af262D449"
+	authClient, err := NewAuthClient(cli, "1479a8a2464a43a9ecc8e6e6baf789ef9e35b89a63d864a22e01b3ef2ad6b6ba", RinkebyChainId)
 	if err != nil {
 		t.Error(err)
 	}

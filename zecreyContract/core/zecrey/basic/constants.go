@@ -49,6 +49,8 @@ const (
 	ERC20_DAI_Name   = "DAI Mock"
 	ERC20_DAI_Symbol = "DAI"
 
+	ZecreyMetaData =
+
 	ERC20_BNB_Name   = "BNB Mock"
 	ERC20_BNB_Symbol = "BNB"
 )
@@ -62,6 +64,7 @@ var (
 	AddressType, _      = abi.NewType("address", "", nil)
 	Bytes32Type, _      = abi.NewType("bytes32", "", nil)
 	Uint32Type, _       = abi.NewType("uint32", "", nil)
+	Uint16Type, _       = abi.NewType("uint16", "", nil)
 	Uint256Type, _      = abi.NewType("uint256", "", nil)
 	MerkleHelperType, _ = abi.NewType("bool[4]", "", nil)
 
