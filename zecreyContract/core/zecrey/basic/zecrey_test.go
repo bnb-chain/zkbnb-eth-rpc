@@ -14,6 +14,7 @@ func TestZecreyComputeCommitment(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
 	initHash, err := ZecreyGetStoredBlockHashesByHeight(instance, 0)
 	if err != nil {
 		t.Fatal(err)

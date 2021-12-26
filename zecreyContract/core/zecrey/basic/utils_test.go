@@ -13,8 +13,14 @@ import (
 )
 
 func TestSetFixed32Bytes(t *testing.T) {
-	buf := SetFixed32Bytes([]byte("1"))
-	fmt.Println(hex.EncodeToString(buf[:]))
+	buf := SetFixed32Bytes([]byte("pool"))
+	name := hex.EncodeToString(buf[:])
+	fmt.Println(name)
+	nameBytes, err := hex.DecodeString(name)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(nameBytes)
 	fmt.Println(new(big.Int).SetBytes(buf[:]).String())
 }
 
