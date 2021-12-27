@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/zecrey-labs/zecrey-eth-rpc/_rpc"
 	"math/big"
 )
@@ -53,7 +54,7 @@ func ZecreyComputeCommitment(hashVal []byte, newBlock ZecreyCommitBlockInfo) (va
 	if err != nil {
 		return nil, err
 	}
-	return value, nil
+	return crypto.Keccak256Hash(value).Bytes(), nil
 }
 
 func ZecreyGetStoredBlockHashesByHeight(instance *Zecrey, height uint32) (res []byte, err error) {
@@ -262,7 +263,8 @@ func ZecreyCommitBlocks(
 */
 func ZecreyVerifyBlocks(
 	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *Zecrey,
-	verifyBlocksInfo []ZecreyVerifyBlockInfo,
+	blockInfos []StorageBlockHeader,
+	proofs []*big.Int,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
@@ -270,7 +272,7 @@ func ZecreyVerifyBlocks(
 		return "", err
 	}
 	// call initialize
-	tx, err := instance.VerifyBlocks(transactOpts, verifyBlocksInfo)
+	tx, err := instance.VerifyBlocks(transactOpts, blockInfos, proofs)
 	if err != nil {
 		return "", err
 	}

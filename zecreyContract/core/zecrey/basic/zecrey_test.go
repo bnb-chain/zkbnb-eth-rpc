@@ -19,14 +19,14 @@ func TestZecreyComputeCommitment(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	ZecreyComputeCommitment(initHash,ZecreyCommitBlockInfo{
+	ZecreyComputeCommitment(initHash, ZecreyCommitBlockInfo{
 		BlockNumber:           0,
 		OnchainOpsRoot:        [32]byte{},
-		NewAccountRoot:          [32]byte{},
+		NewAccountRoot:        [32]byte{},
 		Timestamp:             nil,
 		Commitment:            [32]byte{},
 		OnchainOpsPubData:     nil,
 		OnchainOpsCount:       0,
-		OnchainOpsMerkleProof: [5][32]byte{},
+		OnchainOpsMerkleProof: [6][32]byte{},
 	})
 }
