@@ -49,8 +49,6 @@ const (
 	ERC20_DAI_Name   = "DAI Mock"
 	ERC20_DAI_Symbol = "DAI"
 
-	ZecreyMetaData =
-
 	ERC20_BNB_Name   = "BNB Mock"
 	ERC20_BNB_Symbol = "BNB"
 )

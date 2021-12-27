@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/zecrey-labs/zecrey-eth-rpc/_rpc"
 	"math/big"
 )
@@ -13,7 +14,6 @@ import (
 */
 func DeployZecreyContract(
 	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient,
-	l2ChainId uint8, nativeAssetId uint16, maxPendingBlocks uint16,
 	gasPrice *big.Int, gasLimit uint64,
 ) (addr string, txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
@@ -21,8 +21,7 @@ func DeployZecreyContract(
 		return "", "", err
 	}
 	address, tx, _, err := DeployZecrey(
-		transactOpts, *cli,
-		l2ChainId, nativeAssetId, maxPendingBlocks)
+		transactOpts, *cli)
 	if err != nil {
 		return "", "", err
 	}
@@ -55,7 +54,7 @@ func ZecreyComputeCommitment(hashVal []byte, newBlock ZecreyCommitBlockInfo) (va
 	if err != nil {
 		return nil, err
 	}
-	return value, nil
+	return crypto.Keccak256Hash(value).Bytes(), nil
 }
 
 func ZecreyGetStoredBlockHashesByHeight(instance *Zecrey, height uint32) (res []byte, err error) {
@@ -264,7 +263,8 @@ func ZecreyCommitBlocks(
 */
 func ZecreyVerifyBlocks(
 	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *Zecrey,
-	verifyBlocksInfo []ZecreyVerifyBlockInfo,
+	blockInfos []StorageBlockHeader,
+	proofs []*big.Int,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
@@ -272,7 +272,7 @@ func ZecreyVerifyBlocks(
 		return "", err
 	}
 	// call initialize
-	tx, err := instance.VerifyBlocks(transactOpts, verifyBlocksInfo)
+	tx, err := instance.VerifyBlocks(transactOpts, blockInfos, proofs)
 	if err != nil {
 		return "", err
 	}
@@ -293,26 +293,6 @@ func ZecreyExecuteBlocks(
 	}
 	// call initialize
 	tx, err := instance.ExecuteBlocks(transactOpts, blocks)
-	if err != nil {
-		return "", err
-	}
-	return tx.Hash().String(), nil
-}
-
-/*
-	ZecreyRevertBlocks: revert blocks
-*/
-func ZecreyRevertBlocks(
-	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *Zecrey,
-	blocks []StorageBlockHeader,
-	gasPrice *big.Int, gasLimit uint64,
-) (txHash string, err error) {
-	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
-	if err != nil {
-		return "", err
-	}
-	// call initialize
-	tx, err := instance.RevertBlocks(transactOpts, blocks)
 	if err != nil {
 		return "", err
 	}
