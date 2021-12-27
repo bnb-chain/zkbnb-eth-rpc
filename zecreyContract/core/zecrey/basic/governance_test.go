@@ -21,7 +21,7 @@ func TestDeployGovernanceContract_Ethereum(t *testing.T) {
 	}
 	SuggestGasPrice, _ := cli.SuggestGasPrice(context.Background())
 	addr, txHash, err := DeployGovernanceContract(
-		cli, authCli, eth.L2ChainId, eth.NativeAssetId, eth.MaxPendingBlocks, SuggestGasPrice, _const.SuggestHighGasLimit,
+		cli, authCli, SuggestGasPrice, _const.SuggestHighGasLimit,
 	)
 	if err != nil {
 		t.Fatal(err)
@@ -40,7 +40,7 @@ func TestDeployGovernanceContract_BSC(t *testing.T) {
 	}
 	SuggestGasPrice, _ := cli.SuggestGasPrice(context.Background())
 	addr, txHash, err := DeployGovernanceContract(
-		cli, authCli, bsc.L2ChainId, bsc.NativeAssetId, bsc.MaxPendingBlocks, SuggestGasPrice, _const.SuggestHighGasLimit,
+		cli, authCli, SuggestGasPrice, _const.SuggestHighGasLimit,
 	)
 	if err != nil {
 		t.Fatal(err)
@@ -59,7 +59,7 @@ func TestDeployGovernanceContract_Avalanche(t *testing.T) {
 	}
 	SuggestGasPrice, _ := cli.SuggestGasPrice(context.Background())
 	addr, txHash, err := DeployGovernanceContract(
-		cli, authCli, avalanche.L2ChainId, avalanche.NativeAssetId, avalanche.MaxPendingBlocks, SuggestGasPrice, _const.SuggestHighGasLimit,
+		cli, authCli, SuggestGasPrice, _const.SuggestHighGasLimit,
 	)
 	if err != nil {
 		t.Fatal(err)
@@ -77,7 +77,7 @@ func TestDeployGovernanceContract_Polygon(t *testing.T) {
 	}
 	SuggestGasPrice, _ := cli.SuggestGasPrice(context.Background())
 	addr, txHash, err := DeployGovernanceContract(
-		cli, authCli, polygon.L2ChainId, polygon.NativeAssetId, polygon.MaxPendingBlocks, SuggestGasPrice, _const.SuggestHighGasLimit,
+		cli, authCli, SuggestGasPrice, _const.SuggestHighGasLimit,
 	)
 	if err != nil {
 		t.Fatal(err)
@@ -96,7 +96,7 @@ func TestDeployGovernanceContract_Aurora(t *testing.T) {
 	}
 	SuggestGasPrice, _ := cli.SuggestGasPrice(context.Background())
 	addr, txHash, err := DeployGovernanceContract(
-		cli, authCli, aurora.L2ChainId, aurora.NativeAssetId, aurora.MaxPendingBlocks, SuggestGasPrice, _const.SuggestHighGasLimit,
+		cli, authCli, SuggestGasPrice, _const.SuggestHighGasLimit,
 	)
 	if err != nil {
 		t.Fatal(err)
