@@ -31,6 +31,4 @@ var (
 	Cli, _             = _rpc.NewClient(NetworkEndPoint)
 	SuggestGasPrice, _ = Cli.SuggestGasPrice(context.Background())
 	AuthCli, _         = _rpc.NewAuthClient(Cli, SuperSk, ChainId)
-
-	OnChainOpsMerkleHelper = [4]bool{false, false, true, false}
 )
