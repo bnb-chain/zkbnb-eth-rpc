@@ -1,12 +1,15 @@
 package _rpc
 
 import (
-	"github.com/zecrey-labs/zecrey-eth-rpc/_const"
+	"context"
 	"crypto/ecdsa"
 	"fmt"
+	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/zecrey-labs/zecrey-eth-rpc/_const"
 	"math/big"
 	"reflect"
+	"strings"
 	"testing"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -108,6 +111,8 @@ func TestGetTransactionByHash(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+	names := strings.Split("sher.zecrey", ".zecrey")
+	fmt.Println(names[0])
 	fmt.Println("tx:", string(txBytes))
 	fmt.Println("isPending:", isPending)
 }
@@ -174,4 +179,18 @@ func TestPrivateKeyToAddress(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestProviderClient_GetTransactionByHash(t *testing.T) {
+	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	tx, _, err := cli.GetTransactionByHash("0xd5dc99aa9d25f510e6e7639327747b2e2cc82cbddfcdc3cbf771922fbf80640d")
+	nativeChainId, err := cli.ChainID(context.Background())
+	if err != nil {
+	}
+	fmt.Println(nativeChainId.String())
+	msg, err := tx.AsMessage(types.NewLondonSigner(nativeChainId), nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(msg.From().Hex())
 }

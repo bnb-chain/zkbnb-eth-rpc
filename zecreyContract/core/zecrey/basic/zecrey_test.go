@@ -27,6 +27,6 @@ func TestZecreyComputeCommitment(t *testing.T) {
 		Commitment:            [32]byte{},
 		OnchainOpsPubData:     nil,
 		OnchainOpsCount:       0,
-		OnchainOpsMerkleProof: [6][32]byte{},
+		OnchainOpsMerkleProof: [7][32]byte{},
 	})
 }
