@@ -1,5 +1,5 @@
 module github.com/zecrey-labs/zecrey-eth-rpc
 
-go 1.15
+go 1.17
 
-require github.com/ethereum/go-ethereum v1.10.11
+require github.com/ethereum/go-ethereum v1.10.17
