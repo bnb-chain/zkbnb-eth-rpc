@@ -168,29 +168,6 @@ func GovernanceSetVerifier(
 }
 
 /*
-	GovernanceSetExecutor: set executor
-*/
-func GovernanceSetExecutor(
-	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *Governance,
-	executor string, isActive bool,
-	gasPrice *big.Int, gasLimit uint64,
-) (txHash string, err error) {
-	if !IsValidAddress(executor) {
-		return "", errors.New("[GovernanceSetExecutor] invalid address")
-	}
-	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
-	if err != nil {
-		return "", err
-	}
-	// call initialize
-	tx, err := instance.SetExecutor(transactOpts, common.HexToAddress(executor), isActive)
-	if err != nil {
-		return "", err
-	}
-	return tx.Hash().String(), nil
-}
-
-/*
 	GovernanceSetMonitor: set monitor
 */
 func GovernanceSetMonitor(

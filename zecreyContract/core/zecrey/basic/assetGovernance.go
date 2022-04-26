@@ -25,9 +25,7 @@ func DeployAssetGovernanceContract(
 		return "", "", err
 	}
 	address, tx, _, err := DeployAssetGovernance(
-		transactOpts, *cli,
-		common.HexToAddress(governanceAddr), common.HexToAddress(listingFeeAssetAddr),
-		listingFee, listingCap, common.HexToAddress(treasuryAddr))
+		transactOpts, *cli)
 	if err != nil {
 		return "", "", err
 	}
@@ -59,92 +57,6 @@ func AssetGovernanceSetAsset(
 	}
 	// call initialize
 	tx, err := instance.SetAsset(transactOpts, assetId, common.HexToAddress(assetAddr))
-	if err != nil {
-		return "", err
-	}
-	return tx.Hash().String(), nil
-}
-
-/*
-	AssetGovernanceSetListingFeeToken: set listing fee token
-*/
-func AssetGovernanceSetListingFeeToken(
-	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *AssetGovernance,
-	listingFeeTokenAddr string, listingFee *big.Int,
-	gasPrice *big.Int, gasLimit uint64,
-) (txHash string, err error) {
-	if !IsValidAddress(listingFeeTokenAddr) {
-		return "", errors.New("[AssetGovernanceSetListingFeeToken] invalid asset address")
-	}
-	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
-	if err != nil {
-		return "", err
-	}
-	// call initialize
-	tx, err := instance.SetListingFeeToken(transactOpts, common.HexToAddress(listingFeeTokenAddr), listingFee)
-	if err != nil {
-		return "", err
-	}
-	return tx.Hash().String(), nil
-}
-
-/*
-	AssetGovernanceSetListingFee: set listing fee
-*/
-func AssetGovernanceSetListingFee(
-	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *AssetGovernance,
-	listingFee *big.Int,
-	gasPrice *big.Int, gasLimit uint64,
-) (txHash string, err error) {
-	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
-	if err != nil {
-		return "", err
-	}
-	// call initialize
-	tx, err := instance.SetListingFee(transactOpts, listingFee)
-	if err != nil {
-		return "", err
-	}
-	return tx.Hash().String(), nil
-}
-
-/*
-	AssetGovernanceSetListingCap: set listing cap
-*/
-func AssetGovernanceSetListingCap(
-	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *AssetGovernance,
-	listingCap uint16,
-	gasPrice *big.Int, gasLimit uint64,
-) (txHash string, err error) {
-	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
-	if err != nil {
-		return "", err
-	}
-	// call initialize
-	tx, err := instance.SetListingCap(transactOpts, listingCap)
-	if err != nil {
-		return "", err
-	}
-	return tx.Hash().String(), nil
-}
-
-/*
-	AssetGovernanceSetTreasury: set treasury addr
-*/
-func AssetGovernanceSetTreasury(
-	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *AssetGovernance,
-	treasuryAddr string,
-	gasPrice *big.Int, gasLimit uint64,
-) (txHash string, err error) {
-	if !IsValidAddress(treasuryAddr) {
-		return "", errors.New("[AssetGovernanceSetTreasury] invalid treasury address")
-	}
-	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
-	if err != nil {
-		return "", err
-	}
-	// call initialize
-	tx, err := instance.SetTreasury(transactOpts, common.HexToAddress(treasuryAddr))
 	if err != nil {
 		return "", err
 	}

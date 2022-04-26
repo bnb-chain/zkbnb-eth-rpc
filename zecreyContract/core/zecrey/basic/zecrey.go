@@ -41,13 +41,11 @@ func ZecreyComputeCommitment(hashVal []byte, newBlock ZecreyCommitBlockInfo) (va
 		{Type: Bytes32Type},
 		{Type: Uint32Type},
 		{Type: Bytes32Type},
-		{Type: Bytes32Type},
 		{Type: Uint256Type},
 	}
 	value, err = arguments.Pack(
 		SetFixed32Bytes(hashVal),
 		newBlock.BlockNumber,
-		newBlock.OnchainOpsRoot,
 		newBlock.NewAccountRoot,
 		newBlock.Timestamp,
 	)
@@ -284,7 +282,7 @@ func ZecreyVerifyBlocks(
 */
 func ZecreyExecuteBlocks(
 	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *Zecrey,
-	blocks []StorageBlockHeader,
+	blocks []ZecreyExecuteBlockInfo,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
