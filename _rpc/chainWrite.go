@@ -50,7 +50,7 @@ func (cli *ProviderClient) Transfer(authCli *AuthClient, to string, amount *big.
 	return signedTx.Hash().String(), err
 }
 
-// deploy contract
+// deploy zecrey
 func (cli *ProviderClient) DeployContract(authCli *AuthClient, gasPrice *big.Int, abiPath string, binPath string, params []interface{}) (contractAddress common.Address, txHash common.Hash, err error) {
 	// check authCli
 	if authCli == nil || abiPath == "" || binPath == "" {
@@ -136,7 +136,7 @@ func (cli *ProviderClient) WaitingTransactionStatus(txHash string) (status bool,
 	}
 }
 
-// deploy smart contract until it is completed
+// deploy smart zecrey until it is completed
 func (cli *ProviderClient) DeployContractUntil(authCli *AuthClient, gasPrice *big.Int, abiPath string, binPath string, params []interface{}) (status bool, contractAddress common.Address, txHash common.Hash, err error) {
 	contractAddress, txHash, err = cli.DeployContract(authCli, gasPrice, abiPath, binPath, params)
 	if err != nil {

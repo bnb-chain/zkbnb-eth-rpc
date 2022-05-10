@@ -39,7 +39,7 @@ func TestIsContract(t *testing.T) {
 		{
 			name: "valid",
 			args: args{
-				// smart contract address
+				// smart zecrey address
 				address: "0x8b2a865c5856571bc7f9951fee16215a6b2250e1",
 			},
 			wantIsContract: true,

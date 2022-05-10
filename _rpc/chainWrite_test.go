@@ -34,11 +34,11 @@ func TestDeployContract(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	contractAddress, txHash, err := cli.DeployContract(authClient, nil, "../contract/_interface/example/Store_sol_Store.abi", "../contract/_interface/example/Store_sol_Store.bin", []interface{}{"1.0"})
+	contractAddress, txHash, err := cli.DeployContract(authClient, nil, "../zecrey/_interface/example/Store_sol_Store.abi", "../zecrey/_interface/example/Store_sol_Store.bin", []interface{}{"1.0"})
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("contract address:", contractAddress.String())
+	fmt.Println("zecrey address:", contractAddress.String())
 	fmt.Println("tx hash:", txHash.String())
 }
 
@@ -49,11 +49,11 @@ func TestDeployContractUntil(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	status, contractAddress, txHash, err := cli.DeployContractUntil(authClient, nil, "../contract/_interface/example/Store_sol_Store.abi", "../contract/_interface/example/Store_sol_Store.bin", []interface{}{"1.0"})
+	status, contractAddress, txHash, err := cli.DeployContractUntil(authClient, nil, "../zecrey/_interface/example/Store_sol_Store.abi", "../zecrey/_interface/example/Store_sol_Store.bin", []interface{}{"1.0"})
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("contract address:", contractAddress.String())
+	fmt.Println("zecrey address:", contractAddress.String())
 	fmt.Println("tx hash:", txHash.String())
 	fmt.Println("status:", status)
 }

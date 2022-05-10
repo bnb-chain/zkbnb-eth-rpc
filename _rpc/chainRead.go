@@ -23,7 +23,7 @@ func (cli *ProviderClient) GetBalance(address string) (balance *big.Int, err err
 	return cli.BalanceAt(context.Background(), account, nil)
 }
 
-// check if the address is a contract address
+// check if the address is a zecrey address
 // @address: address of ethereum
 func (cli *ProviderClient) IsContract(address string) (isContract bool, err error) {
 	isValidEthAddress := _utils.IsValidEthAddress(address)
