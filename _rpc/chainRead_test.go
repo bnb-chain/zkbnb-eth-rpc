@@ -7,9 +7,9 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/zecrey-labs/zecrey-eth-rpc/_const"
+	"log"
 	"math/big"
 	"reflect"
-	"strings"
 	"testing"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -100,19 +100,27 @@ func TestGetHeight(t *testing.T) {
 }
 
 func TestGetTransactionByHash(t *testing.T) {
-	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	cli, err := NewClient("http://tf-dex-preview-validator-nlb-6fd109ac8b9d390a.elb.ap-northeast-1.amazonaws.com:8545")
 	defer cli.Close()
-	hash := "0xf900253477a50a1cd808f61058f68eb2e73afcb0161c31e82ecafa034d7c8eec"
+	hash := "0x3322dfec34ceed12d6d2ca2bbc2004e450eeb31d4eabb3660b324dd52ac382aa"
 	tx, isPending, err := cli.GetTransactionByHash(hash)
 	if err != nil {
 		t.Error(err)
 	}
+	receipt, err := cli.GetTransactionReceipt(hash)
+	if err != nil {
+		t.Fatal(err)
+	}
+	log.Println(receipt.Logs)
+	receiptBytes, err := receipt.MarshalJSON()
+	if err != nil {
+		t.Fatal(err)
+	}
+	log.Println(string(receiptBytes))
 	txBytes, err := tx.MarshalJSON()
 	if err != nil {
 		t.Error(err)
 	}
-	names := strings.Split("sher.zecrey", ".zecrey")
-	fmt.Println(names[0])
 	fmt.Println("tx:", string(txBytes))
 	fmt.Println("isPending:", isPending)
 }

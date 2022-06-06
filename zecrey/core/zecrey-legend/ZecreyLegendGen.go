@@ -26,33 +26,42 @@ var (
 	_ = event.NewSubscription
 )
 
-// StorageBlockHeader is an auto generated low-level Go binding around an user-defined struct.
-type StorageBlockHeader struct {
-	BlockNumber                  uint32
-	PriorityOperations           uint64
-	PendingOnchainOperationsHash [32]byte
-	Timestamp                    *big.Int
-	AccountRoot                  [32]byte
-	Commitment                   [32]byte
-}
-
-// ZecreyLegendCommitBlockInfo is an auto generated low-level Go binding around an user-defined struct.
-type ZecreyLegendCommitBlockInfo struct {
-	NewAccountRoot    [32]byte
+// OldZecreyLegendCommitBlockInfo is an auto generated low-level Go binding around an user-defined struct.
+type OldZecreyLegendCommitBlockInfo struct {
+	NewStateRoot      [32]byte
 	PublicData        []byte
 	Timestamp         *big.Int
 	PublicDataOffsets []uint32
 	BlockNumber       uint32
 }
 
-// ZecreyLegendVerifyBlockInfo is an auto generated low-level Go binding around an user-defined struct.
-type ZecreyLegendVerifyBlockInfo struct {
-	BlockHeader              StorageBlockHeader
-	PendingOnchainOpsPubdata [][]byte
+// OldZecreyLegendPairInfo is an auto generated low-level Go binding around an user-defined struct.
+type OldZecreyLegendPairInfo struct {
+	TokenA               common.Address
+	TokenB               common.Address
+	FeeRate              uint16
+	TreasuryAccountIndex uint32
+	TreasuryRate         uint16
+}
+
+// OldZecreyLegendVerifyAndExecuteBlockInfo is an auto generated low-level Go binding around an user-defined struct.
+type OldZecreyLegendVerifyAndExecuteBlockInfo struct {
+	BlockHeader              StorageStoredBlockInfo
+	PendingOnchainOpsPubData [][]byte
+}
+
+// StorageStoredBlockInfo is an auto generated low-level Go binding around an user-defined struct.
+type StorageStoredBlockInfo struct {
+	BlockNumber                  uint32
+	PriorityOperations           uint64
+	PendingOnchainOperationsHash [32]byte
+	Timestamp                    *big.Int
+	StateRoot                    [32]byte
+	Commitment                   [32]byte
 }
 
 // ZecreyLegendABI is the input ABI used to generate the binding from.
-const ZecreyLegendABI = "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"}],\"name\":\"BlockCommit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"}],\"name\":\"BlockVerification\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"totalBlocksVerified\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"totalBlocksCommitted\",\"type\":\"uint32\"}],\"name\":\"BlocksRevert\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"pairIndex\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"asset0Id\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"asset1Id\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"feeRate\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"treasuryAccountIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"treasuryRate\",\"type\":\"uint16\"}],\"name\":\"CreateTokenPair\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"accountName\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"Deposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"zecreyBlockNumber\",\"type\":\"uint32\"},{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"accountIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"accountName\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"DepositCommit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"accountNameHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"nftTokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"creatorTreasuryRate\",\"type\":\"uint16\"}],\"name\":\"DepositNft\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"DesertMode\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"zecreyBlockId\",\"type\":\"uint32\"},{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"accountId\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint16\",\"name\":\"tokenId\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"FullExitCommit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"serialId\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"enumTxTypes.TxType\",\"name\":\"txType\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"pubData\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"expirationBlock\",\"type\":\"uint256\"}],\"name\":\"NewPriorityRequest\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newNoticePeriod\",\"type\":\"uint256\"}],\"name\":\"NoticePeriodChange\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"zecreyPubKey\",\"type\":\"bytes32\"}],\"name\":\"RegisterZNS\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"pairIndex\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"feeRate\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"treasuryAccountIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"treasuryRate\",\"type\":\"uint16\"}],\"name\":\"UpdateTokenPair\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"accountNameHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"toAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"proxyAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"nftTokenId\",\"type\":\"uint256\"}],\"name\":\"WithdrawNft\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"Withdrawal\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"WithdrawalPending\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"MAX_ACCOUNT_INDEX\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_AMOUNT_OF_REGISTERED_ASSETS\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_DEPOSIT_AMOUNT\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"\",\"type\":\"uint128\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_FUNGIBLE_ASSET_ID\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SECURITY_COUNCIL_MEMBERS_NUMBER\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SHORTEST_UPGRADE_NOTICE_PERIOD\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SPECIAL_ACCOUNT_ADDRESS\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SPECIAL_ACCOUNT_ID\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"UPGRADE_NOTICE_PERIOD\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"WITHDRAWAL_GAS_LIMIT\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"internalType\":\"uint128\",\"name\":\"_amount\",\"type\":\"uint128\"},{\"internalType\":\"uint128\",\"name\":\"_maxAmount\",\"type\":\"uint128\"}],\"name\":\"_transferERC20\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"withdrawnAmount\",\"type\":\"uint128\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"accountRoot\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"activateDesertMode\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"uint64\",\"name\":\"priorityOperations\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"pendingOnchainOperationsHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"accountRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"}],\"internalType\":\"structStorage.BlockHeader\",\"name\":\"_lastCommittedBlockData\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"newAccountRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"publicData\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"uint32[]\",\"name\":\"publicDataOffsets\",\"type\":\"uint32[]\"},{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"}],\"internalType\":\"structZecreyLegend.CommitBlockInfo[]\",\"name\":\"_newBlocksData\",\"type\":\"tuple[]\"}],\"name\":\"commitBlocks\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_tokenA\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_tokenB\",\"type\":\"address\"}],\"name\":\"createPair\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"cutUpgradeNoticePeriod\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint104\",\"name\":\"_amount\",\"type\":\"uint104\"},{\"internalType\":\"bytes32\",\"name\":\"_accountNameHash\",\"type\":\"bytes32\"}],\"name\":\"depositBEP20\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_accountNameHash\",\"type\":\"bytes32\"}],\"name\":\"depositBNB\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_accountNameHash\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"_tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_nftTokenId\",\"type\":\"uint256\"},{\"internalType\":\"uint16\",\"name\":\"_creatorTreasuryRate\",\"type\":\"uint16\"}],\"name\":\"depositNft\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"desertMode\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"firstPriorityRequestId\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"accountNameHash\",\"type\":\"bytes32\"}],\"name\":\"getAddressByAccountNameHash\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getNoticePeriod\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_assetAddr\",\"type\":\"address\"}],\"name\":\"getPendingBalance\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"\",\"type\":\"uint128\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"initializationParameters\",\"type\":\"bytes\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isReadyForUpgrade\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_zecreyPubKey\",\"type\":\"bytes32\"}],\"name\":\"registerZNS\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_accountNameHash\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"_asset\",\"type\":\"address\"}],\"name\":\"requestFullExit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_accountNameHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint32\",\"name\":\"_nftIndex\",\"type\":\"uint32\"}],\"name\":\"requestFullExitNft\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"uint64\",\"name\":\"priorityOperations\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"pendingOnchainOperationsHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"accountRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"}],\"internalType\":\"structStorage.BlockHeader[]\",\"name\":\"_blocksToRevert\",\"type\":\"tuple[]\"}],\"name\":\"revertBlocks\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"name\":\"storedBlockHeaderHashes\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalBlocksCommitted\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalBlocksVerified\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalOpenPriorityRequests\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalTokenPairs\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint16\",\"name\":\"_pairIndex\",\"type\":\"uint16\"},{\"internalType\":\"uint16\",\"name\":\"_feeRate\",\"type\":\"uint16\"},{\"internalType\":\"uint32\",\"name\":\"_treasuryAccountIndex\",\"type\":\"uint32\"},{\"internalType\":\"uint16\",\"name\":\"_treasuryRate\",\"type\":\"uint16\"}],\"name\":\"updatePairRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"upgradeParameters\",\"type\":\"bytes\"}],\"name\":\"upgrade\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"upgradeCanceled\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"upgradeFinishes\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"upgradeNoticePeriodStarted\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"upgradePreparationStarted\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"uint64\",\"name\":\"priorityOperations\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"pendingOnchainOperationsHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"accountRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"}],\"internalType\":\"structStorage.BlockHeader\",\"name\":\"blockHeader\",\"type\":\"tuple\"},{\"internalType\":\"bytes[]\",\"name\":\"pendingOnchainOpsPubdata\",\"type\":\"bytes[]\"}],\"internalType\":\"structZecreyLegend.VerifyBlockInfo[]\",\"name\":\"_blocks\",\"type\":\"tuple[]\"},{\"internalType\":\"uint256[]\",\"name\":\"_proofs\",\"type\":\"uint256[]\"}],\"name\":\"verifyBlocks\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"addresspayable\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint128\",\"name\":\"_amount\",\"type\":\"uint128\"}],\"name\":\"withdrawPendingBalance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
+const ZecreyLegendABI = "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"}],\"name\":\"BlockCommit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"}],\"name\":\"BlockVerification\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"totalBlocksVerified\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"totalBlocksCommitted\",\"type\":\"uint32\"}],\"name\":\"BlocksRevert\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"pairIndex\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"asset0Id\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"asset1Id\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"feeRate\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"treasuryAccountIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"treasuryRate\",\"type\":\"uint16\"}],\"name\":\"CreateTokenPair\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"accountName\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"Deposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"zecreyBlockNumber\",\"type\":\"uint32\"},{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"accountIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"accountName\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"DepositCommit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"accountNameHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nftContentHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"nftTokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"creatorTreasuryRate\",\"type\":\"uint16\"}],\"name\":\"DepositNft\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"DesertMode\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"zecreyBlockId\",\"type\":\"uint32\"},{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"accountId\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint16\",\"name\":\"tokenId\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"FullExitCommit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"factory\",\"type\":\"address\"}],\"name\":\"NewDefaultNFTFactory\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"_creatorAccountNameHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"_collectionId\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_factoryAddress\",\"type\":\"address\"}],\"name\":\"NewNFTFactory\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"serialId\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"enumTxTypes.TxType\",\"name\":\"txType\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"pubData\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"expirationBlock\",\"type\":\"uint256\"}],\"name\":\"NewPriorityRequest\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newNoticePeriod\",\"type\":\"uint256\"}],\"name\":\"NoticePeriodChange\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"zecreyPubKey\",\"type\":\"bytes32\"}],\"name\":\"RegisterZNS\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"pairIndex\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"feeRate\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"treasuryAccountIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"treasuryRate\",\"type\":\"uint16\"}],\"name\":\"UpdateTokenPair\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"accountIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"nftL1Address\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"toAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"nftL1TokenId\",\"type\":\"uint256\"}],\"name\":\"WithdrawNft\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"Withdrawal\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint40\",\"name\":\"nftIndex\",\"type\":\"uint40\"}],\"name\":\"WithdrawalNFTPending\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"CHUNK_SIZE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_ACCOUNT_INDEX\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_AMOUNT_OF_REGISTERED_ASSETS\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_DEPOSIT_AMOUNT\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"\",\"type\":\"uint128\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_FUNGIBLE_ASSET_ID\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_NFT_INDEX\",\"outputs\":[{\"internalType\":\"uint40\",\"name\":\"\",\"type\":\"uint40\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SECURITY_COUNCIL_MEMBERS_NUMBER\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SHORTEST_UPGRADE_NOTICE_PERIOD\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SPECIAL_ACCOUNT_ADDRESS\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SPECIAL_ACCOUNT_ID\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"UPGRADE_NOTICE_PERIOD\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"WITHDRAWAL_GAS_LIMIT\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"accountRoot\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"activateDesertMode\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"uint64\",\"name\":\"priorityOperations\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"pendingOnchainOperationsHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"stateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"}],\"internalType\":\"structStorage.StoredBlockInfo\",\"name\":\"_lastCommittedBlockData\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"newStateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"publicData\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"uint32[]\",\"name\":\"publicDataOffsets\",\"type\":\"uint32[]\"},{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"}],\"internalType\":\"structOldZecreyLegend.CommitBlockInfo[]\",\"name\":\"_newBlocksData\",\"type\":\"tuple[]\"}],\"name\":\"commitBlocks\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_tokenA\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_tokenB\",\"type\":\"address\"}],\"name\":\"createPair\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"cutUpgradeNoticePeriod\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"defaultNFTFactory\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint104\",\"name\":\"_amount\",\"type\":\"uint104\"},{\"internalType\":\"string\",\"name\":\"_accountName\",\"type\":\"string\"}],\"name\":\"depositBEP20\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_accountName\",\"type\":\"string\"}],\"name\":\"depositBNB\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_accountName\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"_nftL1Address\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_nftL1TokenId\",\"type\":\"uint256\"}],\"name\":\"depositNft\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"desertMode\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"firstPriorityRequestId\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"accountNameHash\",\"type\":\"bytes32\"}],\"name\":\"getAddressByAccountNameHash\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_creatorAccountNameHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint32\",\"name\":\"_collectionId\",\"type\":\"uint32\"}],\"name\":\"getNFTFactory\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getNoticePeriod\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_assetAddr\",\"type\":\"address\"}],\"name\":\"getPendingBalance\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"\",\"type\":\"uint128\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"initializationParameters\",\"type\":\"bytes\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isReadyForUpgrade\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"input\",\"type\":\"bytes\"}],\"name\":\"keccak256Hash\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"result\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"name\":\"nftFactories\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"onERC721Received\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_zecreyPubKey\",\"type\":\"bytes32\"}],\"name\":\"registerZNS\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_accountName\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"_asset\",\"type\":\"address\"}],\"name\":\"requestFullExit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_accountName\",\"type\":\"string\"},{\"internalType\":\"uint32\",\"name\":\"_nftIndex\",\"type\":\"uint32\"}],\"name\":\"requestFullExitNft\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"uint64\",\"name\":\"priorityOperations\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"pendingOnchainOperationsHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"stateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"}],\"internalType\":\"structStorage.StoredBlockInfo[]\",\"name\":\"_blocksToRevert\",\"type\":\"tuple[]\"}],\"name\":\"revertBlocks\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"name\":\"storedBlockHashes\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalBlocksCommitted\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalBlocksVerified\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalOpenPriorityRequests\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalTokenPairs\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"internalType\":\"uint128\",\"name\":\"_amount\",\"type\":\"uint128\"},{\"internalType\":\"uint128\",\"name\":\"_maxAmount\",\"type\":\"uint128\"}],\"name\":\"transferERC20\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"withdrawnAmount\",\"type\":\"uint128\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"tokenA\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"tokenB\",\"type\":\"address\"},{\"internalType\":\"uint16\",\"name\":\"feeRate\",\"type\":\"uint16\"},{\"internalType\":\"uint32\",\"name\":\"treasuryAccountIndex\",\"type\":\"uint32\"},{\"internalType\":\"uint16\",\"name\":\"treasuryRate\",\"type\":\"uint16\"}],\"internalType\":\"structOldZecreyLegend.PairInfo\",\"name\":\"_pairInfo\",\"type\":\"tuple\"}],\"name\":\"updatePairRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_newVerifierAddress\",\"type\":\"address\"}],\"name\":\"updateZecreyVerifier\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"upgradeParameters\",\"type\":\"bytes\"}],\"name\":\"upgrade\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"upgradeCanceled\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"upgradeFinishes\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"upgradeNoticePeriodStarted\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"upgradePreparationStarted\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"uint64\",\"name\":\"priorityOperations\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"pendingOnchainOperationsHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"stateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"}],\"internalType\":\"structStorage.StoredBlockInfo\",\"name\":\"blockHeader\",\"type\":\"tuple\"},{\"internalType\":\"bytes[]\",\"name\":\"pendingOnchainOpsPubData\",\"type\":\"bytes[]\"}],\"internalType\":\"structOldZecreyLegend.VerifyAndExecuteBlockInfo[]\",\"name\":\"_blocks\",\"type\":\"tuple[]\"},{\"internalType\":\"uint256[]\",\"name\":\"_proofs\",\"type\":\"uint256[]\"}],\"name\":\"verifyAndExecuteBlocks\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"addresspayable\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint128\",\"name\":\"_amount\",\"type\":\"uint128\"}],\"name\":\"withdrawPendingBalance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint40\",\"name\":\"_nftIndex\",\"type\":\"uint40\"}],\"name\":\"withdrawPendingNFTBalance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
 
 // ZecreyLegend is an auto generated Go binding around an Ethereum contract.
 type ZecreyLegend struct {
@@ -196,6 +205,37 @@ func (_ZecreyLegend *ZecreyLegendTransactorRaw) Transact(opts *bind.TransactOpts
 	return _ZecreyLegend.Contract.contract.Transact(opts, method, params...)
 }
 
+// CHUNKSIZE is a free data retrieval call binding the contract method 0xe91e13a9.
+//
+// Solidity: function CHUNK_SIZE() view returns(uint256)
+func (_ZecreyLegend *ZecreyLegendCaller) CHUNKSIZE(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _ZecreyLegend.contract.Call(opts, &out, "CHUNK_SIZE")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// CHUNKSIZE is a free data retrieval call binding the contract method 0xe91e13a9.
+//
+// Solidity: function CHUNK_SIZE() view returns(uint256)
+func (_ZecreyLegend *ZecreyLegendSession) CHUNKSIZE() (*big.Int, error) {
+	return _ZecreyLegend.Contract.CHUNKSIZE(&_ZecreyLegend.CallOpts)
+}
+
+// CHUNKSIZE is a free data retrieval call binding the contract method 0xe91e13a9.
+//
+// Solidity: function CHUNK_SIZE() view returns(uint256)
+func (_ZecreyLegend *ZecreyLegendCallerSession) CHUNKSIZE() (*big.Int, error) {
+	return _ZecreyLegend.Contract.CHUNKSIZE(&_ZecreyLegend.CallOpts)
+}
+
 // MAXACCOUNTINDEX is a free data retrieval call binding the contract method 0x437545f9.
 //
 // Solidity: function MAX_ACCOUNT_INDEX() view returns(uint32)
@@ -318,6 +358,37 @@ func (_ZecreyLegend *ZecreyLegendSession) MAXFUNGIBLEASSETID() (uint32, error) {
 // Solidity: function MAX_FUNGIBLE_ASSET_ID() view returns(uint32)
 func (_ZecreyLegend *ZecreyLegendCallerSession) MAXFUNGIBLEASSETID() (uint32, error) {
 	return _ZecreyLegend.Contract.MAXFUNGIBLEASSETID(&_ZecreyLegend.CallOpts)
+}
+
+// MAXNFTINDEX is a free data retrieval call binding the contract method 0x14791ad2.
+//
+// Solidity: function MAX_NFT_INDEX() view returns(uint40)
+func (_ZecreyLegend *ZecreyLegendCaller) MAXNFTINDEX(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _ZecreyLegend.contract.Call(opts, &out, "MAX_NFT_INDEX")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// MAXNFTINDEX is a free data retrieval call binding the contract method 0x14791ad2.
+//
+// Solidity: function MAX_NFT_INDEX() view returns(uint40)
+func (_ZecreyLegend *ZecreyLegendSession) MAXNFTINDEX() (*big.Int, error) {
+	return _ZecreyLegend.Contract.MAXNFTINDEX(&_ZecreyLegend.CallOpts)
+}
+
+// MAXNFTINDEX is a free data retrieval call binding the contract method 0x14791ad2.
+//
+// Solidity: function MAX_NFT_INDEX() view returns(uint40)
+func (_ZecreyLegend *ZecreyLegendCallerSession) MAXNFTINDEX() (*big.Int, error) {
+	return _ZecreyLegend.Contract.MAXNFTINDEX(&_ZecreyLegend.CallOpts)
 }
 
 // SECURITYCOUNCILMEMBERSNUMBER is a free data retrieval call binding the contract method 0x4a51a71f.
@@ -537,6 +608,37 @@ func (_ZecreyLegend *ZecreyLegendCallerSession) AccountRoot() ([32]byte, error) 
 	return _ZecreyLegend.Contract.AccountRoot(&_ZecreyLegend.CallOpts)
 }
 
+// DefaultNFTFactory is a free data retrieval call binding the contract method 0x940f19c0.
+//
+// Solidity: function defaultNFTFactory() view returns(address)
+func (_ZecreyLegend *ZecreyLegendCaller) DefaultNFTFactory(opts *bind.CallOpts) (common.Address, error) {
+	var out []interface{}
+	err := _ZecreyLegend.contract.Call(opts, &out, "defaultNFTFactory")
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
+}
+
+// DefaultNFTFactory is a free data retrieval call binding the contract method 0x940f19c0.
+//
+// Solidity: function defaultNFTFactory() view returns(address)
+func (_ZecreyLegend *ZecreyLegendSession) DefaultNFTFactory() (common.Address, error) {
+	return _ZecreyLegend.Contract.DefaultNFTFactory(&_ZecreyLegend.CallOpts)
+}
+
+// DefaultNFTFactory is a free data retrieval call binding the contract method 0x940f19c0.
+//
+// Solidity: function defaultNFTFactory() view returns(address)
+func (_ZecreyLegend *ZecreyLegendCallerSession) DefaultNFTFactory() (common.Address, error) {
+	return _ZecreyLegend.Contract.DefaultNFTFactory(&_ZecreyLegend.CallOpts)
+}
+
 // DesertMode is a free data retrieval call binding the contract method 0x02cfb563.
 //
 // Solidity: function desertMode() view returns(bool)
@@ -628,6 +730,37 @@ func (_ZecreyLegend *ZecreyLegendSession) GetAddressByAccountNameHash(accountNam
 // Solidity: function getAddressByAccountNameHash(bytes32 accountNameHash) view returns(address)
 func (_ZecreyLegend *ZecreyLegendCallerSession) GetAddressByAccountNameHash(accountNameHash [32]byte) (common.Address, error) {
 	return _ZecreyLegend.Contract.GetAddressByAccountNameHash(&_ZecreyLegend.CallOpts, accountNameHash)
+}
+
+// GetNFTFactory is a free data retrieval call binding the contract method 0x76b4da60.
+//
+// Solidity: function getNFTFactory(bytes32 _creatorAccountNameHash, uint32 _collectionId) view returns(address)
+func (_ZecreyLegend *ZecreyLegendCaller) GetNFTFactory(opts *bind.CallOpts, _creatorAccountNameHash [32]byte, _collectionId uint32) (common.Address, error) {
+	var out []interface{}
+	err := _ZecreyLegend.contract.Call(opts, &out, "getNFTFactory", _creatorAccountNameHash, _collectionId)
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
+}
+
+// GetNFTFactory is a free data retrieval call binding the contract method 0x76b4da60.
+//
+// Solidity: function getNFTFactory(bytes32 _creatorAccountNameHash, uint32 _collectionId) view returns(address)
+func (_ZecreyLegend *ZecreyLegendSession) GetNFTFactory(_creatorAccountNameHash [32]byte, _collectionId uint32) (common.Address, error) {
+	return _ZecreyLegend.Contract.GetNFTFactory(&_ZecreyLegend.CallOpts, _creatorAccountNameHash, _collectionId)
+}
+
+// GetNFTFactory is a free data retrieval call binding the contract method 0x76b4da60.
+//
+// Solidity: function getNFTFactory(bytes32 _creatorAccountNameHash, uint32 _collectionId) view returns(address)
+func (_ZecreyLegend *ZecreyLegendCallerSession) GetNFTFactory(_creatorAccountNameHash [32]byte, _collectionId uint32) (common.Address, error) {
+	return _ZecreyLegend.Contract.GetNFTFactory(&_ZecreyLegend.CallOpts, _creatorAccountNameHash, _collectionId)
 }
 
 // GetNoticePeriod is a free data retrieval call binding the contract method 0x2a3174f4.
@@ -723,12 +856,12 @@ func (_ZecreyLegend *ZecreyLegendCallerSession) IsReadyForUpgrade() (bool, error
 	return _ZecreyLegend.Contract.IsReadyForUpgrade(&_ZecreyLegend.CallOpts)
 }
 
-// StoredBlockHeaderHashes is a free data retrieval call binding the contract method 0x4167d002.
+// Keccak256Hash is a free data retrieval call binding the contract method 0xeb90f459.
 //
-// Solidity: function storedBlockHeaderHashes(uint32 ) view returns(bytes32)
-func (_ZecreyLegend *ZecreyLegendCaller) StoredBlockHeaderHashes(opts *bind.CallOpts, arg0 uint32) ([32]byte, error) {
+// Solidity: function keccak256Hash(bytes input) view returns(bytes32 result)
+func (_ZecreyLegend *ZecreyLegendCaller) Keccak256Hash(opts *bind.CallOpts, input []byte) ([32]byte, error) {
 	var out []interface{}
-	err := _ZecreyLegend.contract.Call(opts, &out, "storedBlockHeaderHashes", arg0)
+	err := _ZecreyLegend.contract.Call(opts, &out, "keccak256Hash", input)
 
 	if err != nil {
 		return *new([32]byte), err
@@ -740,18 +873,80 @@ func (_ZecreyLegend *ZecreyLegendCaller) StoredBlockHeaderHashes(opts *bind.Call
 
 }
 
-// StoredBlockHeaderHashes is a free data retrieval call binding the contract method 0x4167d002.
+// Keccak256Hash is a free data retrieval call binding the contract method 0xeb90f459.
 //
-// Solidity: function storedBlockHeaderHashes(uint32 ) view returns(bytes32)
-func (_ZecreyLegend *ZecreyLegendSession) StoredBlockHeaderHashes(arg0 uint32) ([32]byte, error) {
-	return _ZecreyLegend.Contract.StoredBlockHeaderHashes(&_ZecreyLegend.CallOpts, arg0)
+// Solidity: function keccak256Hash(bytes input) view returns(bytes32 result)
+func (_ZecreyLegend *ZecreyLegendSession) Keccak256Hash(input []byte) ([32]byte, error) {
+	return _ZecreyLegend.Contract.Keccak256Hash(&_ZecreyLegend.CallOpts, input)
 }
 
-// StoredBlockHeaderHashes is a free data retrieval call binding the contract method 0x4167d002.
+// Keccak256Hash is a free data retrieval call binding the contract method 0xeb90f459.
 //
-// Solidity: function storedBlockHeaderHashes(uint32 ) view returns(bytes32)
-func (_ZecreyLegend *ZecreyLegendCallerSession) StoredBlockHeaderHashes(arg0 uint32) ([32]byte, error) {
-	return _ZecreyLegend.Contract.StoredBlockHeaderHashes(&_ZecreyLegend.CallOpts, arg0)
+// Solidity: function keccak256Hash(bytes input) view returns(bytes32 result)
+func (_ZecreyLegend *ZecreyLegendCallerSession) Keccak256Hash(input []byte) ([32]byte, error) {
+	return _ZecreyLegend.Contract.Keccak256Hash(&_ZecreyLegend.CallOpts, input)
+}
+
+// NftFactories is a free data retrieval call binding the contract method 0x16335e06.
+//
+// Solidity: function nftFactories(bytes32 , uint32 ) view returns(address)
+func (_ZecreyLegend *ZecreyLegendCaller) NftFactories(opts *bind.CallOpts, arg0 [32]byte, arg1 uint32) (common.Address, error) {
+	var out []interface{}
+	err := _ZecreyLegend.contract.Call(opts, &out, "nftFactories", arg0, arg1)
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
+}
+
+// NftFactories is a free data retrieval call binding the contract method 0x16335e06.
+//
+// Solidity: function nftFactories(bytes32 , uint32 ) view returns(address)
+func (_ZecreyLegend *ZecreyLegendSession) NftFactories(arg0 [32]byte, arg1 uint32) (common.Address, error) {
+	return _ZecreyLegend.Contract.NftFactories(&_ZecreyLegend.CallOpts, arg0, arg1)
+}
+
+// NftFactories is a free data retrieval call binding the contract method 0x16335e06.
+//
+// Solidity: function nftFactories(bytes32 , uint32 ) view returns(address)
+func (_ZecreyLegend *ZecreyLegendCallerSession) NftFactories(arg0 [32]byte, arg1 uint32) (common.Address, error) {
+	return _ZecreyLegend.Contract.NftFactories(&_ZecreyLegend.CallOpts, arg0, arg1)
+}
+
+// StoredBlockHashes is a free data retrieval call binding the contract method 0x9ba0d146.
+//
+// Solidity: function storedBlockHashes(uint32 ) view returns(bytes32)
+func (_ZecreyLegend *ZecreyLegendCaller) StoredBlockHashes(opts *bind.CallOpts, arg0 uint32) ([32]byte, error) {
+	var out []interface{}
+	err := _ZecreyLegend.contract.Call(opts, &out, "storedBlockHashes", arg0)
+
+	if err != nil {
+		return *new([32]byte), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new([32]byte)).(*[32]byte)
+
+	return out0, err
+
+}
+
+// StoredBlockHashes is a free data retrieval call binding the contract method 0x9ba0d146.
+//
+// Solidity: function storedBlockHashes(uint32 ) view returns(bytes32)
+func (_ZecreyLegend *ZecreyLegendSession) StoredBlockHashes(arg0 uint32) ([32]byte, error) {
+	return _ZecreyLegend.Contract.StoredBlockHashes(&_ZecreyLegend.CallOpts, arg0)
+}
+
+// StoredBlockHashes is a free data retrieval call binding the contract method 0x9ba0d146.
+//
+// Solidity: function storedBlockHashes(uint32 ) view returns(bytes32)
+func (_ZecreyLegend *ZecreyLegendCallerSession) StoredBlockHashes(arg0 uint32) ([32]byte, error) {
+	return _ZecreyLegend.Contract.StoredBlockHashes(&_ZecreyLegend.CallOpts, arg0)
 }
 
 // TotalBlocksCommitted is a free data retrieval call binding the contract method 0xfaf4d8cb.
@@ -878,27 +1073,6 @@ func (_ZecreyLegend *ZecreyLegendCallerSession) TotalTokenPairs() (uint16, error
 	return _ZecreyLegend.Contract.TotalTokenPairs(&_ZecreyLegend.CallOpts)
 }
 
-// TransferERC20 is a paid mutator transaction binding the contract method 0x8ee1a74e.
-//
-// Solidity: function _transferERC20(address _token, address _to, uint128 _amount, uint128 _maxAmount) returns(uint128 withdrawnAmount)
-func (_ZecreyLegend *ZecreyLegendTransactor) TransferERC20(opts *bind.TransactOpts, _token common.Address, _to common.Address, _amount *big.Int, _maxAmount *big.Int) (*types.Transaction, error) {
-	return _ZecreyLegend.contract.Transact(opts, "_transferERC20", _token, _to, _amount, _maxAmount)
-}
-
-// TransferERC20 is a paid mutator transaction binding the contract method 0x8ee1a74e.
-//
-// Solidity: function _transferERC20(address _token, address _to, uint128 _amount, uint128 _maxAmount) returns(uint128 withdrawnAmount)
-func (_ZecreyLegend *ZecreyLegendSession) TransferERC20(_token common.Address, _to common.Address, _amount *big.Int, _maxAmount *big.Int) (*types.Transaction, error) {
-	return _ZecreyLegend.Contract.TransferERC20(&_ZecreyLegend.TransactOpts, _token, _to, _amount, _maxAmount)
-}
-
-// TransferERC20 is a paid mutator transaction binding the contract method 0x8ee1a74e.
-//
-// Solidity: function _transferERC20(address _token, address _to, uint128 _amount, uint128 _maxAmount) returns(uint128 withdrawnAmount)
-func (_ZecreyLegend *ZecreyLegendTransactorSession) TransferERC20(_token common.Address, _to common.Address, _amount *big.Int, _maxAmount *big.Int) (*types.Transaction, error) {
-	return _ZecreyLegend.Contract.TransferERC20(&_ZecreyLegend.TransactOpts, _token, _to, _amount, _maxAmount)
-}
-
 // ActivateDesertMode is a paid mutator transaction binding the contract method 0x22b22256.
 //
 // Solidity: function activateDesertMode() returns(bool)
@@ -923,21 +1097,21 @@ func (_ZecreyLegend *ZecreyLegendTransactorSession) ActivateDesertMode() (*types
 // CommitBlocks is a paid mutator transaction binding the contract method 0xaad1820e.
 //
 // Solidity: function commitBlocks((uint32,uint64,bytes32,uint256,bytes32,bytes32) _lastCommittedBlockData, (bytes32,bytes,uint256,uint32[],uint32)[] _newBlocksData) returns()
-func (_ZecreyLegend *ZecreyLegendTransactor) CommitBlocks(opts *bind.TransactOpts, _lastCommittedBlockData StorageBlockHeader, _newBlocksData []ZecreyLegendCommitBlockInfo) (*types.Transaction, error) {
+func (_ZecreyLegend *ZecreyLegendTransactor) CommitBlocks(opts *bind.TransactOpts, _lastCommittedBlockData StorageStoredBlockInfo, _newBlocksData []OldZecreyLegendCommitBlockInfo) (*types.Transaction, error) {
 	return _ZecreyLegend.contract.Transact(opts, "commitBlocks", _lastCommittedBlockData, _newBlocksData)
 }
 
 // CommitBlocks is a paid mutator transaction binding the contract method 0xaad1820e.
 //
 // Solidity: function commitBlocks((uint32,uint64,bytes32,uint256,bytes32,bytes32) _lastCommittedBlockData, (bytes32,bytes,uint256,uint32[],uint32)[] _newBlocksData) returns()
-func (_ZecreyLegend *ZecreyLegendSession) CommitBlocks(_lastCommittedBlockData StorageBlockHeader, _newBlocksData []ZecreyLegendCommitBlockInfo) (*types.Transaction, error) {
+func (_ZecreyLegend *ZecreyLegendSession) CommitBlocks(_lastCommittedBlockData StorageStoredBlockInfo, _newBlocksData []OldZecreyLegendCommitBlockInfo) (*types.Transaction, error) {
 	return _ZecreyLegend.Contract.CommitBlocks(&_ZecreyLegend.TransactOpts, _lastCommittedBlockData, _newBlocksData)
 }
 
 // CommitBlocks is a paid mutator transaction binding the contract method 0xaad1820e.
 //
 // Solidity: function commitBlocks((uint32,uint64,bytes32,uint256,bytes32,bytes32) _lastCommittedBlockData, (bytes32,bytes,uint256,uint32[],uint32)[] _newBlocksData) returns()
-func (_ZecreyLegend *ZecreyLegendTransactorSession) CommitBlocks(_lastCommittedBlockData StorageBlockHeader, _newBlocksData []ZecreyLegendCommitBlockInfo) (*types.Transaction, error) {
+func (_ZecreyLegend *ZecreyLegendTransactorSession) CommitBlocks(_lastCommittedBlockData StorageStoredBlockInfo, _newBlocksData []OldZecreyLegendCommitBlockInfo) (*types.Transaction, error) {
 	return _ZecreyLegend.Contract.CommitBlocks(&_ZecreyLegend.TransactOpts, _lastCommittedBlockData, _newBlocksData)
 }
 
@@ -983,67 +1157,67 @@ func (_ZecreyLegend *ZecreyLegendTransactorSession) CutUpgradeNoticePeriod() (*t
 	return _ZecreyLegend.Contract.CutUpgradeNoticePeriod(&_ZecreyLegend.TransactOpts)
 }
 
-// DepositBEP20 is a paid mutator transaction binding the contract method 0x03892c3c.
+// DepositBEP20 is a paid mutator transaction binding the contract method 0x1caf5d25.
 //
-// Solidity: function depositBEP20(address _token, uint104 _amount, bytes32 _accountNameHash) returns()
-func (_ZecreyLegend *ZecreyLegendTransactor) DepositBEP20(opts *bind.TransactOpts, _token common.Address, _amount *big.Int, _accountNameHash [32]byte) (*types.Transaction, error) {
-	return _ZecreyLegend.contract.Transact(opts, "depositBEP20", _token, _amount, _accountNameHash)
+// Solidity: function depositBEP20(address _token, uint104 _amount, string _accountName) returns()
+func (_ZecreyLegend *ZecreyLegendTransactor) DepositBEP20(opts *bind.TransactOpts, _token common.Address, _amount *big.Int, _accountName string) (*types.Transaction, error) {
+	return _ZecreyLegend.contract.Transact(opts, "depositBEP20", _token, _amount, _accountName)
 }
 
-// DepositBEP20 is a paid mutator transaction binding the contract method 0x03892c3c.
+// DepositBEP20 is a paid mutator transaction binding the contract method 0x1caf5d25.
 //
-// Solidity: function depositBEP20(address _token, uint104 _amount, bytes32 _accountNameHash) returns()
-func (_ZecreyLegend *ZecreyLegendSession) DepositBEP20(_token common.Address, _amount *big.Int, _accountNameHash [32]byte) (*types.Transaction, error) {
-	return _ZecreyLegend.Contract.DepositBEP20(&_ZecreyLegend.TransactOpts, _token, _amount, _accountNameHash)
+// Solidity: function depositBEP20(address _token, uint104 _amount, string _accountName) returns()
+func (_ZecreyLegend *ZecreyLegendSession) DepositBEP20(_token common.Address, _amount *big.Int, _accountName string) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.DepositBEP20(&_ZecreyLegend.TransactOpts, _token, _amount, _accountName)
 }
 
-// DepositBEP20 is a paid mutator transaction binding the contract method 0x03892c3c.
+// DepositBEP20 is a paid mutator transaction binding the contract method 0x1caf5d25.
 //
-// Solidity: function depositBEP20(address _token, uint104 _amount, bytes32 _accountNameHash) returns()
-func (_ZecreyLegend *ZecreyLegendTransactorSession) DepositBEP20(_token common.Address, _amount *big.Int, _accountNameHash [32]byte) (*types.Transaction, error) {
-	return _ZecreyLegend.Contract.DepositBEP20(&_ZecreyLegend.TransactOpts, _token, _amount, _accountNameHash)
+// Solidity: function depositBEP20(address _token, uint104 _amount, string _accountName) returns()
+func (_ZecreyLegend *ZecreyLegendTransactorSession) DepositBEP20(_token common.Address, _amount *big.Int, _accountName string) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.DepositBEP20(&_ZecreyLegend.TransactOpts, _token, _amount, _accountName)
 }
 
-// DepositBNB is a paid mutator transaction binding the contract method 0x3d002926.
+// DepositBNB is a paid mutator transaction binding the contract method 0x51344683.
 //
-// Solidity: function depositBNB(bytes32 _accountNameHash) payable returns()
-func (_ZecreyLegend *ZecreyLegendTransactor) DepositBNB(opts *bind.TransactOpts, _accountNameHash [32]byte) (*types.Transaction, error) {
-	return _ZecreyLegend.contract.Transact(opts, "depositBNB", _accountNameHash)
+// Solidity: function depositBNB(string _accountName) payable returns()
+func (_ZecreyLegend *ZecreyLegendTransactor) DepositBNB(opts *bind.TransactOpts, _accountName string) (*types.Transaction, error) {
+	return _ZecreyLegend.contract.Transact(opts, "depositBNB", _accountName)
 }
 
-// DepositBNB is a paid mutator transaction binding the contract method 0x3d002926.
+// DepositBNB is a paid mutator transaction binding the contract method 0x51344683.
 //
-// Solidity: function depositBNB(bytes32 _accountNameHash) payable returns()
-func (_ZecreyLegend *ZecreyLegendSession) DepositBNB(_accountNameHash [32]byte) (*types.Transaction, error) {
-	return _ZecreyLegend.Contract.DepositBNB(&_ZecreyLegend.TransactOpts, _accountNameHash)
+// Solidity: function depositBNB(string _accountName) payable returns()
+func (_ZecreyLegend *ZecreyLegendSession) DepositBNB(_accountName string) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.DepositBNB(&_ZecreyLegend.TransactOpts, _accountName)
 }
 
-// DepositBNB is a paid mutator transaction binding the contract method 0x3d002926.
+// DepositBNB is a paid mutator transaction binding the contract method 0x51344683.
 //
-// Solidity: function depositBNB(bytes32 _accountNameHash) payable returns()
-func (_ZecreyLegend *ZecreyLegendTransactorSession) DepositBNB(_accountNameHash [32]byte) (*types.Transaction, error) {
-	return _ZecreyLegend.Contract.DepositBNB(&_ZecreyLegend.TransactOpts, _accountNameHash)
+// Solidity: function depositBNB(string _accountName) payable returns()
+func (_ZecreyLegend *ZecreyLegendTransactorSession) DepositBNB(_accountName string) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.DepositBNB(&_ZecreyLegend.TransactOpts, _accountName)
 }
 
-// DepositNft is a paid mutator transaction binding the contract method 0x8900e4c5.
+// DepositNft is a paid mutator transaction binding the contract method 0xfb99514b.
 //
-// Solidity: function depositNft(bytes32 _accountNameHash, address _tokenAddress, uint256 _nftTokenId, uint16 _creatorTreasuryRate) returns()
-func (_ZecreyLegend *ZecreyLegendTransactor) DepositNft(opts *bind.TransactOpts, _accountNameHash [32]byte, _tokenAddress common.Address, _nftTokenId *big.Int, _creatorTreasuryRate uint16) (*types.Transaction, error) {
-	return _ZecreyLegend.contract.Transact(opts, "depositNft", _accountNameHash, _tokenAddress, _nftTokenId, _creatorTreasuryRate)
+// Solidity: function depositNft(string _accountName, address _nftL1Address, uint256 _nftL1TokenId) returns()
+func (_ZecreyLegend *ZecreyLegendTransactor) DepositNft(opts *bind.TransactOpts, _accountName string, _nftL1Address common.Address, _nftL1TokenId *big.Int) (*types.Transaction, error) {
+	return _ZecreyLegend.contract.Transact(opts, "depositNft", _accountName, _nftL1Address, _nftL1TokenId)
 }
 
-// DepositNft is a paid mutator transaction binding the contract method 0x8900e4c5.
+// DepositNft is a paid mutator transaction binding the contract method 0xfb99514b.
 //
-// Solidity: function depositNft(bytes32 _accountNameHash, address _tokenAddress, uint256 _nftTokenId, uint16 _creatorTreasuryRate) returns()
-func (_ZecreyLegend *ZecreyLegendSession) DepositNft(_accountNameHash [32]byte, _tokenAddress common.Address, _nftTokenId *big.Int, _creatorTreasuryRate uint16) (*types.Transaction, error) {
-	return _ZecreyLegend.Contract.DepositNft(&_ZecreyLegend.TransactOpts, _accountNameHash, _tokenAddress, _nftTokenId, _creatorTreasuryRate)
+// Solidity: function depositNft(string _accountName, address _nftL1Address, uint256 _nftL1TokenId) returns()
+func (_ZecreyLegend *ZecreyLegendSession) DepositNft(_accountName string, _nftL1Address common.Address, _nftL1TokenId *big.Int) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.DepositNft(&_ZecreyLegend.TransactOpts, _accountName, _nftL1Address, _nftL1TokenId)
 }
 
-// DepositNft is a paid mutator transaction binding the contract method 0x8900e4c5.
+// DepositNft is a paid mutator transaction binding the contract method 0xfb99514b.
 //
-// Solidity: function depositNft(bytes32 _accountNameHash, address _tokenAddress, uint256 _nftTokenId, uint16 _creatorTreasuryRate) returns()
-func (_ZecreyLegend *ZecreyLegendTransactorSession) DepositNft(_accountNameHash [32]byte, _tokenAddress common.Address, _nftTokenId *big.Int, _creatorTreasuryRate uint16) (*types.Transaction, error) {
-	return _ZecreyLegend.Contract.DepositNft(&_ZecreyLegend.TransactOpts, _accountNameHash, _tokenAddress, _nftTokenId, _creatorTreasuryRate)
+// Solidity: function depositNft(string _accountName, address _nftL1Address, uint256 _nftL1TokenId) returns()
+func (_ZecreyLegend *ZecreyLegendTransactorSession) DepositNft(_accountName string, _nftL1Address common.Address, _nftL1TokenId *big.Int) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.DepositNft(&_ZecreyLegend.TransactOpts, _accountName, _nftL1Address, _nftL1TokenId)
 }
 
 // Initialize is a paid mutator transaction binding the contract method 0x439fab91.
@@ -1067,109 +1241,172 @@ func (_ZecreyLegend *ZecreyLegendTransactorSession) Initialize(initializationPar
 	return _ZecreyLegend.Contract.Initialize(&_ZecreyLegend.TransactOpts, initializationParameters)
 }
 
+// OnERC721Received is a paid mutator transaction binding the contract method 0x150b7a02.
+//
+// Solidity: function onERC721Received(address operator, address from, uint256 tokenId, bytes data) returns(bytes4)
+func (_ZecreyLegend *ZecreyLegendTransactor) OnERC721Received(opts *bind.TransactOpts, operator common.Address, from common.Address, tokenId *big.Int, data []byte) (*types.Transaction, error) {
+	return _ZecreyLegend.contract.Transact(opts, "onERC721Received", operator, from, tokenId, data)
+}
+
+// OnERC721Received is a paid mutator transaction binding the contract method 0x150b7a02.
+//
+// Solidity: function onERC721Received(address operator, address from, uint256 tokenId, bytes data) returns(bytes4)
+func (_ZecreyLegend *ZecreyLegendSession) OnERC721Received(operator common.Address, from common.Address, tokenId *big.Int, data []byte) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.OnERC721Received(&_ZecreyLegend.TransactOpts, operator, from, tokenId, data)
+}
+
+// OnERC721Received is a paid mutator transaction binding the contract method 0x150b7a02.
+//
+// Solidity: function onERC721Received(address operator, address from, uint256 tokenId, bytes data) returns(bytes4)
+func (_ZecreyLegend *ZecreyLegendTransactorSession) OnERC721Received(operator common.Address, from common.Address, tokenId *big.Int, data []byte) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.OnERC721Received(&_ZecreyLegend.TransactOpts, operator, from, tokenId, data)
+}
+
 // RegisterZNS is a paid mutator transaction binding the contract method 0xd7757da1.
 //
-// Solidity: function registerZNS(string _name, address _owner, bytes32 _zecreyPubKey) returns()
+// Solidity: function registerZNS(string _name, address _owner, bytes32 _zecreyPubKey) payable returns()
 func (_ZecreyLegend *ZecreyLegendTransactor) RegisterZNS(opts *bind.TransactOpts, _name string, _owner common.Address, _zecreyPubKey [32]byte) (*types.Transaction, error) {
 	return _ZecreyLegend.contract.Transact(opts, "registerZNS", _name, _owner, _zecreyPubKey)
 }
 
 // RegisterZNS is a paid mutator transaction binding the contract method 0xd7757da1.
 //
-// Solidity: function registerZNS(string _name, address _owner, bytes32 _zecreyPubKey) returns()
+// Solidity: function registerZNS(string _name, address _owner, bytes32 _zecreyPubKey) payable returns()
 func (_ZecreyLegend *ZecreyLegendSession) RegisterZNS(_name string, _owner common.Address, _zecreyPubKey [32]byte) (*types.Transaction, error) {
 	return _ZecreyLegend.Contract.RegisterZNS(&_ZecreyLegend.TransactOpts, _name, _owner, _zecreyPubKey)
 }
 
 // RegisterZNS is a paid mutator transaction binding the contract method 0xd7757da1.
 //
-// Solidity: function registerZNS(string _name, address _owner, bytes32 _zecreyPubKey) returns()
+// Solidity: function registerZNS(string _name, address _owner, bytes32 _zecreyPubKey) payable returns()
 func (_ZecreyLegend *ZecreyLegendTransactorSession) RegisterZNS(_name string, _owner common.Address, _zecreyPubKey [32]byte) (*types.Transaction, error) {
 	return _ZecreyLegend.Contract.RegisterZNS(&_ZecreyLegend.TransactOpts, _name, _owner, _zecreyPubKey)
 }
 
-// RequestFullExit is a paid mutator transaction binding the contract method 0x5fa8fc89.
+// RequestFullExit is a paid mutator transaction binding the contract method 0x8da64c7f.
 //
-// Solidity: function requestFullExit(bytes32 _accountNameHash, address _asset) returns()
-func (_ZecreyLegend *ZecreyLegendTransactor) RequestFullExit(opts *bind.TransactOpts, _accountNameHash [32]byte, _asset common.Address) (*types.Transaction, error) {
-	return _ZecreyLegend.contract.Transact(opts, "requestFullExit", _accountNameHash, _asset)
+// Solidity: function requestFullExit(string _accountName, address _asset) returns()
+func (_ZecreyLegend *ZecreyLegendTransactor) RequestFullExit(opts *bind.TransactOpts, _accountName string, _asset common.Address) (*types.Transaction, error) {
+	return _ZecreyLegend.contract.Transact(opts, "requestFullExit", _accountName, _asset)
 }
 
-// RequestFullExit is a paid mutator transaction binding the contract method 0x5fa8fc89.
+// RequestFullExit is a paid mutator transaction binding the contract method 0x8da64c7f.
 //
-// Solidity: function requestFullExit(bytes32 _accountNameHash, address _asset) returns()
-func (_ZecreyLegend *ZecreyLegendSession) RequestFullExit(_accountNameHash [32]byte, _asset common.Address) (*types.Transaction, error) {
-	return _ZecreyLegend.Contract.RequestFullExit(&_ZecreyLegend.TransactOpts, _accountNameHash, _asset)
+// Solidity: function requestFullExit(string _accountName, address _asset) returns()
+func (_ZecreyLegend *ZecreyLegendSession) RequestFullExit(_accountName string, _asset common.Address) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.RequestFullExit(&_ZecreyLegend.TransactOpts, _accountName, _asset)
 }
 
-// RequestFullExit is a paid mutator transaction binding the contract method 0x5fa8fc89.
+// RequestFullExit is a paid mutator transaction binding the contract method 0x8da64c7f.
 //
-// Solidity: function requestFullExit(bytes32 _accountNameHash, address _asset) returns()
-func (_ZecreyLegend *ZecreyLegendTransactorSession) RequestFullExit(_accountNameHash [32]byte, _asset common.Address) (*types.Transaction, error) {
-	return _ZecreyLegend.Contract.RequestFullExit(&_ZecreyLegend.TransactOpts, _accountNameHash, _asset)
+// Solidity: function requestFullExit(string _accountName, address _asset) returns()
+func (_ZecreyLegend *ZecreyLegendTransactorSession) RequestFullExit(_accountName string, _asset common.Address) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.RequestFullExit(&_ZecreyLegend.TransactOpts, _accountName, _asset)
 }
 
-// RequestFullExitNft is a paid mutator transaction binding the contract method 0xc5d9f7cb.
+// RequestFullExitNft is a paid mutator transaction binding the contract method 0x1bd24317.
 //
-// Solidity: function requestFullExitNft(bytes32 _accountNameHash, uint32 _nftIndex) returns()
-func (_ZecreyLegend *ZecreyLegendTransactor) RequestFullExitNft(opts *bind.TransactOpts, _accountNameHash [32]byte, _nftIndex uint32) (*types.Transaction, error) {
-	return _ZecreyLegend.contract.Transact(opts, "requestFullExitNft", _accountNameHash, _nftIndex)
+// Solidity: function requestFullExitNft(string _accountName, uint32 _nftIndex) returns()
+func (_ZecreyLegend *ZecreyLegendTransactor) RequestFullExitNft(opts *bind.TransactOpts, _accountName string, _nftIndex uint32) (*types.Transaction, error) {
+	return _ZecreyLegend.contract.Transact(opts, "requestFullExitNft", _accountName, _nftIndex)
 }
 
-// RequestFullExitNft is a paid mutator transaction binding the contract method 0xc5d9f7cb.
+// RequestFullExitNft is a paid mutator transaction binding the contract method 0x1bd24317.
 //
-// Solidity: function requestFullExitNft(bytes32 _accountNameHash, uint32 _nftIndex) returns()
-func (_ZecreyLegend *ZecreyLegendSession) RequestFullExitNft(_accountNameHash [32]byte, _nftIndex uint32) (*types.Transaction, error) {
-	return _ZecreyLegend.Contract.RequestFullExitNft(&_ZecreyLegend.TransactOpts, _accountNameHash, _nftIndex)
+// Solidity: function requestFullExitNft(string _accountName, uint32 _nftIndex) returns()
+func (_ZecreyLegend *ZecreyLegendSession) RequestFullExitNft(_accountName string, _nftIndex uint32) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.RequestFullExitNft(&_ZecreyLegend.TransactOpts, _accountName, _nftIndex)
 }
 
-// RequestFullExitNft is a paid mutator transaction binding the contract method 0xc5d9f7cb.
+// RequestFullExitNft is a paid mutator transaction binding the contract method 0x1bd24317.
 //
-// Solidity: function requestFullExitNft(bytes32 _accountNameHash, uint32 _nftIndex) returns()
-func (_ZecreyLegend *ZecreyLegendTransactorSession) RequestFullExitNft(_accountNameHash [32]byte, _nftIndex uint32) (*types.Transaction, error) {
-	return _ZecreyLegend.Contract.RequestFullExitNft(&_ZecreyLegend.TransactOpts, _accountNameHash, _nftIndex)
+// Solidity: function requestFullExitNft(string _accountName, uint32 _nftIndex) returns()
+func (_ZecreyLegend *ZecreyLegendTransactorSession) RequestFullExitNft(_accountName string, _nftIndex uint32) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.RequestFullExitNft(&_ZecreyLegend.TransactOpts, _accountName, _nftIndex)
 }
 
 // RevertBlocks is a paid mutator transaction binding the contract method 0xb4a8498c.
 //
 // Solidity: function revertBlocks((uint32,uint64,bytes32,uint256,bytes32,bytes32)[] _blocksToRevert) returns()
-func (_ZecreyLegend *ZecreyLegendTransactor) RevertBlocks(opts *bind.TransactOpts, _blocksToRevert []StorageBlockHeader) (*types.Transaction, error) {
+func (_ZecreyLegend *ZecreyLegendTransactor) RevertBlocks(opts *bind.TransactOpts, _blocksToRevert []StorageStoredBlockInfo) (*types.Transaction, error) {
 	return _ZecreyLegend.contract.Transact(opts, "revertBlocks", _blocksToRevert)
 }
 
 // RevertBlocks is a paid mutator transaction binding the contract method 0xb4a8498c.
 //
 // Solidity: function revertBlocks((uint32,uint64,bytes32,uint256,bytes32,bytes32)[] _blocksToRevert) returns()
-func (_ZecreyLegend *ZecreyLegendSession) RevertBlocks(_blocksToRevert []StorageBlockHeader) (*types.Transaction, error) {
+func (_ZecreyLegend *ZecreyLegendSession) RevertBlocks(_blocksToRevert []StorageStoredBlockInfo) (*types.Transaction, error) {
 	return _ZecreyLegend.Contract.RevertBlocks(&_ZecreyLegend.TransactOpts, _blocksToRevert)
 }
 
 // RevertBlocks is a paid mutator transaction binding the contract method 0xb4a8498c.
 //
 // Solidity: function revertBlocks((uint32,uint64,bytes32,uint256,bytes32,bytes32)[] _blocksToRevert) returns()
-func (_ZecreyLegend *ZecreyLegendTransactorSession) RevertBlocks(_blocksToRevert []StorageBlockHeader) (*types.Transaction, error) {
+func (_ZecreyLegend *ZecreyLegendTransactorSession) RevertBlocks(_blocksToRevert []StorageStoredBlockInfo) (*types.Transaction, error) {
 	return _ZecreyLegend.Contract.RevertBlocks(&_ZecreyLegend.TransactOpts, _blocksToRevert)
 }
 
-// UpdatePairRate is a paid mutator transaction binding the contract method 0xd01b2308.
+// TransferERC20 is a paid mutator transaction binding the contract method 0x68809a23.
 //
-// Solidity: function updatePairRate(uint16 _pairIndex, uint16 _feeRate, uint32 _treasuryAccountIndex, uint16 _treasuryRate) returns()
-func (_ZecreyLegend *ZecreyLegendTransactor) UpdatePairRate(opts *bind.TransactOpts, _pairIndex uint16, _feeRate uint16, _treasuryAccountIndex uint32, _treasuryRate uint16) (*types.Transaction, error) {
-	return _ZecreyLegend.contract.Transact(opts, "updatePairRate", _pairIndex, _feeRate, _treasuryAccountIndex, _treasuryRate)
+// Solidity: function transferERC20(address _token, address _to, uint128 _amount, uint128 _maxAmount) returns(uint128 withdrawnAmount)
+func (_ZecreyLegend *ZecreyLegendTransactor) TransferERC20(opts *bind.TransactOpts, _token common.Address, _to common.Address, _amount *big.Int, _maxAmount *big.Int) (*types.Transaction, error) {
+	return _ZecreyLegend.contract.Transact(opts, "transferERC20", _token, _to, _amount, _maxAmount)
 }
 
-// UpdatePairRate is a paid mutator transaction binding the contract method 0xd01b2308.
+// TransferERC20 is a paid mutator transaction binding the contract method 0x68809a23.
 //
-// Solidity: function updatePairRate(uint16 _pairIndex, uint16 _feeRate, uint32 _treasuryAccountIndex, uint16 _treasuryRate) returns()
-func (_ZecreyLegend *ZecreyLegendSession) UpdatePairRate(_pairIndex uint16, _feeRate uint16, _treasuryAccountIndex uint32, _treasuryRate uint16) (*types.Transaction, error) {
-	return _ZecreyLegend.Contract.UpdatePairRate(&_ZecreyLegend.TransactOpts, _pairIndex, _feeRate, _treasuryAccountIndex, _treasuryRate)
+// Solidity: function transferERC20(address _token, address _to, uint128 _amount, uint128 _maxAmount) returns(uint128 withdrawnAmount)
+func (_ZecreyLegend *ZecreyLegendSession) TransferERC20(_token common.Address, _to common.Address, _amount *big.Int, _maxAmount *big.Int) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.TransferERC20(&_ZecreyLegend.TransactOpts, _token, _to, _amount, _maxAmount)
 }
 
-// UpdatePairRate is a paid mutator transaction binding the contract method 0xd01b2308.
+// TransferERC20 is a paid mutator transaction binding the contract method 0x68809a23.
 //
-// Solidity: function updatePairRate(uint16 _pairIndex, uint16 _feeRate, uint32 _treasuryAccountIndex, uint16 _treasuryRate) returns()
-func (_ZecreyLegend *ZecreyLegendTransactorSession) UpdatePairRate(_pairIndex uint16, _feeRate uint16, _treasuryAccountIndex uint32, _treasuryRate uint16) (*types.Transaction, error) {
-	return _ZecreyLegend.Contract.UpdatePairRate(&_ZecreyLegend.TransactOpts, _pairIndex, _feeRate, _treasuryAccountIndex, _treasuryRate)
+// Solidity: function transferERC20(address _token, address _to, uint128 _amount, uint128 _maxAmount) returns(uint128 withdrawnAmount)
+func (_ZecreyLegend *ZecreyLegendTransactorSession) TransferERC20(_token common.Address, _to common.Address, _amount *big.Int, _maxAmount *big.Int) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.TransferERC20(&_ZecreyLegend.TransactOpts, _token, _to, _amount, _maxAmount)
+}
+
+// UpdatePairRate is a paid mutator transaction binding the contract method 0x13a05e23.
+//
+// Solidity: function updatePairRate((address,address,uint16,uint32,uint16) _pairInfo) returns()
+func (_ZecreyLegend *ZecreyLegendTransactor) UpdatePairRate(opts *bind.TransactOpts, _pairInfo OldZecreyLegendPairInfo) (*types.Transaction, error) {
+	return _ZecreyLegend.contract.Transact(opts, "updatePairRate", _pairInfo)
+}
+
+// UpdatePairRate is a paid mutator transaction binding the contract method 0x13a05e23.
+//
+// Solidity: function updatePairRate((address,address,uint16,uint32,uint16) _pairInfo) returns()
+func (_ZecreyLegend *ZecreyLegendSession) UpdatePairRate(_pairInfo OldZecreyLegendPairInfo) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.UpdatePairRate(&_ZecreyLegend.TransactOpts, _pairInfo)
+}
+
+// UpdatePairRate is a paid mutator transaction binding the contract method 0x13a05e23.
+//
+// Solidity: function updatePairRate((address,address,uint16,uint32,uint16) _pairInfo) returns()
+func (_ZecreyLegend *ZecreyLegendTransactorSession) UpdatePairRate(_pairInfo OldZecreyLegendPairInfo) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.UpdatePairRate(&_ZecreyLegend.TransactOpts, _pairInfo)
+}
+
+// UpdateZecreyVerifier is a paid mutator transaction binding the contract method 0x696ee13f.
+//
+// Solidity: function updateZecreyVerifier(address _newVerifierAddress) returns()
+func (_ZecreyLegend *ZecreyLegendTransactor) UpdateZecreyVerifier(opts *bind.TransactOpts, _newVerifierAddress common.Address) (*types.Transaction, error) {
+	return _ZecreyLegend.contract.Transact(opts, "updateZecreyVerifier", _newVerifierAddress)
+}
+
+// UpdateZecreyVerifier is a paid mutator transaction binding the contract method 0x696ee13f.
+//
+// Solidity: function updateZecreyVerifier(address _newVerifierAddress) returns()
+func (_ZecreyLegend *ZecreyLegendSession) UpdateZecreyVerifier(_newVerifierAddress common.Address) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.UpdateZecreyVerifier(&_ZecreyLegend.TransactOpts, _newVerifierAddress)
+}
+
+// UpdateZecreyVerifier is a paid mutator transaction binding the contract method 0x696ee13f.
+//
+// Solidity: function updateZecreyVerifier(address _newVerifierAddress) returns()
+func (_ZecreyLegend *ZecreyLegendTransactorSession) UpdateZecreyVerifier(_newVerifierAddress common.Address) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.UpdateZecreyVerifier(&_ZecreyLegend.TransactOpts, _newVerifierAddress)
 }
 
 // Upgrade is a paid mutator transaction binding the contract method 0x25394645.
@@ -1277,25 +1514,25 @@ func (_ZecreyLegend *ZecreyLegendTransactorSession) UpgradePreparationStarted() 
 	return _ZecreyLegend.Contract.UpgradePreparationStarted(&_ZecreyLegend.TransactOpts)
 }
 
-// VerifyBlocks is a paid mutator transaction binding the contract method 0xb77a1ef5.
+// VerifyAndExecuteBlocks is a paid mutator transaction binding the contract method 0x1088812b.
 //
-// Solidity: function verifyBlocks(((uint32,uint64,bytes32,uint256,bytes32,bytes32),bytes[])[] _blocks, uint256[] _proofs) returns()
-func (_ZecreyLegend *ZecreyLegendTransactor) VerifyBlocks(opts *bind.TransactOpts, _blocks []ZecreyLegendVerifyBlockInfo, _proofs []*big.Int) (*types.Transaction, error) {
-	return _ZecreyLegend.contract.Transact(opts, "verifyBlocks", _blocks, _proofs)
+// Solidity: function verifyAndExecuteBlocks(((uint32,uint64,bytes32,uint256,bytes32,bytes32),bytes[])[] _blocks, uint256[] _proofs) returns()
+func (_ZecreyLegend *ZecreyLegendTransactor) VerifyAndExecuteBlocks(opts *bind.TransactOpts, _blocks []OldZecreyLegendVerifyAndExecuteBlockInfo, _proofs []*big.Int) (*types.Transaction, error) {
+	return _ZecreyLegend.contract.Transact(opts, "verifyAndExecuteBlocks", _blocks, _proofs)
 }
 
-// VerifyBlocks is a paid mutator transaction binding the contract method 0xb77a1ef5.
+// VerifyAndExecuteBlocks is a paid mutator transaction binding the contract method 0x1088812b.
 //
-// Solidity: function verifyBlocks(((uint32,uint64,bytes32,uint256,bytes32,bytes32),bytes[])[] _blocks, uint256[] _proofs) returns()
-func (_ZecreyLegend *ZecreyLegendSession) VerifyBlocks(_blocks []ZecreyLegendVerifyBlockInfo, _proofs []*big.Int) (*types.Transaction, error) {
-	return _ZecreyLegend.Contract.VerifyBlocks(&_ZecreyLegend.TransactOpts, _blocks, _proofs)
+// Solidity: function verifyAndExecuteBlocks(((uint32,uint64,bytes32,uint256,bytes32,bytes32),bytes[])[] _blocks, uint256[] _proofs) returns()
+func (_ZecreyLegend *ZecreyLegendSession) VerifyAndExecuteBlocks(_blocks []OldZecreyLegendVerifyAndExecuteBlockInfo, _proofs []*big.Int) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.VerifyAndExecuteBlocks(&_ZecreyLegend.TransactOpts, _blocks, _proofs)
 }
 
-// VerifyBlocks is a paid mutator transaction binding the contract method 0xb77a1ef5.
+// VerifyAndExecuteBlocks is a paid mutator transaction binding the contract method 0x1088812b.
 //
-// Solidity: function verifyBlocks(((uint32,uint64,bytes32,uint256,bytes32,bytes32),bytes[])[] _blocks, uint256[] _proofs) returns()
-func (_ZecreyLegend *ZecreyLegendTransactorSession) VerifyBlocks(_blocks []ZecreyLegendVerifyBlockInfo, _proofs []*big.Int) (*types.Transaction, error) {
-	return _ZecreyLegend.Contract.VerifyBlocks(&_ZecreyLegend.TransactOpts, _blocks, _proofs)
+// Solidity: function verifyAndExecuteBlocks(((uint32,uint64,bytes32,uint256,bytes32,bytes32),bytes[])[] _blocks, uint256[] _proofs) returns()
+func (_ZecreyLegend *ZecreyLegendTransactorSession) VerifyAndExecuteBlocks(_blocks []OldZecreyLegendVerifyAndExecuteBlockInfo, _proofs []*big.Int) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.VerifyAndExecuteBlocks(&_ZecreyLegend.TransactOpts, _blocks, _proofs)
 }
 
 // WithdrawPendingBalance is a paid mutator transaction binding the contract method 0xd514da50.
@@ -1317,6 +1554,27 @@ func (_ZecreyLegend *ZecreyLegendSession) WithdrawPendingBalance(_owner common.A
 // Solidity: function withdrawPendingBalance(address _owner, address _token, uint128 _amount) returns()
 func (_ZecreyLegend *ZecreyLegendTransactorSession) WithdrawPendingBalance(_owner common.Address, _token common.Address, _amount *big.Int) (*types.Transaction, error) {
 	return _ZecreyLegend.Contract.WithdrawPendingBalance(&_ZecreyLegend.TransactOpts, _owner, _token, _amount)
+}
+
+// WithdrawPendingNFTBalance is a paid mutator transaction binding the contract method 0x7ce1017d.
+//
+// Solidity: function withdrawPendingNFTBalance(uint40 _nftIndex) returns()
+func (_ZecreyLegend *ZecreyLegendTransactor) WithdrawPendingNFTBalance(opts *bind.TransactOpts, _nftIndex *big.Int) (*types.Transaction, error) {
+	return _ZecreyLegend.contract.Transact(opts, "withdrawPendingNFTBalance", _nftIndex)
+}
+
+// WithdrawPendingNFTBalance is a paid mutator transaction binding the contract method 0x7ce1017d.
+//
+// Solidity: function withdrawPendingNFTBalance(uint40 _nftIndex) returns()
+func (_ZecreyLegend *ZecreyLegendSession) WithdrawPendingNFTBalance(_nftIndex *big.Int) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.WithdrawPendingNFTBalance(&_ZecreyLegend.TransactOpts, _nftIndex)
+}
+
+// WithdrawPendingNFTBalance is a paid mutator transaction binding the contract method 0x7ce1017d.
+//
+// Solidity: function withdrawPendingNFTBalance(uint40 _nftIndex) returns()
+func (_ZecreyLegend *ZecreyLegendTransactorSession) WithdrawPendingNFTBalance(_nftIndex *big.Int) (*types.Transaction, error) {
+	return _ZecreyLegend.Contract.WithdrawPendingNFTBalance(&_ZecreyLegend.TransactOpts, _nftIndex)
 }
 
 // ZecreyLegendBlockCommitIterator is returned from FilterBlockCommit and is used to iterate over the raw logs and unpacked data for BlockCommit events raised by the ZecreyLegend contract.
@@ -2233,15 +2491,16 @@ func (it *ZecreyLegendDepositNftIterator) Close() error {
 // ZecreyLegendDepositNft represents a DepositNft event raised by the ZecreyLegend contract.
 type ZecreyLegendDepositNft struct {
 	AccountNameHash     [32]byte
+	NftContentHash      [32]byte
 	TokenAddress        common.Address
 	NftTokenId          *big.Int
 	CreatorTreasuryRate uint16
 	Raw                 types.Log // Blockchain specific contextual infos
 }
 
-// FilterDepositNft is a free log retrieval operation binding the contract event 0x5e7ed95c5de0831db760fa0f4bddf5b3752edc7b22814e7cfaceddf7fb9f9ed6.
+// FilterDepositNft is a free log retrieval operation binding the contract event 0x42f9fbd77faf066fde386943aaafcc841fba6b755dc5da7939a046cbc493c24f.
 //
-// Solidity: event DepositNft(bytes32 accountNameHash, address tokenAddress, uint256 nftTokenId, uint16 creatorTreasuryRate)
+// Solidity: event DepositNft(bytes32 accountNameHash, bytes32 nftContentHash, address tokenAddress, uint256 nftTokenId, uint16 creatorTreasuryRate)
 func (_ZecreyLegend *ZecreyLegendFilterer) FilterDepositNft(opts *bind.FilterOpts) (*ZecreyLegendDepositNftIterator, error) {
 
 	logs, sub, err := _ZecreyLegend.contract.FilterLogs(opts, "DepositNft")
@@ -2251,9 +2510,9 @@ func (_ZecreyLegend *ZecreyLegendFilterer) FilterDepositNft(opts *bind.FilterOpt
 	return &ZecreyLegendDepositNftIterator{contract: _ZecreyLegend.contract, event: "DepositNft", logs: logs, sub: sub}, nil
 }
 
-// WatchDepositNft is a free log subscription operation binding the contract event 0x5e7ed95c5de0831db760fa0f4bddf5b3752edc7b22814e7cfaceddf7fb9f9ed6.
+// WatchDepositNft is a free log subscription operation binding the contract event 0x42f9fbd77faf066fde386943aaafcc841fba6b755dc5da7939a046cbc493c24f.
 //
-// Solidity: event DepositNft(bytes32 accountNameHash, address tokenAddress, uint256 nftTokenId, uint16 creatorTreasuryRate)
+// Solidity: event DepositNft(bytes32 accountNameHash, bytes32 nftContentHash, address tokenAddress, uint256 nftTokenId, uint16 creatorTreasuryRate)
 func (_ZecreyLegend *ZecreyLegendFilterer) WatchDepositNft(opts *bind.WatchOpts, sink chan<- *ZecreyLegendDepositNft) (event.Subscription, error) {
 
 	logs, sub, err := _ZecreyLegend.contract.WatchLogs(opts, "DepositNft")
@@ -2288,9 +2547,9 @@ func (_ZecreyLegend *ZecreyLegendFilterer) WatchDepositNft(opts *bind.WatchOpts,
 	}), nil
 }
 
-// ParseDepositNft is a log parse operation binding the contract event 0x5e7ed95c5de0831db760fa0f4bddf5b3752edc7b22814e7cfaceddf7fb9f9ed6.
+// ParseDepositNft is a log parse operation binding the contract event 0x42f9fbd77faf066fde386943aaafcc841fba6b755dc5da7939a046cbc493c24f.
 //
-// Solidity: event DepositNft(bytes32 accountNameHash, address tokenAddress, uint256 nftTokenId, uint16 creatorTreasuryRate)
+// Solidity: event DepositNft(bytes32 accountNameHash, bytes32 nftContentHash, address tokenAddress, uint256 nftTokenId, uint16 creatorTreasuryRate)
 func (_ZecreyLegend *ZecreyLegendFilterer) ParseDepositNft(log types.Log) (*ZecreyLegendDepositNft, error) {
 	event := new(ZecreyLegendDepositNft)
 	if err := _ZecreyLegend.contract.UnpackLog(event, "DepositNft", log); err != nil {
@@ -2593,6 +2852,296 @@ func (_ZecreyLegend *ZecreyLegendFilterer) WatchFullExitCommit(opts *bind.WatchO
 func (_ZecreyLegend *ZecreyLegendFilterer) ParseFullExitCommit(log types.Log) (*ZecreyLegendFullExitCommit, error) {
 	event := new(ZecreyLegendFullExitCommit)
 	if err := _ZecreyLegend.contract.UnpackLog(event, "FullExitCommit", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// ZecreyLegendNewDefaultNFTFactoryIterator is returned from FilterNewDefaultNFTFactory and is used to iterate over the raw logs and unpacked data for NewDefaultNFTFactory events raised by the ZecreyLegend contract.
+type ZecreyLegendNewDefaultNFTFactoryIterator struct {
+	Event *ZecreyLegendNewDefaultNFTFactory // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *ZecreyLegendNewDefaultNFTFactoryIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(ZecreyLegendNewDefaultNFTFactory)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(ZecreyLegendNewDefaultNFTFactory)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *ZecreyLegendNewDefaultNFTFactoryIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *ZecreyLegendNewDefaultNFTFactoryIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// ZecreyLegendNewDefaultNFTFactory represents a NewDefaultNFTFactory event raised by the ZecreyLegend contract.
+type ZecreyLegendNewDefaultNFTFactory struct {
+	Factory common.Address
+	Raw     types.Log // Blockchain specific contextual infos
+}
+
+// FilterNewDefaultNFTFactory is a free log retrieval operation binding the contract event 0xadf2ec6c092b7101c958de6b55caf4818f26a946e94fa556cbe3b3f29ff9f2ee.
+//
+// Solidity: event NewDefaultNFTFactory(address indexed factory)
+func (_ZecreyLegend *ZecreyLegendFilterer) FilterNewDefaultNFTFactory(opts *bind.FilterOpts, factory []common.Address) (*ZecreyLegendNewDefaultNFTFactoryIterator, error) {
+
+	var factoryRule []interface{}
+	for _, factoryItem := range factory {
+		factoryRule = append(factoryRule, factoryItem)
+	}
+
+	logs, sub, err := _ZecreyLegend.contract.FilterLogs(opts, "NewDefaultNFTFactory", factoryRule)
+	if err != nil {
+		return nil, err
+	}
+	return &ZecreyLegendNewDefaultNFTFactoryIterator{contract: _ZecreyLegend.contract, event: "NewDefaultNFTFactory", logs: logs, sub: sub}, nil
+}
+
+// WatchNewDefaultNFTFactory is a free log subscription operation binding the contract event 0xadf2ec6c092b7101c958de6b55caf4818f26a946e94fa556cbe3b3f29ff9f2ee.
+//
+// Solidity: event NewDefaultNFTFactory(address indexed factory)
+func (_ZecreyLegend *ZecreyLegendFilterer) WatchNewDefaultNFTFactory(opts *bind.WatchOpts, sink chan<- *ZecreyLegendNewDefaultNFTFactory, factory []common.Address) (event.Subscription, error) {
+
+	var factoryRule []interface{}
+	for _, factoryItem := range factory {
+		factoryRule = append(factoryRule, factoryItem)
+	}
+
+	logs, sub, err := _ZecreyLegend.contract.WatchLogs(opts, "NewDefaultNFTFactory", factoryRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(ZecreyLegendNewDefaultNFTFactory)
+				if err := _ZecreyLegend.contract.UnpackLog(event, "NewDefaultNFTFactory", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseNewDefaultNFTFactory is a log parse operation binding the contract event 0xadf2ec6c092b7101c958de6b55caf4818f26a946e94fa556cbe3b3f29ff9f2ee.
+//
+// Solidity: event NewDefaultNFTFactory(address indexed factory)
+func (_ZecreyLegend *ZecreyLegendFilterer) ParseNewDefaultNFTFactory(log types.Log) (*ZecreyLegendNewDefaultNFTFactory, error) {
+	event := new(ZecreyLegendNewDefaultNFTFactory)
+	if err := _ZecreyLegend.contract.UnpackLog(event, "NewDefaultNFTFactory", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// ZecreyLegendNewNFTFactoryIterator is returned from FilterNewNFTFactory and is used to iterate over the raw logs and unpacked data for NewNFTFactory events raised by the ZecreyLegend contract.
+type ZecreyLegendNewNFTFactoryIterator struct {
+	Event *ZecreyLegendNewNFTFactory // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *ZecreyLegendNewNFTFactoryIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(ZecreyLegendNewNFTFactory)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(ZecreyLegendNewNFTFactory)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *ZecreyLegendNewNFTFactoryIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *ZecreyLegendNewNFTFactoryIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// ZecreyLegendNewNFTFactory represents a NewNFTFactory event raised by the ZecreyLegend contract.
+type ZecreyLegendNewNFTFactory struct {
+	CreatorAccountNameHash [32]byte
+	CollectionId           uint32
+	FactoryAddress         common.Address
+	Raw                    types.Log // Blockchain specific contextual infos
+}
+
+// FilterNewNFTFactory is a free log retrieval operation binding the contract event 0xaa31b08b26b4240f7d2837e3fb6359824b509a4e4c5a5766af80f63c319add7e.
+//
+// Solidity: event NewNFTFactory(bytes32 indexed _creatorAccountNameHash, uint32 _collectionId, address _factoryAddress)
+func (_ZecreyLegend *ZecreyLegendFilterer) FilterNewNFTFactory(opts *bind.FilterOpts, _creatorAccountNameHash [][32]byte) (*ZecreyLegendNewNFTFactoryIterator, error) {
+
+	var _creatorAccountNameHashRule []interface{}
+	for _, _creatorAccountNameHashItem := range _creatorAccountNameHash {
+		_creatorAccountNameHashRule = append(_creatorAccountNameHashRule, _creatorAccountNameHashItem)
+	}
+
+	logs, sub, err := _ZecreyLegend.contract.FilterLogs(opts, "NewNFTFactory", _creatorAccountNameHashRule)
+	if err != nil {
+		return nil, err
+	}
+	return &ZecreyLegendNewNFTFactoryIterator{contract: _ZecreyLegend.contract, event: "NewNFTFactory", logs: logs, sub: sub}, nil
+}
+
+// WatchNewNFTFactory is a free log subscription operation binding the contract event 0xaa31b08b26b4240f7d2837e3fb6359824b509a4e4c5a5766af80f63c319add7e.
+//
+// Solidity: event NewNFTFactory(bytes32 indexed _creatorAccountNameHash, uint32 _collectionId, address _factoryAddress)
+func (_ZecreyLegend *ZecreyLegendFilterer) WatchNewNFTFactory(opts *bind.WatchOpts, sink chan<- *ZecreyLegendNewNFTFactory, _creatorAccountNameHash [][32]byte) (event.Subscription, error) {
+
+	var _creatorAccountNameHashRule []interface{}
+	for _, _creatorAccountNameHashItem := range _creatorAccountNameHash {
+		_creatorAccountNameHashRule = append(_creatorAccountNameHashRule, _creatorAccountNameHashItem)
+	}
+
+	logs, sub, err := _ZecreyLegend.contract.WatchLogs(opts, "NewNFTFactory", _creatorAccountNameHashRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(ZecreyLegendNewNFTFactory)
+				if err := _ZecreyLegend.contract.UnpackLog(event, "NewNFTFactory", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseNewNFTFactory is a log parse operation binding the contract event 0xaa31b08b26b4240f7d2837e3fb6359824b509a4e4c5a5766af80f63c319add7e.
+//
+// Solidity: event NewNFTFactory(bytes32 indexed _creatorAccountNameHash, uint32 _collectionId, address _factoryAddress)
+func (_ZecreyLegend *ZecreyLegendFilterer) ParseNewNFTFactory(log types.Log) (*ZecreyLegendNewNFTFactory, error) {
+	event := new(ZecreyLegendNewNFTFactory)
+	if err := _ZecreyLegend.contract.UnpackLog(event, "NewNFTFactory", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
@@ -3214,17 +3763,16 @@ func (it *ZecreyLegendWithdrawNftIterator) Close() error {
 
 // ZecreyLegendWithdrawNft represents a WithdrawNft event raised by the ZecreyLegend contract.
 type ZecreyLegendWithdrawNft struct {
-	AccountNameHash [32]byte
-	TokenAddress    common.Address
-	ToAddress       common.Address
-	ProxyAddress    common.Address
-	NftTokenId      *big.Int
-	Raw             types.Log // Blockchain specific contextual infos
+	AccountIndex uint32
+	NftL1Address common.Address
+	ToAddress    common.Address
+	NftL1TokenId *big.Int
+	Raw          types.Log // Blockchain specific contextual infos
 }
 
-// FilterWithdrawNft is a free log retrieval operation binding the contract event 0x49f385f20711f01d7f0a1465c0fccbfeff7c753dda812cb3d7c9b6252f6cd543.
+// FilterWithdrawNft is a free log retrieval operation binding the contract event 0x001c1fcac2c66b39f6b0a825948e9f8892b2d4a17edc60aaf61ca474e08402ec.
 //
-// Solidity: event WithdrawNft(bytes32 accountNameHash, address tokenAddress, address toAddress, address proxyAddress, uint256 nftTokenId)
+// Solidity: event WithdrawNft(uint32 accountIndex, address nftL1Address, address toAddress, uint256 nftL1TokenId)
 func (_ZecreyLegend *ZecreyLegendFilterer) FilterWithdrawNft(opts *bind.FilterOpts) (*ZecreyLegendWithdrawNftIterator, error) {
 
 	logs, sub, err := _ZecreyLegend.contract.FilterLogs(opts, "WithdrawNft")
@@ -3234,9 +3782,9 @@ func (_ZecreyLegend *ZecreyLegendFilterer) FilterWithdrawNft(opts *bind.FilterOp
 	return &ZecreyLegendWithdrawNftIterator{contract: _ZecreyLegend.contract, event: "WithdrawNft", logs: logs, sub: sub}, nil
 }
 
-// WatchWithdrawNft is a free log subscription operation binding the contract event 0x49f385f20711f01d7f0a1465c0fccbfeff7c753dda812cb3d7c9b6252f6cd543.
+// WatchWithdrawNft is a free log subscription operation binding the contract event 0x001c1fcac2c66b39f6b0a825948e9f8892b2d4a17edc60aaf61ca474e08402ec.
 //
-// Solidity: event WithdrawNft(bytes32 accountNameHash, address tokenAddress, address toAddress, address proxyAddress, uint256 nftTokenId)
+// Solidity: event WithdrawNft(uint32 accountIndex, address nftL1Address, address toAddress, uint256 nftL1TokenId)
 func (_ZecreyLegend *ZecreyLegendFilterer) WatchWithdrawNft(opts *bind.WatchOpts, sink chan<- *ZecreyLegendWithdrawNft) (event.Subscription, error) {
 
 	logs, sub, err := _ZecreyLegend.contract.WatchLogs(opts, "WithdrawNft")
@@ -3271,9 +3819,9 @@ func (_ZecreyLegend *ZecreyLegendFilterer) WatchWithdrawNft(opts *bind.WatchOpts
 	}), nil
 }
 
-// ParseWithdrawNft is a log parse operation binding the contract event 0x49f385f20711f01d7f0a1465c0fccbfeff7c753dda812cb3d7c9b6252f6cd543.
+// ParseWithdrawNft is a log parse operation binding the contract event 0x001c1fcac2c66b39f6b0a825948e9f8892b2d4a17edc60aaf61ca474e08402ec.
 //
-// Solidity: event WithdrawNft(bytes32 accountNameHash, address tokenAddress, address toAddress, address proxyAddress, uint256 nftTokenId)
+// Solidity: event WithdrawNft(uint32 accountIndex, address nftL1Address, address toAddress, uint256 nftL1TokenId)
 func (_ZecreyLegend *ZecreyLegendFilterer) ParseWithdrawNft(log types.Log) (*ZecreyLegendWithdrawNft, error) {
 	event := new(ZecreyLegendWithdrawNft)
 	if err := _ZecreyLegend.contract.UnpackLog(event, "WithdrawNft", log); err != nil {
@@ -3418,9 +3966,9 @@ func (_ZecreyLegend *ZecreyLegendFilterer) ParseWithdrawal(log types.Log) (*Zecr
 	return event, nil
 }
 
-// ZecreyLegendWithdrawalPendingIterator is returned from FilterWithdrawalPending and is used to iterate over the raw logs and unpacked data for WithdrawalPending events raised by the ZecreyLegend contract.
-type ZecreyLegendWithdrawalPendingIterator struct {
-	Event *ZecreyLegendWithdrawalPending // Event containing the contract specifics and raw log
+// ZecreyLegendWithdrawalNFTPendingIterator is returned from FilterWithdrawalNFTPending and is used to iterate over the raw logs and unpacked data for WithdrawalNFTPending events raised by the ZecreyLegend contract.
+type ZecreyLegendWithdrawalNFTPendingIterator struct {
+	Event *ZecreyLegendWithdrawalNFTPending // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -3434,7 +3982,7 @@ type ZecreyLegendWithdrawalPendingIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *ZecreyLegendWithdrawalPendingIterator) Next() bool {
+func (it *ZecreyLegendWithdrawalNFTPendingIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -3443,7 +3991,7 @@ func (it *ZecreyLegendWithdrawalPendingIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(ZecreyLegendWithdrawalPending)
+			it.Event = new(ZecreyLegendWithdrawalNFTPending)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -3458,7 +4006,7 @@ func (it *ZecreyLegendWithdrawalPendingIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(ZecreyLegendWithdrawalPending)
+		it.Event = new(ZecreyLegendWithdrawalNFTPending)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -3474,42 +4022,51 @@ func (it *ZecreyLegendWithdrawalPendingIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *ZecreyLegendWithdrawalPendingIterator) Error() error {
+func (it *ZecreyLegendWithdrawalNFTPendingIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *ZecreyLegendWithdrawalPendingIterator) Close() error {
+func (it *ZecreyLegendWithdrawalNFTPendingIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// ZecreyLegendWithdrawalPending represents a WithdrawalPending event raised by the ZecreyLegend contract.
-type ZecreyLegendWithdrawalPending struct {
-	AssetId uint16
-	Amount  *big.Int
-	Raw     types.Log // Blockchain specific contextual infos
+// ZecreyLegendWithdrawalNFTPending represents a WithdrawalNFTPending event raised by the ZecreyLegend contract.
+type ZecreyLegendWithdrawalNFTPending struct {
+	NftIndex *big.Int
+	Raw      types.Log // Blockchain specific contextual infos
 }
 
-// FilterWithdrawalPending is a free log retrieval operation binding the contract event 0xd19cf67bbb6c320849f41b650b1179fb06a3f104451c75109c3b006a385c1688.
+// FilterWithdrawalNFTPending is a free log retrieval operation binding the contract event 0x71aea045e572384e5b53812f175c12adb074001c9c13d379730d15188d3729bc.
 //
-// Solidity: event WithdrawalPending(uint16 assetId, uint128 amount)
-func (_ZecreyLegend *ZecreyLegendFilterer) FilterWithdrawalPending(opts *bind.FilterOpts) (*ZecreyLegendWithdrawalPendingIterator, error) {
+// Solidity: event WithdrawalNFTPending(uint40 indexed nftIndex)
+func (_ZecreyLegend *ZecreyLegendFilterer) FilterWithdrawalNFTPending(opts *bind.FilterOpts, nftIndex []*big.Int) (*ZecreyLegendWithdrawalNFTPendingIterator, error) {
 
-	logs, sub, err := _ZecreyLegend.contract.FilterLogs(opts, "WithdrawalPending")
+	var nftIndexRule []interface{}
+	for _, nftIndexItem := range nftIndex {
+		nftIndexRule = append(nftIndexRule, nftIndexItem)
+	}
+
+	logs, sub, err := _ZecreyLegend.contract.FilterLogs(opts, "WithdrawalNFTPending", nftIndexRule)
 	if err != nil {
 		return nil, err
 	}
-	return &ZecreyLegendWithdrawalPendingIterator{contract: _ZecreyLegend.contract, event: "WithdrawalPending", logs: logs, sub: sub}, nil
+	return &ZecreyLegendWithdrawalNFTPendingIterator{contract: _ZecreyLegend.contract, event: "WithdrawalNFTPending", logs: logs, sub: sub}, nil
 }
 
-// WatchWithdrawalPending is a free log subscription operation binding the contract event 0xd19cf67bbb6c320849f41b650b1179fb06a3f104451c75109c3b006a385c1688.
+// WatchWithdrawalNFTPending is a free log subscription operation binding the contract event 0x71aea045e572384e5b53812f175c12adb074001c9c13d379730d15188d3729bc.
 //
-// Solidity: event WithdrawalPending(uint16 assetId, uint128 amount)
-func (_ZecreyLegend *ZecreyLegendFilterer) WatchWithdrawalPending(opts *bind.WatchOpts, sink chan<- *ZecreyLegendWithdrawalPending) (event.Subscription, error) {
+// Solidity: event WithdrawalNFTPending(uint40 indexed nftIndex)
+func (_ZecreyLegend *ZecreyLegendFilterer) WatchWithdrawalNFTPending(opts *bind.WatchOpts, sink chan<- *ZecreyLegendWithdrawalNFTPending, nftIndex []*big.Int) (event.Subscription, error) {
 
-	logs, sub, err := _ZecreyLegend.contract.WatchLogs(opts, "WithdrawalPending")
+	var nftIndexRule []interface{}
+	for _, nftIndexItem := range nftIndex {
+		nftIndexRule = append(nftIndexRule, nftIndexItem)
+	}
+
+	logs, sub, err := _ZecreyLegend.contract.WatchLogs(opts, "WithdrawalNFTPending", nftIndexRule)
 	if err != nil {
 		return nil, err
 	}
@@ -3519,8 +4076,8 @@ func (_ZecreyLegend *ZecreyLegendFilterer) WatchWithdrawalPending(opts *bind.Wat
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(ZecreyLegendWithdrawalPending)
-				if err := _ZecreyLegend.contract.UnpackLog(event, "WithdrawalPending", log); err != nil {
+				event := new(ZecreyLegendWithdrawalNFTPending)
+				if err := _ZecreyLegend.contract.UnpackLog(event, "WithdrawalNFTPending", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -3541,12 +4098,12 @@ func (_ZecreyLegend *ZecreyLegendFilterer) WatchWithdrawalPending(opts *bind.Wat
 	}), nil
 }
 
-// ParseWithdrawalPending is a log parse operation binding the contract event 0xd19cf67bbb6c320849f41b650b1179fb06a3f104451c75109c3b006a385c1688.
+// ParseWithdrawalNFTPending is a log parse operation binding the contract event 0x71aea045e572384e5b53812f175c12adb074001c9c13d379730d15188d3729bc.
 //
-// Solidity: event WithdrawalPending(uint16 assetId, uint128 amount)
-func (_ZecreyLegend *ZecreyLegendFilterer) ParseWithdrawalPending(log types.Log) (*ZecreyLegendWithdrawalPending, error) {
-	event := new(ZecreyLegendWithdrawalPending)
-	if err := _ZecreyLegend.contract.UnpackLog(event, "WithdrawalPending", log); err != nil {
+// Solidity: event WithdrawalNFTPending(uint40 indexed nftIndex)
+func (_ZecreyLegend *ZecreyLegendFilterer) ParseWithdrawalNFTPending(log types.Log) (*ZecreyLegendWithdrawalNFTPending, error) {
+	event := new(ZecreyLegendWithdrawalNFTPending)
+	if err := _ZecreyLegend.contract.UnpackLog(event, "WithdrawalNFTPending", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
