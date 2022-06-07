@@ -4,6 +4,7 @@
 package zecreyLegend
 
 import (
+	"errors"
 	"math/big"
 	"strings"
 
@@ -17,6 +18,7 @@ import (
 
 // Reference imports to suppress errors if they are not otherwise used.
 var (
+	_ = errors.New
 	_ = big.NewInt
 	_ = strings.NewReader
 	_ = ethereum.NotFound
@@ -26,25 +28,14 @@ var (
 	_ = event.NewSubscription
 )
 
-// GovernanceABI is the input ABI used to generate the binding from.
-const GovernanceABI = "[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"paused\",\"type\":\"bool\"}],\"name\":\"AssetPausedUpdate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"}],\"name\":\"NewAsset\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"contractAssetGovernance\",\"name\":\"newAssetGovernance\",\"type\":\"address\"}],\"name\":\"NewAssetGovernance\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newGovernor\",\"type\":\"address\"}],\"name\":\"NewGovernor\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"validatorAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"}],\"name\":\"ValidatorStatusUpdate\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"MAX_ACCOUNT_INDEX\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_AMOUNT_OF_REGISTERED_ASSETS\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_DEPOSIT_AMOUNT\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"\",\"type\":\"uint128\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_FUNGIBLE_ASSET_ID\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SECURITY_COUNCIL_MEMBERS_NUMBER\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SPECIAL_ACCOUNT_ADDRESS\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SPECIAL_ACCOUNT_ID\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"UPGRADE_NOTICE_PERIOD\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"WITHDRAWAL_GAS_LIMIT\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_asset\",\"type\":\"address\"}],\"name\":\"addAsset\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"name\":\"assetAddresses\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"assetGovernance\",\"outputs\":[{\"internalType\":\"contractAssetGovernance\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"assetsList\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractAssetGovernance\",\"name\":\"_newAssetGovernance\",\"type\":\"address\"}],\"name\":\"changeAssetGovernance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_newGovernor\",\"type\":\"address\"}],\"name\":\"changeGovernor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"initializationParameters\",\"type\":\"bytes\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"isAddressExists\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"networkGovernor\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"name\":\"pausedAssets\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"}],\"name\":\"requireActiveValidator\",\"outputs\":[],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"}],\"name\":\"requireGovernor\",\"outputs\":[],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_assetAddress\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"_assetPaused\",\"type\":\"bool\"}],\"name\":\"setAssetPaused\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_validator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"_active\",\"type\":\"bool\"}],\"name\":\"setValidator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalAssets\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"upgradeParameters\",\"type\":\"bytes\"}],\"name\":\"upgrade\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_assetAddr\",\"type\":\"address\"}],\"name\":\"validateAssetAddress\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"validators\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]"
-
-// GovernanceBin is the compiled bytecode used for deploying new contracts.
-var GovernanceBin = "0x608060405234801561001057600080fd5b50610c18806100206000396000f3fe608060405234801561001057600080fd5b50600436106101a95760003560e01c80634a51a71f116100f9578063d87e374811610097578063f39349ef11610071578063f39349ef14610517578063f5e7d6fd1461051f578063f5f84ed414610527578063fa52c7d81461054d576101a9565b8063d87e3748146104aa578063dbfc2967146104d0578063e4c0aaf4146104f1576101a9565b80637ea399c1116100d35780637ea399c1146104505780639bd7760914610474578063c701f9551461049a578063cc375fb7146104a2576101a9565b80634a51a71f146103e35780634b18bd0f146103fd5780634c34a98214610423576101a9565b806331d8687b11610166578063437545f911610140578063437545f91461033d578063437da02f1461033d578063439fab91146103455780634623c91d146103b5576101a9565b806331d8687b146102c1578063321e182b146102f65780634242d5b31461031c576101a9565b806301e1d114146101ae5780630d360b7f146101cd5780631e763ee3146101d55780632520ce5a146101fb578063253946451461022b578063298410e51461029b575b600080fd5b6101b6610573565b6040805161ffff9092168252519081900360200190f35b6101b6610584565b6101b6600480360360208110156101eb57600080fd5b50356001600160a01b031661058a565b6102296004803603604081101561021157600080fd5b506001600160a01b03813516906020013515156105a0565b005b6102296004803603602081101561024157600080fd5b81019060208101813564010000000081111561025c57600080fd5b82018360208201111561026e57600080fd5b8035906020019184600183028401116401000000008311171561029057600080fd5b5090925090506106af565b610229600480360360208110156102b157600080fd5b50356001600160a01b03166106b3565b6102e2600480360360208110156102d757600080fd5b503561ffff1661082f565b604080519115158252519081900360200190f35b6102e26004803603602081101561030c57600080fd5b50356001600160a01b0316610844565b610324610859565b6040805163ffffffff9092168252519081900360200190f35b61032461085e565b6102296004803603602081101561035b57600080fd5b81019060208101813564010000000081111561037657600080fd5b82018360208201111561038857600080fd5b803590602001918460018302840111640100000000831117156103aa57600080fd5b509092509050610866565b610229600480360360408110156103cb57600080fd5b506001600160a01b038135169060200135151561089f565b6103eb61092e565b60408051918252519081900360200190f35b6102296004803603602081101561041357600080fd5b50356001600160a01b0316610933565b61042b610997565b604080516fffffffffffffffffffffffffffffffff9092168252519081900360200190f35b6104586109a8565b604080516001600160a01b039092168252519081900360200190f35b6101b66004803603602081101561048a57600080fd5b50356001600160a01b03166109b3565b6103eb610a5b565b6103eb610a62565b610229600480360360208110156104c057600080fd5b50356001600160a01b0316610a69565b610458600480360360208110156104e657600080fd5b503561ffff16610adb565b6102296004803603602081101561050757600080fd5b50356001600160a01b0316610af6565b610458610b68565b610458610b77565b6102296004803603602081101561053d57600080fd5b50356001600160a01b0316610b86565b6102e26004803603602081101561056357600080fd5b50356001600160a01b0316610bcd565b600054600160a01b900461ffff1681565b61ffff81565b60036020526000908152604090205461ffff1681565b6105a933610b86565b6000306001600160a01b0316639bd77609846040518263ffffffff1660e01b815260040180826001600160a01b0316815260200191505060206040518083038186803b1580156105f857600080fd5b505afa15801561060c573d6000803e3d6000fd5b505050506040513d602081101561062257600080fd5b505161ffff811660009081526002602052604090205490915060ff161515821515146106aa5761ffff8116600090815260026020908152604091829020805460ff1916851515908117909155825190815291516001600160a01b038616927ff7ca5545623b85829d3abcb6729eb021070bbe93cba64f5c4de6b17b805b7d0292908290030190a25b505050565b5050565b6006546001600160a01b031633146106f7576040805162461bcd60e51b8152602060048201526002602482015261314560f01b604482015290519081900360640190fd5b6001600160a01b03811660009081526003602052604090205461ffff161561074b576040805162461bcd60e51b8152602060048201526002602482015261316560f01b604482015290519081900360640190fd5b60005461ffff600160a01b909104811610610792576040805162461bcd60e51b815260206004820152600260248201526118b360f11b604482015290519081900360640190fd5b60008054600161ffff600160a01b8084048216929092018116820261ffff60a01b1990931692909217808455041680825260046020908152604080842080546001600160a01b0387166001600160a01b031990911681179091558085526003909252808420805461ffff19168417905551919283927f990c18cf226b253448a6a051b5cadf51a61f4ca56703374cdd8bf9df04b2f9019190a35050565b60026020526000908152604090205460ff1681565b60056020526000908152604090205460ff1681565b600081565b63ffffffff81565b60008282602081101561087857600080fd5b506000805491356001600160a01b03166001600160a01b0319909216919091179055505050565b6108a833610b86565b6001600160a01b03821660009081526001602052604090205460ff161515811515146106af576001600160a01b038216600081815260016020908152604091829020805460ff1916851515908117909155825190815291517f065b77b53864e46fda3d8986acb51696223d6dde7ced42441eb150bae6d481369281900390910190a25050565b600381565b6001600160a01b03811660009081526001602052604090205460ff16610994576040805162461bcd60e51b815260206004820152601160248201527034b73b30b634b2103b30b634b230ba37b960791b604482015290519081900360640190fd5b50565b6cffffffffffffffffffffffffff81565b6001600160a01b0381565b6001600160a01b03811660009081526003602052604081205461ffff1680610a07576040805162461bcd60e51b8152602060048201526002602482015261316960f01b604482015290519081900360640190fd5b61ffff811660009081526002602052604090205460ff1615610a55576040805162461bcd60e51b8152602060048201526002602482015261326960f01b604482015290519081900360640190fd5b92915050565b620186a081565b6224ea0081565b610a7233610b86565b6006546001600160a01b0382811691161461099457600680546001600160a01b0383166001600160a01b0319909116811790915560408051918252517fc7708091594580aae77e08cb1e2e3b9d2bd0cab0d2d95797248dd95f02d7299e9181900360200190a150565b6004602052600090815260409020546001600160a01b031681565b610aff33610b86565b6000546001600160a01b0382811691161461099457600080546001600160a01b0383166001600160a01b0319909116811790915560408051918252517f5425363a03f182281120f5919107c49c7a1a623acc1cbc6df468b6f0c11fcf8c9181900360200190a150565b6000546001600160a01b031681565b6006546001600160a01b031681565b6000546001600160a01b03828116911614610994576040805162461bcd60e51b8152602060048201526002602482015261316760f01b604482015290519081900360640190fd5b60016020526000908152604090205460ff168156fea2646970667358221220bb4641da870d05b1551de19e59342231b862f7dbad93d6c235c1f08abe1dfbdc64736f6c63430007060033"
-
-// DeployGovernance deploys a new Ethereum contract, binding an instance of Governance to it.
-func DeployGovernance(auth *bind.TransactOpts, backend bind.ContractBackend) (common.Address, *types.Transaction, *Governance, error) {
-	parsed, err := abi.JSON(strings.NewReader(GovernanceABI))
-	if err != nil {
-		return common.Address{}, nil, nil, err
-	}
-
-	address, tx, contract, err := bind.DeployContract(auth, parsed, common.FromHex(GovernanceBin), backend)
-	if err != nil {
-		return common.Address{}, nil, nil, err
-	}
-	return address, tx, &Governance{GovernanceCaller: GovernanceCaller{contract: contract}, GovernanceTransactor: GovernanceTransactor{contract: contract}, GovernanceFilterer: GovernanceFilterer{contract: contract}}, nil
+// GovernanceMetaData contains all meta data concerning the Governance contract.
+var GovernanceMetaData = &bind.MetaData{
+	ABI: "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"paused\",\"type\":\"bool\"}],\"name\":\"AssetPausedUpdate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"}],\"name\":\"NewAsset\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"contractAssetGovernance\",\"name\":\"newAssetGovernance\",\"type\":\"address\"}],\"name\":\"NewAssetGovernance\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newGovernor\",\"type\":\"address\"}],\"name\":\"NewGovernor\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"validatorAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"}],\"name\":\"ValidatorStatusUpdate\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"MAX_ACCOUNT_INDEX\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_AMOUNT_OF_REGISTERED_ASSETS\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_DEPOSIT_AMOUNT\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"\",\"type\":\"uint128\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_FUNGIBLE_ASSET_ID\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_NFT_INDEX\",\"outputs\":[{\"internalType\":\"uint40\",\"name\":\"\",\"type\":\"uint40\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SECURITY_COUNCIL_MEMBERS_NUMBER\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SHORTEST_UPGRADE_NOTICE_PERIOD\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SPECIAL_ACCOUNT_ADDRESS\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SPECIAL_ACCOUNT_ID\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"TX_SIZE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"UPGRADE_NOTICE_PERIOD\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"WITHDRAWAL_GAS_LIMIT\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_asset\",\"type\":\"address\"}],\"name\":\"addAsset\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"name\":\"assetAddresses\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"assetGovernance\",\"outputs\":[{\"internalType\":\"contractAssetGovernance\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"assetsList\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractAssetGovernance\",\"name\":\"_newAssetGovernance\",\"type\":\"address\"}],\"name\":\"changeAssetGovernance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_newGovernor\",\"type\":\"address\"}],\"name\":\"changeGovernor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"initializationParameters\",\"type\":\"bytes\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"isAddressExists\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"networkGovernor\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"name\":\"pausedAssets\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"}],\"name\":\"requireActiveValidator\",\"outputs\":[],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"}],\"name\":\"requireGovernor\",\"outputs\":[],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_assetAddress\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"_assetPaused\",\"type\":\"bool\"}],\"name\":\"setAssetPaused\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_validator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"_active\",\"type\":\"bool\"}],\"name\":\"setValidator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalAssets\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"upgradeParameters\",\"type\":\"bytes\"}],\"name\":\"upgrade\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_assetAddr\",\"type\":\"address\"}],\"name\":\"validateAssetAddress\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"}],\"name\":\"validateAssetTokenLister\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"validators\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
 }
+
+// GovernanceABI is the input ABI used to generate the binding from.
+// Deprecated: Use GovernanceMetaData.ABI instead.
+var GovernanceABI = GovernanceMetaData.ABI
 
 // Governance is an auto generated Go binding around an Ethereum contract.
 type Governance struct {
@@ -312,6 +303,37 @@ func (_Governance *GovernanceCallerSession) MAXFUNGIBLEASSETID() (uint32, error)
 	return _Governance.Contract.MAXFUNGIBLEASSETID(&_Governance.CallOpts)
 }
 
+// MAXNFTINDEX is a free data retrieval call binding the contract method 0x14791ad2.
+//
+// Solidity: function MAX_NFT_INDEX() view returns(uint40)
+func (_Governance *GovernanceCaller) MAXNFTINDEX(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _Governance.contract.Call(opts, &out, "MAX_NFT_INDEX")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// MAXNFTINDEX is a free data retrieval call binding the contract method 0x14791ad2.
+//
+// Solidity: function MAX_NFT_INDEX() view returns(uint40)
+func (_Governance *GovernanceSession) MAXNFTINDEX() (*big.Int, error) {
+	return _Governance.Contract.MAXNFTINDEX(&_Governance.CallOpts)
+}
+
+// MAXNFTINDEX is a free data retrieval call binding the contract method 0x14791ad2.
+//
+// Solidity: function MAX_NFT_INDEX() view returns(uint40)
+func (_Governance *GovernanceCallerSession) MAXNFTINDEX() (*big.Int, error) {
+	return _Governance.Contract.MAXNFTINDEX(&_Governance.CallOpts)
+}
+
 // SECURITYCOUNCILMEMBERSNUMBER is a free data retrieval call binding the contract method 0x4a51a71f.
 //
 // Solidity: function SECURITY_COUNCIL_MEMBERS_NUMBER() view returns(uint256)
@@ -341,6 +363,37 @@ func (_Governance *GovernanceSession) SECURITYCOUNCILMEMBERSNUMBER() (*big.Int, 
 // Solidity: function SECURITY_COUNCIL_MEMBERS_NUMBER() view returns(uint256)
 func (_Governance *GovernanceCallerSession) SECURITYCOUNCILMEMBERSNUMBER() (*big.Int, error) {
 	return _Governance.Contract.SECURITYCOUNCILMEMBERSNUMBER(&_Governance.CallOpts)
+}
+
+// SHORTESTUPGRADENOTICEPERIOD is a free data retrieval call binding the contract method 0x85053581.
+//
+// Solidity: function SHORTEST_UPGRADE_NOTICE_PERIOD() view returns(uint256)
+func (_Governance *GovernanceCaller) SHORTESTUPGRADENOTICEPERIOD(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _Governance.contract.Call(opts, &out, "SHORTEST_UPGRADE_NOTICE_PERIOD")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// SHORTESTUPGRADENOTICEPERIOD is a free data retrieval call binding the contract method 0x85053581.
+//
+// Solidity: function SHORTEST_UPGRADE_NOTICE_PERIOD() view returns(uint256)
+func (_Governance *GovernanceSession) SHORTESTUPGRADENOTICEPERIOD() (*big.Int, error) {
+	return _Governance.Contract.SHORTESTUPGRADENOTICEPERIOD(&_Governance.CallOpts)
+}
+
+// SHORTESTUPGRADENOTICEPERIOD is a free data retrieval call binding the contract method 0x85053581.
+//
+// Solidity: function SHORTEST_UPGRADE_NOTICE_PERIOD() view returns(uint256)
+func (_Governance *GovernanceCallerSession) SHORTESTUPGRADENOTICEPERIOD() (*big.Int, error) {
+	return _Governance.Contract.SHORTESTUPGRADENOTICEPERIOD(&_Governance.CallOpts)
 }
 
 // SPECIALACCOUNTADDRESS is a free data retrieval call binding the contract method 0x7ea399c1.
@@ -403,6 +456,37 @@ func (_Governance *GovernanceSession) SPECIALACCOUNTID() (uint32, error) {
 // Solidity: function SPECIAL_ACCOUNT_ID() view returns(uint32)
 func (_Governance *GovernanceCallerSession) SPECIALACCOUNTID() (uint32, error) {
 	return _Governance.Contract.SPECIALACCOUNTID(&_Governance.CallOpts)
+}
+
+// TXSIZE is a free data retrieval call binding the contract method 0xe6e3c012.
+//
+// Solidity: function TX_SIZE() view returns(uint256)
+func (_Governance *GovernanceCaller) TXSIZE(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _Governance.contract.Call(opts, &out, "TX_SIZE")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// TXSIZE is a free data retrieval call binding the contract method 0xe6e3c012.
+//
+// Solidity: function TX_SIZE() view returns(uint256)
+func (_Governance *GovernanceSession) TXSIZE() (*big.Int, error) {
+	return _Governance.Contract.TXSIZE(&_Governance.CallOpts)
+}
+
+// TXSIZE is a free data retrieval call binding the contract method 0xe6e3c012.
+//
+// Solidity: function TX_SIZE() view returns(uint256)
+func (_Governance *GovernanceCallerSession) TXSIZE() (*big.Int, error) {
+	return _Governance.Contract.TXSIZE(&_Governance.CallOpts)
 }
 
 // UPGRADENOTICEPERIOD is a free data retrieval call binding the contract method 0xcc375fb7.
@@ -951,6 +1035,27 @@ func (_Governance *GovernanceTransactorSession) Upgrade(upgradeParameters []byte
 	return _Governance.Contract.Upgrade(&_Governance.TransactOpts, upgradeParameters)
 }
 
+// ValidateAssetTokenLister is a paid mutator transaction binding the contract method 0xc2001b38.
+//
+// Solidity: function validateAssetTokenLister(address _address) returns()
+func (_Governance *GovernanceTransactor) ValidateAssetTokenLister(opts *bind.TransactOpts, _address common.Address) (*types.Transaction, error) {
+	return _Governance.contract.Transact(opts, "validateAssetTokenLister", _address)
+}
+
+// ValidateAssetTokenLister is a paid mutator transaction binding the contract method 0xc2001b38.
+//
+// Solidity: function validateAssetTokenLister(address _address) returns()
+func (_Governance *GovernanceSession) ValidateAssetTokenLister(_address common.Address) (*types.Transaction, error) {
+	return _Governance.Contract.ValidateAssetTokenLister(&_Governance.TransactOpts, _address)
+}
+
+// ValidateAssetTokenLister is a paid mutator transaction binding the contract method 0xc2001b38.
+//
+// Solidity: function validateAssetTokenLister(address _address) returns()
+func (_Governance *GovernanceTransactorSession) ValidateAssetTokenLister(_address common.Address) (*types.Transaction, error) {
+	return _Governance.Contract.ValidateAssetTokenLister(&_Governance.TransactOpts, _address)
+}
+
 // GovernanceAssetPausedUpdateIterator is returned from FilterAssetPausedUpdate and is used to iterate over the raw logs and unpacked data for AssetPausedUpdate events raised by the Governance contract.
 type GovernanceAssetPausedUpdateIterator struct {
 	Event *GovernanceAssetPausedUpdate // Event containing the contract specifics and raw log
@@ -1027,15 +1132,10 @@ type GovernanceAssetPausedUpdate struct {
 
 // FilterAssetPausedUpdate is a free log retrieval operation binding the contract event 0xf7ca5545623b85829d3abcb6729eb021070bbe93cba64f5c4de6b17b805b7d02.
 //
-// Solidity: event AssetPausedUpdate(address indexed token, bool paused)
-func (_Governance *GovernanceFilterer) FilterAssetPausedUpdate(opts *bind.FilterOpts, token []common.Address) (*GovernanceAssetPausedUpdateIterator, error) {
+// Solidity: event AssetPausedUpdate(address token, bool paused)
+func (_Governance *GovernanceFilterer) FilterAssetPausedUpdate(opts *bind.FilterOpts) (*GovernanceAssetPausedUpdateIterator, error) {
 
-	var tokenRule []interface{}
-	for _, tokenItem := range token {
-		tokenRule = append(tokenRule, tokenItem)
-	}
-
-	logs, sub, err := _Governance.contract.FilterLogs(opts, "AssetPausedUpdate", tokenRule)
+	logs, sub, err := _Governance.contract.FilterLogs(opts, "AssetPausedUpdate")
 	if err != nil {
 		return nil, err
 	}
@@ -1044,15 +1144,10 @@ func (_Governance *GovernanceFilterer) FilterAssetPausedUpdate(opts *bind.Filter
 
 // WatchAssetPausedUpdate is a free log subscription operation binding the contract event 0xf7ca5545623b85829d3abcb6729eb021070bbe93cba64f5c4de6b17b805b7d02.
 //
-// Solidity: event AssetPausedUpdate(address indexed token, bool paused)
-func (_Governance *GovernanceFilterer) WatchAssetPausedUpdate(opts *bind.WatchOpts, sink chan<- *GovernanceAssetPausedUpdate, token []common.Address) (event.Subscription, error) {
+// Solidity: event AssetPausedUpdate(address token, bool paused)
+func (_Governance *GovernanceFilterer) WatchAssetPausedUpdate(opts *bind.WatchOpts, sink chan<- *GovernanceAssetPausedUpdate) (event.Subscription, error) {
 
-	var tokenRule []interface{}
-	for _, tokenItem := range token {
-		tokenRule = append(tokenRule, tokenItem)
-	}
-
-	logs, sub, err := _Governance.contract.WatchLogs(opts, "AssetPausedUpdate", tokenRule)
+	logs, sub, err := _Governance.contract.WatchLogs(opts, "AssetPausedUpdate")
 	if err != nil {
 		return nil, err
 	}
@@ -1086,7 +1181,7 @@ func (_Governance *GovernanceFilterer) WatchAssetPausedUpdate(opts *bind.WatchOp
 
 // ParseAssetPausedUpdate is a log parse operation binding the contract event 0xf7ca5545623b85829d3abcb6729eb021070bbe93cba64f5c4de6b17b805b7d02.
 //
-// Solidity: event AssetPausedUpdate(address indexed token, bool paused)
+// Solidity: event AssetPausedUpdate(address token, bool paused)
 func (_Governance *GovernanceFilterer) ParseAssetPausedUpdate(log types.Log) (*GovernanceAssetPausedUpdate, error) {
 	event := new(GovernanceAssetPausedUpdate)
 	if err := _Governance.contract.UnpackLog(event, "AssetPausedUpdate", log); err != nil {
@@ -1172,19 +1267,10 @@ type GovernanceNewAsset struct {
 
 // FilterNewAsset is a free log retrieval operation binding the contract event 0x990c18cf226b253448a6a051b5cadf51a61f4ca56703374cdd8bf9df04b2f901.
 //
-// Solidity: event NewAsset(address indexed assetAddress, uint16 indexed assetId)
-func (_Governance *GovernanceFilterer) FilterNewAsset(opts *bind.FilterOpts, assetAddress []common.Address, assetId []uint16) (*GovernanceNewAssetIterator, error) {
+// Solidity: event NewAsset(address assetAddress, uint16 assetId)
+func (_Governance *GovernanceFilterer) FilterNewAsset(opts *bind.FilterOpts) (*GovernanceNewAssetIterator, error) {
 
-	var assetAddressRule []interface{}
-	for _, assetAddressItem := range assetAddress {
-		assetAddressRule = append(assetAddressRule, assetAddressItem)
-	}
-	var assetIdRule []interface{}
-	for _, assetIdItem := range assetId {
-		assetIdRule = append(assetIdRule, assetIdItem)
-	}
-
-	logs, sub, err := _Governance.contract.FilterLogs(opts, "NewAsset", assetAddressRule, assetIdRule)
+	logs, sub, err := _Governance.contract.FilterLogs(opts, "NewAsset")
 	if err != nil {
 		return nil, err
 	}
@@ -1193,19 +1279,10 @@ func (_Governance *GovernanceFilterer) FilterNewAsset(opts *bind.FilterOpts, ass
 
 // WatchNewAsset is a free log subscription operation binding the contract event 0x990c18cf226b253448a6a051b5cadf51a61f4ca56703374cdd8bf9df04b2f901.
 //
-// Solidity: event NewAsset(address indexed assetAddress, uint16 indexed assetId)
-func (_Governance *GovernanceFilterer) WatchNewAsset(opts *bind.WatchOpts, sink chan<- *GovernanceNewAsset, assetAddress []common.Address, assetId []uint16) (event.Subscription, error) {
+// Solidity: event NewAsset(address assetAddress, uint16 assetId)
+func (_Governance *GovernanceFilterer) WatchNewAsset(opts *bind.WatchOpts, sink chan<- *GovernanceNewAsset) (event.Subscription, error) {
 
-	var assetAddressRule []interface{}
-	for _, assetAddressItem := range assetAddress {
-		assetAddressRule = append(assetAddressRule, assetAddressItem)
-	}
-	var assetIdRule []interface{}
-	for _, assetIdItem := range assetId {
-		assetIdRule = append(assetIdRule, assetIdItem)
-	}
-
-	logs, sub, err := _Governance.contract.WatchLogs(opts, "NewAsset", assetAddressRule, assetIdRule)
+	logs, sub, err := _Governance.contract.WatchLogs(opts, "NewAsset")
 	if err != nil {
 		return nil, err
 	}
@@ -1239,7 +1316,7 @@ func (_Governance *GovernanceFilterer) WatchNewAsset(opts *bind.WatchOpts, sink 
 
 // ParseNewAsset is a log parse operation binding the contract event 0x990c18cf226b253448a6a051b5cadf51a61f4ca56703374cdd8bf9df04b2f901.
 //
-// Solidity: event NewAsset(address indexed assetAddress, uint16 indexed assetId)
+// Solidity: event NewAsset(address assetAddress, uint16 assetId)
 func (_Governance *GovernanceFilterer) ParseNewAsset(log types.Log) (*GovernanceNewAsset, error) {
 	event := new(GovernanceNewAsset)
 	if err := _Governance.contract.UnpackLog(event, "NewAsset", log); err != nil {
@@ -1593,15 +1670,10 @@ type GovernanceValidatorStatusUpdate struct {
 
 // FilterValidatorStatusUpdate is a free log retrieval operation binding the contract event 0x065b77b53864e46fda3d8986acb51696223d6dde7ced42441eb150bae6d48136.
 //
-// Solidity: event ValidatorStatusUpdate(address indexed validatorAddress, bool isActive)
-func (_Governance *GovernanceFilterer) FilterValidatorStatusUpdate(opts *bind.FilterOpts, validatorAddress []common.Address) (*GovernanceValidatorStatusUpdateIterator, error) {
+// Solidity: event ValidatorStatusUpdate(address validatorAddress, bool isActive)
+func (_Governance *GovernanceFilterer) FilterValidatorStatusUpdate(opts *bind.FilterOpts) (*GovernanceValidatorStatusUpdateIterator, error) {
 
-	var validatorAddressRule []interface{}
-	for _, validatorAddressItem := range validatorAddress {
-		validatorAddressRule = append(validatorAddressRule, validatorAddressItem)
-	}
-
-	logs, sub, err := _Governance.contract.FilterLogs(opts, "ValidatorStatusUpdate", validatorAddressRule)
+	logs, sub, err := _Governance.contract.FilterLogs(opts, "ValidatorStatusUpdate")
 	if err != nil {
 		return nil, err
 	}
@@ -1610,15 +1682,10 @@ func (_Governance *GovernanceFilterer) FilterValidatorStatusUpdate(opts *bind.Fi
 
 // WatchValidatorStatusUpdate is a free log subscription operation binding the contract event 0x065b77b53864e46fda3d8986acb51696223d6dde7ced42441eb150bae6d48136.
 //
-// Solidity: event ValidatorStatusUpdate(address indexed validatorAddress, bool isActive)
-func (_Governance *GovernanceFilterer) WatchValidatorStatusUpdate(opts *bind.WatchOpts, sink chan<- *GovernanceValidatorStatusUpdate, validatorAddress []common.Address) (event.Subscription, error) {
+// Solidity: event ValidatorStatusUpdate(address validatorAddress, bool isActive)
+func (_Governance *GovernanceFilterer) WatchValidatorStatusUpdate(opts *bind.WatchOpts, sink chan<- *GovernanceValidatorStatusUpdate) (event.Subscription, error) {
 
-	var validatorAddressRule []interface{}
-	for _, validatorAddressItem := range validatorAddress {
-		validatorAddressRule = append(validatorAddressRule, validatorAddressItem)
-	}
-
-	logs, sub, err := _Governance.contract.WatchLogs(opts, "ValidatorStatusUpdate", validatorAddressRule)
+	logs, sub, err := _Governance.contract.WatchLogs(opts, "ValidatorStatusUpdate")
 	if err != nil {
 		return nil, err
 	}
@@ -1652,7 +1719,7 @@ func (_Governance *GovernanceFilterer) WatchValidatorStatusUpdate(opts *bind.Wat
 
 // ParseValidatorStatusUpdate is a log parse operation binding the contract event 0x065b77b53864e46fda3d8986acb51696223d6dde7ced42441eb150bae6d48136.
 //
-// Solidity: event ValidatorStatusUpdate(address indexed validatorAddress, bool isActive)
+// Solidity: event ValidatorStatusUpdate(address validatorAddress, bool isActive)
 func (_Governance *GovernanceFilterer) ParseValidatorStatusUpdate(log types.Log) (*GovernanceValidatorStatusUpdate, error) {
 	event := new(GovernanceValidatorStatusUpdate)
 	if err := _Governance.contract.UnpackLog(event, "ValidatorStatusUpdate", log); err != nil {
