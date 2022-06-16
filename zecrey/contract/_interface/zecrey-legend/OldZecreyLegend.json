@@ -341,8 +341,20 @@
       {
         "indexed": false,
         "internalType": "bytes32",
-        "name": "zecreyPubKey",
+        "name": "zecreyPubKeyX",
         "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "zecreyPubKeyY",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "accountIndex",
+        "type": "uint32"
       }
     ],
     "name": "RegisterZNS",
@@ -441,19 +453,6 @@
     ],
     "name": "WithdrawalNFTPending",
     "type": "event"
-  },
-  {
-    "inputs": [],
-    "name": "CHUNK_SIZE",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
   },
   {
     "inputs": [],
@@ -574,6 +573,19 @@
   },
   {
     "inputs": [],
+    "name": "TX_SIZE",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "UPGRADE_NOTICE_PERIOD",
     "outputs": [
       {
@@ -593,19 +605,6 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "accountRoot",
-    "outputs": [
-      {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
       }
     ],
     "stateMutability": "view",
@@ -933,25 +932,6 @@
   {
     "inputs": [
       {
-        "internalType": "bytes",
-        "name": "input",
-        "type": "bytes"
-      }
-    ],
-    "name": "keccak256Hash",
-    "outputs": [
-      {
-        "internalType": "bytes32",
-        "name": "result",
-        "type": "bytes32"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
@@ -1021,7 +1001,12 @@
       },
       {
         "internalType": "bytes32",
-        "name": "_zecreyPubKey",
+        "name": "_zecreyPubKeyX",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_zecreyPubKeyY",
         "type": "bytes32"
       }
     ],
@@ -1109,6 +1094,32 @@
     "name": "revertBlocks",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract NFTFactory",
+        "name": "_factory",
+        "type": "address"
+      }
+    ],
+    "name": "setDefaultNFTFactory",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "stateRoot",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -1252,19 +1263,6 @@
       }
     ],
     "name": "updatePairRate",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_newVerifierAddress",
-        "type": "address"
-      }
-    ],
-    "name": "updateZecreyVerifier",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
