@@ -4,7 +4,7 @@ import (
 	"crypto/ecdsa"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/zecrey-labs/zecrey-eth-rpc/_const"
+	"github.com/bnb-chain/zkbas-eth-rpc/_const"
 	"math/big"
 )
 

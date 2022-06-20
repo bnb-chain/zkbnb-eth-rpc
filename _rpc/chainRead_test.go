@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/zecrey-labs/zecrey-eth-rpc/_const"
+	"github.com/bnb-chain/zkbas-eth-rpc/_const"
 	"log"
 	"math/big"
 	"reflect"

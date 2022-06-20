@@ -2,8 +2,8 @@ package _rpc
 
 import (
 	"fmt"
-	"github.com/zecrey-labs/zecrey-eth-rpc/_const"
-	"github.com/zecrey-labs/zecrey-eth-rpc/_utils"
+	"github.com/bnb-chain/zkbas-eth-rpc/_const"
+	"github.com/bnb-chain/zkbas-eth-rpc/_utils"
 	"testing"
 )
 

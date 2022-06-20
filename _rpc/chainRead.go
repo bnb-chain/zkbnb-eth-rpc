@@ -1,7 +1,7 @@
 package _rpc
 
 import (
-	"github.com/zecrey-labs/zecrey-eth-rpc/_utils"
+	"github.com/bnb-chain/zkbas-eth-rpc/_utils"
 	"context"
 	"crypto/ecdsa"
 	"github.com/ethereum/go-ethereum/common"

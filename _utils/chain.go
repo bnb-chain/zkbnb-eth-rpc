@@ -6,7 +6,7 @@ import (
 	"errors"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/zecrey-labs/zecrey-eth-rpc/_const"
+	"github.com/bnb-chain/zkbas-eth-rpc/_const"
 	"math"
 	"math/big"
 	"regexp"
