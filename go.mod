@@ -1,4 +1,4 @@
-module github.com/zecrey-labs/zecrey-eth-rpc
+module github.com/bnb-chain/zkbas-eth-rpc
 
 go 1.16
 

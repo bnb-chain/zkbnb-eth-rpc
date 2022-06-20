@@ -1,4 +1,4 @@
-# github.com/zecrey-labs/zecrey-eth-rpc
+# zkbas-eth-rpc
 
 # Explorer
 - [Ethereum Rinkeby](https://rinkeby.etherscan.io/)
