@@ -1,16 +1,16 @@
 package legend
 
 import (
-	"github.com/ethereum/go-ethereum/common"
 	"github.com/bnb-chain/zkbas-eth-rpc/_rpc"
+	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 )
 
 /*
-	LoadZecreyLegendInstance: load zecrey legend instance if it is already deployed
+	LoadZkbasInstance: load zkbas instance if it is already deployed
 */
-func LoadZecreyLegendInstance(cli *_rpc.ProviderClient, addr string) (instance *ZecreyLegend, err error) {
-	instance, err = NewZecreyLegend(common.HexToAddress(addr), *cli)
+func LoadZkbasInstance(cli *_rpc.ProviderClient, addr string) (instance *Zkbas, err error) {
+	instance, err = NewZkbas(common.HexToAddress(addr), *cli)
 	return instance, err
 }
 
@@ -18,8 +18,8 @@ func LoadZecreyLegendInstance(cli *_rpc.ProviderClient, addr string) (instance *
 	CommitBlocks: commit blocks
 */
 func CommitBlocks(
-	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *ZecreyLegend,
-	lastBlock StorageStoredBlockInfo, commitBlocksInfo []OldZecreyLegendCommitBlockInfo,
+	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *Zkbas,
+	lastBlock StorageStoredBlockInfo, commitBlocksInfo []OldZkbasCommitBlockInfo,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
@@ -38,8 +38,8 @@ func CommitBlocks(
 	VerifyAndExecuteBlocks: verify and execute blocks
 */
 func VerifyAndExecuteBlocks(
-	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *ZecreyLegend,
-	verifyAndExecuteBlocksInfo []OldZecreyLegendVerifyAndExecuteBlockInfo, proofs []*big.Int,
+	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *Zkbas,
+	verifyAndExecuteBlocksInfo []OldZkbasVerifyAndExecuteBlockInfo, proofs []*big.Int,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
