@@ -628,6 +628,11 @@
       {
         "components": [
           {
+            "internalType": "uint16",
+            "name": "blockSize",
+            "type": "uint16"
+          },
+          {
             "internalType": "uint32",
             "name": "blockNumber",
             "type": "uint32"
@@ -688,6 +693,11 @@
             "internalType": "uint32",
             "name": "blockNumber",
             "type": "uint32"
+          },
+          {
+            "internalType": "uint16",
+            "name": "blockSize",
+            "type": "uint16"
           }
         ],
         "internalType": "struct OldZecreyLegend.CommitBlockInfo[]",
@@ -1056,6 +1066,11 @@
       {
         "components": [
           {
+            "internalType": "uint16",
+            "name": "blockSize",
+            "type": "uint16"
+          },
+          {
             "internalType": "uint32",
             "name": "blockNumber",
             "type": "uint32"
@@ -1314,6 +1329,11 @@
         "components": [
           {
             "components": [
+              {
+                "internalType": "uint16",
+                "name": "blockSize",
+                "type": "uint16"
+              },
               {
                 "internalType": "uint32",
                 "name": "blockNumber",
