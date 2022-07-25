@@ -53,3 +53,19 @@ func VerifyAndExecuteBlocks(
 	}
 	return tx.Hash().String(), nil
 }
+
+func RevertBlocks(
+	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *ZecreyLegend,
+	revertBlocks []StorageStoredBlockInfo,
+	gasPrice *big.Int, gasLimit uint64,
+) (txHash string, err error) {
+	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
+	if err != nil {
+		return "", err
+	}
+	tx, err := instance.RevertBlocks(transactOpts, revertBlocks)
+	if err != nil {
+		return "", err
+	}
+	return tx.Hash().String(), nil
+}
