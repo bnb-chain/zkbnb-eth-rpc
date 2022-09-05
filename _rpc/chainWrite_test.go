@@ -2,8 +2,8 @@ package _rpc
 
 import (
 	"fmt"
-	"github.com/bnb-chain/zkbas-eth-rpc/_const"
-	"github.com/bnb-chain/zkbas-eth-rpc/_utils"
+	"github.com/bnb-chain/zkbnb-eth-rpc/_const"
+	"github.com/bnb-chain/zkbnb-eth-rpc/_utils"
 	"testing"
 )
 
@@ -34,11 +34,11 @@ func TestDeployContract(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	contractAddress, txHash, err := cli.DeployContract(authClient, nil, "../zecrey/_interface/example/Store_sol_Store.abi", "../zecrey/_interface/example/Store_sol_Store.bin", []interface{}{"1.0"})
+	contractAddress, txHash, err := cli.DeployContract(authClient, nil, "../zkbnb/_interface/example/Store_sol_Store.abi", "../zkbnb/_interface/example/Store_sol_Store.bin", []interface{}{"1.0"})
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("zecrey address:", contractAddress.String())
+	fmt.Println("zkbnb address:", contractAddress.String())
 	fmt.Println("tx hash:", txHash.String())
 }
 
@@ -49,11 +49,11 @@ func TestDeployContractUntil(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	status, contractAddress, txHash, err := cli.DeployContractUntil(authClient, nil, "../zecrey/_interface/example/Store_sol_Store.abi", "../zecrey/_interface/example/Store_sol_Store.bin", []interface{}{"1.0"})
+	status, contractAddress, txHash, err := cli.DeployContractUntil(authClient, nil, "../zkbnb/_interface/example/Store_sol_Store.abi", "../zkbnb/_interface/example/Store_sol_Store.bin", []interface{}{"1.0"})
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("zecrey address:", contractAddress.String())
+	fmt.Println("zkbnb address:", contractAddress.String())
 	fmt.Println("tx hash:", txHash.String())
 	fmt.Println("status:", status)
 }

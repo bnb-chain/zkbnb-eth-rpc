@@ -2,9 +2,9 @@ package _rpc
 
 import (
 	"crypto/ecdsa"
+	"github.com/bnb-chain/zkbnb-eth-rpc/_const"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/bnb-chain/zkbas-eth-rpc/_const"
 	"math/big"
 )
 

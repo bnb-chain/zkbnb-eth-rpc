@@ -2,7 +2,7 @@ package _rpc
 
 import (
 	"crypto/ecdsa"
-	"github.com/bnb-chain/zkbas-eth-rpc/_utils"
+	"github.com/bnb-chain/zkbnb-eth-rpc/_utils"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"math/big"

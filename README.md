@@ -1,4 +1,4 @@
-# zkbas-eth-rpc
+# zkbnb-eth-rpc
 
 # Explorer
 - [Ethereum Rinkeby](https://rinkeby.etherscan.io/)

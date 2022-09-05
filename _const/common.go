@@ -46,9 +46,9 @@ const (
 	ZKSneakAddress  = "0x95F45C568f146c409F92321B1123505Cbe84719B"
 
 	// Token address
-	ZecreyTokenAddress      = "0x1874D6B0B85fF4AD526163a4178064aEaB55D9DD"
-	ZecreyAddress           = "0x9c460ccF59E01fFc66a48378Fb3957BEbf2123a2"
-	ZecreyGovernanceAddress = "0xa54f5Eb49cd28088D91aD201387Bfc42e1711F69"
+	ZkBNBTokenAddress      = "0x1874D6B0B85fF4AD526163a4178064aEaB55D9DD"
+	ZkBNBAddress           = "0x9c460ccF59E01fFc66a48378Fb3957BEbf2123a2"
+	ZkBNBGovernanceAddress = "0xa54f5Eb49cd28088D91aD201387Bfc42e1711F69"
 
 	// Transaction status
 	TransactionSuccess = uint64(1)

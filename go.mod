@@ -1,4 +1,4 @@
-module github.com/bnb-chain/zkbas-eth-rpc
+module github.com/bnb-chain/zkbnb-eth-rpc
 
 go 1.16
 
