@@ -1388,21 +1388,21 @@ func (_ZkBNB *ZkBNBTransactorSession) UpdatePairRate(_pairInfo OldZkBNBPairInfo)
 	return _ZkBNB.Contract.UpdatePairRate(&_ZkBNB.TransactOpts, _pairInfo)
 }
 
-// UpdateZkBNBVerifier is a paid mutator transaction binding the contract method 0x6f88b156.
+// UpdateZkBNBVerifier is a paid mutator transaction binding the contract method 0xc91cf162.
 //
 // Solidity: function updateZkBNBVerifier(address _newVerifierAddress) returns()
 func (_ZkBNB *ZkBNBTransactor) UpdateZkBNBVerifier(opts *bind.TransactOpts, _newVerifierAddress common.Address) (*types.Transaction, error) {
 	return _ZkBNB.contract.Transact(opts, "updateZkBNBVerifier", _newVerifierAddress)
 }
 
-// UpdateZkBNBVerifier is a paid mutator transaction binding the contract method 0x6f88b156.
+// UpdateZkBNBVerifier is a paid mutator transaction binding the contract method 0xc91cf162.
 //
 // Solidity: function updateZkBNBVerifier(address _newVerifierAddress) returns()
 func (_ZkBNB *ZkBNBSession) UpdateZkBNBVerifier(_newVerifierAddress common.Address) (*types.Transaction, error) {
 	return _ZkBNB.Contract.UpdateZkBNBVerifier(&_ZkBNB.TransactOpts, _newVerifierAddress)
 }
 
-// UpdateZkBNBVerifier is a paid mutator transaction binding the contract method 0x6f88b156.
+// UpdateZkBNBVerifier is a paid mutator transaction binding the contract method 0xc91cf162.
 //
 // Solidity: function updateZkBNBVerifier(address _newVerifierAddress) returns()
 func (_ZkBNB *ZkBNBTransactorSession) UpdateZkBNBVerifier(_newVerifierAddress common.Address) (*types.Transaction, error) {
@@ -2324,7 +2324,7 @@ func (it *ZkBNBDepositCommitIterator) Close() error {
 
 // ZkBNBDepositCommit represents a DepositCommit event raised by the ZkBNB contract.
 type ZkBNBDepositCommit struct {
-	ZkBNBBlockNumber uint32
+	ZkbnbBlockNumber uint32
 	AccountIndex     uint32
 	AccountName      [32]byte
 	AssetId          uint16
@@ -2761,7 +2761,7 @@ func (it *ZkBNBFullExitCommitIterator) Close() error {
 
 // ZkBNBFullExitCommit represents a FullExitCommit event raised by the ZkBNB contract.
 type ZkBNBFullExitCommit struct {
-	ZkBNBBlockId uint32
+	ZkbnbBlockId uint32
 	AccountId    uint32
 	Owner        common.Address
 	TokenId      uint16
@@ -3492,8 +3492,8 @@ type ZkBNBRegisterZNS struct {
 	Name         string
 	NameHash     [32]byte
 	Owner        common.Address
-	ZkBNBPubKeyX [32]byte
-	ZkBNBPubKeyY [32]byte
+	ZkbnbPubKeyX [32]byte
+	ZkbnbPubKeyY [32]byte
 	AccountIndex uint32
 	Raw          types.Log // Blockchain specific contextual infos
 }

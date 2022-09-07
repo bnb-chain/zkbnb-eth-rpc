@@ -1,5 +1,5 @@
 @echo off
 
 # abigen --bin=_MyERC20_sol_ZkBNBRelatedERC20.bin --abi=_MyERC20_sol_ZkBNBRelatedERC20.abi --pkg=erc20 --out=ERC20Gen.go && abigen --bin=_Governance_sol_Governance.bin --abi=_Governance_sol_Governance.abi --pkg=governance --out=GovernanceGen.go && abigen --bin=_Governance_sol_Governance.bin --abi=_AssetGovernance_sol_AssetGovernance.abi --pkg=assetGovernance --out=AssetGovernanceGen.go && abigen --bin=_ZkBNBVerifier_sol_ZkBNBVerifier.bin --abi=_ZkBNBVerifier_sol_ZkBNBVerifier.abi --pkg=verifier --out=ZkBNBVerifierGen.go && abigen --abi=OldZkBNBLegend.json --pkg=zkbnbLegend --out=ZkBNBLegendGen.go
-abigen --abi=zkbnb/contract/_interface/legend/OldZkBNB.json --pkg=legend --out=ZkBNBGen.go
-abigen --abi=zkbnb/contract/_interface/legend/Governance.json --pkg=legend --out=GovernanceGen.go
+abigen --abi=zkbnb/contract/_interface/legend/OldZkBNB.json --pkg=ZkBNB --out=zkbnb/core/legend/ZkBNBGen.go
+abigen --abi=zkbnb/contract/_interface/legend/Governance.json --pkg=Governance --out=zkbnb/core/legend/GovernanceGen.go
