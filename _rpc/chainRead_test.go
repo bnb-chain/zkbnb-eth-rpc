@@ -4,9 +4,9 @@ import (
 	"context"
 	"crypto/ecdsa"
 	"fmt"
+	"github.com/bnb-chain/zkbnb-eth-rpc/_const"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/bnb-chain/zkbas-eth-rpc/_const"
 	"log"
 	"math/big"
 	"reflect"
@@ -39,7 +39,7 @@ func TestIsContract(t *testing.T) {
 		{
 			name: "valid",
 			args: args{
-				// smart zecrey address
+				// smart zkbnb address
 				address: "0x8b2a865c5856571bc7f9951fee16215a6b2250e1",
 			},
 			wantIsContract: true,

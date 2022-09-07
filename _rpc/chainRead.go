@@ -1,9 +1,9 @@
 package _rpc
 
 import (
-	"github.com/bnb-chain/zkbas-eth-rpc/_utils"
 	"context"
 	"crypto/ecdsa"
+	"github.com/bnb-chain/zkbnb-eth-rpc/_utils"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
@@ -23,7 +23,7 @@ func (cli *ProviderClient) GetBalance(address string) (balance *big.Int, err err
 	return cli.BalanceAt(context.Background(), account, nil)
 }
 
-// check if the address is a zecrey address
+// check if the address is a zkbnb address
 // @address: address of ethereum
 func (cli *ProviderClient) IsContract(address string) (isContract bool, err error) {
 	isValidEthAddress := _utils.IsValidEthAddress(address)
