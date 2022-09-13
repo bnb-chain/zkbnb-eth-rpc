@@ -2,19 +2,20 @@ package _rpc
 
 import (
 	"context"
-	"github.com/bnb-chain/zkbnb-eth-rpc/_const"
-	"github.com/bnb-chain/zkbnb-eth-rpc/_utils"
-	"github.com/ethereum/go-ethereum/accounts/abi"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
 	"io/ioutil"
 	"math/big"
 	"strings"
 	"time"
+
+	"github.com/ethereum/go-ethereum/accounts/abi"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/types"
+
+	"github.com/bnb-chain/zkbnb-eth-rpc/_const"
+	"github.com/bnb-chain/zkbnb-eth-rpc/_utils"
 )
 
-// transfer eth
 func (cli *ProviderClient) Transfer(authCli *AuthClient, to string, amount *big.Int, data []byte, gasLimit uint64) (txHash string, err error) {
 	// validate amount,it can't less than zero
 	if amount.Cmp(new(big.Int).SetUint64(0)) < 0 {
@@ -50,7 +51,6 @@ func (cli *ProviderClient) Transfer(authCli *AuthClient, to string, amount *big.
 	return signedTx.Hash().String(), err
 }
 
-// deploy zkbnb
 func (cli *ProviderClient) DeployContract(authCli *AuthClient, gasPrice *big.Int, abiPath string, binPath string, params []interface{}) (contractAddress common.Address, txHash common.Hash, err error) {
 	// check authCli
 	if authCli == nil || abiPath == "" || binPath == "" {
@@ -76,7 +76,6 @@ func (cli *ProviderClient) DeployContract(authCli *AuthClient, gasPrice *big.Int
 		authCli.PrivateKey,
 		big.NewInt(int64(nonce)),
 		big.NewInt(0),
-		_const.SuggestContractGasLimit,
 		gasPrice,
 	)
 	// get abi
@@ -102,7 +101,6 @@ func (cli *ProviderClient) DeployContract(authCli *AuthClient, gasPrice *big.Int
 	return address, tx.Hash(), nil
 }
 
-// wait until transaction is completed
 func (cli *ProviderClient) WaitingTransactionStatus(txHash string) (status bool, err error) {
 	// set ticker
 	ticker := time.NewTicker(_const.TryTimeInterval)
@@ -136,7 +134,6 @@ func (cli *ProviderClient) WaitingTransactionStatus(txHash string) (status bool,
 	}
 }
 
-// deploy smart zkbnb until it is completed
 func (cli *ProviderClient) DeployContractUntil(authCli *AuthClient, gasPrice *big.Int, abiPath string, binPath string, params []interface{}) (status bool, contractAddress common.Address, txHash common.Hash, err error) {
 	contractAddress, txHash, err = cli.DeployContract(authCli, gasPrice, abiPath, binPath, params)
 	if err != nil {

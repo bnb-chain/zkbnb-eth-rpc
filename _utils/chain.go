@@ -4,34 +4,32 @@ import (
 	"bytes"
 	"crypto/ecdsa"
 	"errors"
-	"github.com/bnb-chain/zkbnb-eth-rpc/_const"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/crypto"
 	"math"
 	"math/big"
 	"regexp"
+
+	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/ethereum/go-ethereum/crypto"
+
+	"github.com/bnb-chain/zkbnb-eth-rpc/_const"
 )
 
-// transfer wei to ether balance/10^{18}
 func WeiToEther(_balance *big.Int) *big.Float {
 	fbalance := new(big.Float)
 	fbalance.SetString(_balance.String())
 	return new(big.Float).Quo(fbalance, big.NewFloat(math.Pow10(18)))
 }
 
-// check if it is a valid hash value
 func IsValidHashValue(hash string) bool {
 	re := regexp.MustCompile(_const.HashRegexp)
 	return re.MatchString(hash)
 }
 
-// check if it is a valid address
 func IsValidEthAddress(address string) bool {
 	re := regexp.MustCompile(_const.AddressRegexp)
 	return re.MatchString(address)
 }
 
-// check if it is a valid private key
 func IsValidPrivateKey(sk string) bool {
 	// if sk starts with 0x
 	var re *regexp.Regexp
@@ -47,7 +45,6 @@ func IsValidPrivateKey(sk string) bool {
 
 }
 
-// transfer ether to wei
 func EtherToWei(value float64) *big.Int {
 	one := math.Pow10(18)
 	res := value * one
@@ -56,7 +53,6 @@ func EtherToWei(value float64) *big.Int {
 	return result
 }
 
-// transfer private key to str
 func EncodePrivateKey(sk *ecdsa.PrivateKey) (priKey string, err error) {
 	if sk == nil {
 		return "", ErrInvalidPrivateKey
@@ -65,7 +61,6 @@ func EncodePrivateKey(sk *ecdsa.PrivateKey) (priKey string, err error) {
 	return hexutil.Encode(crypto.FromECDSA(sk)), nil
 }
 
-// transfer str to private key
 func DecodePrivateKey(sk string) (privateKey *ecdsa.PrivateKey, err error) {
 	isValidPrivateKey := IsValidPrivateKey(sk)
 	if !isValidPrivateKey {
@@ -94,7 +89,6 @@ func DecodePrivateKeyBigInt(skStr string) (privateKey *ecdsa.PrivateKey, err err
 	return privateKey, nil
 }
 
-// public key to str
 func EncodePubKey(pk *ecdsa.PublicKey) (pubKey string, err error) {
 	if pk == nil {
 		return "", ErrInvalidPublicKey
@@ -102,7 +96,6 @@ func EncodePubKey(pk *ecdsa.PublicKey) (pubKey string, err error) {
 	return hexutil.Encode(crypto.FromECDSAPub(pk)), nil
 }
 
-// decode public key
 func DecodePubKey(pk string) (pubKey *ecdsa.PublicKey, err error) {
 	pubKeyBytes, err := hexutil.Decode(pk)
 	if err != nil {
@@ -115,7 +108,6 @@ func DecodePubKey(pk string) (pubKey *ecdsa.PublicKey, err error) {
 	return pubKey, nil
 }
 
-// create a signature
 func Sign(sk string, data []byte) (sig []byte, err error) {
 	hash := crypto.Keccak256Hash(data)
 	// transfer sk str to private key
@@ -126,7 +118,6 @@ func Sign(sk string, data []byte) (sig []byte, err error) {
 	return crypto.Sign(hash.Bytes(), privateKey)
 }
 
-// verify ecdsa signature
 func VerifySig(pk string, sig []byte, data []byte) (res bool, err error) {
 	hash := crypto.Keccak256Hash(data)
 	// transfer pk str to public key

@@ -1,9 +1,11 @@
 package legend
 
 import (
-	"github.com/bnb-chain/zkbnb-eth-rpc/_rpc"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"math/big"
+
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+
+	"github.com/bnb-chain/zkbnb-eth-rpc/_rpc"
 )
 
 func ConstructTransactOpts(cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, gasPrice *big.Int, gasLimit uint64) (transactOpts *bind.TransactOpts, err error) {

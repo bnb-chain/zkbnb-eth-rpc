@@ -1,6 +1,8 @@
 package legend
 
-import "log"
+import (
+	"log"
+)
 
 func init() {
 	// set log info

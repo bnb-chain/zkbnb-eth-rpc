@@ -1,9 +1,11 @@
 package legend
 
 import (
-	"github.com/bnb-chain/zkbnb-eth-rpc/_rpc"
-	"github.com/ethereum/go-ethereum/common"
 	"math/big"
+
+	"github.com/ethereum/go-ethereum/common"
+
+	"github.com/bnb-chain/zkbnb-eth-rpc/_rpc"
 )
 
 /*

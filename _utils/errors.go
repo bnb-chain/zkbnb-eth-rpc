@@ -1,6 +1,8 @@
 package _utils
 
-import "errors"
+import (
+	"errors"
+)
 
 var (
 	ErrInvalidPrivateKey      = errors.New("err: input private key is not valid! ")

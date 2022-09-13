@@ -1,6 +1,8 @@
 package _rpc
 
-import "errors"
+import (
+	"errors"
+)
 
 var (
 	ErrInvalidAddress          = errors.New("err: input address is not valid! ")

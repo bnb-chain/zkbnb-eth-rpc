@@ -1,8 +1,9 @@
 package legend
 
 import (
-	"github.com/bnb-chain/zkbnb-eth-rpc/_rpc"
 	"github.com/ethereum/go-ethereum/common"
+
+	"github.com/bnb-chain/zkbnb-eth-rpc/_rpc"
 )
 
 func LoadERC20(cli *_rpc.ProviderClient, addr string) (instance *Erc20, err error) {

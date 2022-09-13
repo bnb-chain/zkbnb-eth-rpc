@@ -4,15 +4,16 @@ import (
 	"context"
 	"crypto/ecdsa"
 	"fmt"
-	"github.com/bnb-chain/zkbnb-eth-rpc/_const"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/crypto"
 	"log"
 	"math/big"
 	"reflect"
 	"testing"
 
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/crypto"
+
+	"github.com/bnb-chain/zkbnb-eth-rpc/_const"
 )
 
 func TestGetBalance(t *testing.T) {

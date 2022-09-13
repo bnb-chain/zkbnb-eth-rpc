@@ -2,13 +2,14 @@ package _rpc
 
 import (
 	"crypto/ecdsa"
-	"github.com/bnb-chain/zkbnb-eth-rpc/_utils"
+	"math/big"
+
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
-	"math/big"
+
+	"github.com/bnb-chain/zkbnb-eth-rpc/_utils"
 )
 
-// auth of user
 type AuthClient struct {
 	PrivateKey *ecdsa.PrivateKey `json:"private_key"`
 	PublicKey  *ecdsa.PublicKey  `json:"public_key"`
@@ -16,8 +17,7 @@ type AuthClient struct {
 	ChainId    *big.Int          `json:"chain_id"`
 }
 
-// create a new auth cli
-func NewAuthClient(cli *ProviderClient, priKey string, chainId *big.Int) (authCli *AuthClient, err error) {
+func NewAuthClient(priKey string, chainId *big.Int) (authCli *AuthClient, err error) {
 	// validate private key
 	if !_utils.IsValidPrivateKey(priKey) {
 		return nil, ErrInvalidPrivateKey
