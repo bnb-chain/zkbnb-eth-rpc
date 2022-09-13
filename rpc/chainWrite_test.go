@@ -1,22 +1,22 @@
-package _rpc
+package rpc
 
 import (
 	"fmt"
 	"testing"
 
-	"github.com/bnb-chain/zkbnb-eth-rpc/_const"
-	"github.com/bnb-chain/zkbnb-eth-rpc/_utils"
+	"github.com/bnb-chain/zkbnb-eth-rpc/constants"
+	"github.com/bnb-chain/zkbnb-eth-rpc/utils"
 )
 
 func TestTransfer(t *testing.T) {
-	cli, err := NewClient(_const.LocalNetwork)
+	cli, err := NewClient(constants.LocalNetwork)
 	defer cli.Close()
 	toAddress := "0xE9b15a2D396B349ABF60e53ec66Bcf9af262D449"
 	authClient, err := NewAuthClient("1479a8a2464a43a9ecc8e6e6baf789ef9e35b89a63d864a22e01b3ef2ad6b6ba", RinkebyChainId)
 	if err != nil {
 		t.Error(err)
 	}
-	txHash, err := cli.Transfer(authClient, toAddress, _utils.EtherToWei(99), nil, _const.SuggestGasLimit)
+	txHash, err := cli.Transfer(authClient, toAddress, utils.EtherToWei(99), nil, constants.SuggestGasLimit)
 	if err != nil {
 		t.Error(err)
 	}
@@ -29,9 +29,9 @@ func TestTransfer(t *testing.T) {
 }
 
 func TestDeployContract(t *testing.T) {
-	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	cli, err := NewClient(constants.InfuraRinkebyNetwork)
 	defer cli.Close()
-	authClient, err := NewAuthClient(_const.RinkebySuperSk, RinkebyChainId)
+	authClient, err := NewAuthClient(constants.RinkebySuperSk, RinkebyChainId)
 	if err != nil {
 		panic(err)
 	}
@@ -44,9 +44,9 @@ func TestDeployContract(t *testing.T) {
 }
 
 func TestDeployContractUntil(t *testing.T) {
-	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	cli, err := NewClient(constants.InfuraRinkebyNetwork)
 	defer cli.Close()
-	authClient, err := NewAuthClient(_const.RinkebySuperSk, RinkebyChainId)
+	authClient, err := NewAuthClient(constants.RinkebySuperSk, RinkebyChainId)
 	if err != nil {
 		panic(err)
 	}

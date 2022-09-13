@@ -1,4 +1,4 @@
-package _rpc
+package rpc
 
 import (
 	"context"
@@ -13,12 +13,12 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	"github.com/bnb-chain/zkbnb-eth-rpc/_const"
+	"github.com/bnb-chain/zkbnb-eth-rpc/constants"
 )
 
 func TestGetBalance(t *testing.T) {
 	toAddress := "0xE9b15a2D396B349ABF60e53ec66Bcf9af262D449"
-	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	cli, err := NewClient(constants.InfuraRinkebyNetwork)
 	balance, err := cli.GetBalance(toAddress)
 	if err != nil {
 		panic(err)
@@ -30,7 +30,7 @@ func TestIsContract(t *testing.T) {
 	type args struct {
 		address string
 	}
-	cli, _ := NewClient(_const.InfuraRinkebyNetwork)
+	cli, _ := NewClient(constants.InfuraRinkebyNetwork)
 	tests := []struct {
 		name           string
 		args           args
@@ -71,7 +71,7 @@ func TestIsContract(t *testing.T) {
 }
 
 func TestGetBlockHeaderByNumber(t *testing.T) {
-	cli, err := NewClient(_const.LocalNetwork)
+	cli, err := NewClient(constants.LocalNetwork)
 	defer cli.Close()
 	header, err := cli.GetBlockHeaderByNumber(big.NewInt(1))
 	if err != nil {
@@ -81,7 +81,7 @@ func TestGetBlockHeaderByNumber(t *testing.T) {
 }
 
 func TestGetBlockInfoByNumber(t *testing.T) {
-	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	cli, err := NewClient(constants.InfuraRinkebyNetwork)
 	defer cli.Close()
 	blockInfo, err := cli.GetBlockInfoByNumber(big.NewInt(2))
 	if err != nil {
@@ -91,7 +91,7 @@ func TestGetBlockInfoByNumber(t *testing.T) {
 }
 
 func TestGetHeight(t *testing.T) {
-	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	cli, err := NewClient(constants.InfuraRinkebyNetwork)
 	defer cli.Close()
 	height, err := cli.GetHeight()
 	if err != nil {
@@ -127,7 +127,7 @@ func TestGetTransactionByHash(t *testing.T) {
 }
 
 func TestGetTransactionReceipt(t *testing.T) {
-	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	cli, err := NewClient(constants.InfuraRinkebyNetwork)
 	defer cli.Close()
 	successHash := "0xf900253477a50a1cd808f61058f68eb2e73afcb0161c31e82ecafa034d7c8eec"
 	receipt, err := cli.GetTransactionReceipt(successHash)
@@ -191,7 +191,7 @@ func TestPrivateKeyToAddress(t *testing.T) {
 }
 
 func TestProviderClient_GetTransactionByHash(t *testing.T) {
-	cli, err := NewClient(_const.InfuraRinkebyNetwork)
+	cli, err := NewClient(constants.InfuraRinkebyNetwork)
 	tx, _, err := cli.GetTransactionByHash("0xd5dc99aa9d25f510e6e7639327747b2e2cc82cbddfcdc3cbf771922fbf80640d")
 	nativeChainId, err := cli.ChainID(context.Background())
 	if err != nil {

@@ -1,4 +1,4 @@
-package _rpc
+package rpc
 
 import (
 	"math/big"

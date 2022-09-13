@@ -1,4 +1,4 @@
-package _utils
+package utils
 
 import (
 	"bytes"
@@ -11,7 +11,7 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	"github.com/bnb-chain/zkbnb-eth-rpc/_const"
+	"github.com/bnb-chain/zkbnb-eth-rpc/constants"
 )
 
 func WeiToEther(_balance *big.Int) *big.Float {
@@ -21,12 +21,12 @@ func WeiToEther(_balance *big.Int) *big.Float {
 }
 
 func IsValidHashValue(hash string) bool {
-	re := regexp.MustCompile(_const.HashRegexp)
+	re := regexp.MustCompile(constants.HashRegexp)
 	return re.MatchString(hash)
 }
 
 func IsValidEthAddress(address string) bool {
-	re := regexp.MustCompile(_const.AddressRegexp)
+	re := regexp.MustCompile(constants.AddressRegexp)
 	return re.MatchString(address)
 }
 
@@ -34,9 +34,9 @@ func IsValidPrivateKey(sk string) bool {
 	// if sk starts with 0x
 	var re *regexp.Regexp
 	if len(sk) == 66 && sk[:2] == "0x" {
-		re = regexp.MustCompile(_const.SkRegexp0x)
+		re = regexp.MustCompile(constants.SkRegexp0x)
 	} else if len(sk) == 64 {
-		re = regexp.MustCompile(_const.SkRegexp)
+		re = regexp.MustCompile(constants.SkRegexp)
 	}
 	if re == nil {
 		return false

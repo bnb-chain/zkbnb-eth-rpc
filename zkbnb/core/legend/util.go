@@ -5,10 +5,10 @@ import (
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 
-	"github.com/bnb-chain/zkbnb-eth-rpc/_rpc"
+	"github.com/bnb-chain/zkbnb-eth-rpc/rpc"
 )
 
-func ConstructTransactOpts(cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, gasPrice *big.Int, gasLimit uint64) (transactOpts *bind.TransactOpts, err error) {
+func ConstructTransactOpts(cli *rpc.ProviderClient, authCli *rpc.AuthClient, gasPrice *big.Int, gasLimit uint64) (transactOpts *bind.TransactOpts, err error) {
 	transactOpts, err = bind.NewKeyedTransactorWithChainID(authCli.PrivateKey, authCli.ChainId)
 	if err != nil {
 		return nil, err

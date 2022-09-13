@@ -1,4 +1,4 @@
-package _rpc
+package rpc
 
 import (
 	"crypto/ecdsa"
@@ -7,7 +7,7 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/bnb-chain/zkbnb-eth-rpc/_const"
+	"github.com/bnb-chain/zkbnb-eth-rpc/constants"
 )
 
 func SignTx(authCli *AuthClient, tx *types.Transaction) (signedTx *types.Transaction, err error) {
@@ -22,7 +22,7 @@ func CreateAuthentication(privateKey *ecdsa.PrivateKey, nonce *big.Int, value *b
 	auth := bind.NewKeyedTransactor(privateKey)
 	auth.Nonce = nonce
 	auth.Value = value
-	auth.GasLimit = _const.SuggestContractGasLimit
+	auth.GasLimit = constants.SuggestContractGasLimit
 	auth.GasPrice = gasPrice
 	return auth
 }

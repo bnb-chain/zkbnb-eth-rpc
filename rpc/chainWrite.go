@@ -1,4 +1,4 @@
-package _rpc
+package rpc
 
 import (
 	"context"
@@ -12,8 +12,8 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/bnb-chain/zkbnb-eth-rpc/_const"
-	"github.com/bnb-chain/zkbnb-eth-rpc/_utils"
+	"github.com/bnb-chain/zkbnb-eth-rpc/constants"
+	"github.com/bnb-chain/zkbnb-eth-rpc/utils"
 )
 
 func (cli *ProviderClient) Transfer(authCli *AuthClient, to string, amount *big.Int, data []byte, gasLimit uint64) (txHash string, err error) {
@@ -22,7 +22,7 @@ func (cli *ProviderClient) Transfer(authCli *AuthClient, to string, amount *big.
 		return "", ErrAmountLessThanZero
 	}
 	// check address
-	isValidTo := _utils.IsValidEthAddress(to)
+	isValidTo := utils.IsValidEthAddress(to)
 	if !isValidTo {
 		return "", ErrInvalidAddress
 	}
@@ -103,11 +103,11 @@ func (cli *ProviderClient) DeployContract(authCli *AuthClient, gasPrice *big.Int
 
 func (cli *ProviderClient) WaitingTransactionStatus(txHash string) (status bool, err error) {
 	// set ticker
-	ticker := time.NewTicker(_const.TryTimeInterval)
+	ticker := time.NewTicker(constants.TryTimeInterval)
 	defer ticker.Stop()
 	count := 0
 	for {
-		if count > _const.MaxTryTimes {
+		if count > constants.MaxTryTimes {
 			return false, ErrGetBlockStatus
 		}
 		// get transaction info
@@ -122,9 +122,9 @@ func (cli *ProviderClient) WaitingTransactionStatus(txHash string) (status bool,
 			if err != nil {
 				return false, err
 			}
-			if receipt.Status == _const.TransactionSuccess {
+			if receipt.Status == constants.TransactionSuccess {
 				status = true
-			} else if receipt.Status == _const.TransactionFail {
+			} else if receipt.Status == constants.TransactionFail {
 				status = false
 			}
 			return status, nil

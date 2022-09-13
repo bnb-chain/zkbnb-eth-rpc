@@ -5,13 +5,13 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/bnb-chain/zkbnb-eth-rpc/_rpc"
+	"github.com/bnb-chain/zkbnb-eth-rpc/rpc"
 )
 
 /*
 	LoadZkBNBInstance: load zkbnb instance if it is already deployed
 */
-func LoadZkBNBInstance(cli *_rpc.ProviderClient, addr string) (instance *ZkBNB, err error) {
+func LoadZkBNBInstance(cli *rpc.ProviderClient, addr string) (instance *ZkBNB, err error) {
 	instance, err = NewZkBNB(common.HexToAddress(addr), *cli)
 	return instance, err
 }
@@ -20,7 +20,7 @@ func LoadZkBNBInstance(cli *_rpc.ProviderClient, addr string) (instance *ZkBNB, 
 	CommitBlocks: commit blocks
 */
 func CommitBlocks(
-	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *ZkBNB,
+	cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB,
 	lastBlock StorageStoredBlockInfo, commitBlocksInfo []OldZkBNBCommitBlockInfo,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
@@ -40,7 +40,7 @@ func CommitBlocks(
 	VerifyAndExecuteBlocks: verify and execute blocks
 */
 func VerifyAndExecuteBlocks(
-	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *ZkBNB,
+	cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB,
 	verifyAndExecuteBlocksInfo []OldZkBNBVerifyAndExecuteBlockInfo, proofs []*big.Int,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
@@ -57,7 +57,7 @@ func VerifyAndExecuteBlocks(
 }
 
 func RevertBlocks(
-	cli *_rpc.ProviderClient, authCli *_rpc.AuthClient, instance *ZkBNB,
+	cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB,
 	revertBlocks []StorageStoredBlockInfo,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {

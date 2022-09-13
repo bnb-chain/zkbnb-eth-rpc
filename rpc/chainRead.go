@@ -1,4 +1,4 @@
-package _rpc
+package rpc
 
 import (
 	"context"
@@ -9,12 +9,12 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	"github.com/bnb-chain/zkbnb-eth-rpc/_utils"
+	"github.com/bnb-chain/zkbnb-eth-rpc/utils"
 )
 
 func (cli *ProviderClient) GetBalance(address string) (balance *big.Int, err error) {
 	// check address
-	isValid := _utils.IsValidEthAddress(address)
+	isValid := utils.IsValidEthAddress(address)
 	if !isValid {
 		return nil, ErrInvalidAddress
 	}
@@ -25,7 +25,7 @@ func (cli *ProviderClient) GetBalance(address string) (balance *big.Int, err err
 }
 
 func (cli *ProviderClient) IsContract(address string) (isContract bool, err error) {
-	isValidEthAddress := _utils.IsValidEthAddress(address)
+	isValidEthAddress := utils.IsValidEthAddress(address)
 	if !isValidEthAddress {
 		return false, ErrInvalidAddress
 	}
@@ -79,7 +79,7 @@ func (cli *ProviderClient) GetHeight() (height uint64, err error) {
 
 func (cli *ProviderClient) GetTransactionByHash(transactionHash string) (tx *types.Transaction, isPending bool, err error) {
 	// validate hash value
-	if !_utils.IsValidHashValue(transactionHash) {
+	if !utils.IsValidHashValue(transactionHash) {
 		return nil, false, ErrInvalidHashValue
 	}
 	// get hash value
@@ -89,7 +89,7 @@ func (cli *ProviderClient) GetTransactionByHash(transactionHash string) (tx *typ
 
 func (cli *ProviderClient) GetTransactionReceipt(transactionHash string) (receipt *types.Receipt, err error) {
 	// validate hash value
-	if !_utils.IsValidHashValue(transactionHash) {
+	if !utils.IsValidHashValue(transactionHash) {
 		return nil, ErrInvalidHashValue
 	}
 	// get hash value
@@ -99,7 +99,7 @@ func (cli *ProviderClient) GetTransactionReceipt(transactionHash string) (receip
 
 func (cli *ProviderClient) GetPendingNonce(address string) (nonce uint64, err error) {
 	// validate address
-	isValidEthAddress := _utils.IsValidEthAddress(address)
+	isValidEthAddress := utils.IsValidEthAddress(address)
 	if !isValidEthAddress {
 		return 0, ErrInvalidAddress
 	}

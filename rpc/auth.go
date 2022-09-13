@@ -1,4 +1,4 @@
-package _rpc
+package rpc
 
 import (
 	"crypto/ecdsa"
@@ -7,7 +7,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	"github.com/bnb-chain/zkbnb-eth-rpc/_utils"
+	"github.com/bnb-chain/zkbnb-eth-rpc/utils"
 )
 
 type AuthClient struct {
@@ -19,11 +19,11 @@ type AuthClient struct {
 
 func NewAuthClient(priKey string, chainId *big.Int) (authCli *AuthClient, err error) {
 	// validate private key
-	if !_utils.IsValidPrivateKey(priKey) {
+	if !utils.IsValidPrivateKey(priKey) {
 		return nil, ErrInvalidPrivateKey
 	}
 	// transfer private key str to private key
-	privateKey, err := _utils.DecodePrivateKey(priKey)
+	privateKey, err := utils.DecodePrivateKey(priKey)
 	if err != nil {
 		return nil, err
 	}
