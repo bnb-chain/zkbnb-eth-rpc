@@ -1,4 +1,4 @@
-package legend
+package core
 
 import (
 	"log"
