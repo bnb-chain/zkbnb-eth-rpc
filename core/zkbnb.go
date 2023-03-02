@@ -37,6 +37,26 @@ func CommitBlocks(
 }
 
 /*
+	CommitBlocks: commit blocks
+*/
+func CommitBlocksWithNonce(
+	cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB,
+	lastBlock StorageStoredBlockInfo, commitBlocksInfo []OldZkBNBCommitBlockInfo,
+	gasPrice *big.Int, gasLimit uint64, nonce uint64,
+) (txHash string, err error) {
+	transactOpts, err := ConstructTransactOptsWithNonce(authCli, gasPrice, gasLimit, nonce)
+	if err != nil {
+		return "", err
+	}
+	// call initialize
+	tx, err := instance.CommitBlocks(transactOpts, lastBlock, commitBlocksInfo)
+	if err != nil {
+		return "", err
+	}
+	return tx.Hash().String(), nil
+}
+
+/*
 	VerifyAndExecuteBlocks: verify and execute blocks
 */
 func VerifyAndExecuteBlocks(
@@ -56,12 +76,46 @@ func VerifyAndExecuteBlocks(
 	return tx.Hash().String(), nil
 }
 
+/*
+	VerifyAndExecuteBlocks: verify and execute blocks
+*/
+func VerifyAndExecuteBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
+	verifyAndExecuteBlocksInfo []OldZkBNBVerifyAndExecuteBlockInfo, proofs []*big.Int,
+	gasPrice *big.Int, gasLimit uint64, nonce uint64,
+) (txHash string, err error) {
+	transactOpts, err := ConstructTransactOptsWithNonce(authCli, gasPrice, gasLimit, nonce)
+	if err != nil {
+		return "", err
+	}
+	// call initialize
+	tx, err := instance.VerifyAndExecuteBlocks(transactOpts, verifyAndExecuteBlocksInfo, proofs)
+	if err != nil {
+		return "", err
+	}
+	return tx.Hash().String(), nil
+}
+
 func RevertBlocks(
 	cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB,
 	revertBlocks []StorageStoredBlockInfo,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
+	if err != nil {
+		return "", err
+	}
+	tx, err := instance.RevertBlocks(transactOpts, revertBlocks)
+	if err != nil {
+		return "", err
+	}
+	return tx.Hash().String(), nil
+}
+
+func RevertBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
+	revertBlocks []StorageStoredBlockInfo,
+	gasPrice *big.Int, gasLimit uint64, nonce uint64,
+) (txHash string, err error) {
+	transactOpts, err := ConstructTransactOptsWithNonce(authCli, gasPrice, gasLimit, nonce)
 	if err != nil {
 		return "", err
 	}
