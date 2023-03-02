@@ -571,6 +571,24 @@
   {
     "inputs": [
       {
+        "internalType": "uint64",
+        "name": "_n",
+        "type": "uint64"
+      },
+      {
+        "internalType": "bytes[]",
+        "name": "_depositsPubData",
+        "type": "bytes[]"
+      }
+    ],
+    "name": "cancelOutstandingDepositsForExodusMode",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "components": [
           {
             "internalType": "uint16",
@@ -975,11 +993,6 @@
             "type": "uint32"
           },
           {
-            "internalType": "uint64",
-            "name": "nftIndex",
-            "type": "uint64"
-          },
-          {
             "internalType": "uint256",
             "name": "amount",
             "type": "uint256"
@@ -1013,31 +1026,6 @@
             "internalType": "uint256",
             "name": "collectionNonce",
             "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "creatorAccountIndex",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "ownerAccountIndex",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "nftContentHash",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "creatorTreasuryRate",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "collectionId",
-            "type": "uint256"
           }
         ],
         "internalType": "struct ExodusVerifier.ExitData",
@@ -1061,6 +1049,56 @@
       }
     ],
     "name": "performDesert",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint64",
+            "name": "nftIndex",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint256",
+            "name": "creatorAccountIndex",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "nftContentHash",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "creatorTreasuryRate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "collectionId",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct ExodusVerifier.ExitNftData",
+        "name": "_exitNftData",
+        "type": "tuple"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_accountRoot",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[39]",
+        "name": "_nftMerkleProof",
+        "type": "uint256[39]"
+      }
+    ],
+    "name": "performDesertNft",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
