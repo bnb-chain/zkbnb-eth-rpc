@@ -126,8 +126,8 @@ func RevertBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
 	return tx.Hash().String(), nil
 }
 
-func PerformDesert(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB,
-	exitData ExodusVerifierExitData, assetMerkleProof [15]*big.Int, accountMerkleProof [31]*big.Int, nftMerkleProof [39]*big.Int,
+func PerformDesert(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB, nftRoot [32]byte,
+	exitData ExodusVerifierExitData, assetMerkleProof [15][32]byte, accountMerkleProof [31][32]byte,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
@@ -135,7 +135,7 @@ func PerformDesert(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *Z
 		return "", err
 	}
 	// call initialize
-	tx, err := instance.PerformDesert(transactOpts, exitData, assetMerkleProof, accountMerkleProof, nftMerkleProof)
+	tx, err := instance.PerformDesert(transactOpts, nftRoot, exitData, assetMerkleProof, accountMerkleProof)
 	if err != nil {
 		return "", err
 	}
@@ -143,7 +143,7 @@ func PerformDesert(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *Z
 }
 
 func PerformDesertNft(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB,
-	exitNftData ExodusVerifierExitNftData, accountRoot *big.Int, nftMerkleProof [39]*big.Int,
+	ownerAccountIndex *big.Int, accountRoot [32]byte, exitNfts []ExodusVerifierExitNftData, nftMerkleProofs [][39][32]byte,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
@@ -151,7 +151,7 @@ func PerformDesertNft(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance
 		return "", err
 	}
 	// call initialize
-	tx, err := instance.PerformDesertNft(transactOpts, exitNftData, accountRoot, nftMerkleProof)
+	tx, err := instance.PerformDesertNft(transactOpts, ownerAccountIndex, accountRoot, exitNfts, nftMerkleProofs)
 	if err != nil {
 		return "", err
 	}
