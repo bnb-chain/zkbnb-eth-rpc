@@ -1038,14 +1038,14 @@
         "type": "tuple"
       },
       {
-        "internalType": "uint256[15]",
+        "internalType": "bytes32[15]",
         "name": "_assetMerkleProof",
-        "type": "uint256[15]"
+        "type": "bytes32[15]"
       },
       {
-        "internalType": "uint256[31]",
+        "internalType": "bytes32[31]",
         "name": "_accountMerkleProof",
-        "type": "uint256[31]"
+        "type": "bytes32[31]"
       }
     ],
     "name": "performDesert",
@@ -1098,9 +1098,9 @@
         "type": "tuple[]"
       },
       {
-        "internalType": "uint256[39][]",
+        "internalType": "bytes32[39][]",
         "name": "_nftMerkleProofs",
-        "type": "uint256[39][]"
+        "type": "bytes32[39][]"
       }
     ],
     "name": "performDesertNft",
