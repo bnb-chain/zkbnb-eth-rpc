@@ -981,9 +981,9 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
+        "internalType": "bytes32",
         "name": "_nftRoot",
-        "type": "uint256"
+        "type": "bytes32"
       },
       {
         "components": [
@@ -1008,19 +1008,19 @@
             "type": "uint256"
           },
           {
-            "internalType": "uint256",
+            "internalType": "bytes32",
             "name": "accountNameHash",
-            "type": "uint256"
+            "type": "bytes32"
           },
           {
-            "internalType": "uint256",
+            "internalType": "bytes32",
             "name": "pubKeyX",
-            "type": "uint256"
+            "type": "bytes32"
           },
           {
-            "internalType": "uint256",
+            "internalType": "bytes32",
             "name": "pubKeyY",
-            "type": "uint256"
+            "type": "bytes32"
           },
           {
             "internalType": "uint256",
@@ -1061,9 +1061,9 @@
         "type": "uint256"
       },
       {
-        "internalType": "uint256",
+        "internalType": "bytes32",
         "name": "_accountRoot",
-        "type": "uint256"
+        "type": "bytes32"
       },
       {
         "components": [
@@ -1078,9 +1078,9 @@
             "type": "uint256"
           },
           {
-            "internalType": "uint256",
+            "internalType": "bytes32",
             "name": "nftContentHash",
-            "type": "uint256"
+            "type": "bytes32"
           },
           {
             "internalType": "uint256",
