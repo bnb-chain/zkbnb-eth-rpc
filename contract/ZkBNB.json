@@ -203,44 +203,6 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "factory",
-        "type": "address"
-      }
-    ],
-    "name": "NewDefaultNFTFactory",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "bytes32",
-        "name": "_creatorAccountNameHash",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint32",
-        "name": "_collectionId",
-        "type": "uint32"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "_factoryAddress",
-        "type": "address"
-      }
-    ],
-    "name": "NewNFTFactory",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
         "indexed": false,
         "internalType": "address",
         "name": "sender",
@@ -498,64 +460,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "accountNfts",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "nftAddress",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "nftIndex",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "accountNftsMap",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "activateDesertMode",
     "outputs": [
@@ -674,19 +578,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "defaultNFTFactory",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "contract IERC20",
@@ -794,7 +685,7 @@
             "type": "uint256"
           }
         ],
-        "internalType": "struct NFTHelper.AccountNft[]",
+        "internalType": "struct NftHelperLibrary.AccountNft[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -811,30 +702,6 @@
       }
     ],
     "name": "getAddressByAccountNameHash",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "_creatorAccountNameHash",
-        "type": "bytes32"
-      },
-      {
-        "internalType": "uint32",
-        "name": "_collectionId",
-        "type": "uint32"
-      }
-    ],
-    "name": "getNFTFactory",
     "outputs": [
       {
         "internalType": "address",
@@ -915,30 +782,6 @@
         "internalType": "bool",
         "name": "",
         "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      },
-      {
-        "internalType": "uint32",
-        "name": "",
-        "type": "uint32"
-      }
-    ],
-    "name": "nftFactories",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -1038,14 +881,14 @@
         "type": "tuple"
       },
       {
-        "internalType": "bytes32[15]",
+        "internalType": "bytes32[16]",
         "name": "_assetMerkleProof",
-        "type": "bytes32[15]"
+        "type": "bytes32[16]"
       },
       {
-        "internalType": "bytes32[31]",
+        "internalType": "bytes32[32]",
         "name": "_accountMerkleProof",
-        "type": "bytes32[31]"
+        "type": "bytes32[32]"
       }
     ],
     "name": "performDesert",
@@ -1098,9 +941,9 @@
         "type": "tuple[]"
       },
       {
-        "internalType": "bytes32[39][]",
+        "internalType": "bytes32[40][]",
         "name": "_nftMerkleProofs",
-        "type": "bytes32[39][]"
+        "type": "bytes32[40][]"
       }
     ],
     "name": "performDesertNft",
@@ -1218,19 +1061,6 @@
       }
     ],
     "name": "revertBlocks",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "contract INFTFactory",
-        "name": "_factory",
-        "type": "address"
-      }
-    ],
-    "name": "setDefaultNFTFactory",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
