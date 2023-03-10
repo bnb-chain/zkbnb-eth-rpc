@@ -3,22 +3,82 @@
     "inputs": [
       {
         "internalType": "string",
-        "name": "_name",
+        "name": "name_",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "_symbol",
+        "name": "symbol_",
         "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_tokenId",
-        "type": "uint256"
       }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "ApprovalCallerNotOwnerNorApproved",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ApprovalQueryForNonexistentToken",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "BalanceQueryForZeroAddress",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "MintERC2309QuantityExceedsLimit",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "MintToZeroAddress",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "MintZeroQuantity",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "OwnerQueryForNonexistentToken",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "OwnershipNotInitializedForExtraData",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TransferCallerNotOwnerNorApproved",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TransferFromIncorrectOwner",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TransferToNonERC721ReceiverImplementer",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TransferToZeroAddress",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "URIQueryForNonexistentToken",
+    "type": "error"
   },
   {
     "anonymous": false,
@@ -75,6 +135,37 @@
     "inputs": [
       {
         "indexed": true,
+        "internalType": "uint256",
+        "name": "fromTokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "toTokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      }
+    ],
+    "name": "ConsecutiveTransfer",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
         "internalType": "address",
         "name": "from",
         "type": "address"
@@ -110,7 +201,7 @@
     ],
     "name": "approve",
     "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -176,19 +267,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_tokenId",
-        "type": "uint256"
-      }
-    ],
-    "name": "mint",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "name",
     "outputs": [
@@ -240,7 +318,7 @@
     ],
     "name": "safeTransferFrom",
     "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -262,13 +340,13 @@
       },
       {
         "internalType": "bytes",
-        "name": "data",
+        "name": "_data",
         "type": "bytes"
       }
     ],
     "name": "safeTransferFrom",
     "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -285,24 +363,6 @@
       }
     ],
     "name": "setApprovalForAll",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_tokenId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "_tokenURI",
-        "type": "string"
-      }
-    ],
-    "name": "setTokenURI",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -359,6 +419,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "totalSupply",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -378,7 +451,7 @@
     ],
     "name": "transferFrom",
     "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "payable",
     "type": "function"
   }
 ]
