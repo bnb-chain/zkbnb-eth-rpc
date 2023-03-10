@@ -127,7 +127,7 @@ func RevertBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
 }
 
 func PerformDesert(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB, nftRoot [32]byte,
-	exitData ExodusVerifierExitData, assetMerkleProof [15][32]byte, accountMerkleProof [31][32]byte,
+	exitData ExodusVerifierExitData, assetMerkleProof [16][32]byte, accountMerkleProof [32][32]byte,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
@@ -143,7 +143,7 @@ func PerformDesert(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *Z
 }
 
 func PerformDesertNft(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB,
-	ownerAccountIndex *big.Int, accountRoot [32]byte, exitNfts []ExodusVerifierExitNftData, nftMerkleProofs [][39][32]byte,
+	ownerAccountIndex *big.Int, accountRoot [32]byte, exitNfts []ExodusVerifierExitNftData, nftMerkleProofs [][40][32]byte,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
