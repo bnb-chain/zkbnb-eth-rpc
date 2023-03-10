@@ -1,4 +1,4 @@
-@echo off
+#!/usr/bin/env bash
 
-abigen --abi=OldZkBNB.json --pkg=ZkBNB --out=../core/ZkBNBGen.go
-abigen --abi=Governance.json --pkg=Governance --out=../GovernanceGen.go
+abigen --abi=ZkBNB.json --pkg=core --type ZkBNB --out=../core/ZkBNBGen.go
+abigen --abi=Governance.json --pkg=core --type Governance --out=../core/GovernanceGen.go
