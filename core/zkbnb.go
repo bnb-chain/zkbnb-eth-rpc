@@ -126,6 +126,34 @@ func RevertBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
 	return tx.Hash().String(), nil
 }
 
+func WithdrawPendingBalance(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB, owner common.Address, token common.Address, amount *big.Int, gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
+	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
+	if err != nil {
+		return "", err
+	}
+	// call initialize
+	tx, err := instance.WithdrawPendingBalance(transactOpts, owner, token, amount)
+	if err != nil {
+		return "", err
+	}
+	return tx.Hash().String(), nil
+}
+
+func WithdrawPendingNFTBalance(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB, nftIndex *big.Int, gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
+	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
+	if err != nil {
+		return "", err
+	}
+	// call initialize
+	tx, err := instance.WithdrawPendingNFTBalance(transactOpts, nftIndex)
+	if err != nil {
+		return "", err
+	}
+	return tx.Hash().String(), nil
+}
+
+// conflict with Exodus exit branch
+/*
 func PerformDesert(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB, nftRoot [32]byte,
 	exitData ExodusVerifierExitData, assetMerkleProof [15][32]byte, accountMerkleProof [31][32]byte,
 	gasPrice *big.Int, gasLimit uint64,
@@ -157,32 +185,6 @@ func PerformDesertNft(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance
 	}
 	return tx.Hash().String(), nil
 }
-
-func WithdrawPendingBalance(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB, owner common.Address, token common.Address, amount *big.Int, gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
-	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
-	if err != nil {
-		return "", err
-	}
-	// call initialize
-	tx, err := instance.WithdrawPendingBalance(transactOpts, owner, token, amount)
-	if err != nil {
-		return "", err
-	}
-	return tx.Hash().String(), nil
-}
-func WithdrawPendingNFTBalance(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB, nftIndex *big.Int, gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
-	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
-	if err != nil {
-		return "", err
-	}
-	// call initialize
-	tx, err := instance.WithdrawPendingNFTBalance(transactOpts, nftIndex)
-	if err != nil {
-		return "", err
-	}
-	return tx.Hash().String(), nil
-}
-
 func CancelOutstandingDepositsForExodusMode(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB, priorityRequestId uint64, depositsPubData [][]byte, gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
 	if err != nil {
@@ -195,3 +197,4 @@ func CancelOutstandingDepositsForExodusMode(cli *rpc.ProviderClient, authCli *rp
 	}
 	return tx.Hash().String(), nil
 }
+*/
