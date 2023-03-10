@@ -660,37 +660,6 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_account",
-        "type": "address"
-      }
-    ],
-    "name": "getAccountNfts",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "nftAddress",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "nftIndex",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct NftHelperLibrary.AccountNft[]",
-        "name": "",
-        "type": "tuple[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
         "name": "_address",
         "type": "address"
       },
