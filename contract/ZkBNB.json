@@ -748,9 +748,9 @@
   {
     "inputs": [
       {
-        "internalType": "bytes32",
+        "internalType": "uint256",
         "name": "_nftRoot",
-        "type": "bytes32"
+        "type": "uint256"
       },
       {
         "components": [
@@ -805,14 +805,14 @@
         "type": "tuple"
       },
       {
-        "internalType": "bytes32[16]",
+        "internalType": "uint256[16]",
         "name": "_assetMerkleProof",
-        "type": "bytes32[16]"
+        "type": "uint256[16]"
       },
       {
-        "internalType": "bytes32[32]",
+        "internalType": "uint256[32]",
         "name": "_accountMerkleProof",
-        "type": "bytes32[32]"
+        "type": "uint256[32]"
       }
     ],
     "name": "performDesert",
@@ -828,9 +828,9 @@
         "type": "uint256"
       },
       {
-        "internalType": "bytes32",
+        "internalType": "uint256",
         "name": "_accountRoot",
-        "type": "bytes32"
+        "type": "uint256"
       },
       {
         "components": [
@@ -865,9 +865,9 @@
         "type": "tuple[]"
       },
       {
-        "internalType": "bytes32[40][]",
+        "internalType": "uint256[40][]",
         "name": "_nftMerkleProofs",
-        "type": "bytes32[40][]"
+        "type": "uint256[40][]"
       }
     ],
     "name": "performDesertNft",
