@@ -126,8 +126,8 @@ func RevertBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
 	return tx.Hash().String(), nil
 }
 
-func PerformDesert(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB, nftRoot [32]byte,
-	exitData ExodusVerifierExitData, assetMerkleProof [16][32]byte, accountMerkleProof [32][32]byte,
+func PerformDesert(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB, nftRoot *big.Int,
+	exitData ExodusVerifierExitData, assetMerkleProof [16]*big.Int, accountMerkleProof [32]*big.Int,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
@@ -143,7 +143,7 @@ func PerformDesert(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *Z
 }
 
 func PerformDesertNft(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB,
-	ownerAccountIndex *big.Int, accountRoot [32]byte, exitNfts []ExodusVerifierExitNftData, nftMerkleProofs [][40][32]byte,
+	ownerAccountIndex *big.Int, accountRoot *big.Int, exitNfts []ExodusVerifierExitNftData, nftMerkleProofs [][40]*big.Int,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
