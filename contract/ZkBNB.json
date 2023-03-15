@@ -748,6 +748,48 @@
   {
     "inputs": [
       {
+        "components": [
+          {
+            "internalType": "uint16",
+            "name": "blockSize",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint32",
+            "name": "blockNumber",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint64",
+            "name": "priorityOperations",
+            "type": "uint64"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "pendingOnchainOperationsHash",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "uint256",
+            "name": "timestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "stateRoot",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "commitment",
+            "type": "bytes32"
+          }
+        ],
+        "internalType": "struct Storage.StoredBlockInfo",
+        "name": "_storedBlockInfo",
+        "type": "tuple"
+      },
+      {
         "internalType": "uint256",
         "name": "_nftRoot",
         "type": "uint256"
@@ -760,11 +802,6 @@
             "type": "uint32"
           },
           {
-            "internalType": "uint32",
-            "name": "accountId",
-            "type": "uint32"
-          },
-          {
             "internalType": "uint256",
             "name": "amount",
             "type": "uint256"
@@ -773,11 +810,23 @@
             "internalType": "uint256",
             "name": "offerCanceledOrFinalized",
             "type": "uint256"
+          }
+        ],
+        "internalType": "struct ExodusVerifier.AssetExitData",
+        "name": "_assetExitData",
+        "type": "tuple"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint32",
+            "name": "accountId",
+            "type": "uint32"
           },
           {
-            "internalType": "bytes20",
+            "internalType": "address",
             "name": "l1Address",
-            "type": "bytes20"
+            "type": "address"
           },
           {
             "internalType": "bytes32",
@@ -800,8 +849,8 @@
             "type": "uint256"
           }
         ],
-        "internalType": "struct ExodusVerifier.ExitData",
-        "name": "_exitData",
+        "internalType": "struct ExodusVerifier.AccountExitData",
+        "name": "_accountExitData",
         "type": "tuple"
       },
       {
@@ -823,14 +872,88 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "_ownerAccountIndex",
-        "type": "uint256"
+        "components": [
+          {
+            "internalType": "uint16",
+            "name": "blockSize",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint32",
+            "name": "blockNumber",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint64",
+            "name": "priorityOperations",
+            "type": "uint64"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "pendingOnchainOperationsHash",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "uint256",
+            "name": "timestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "stateRoot",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "commitment",
+            "type": "bytes32"
+          }
+        ],
+        "internalType": "struct Storage.StoredBlockInfo",
+        "name": "_storedBlockInfo",
+        "type": "tuple"
       },
       {
         "internalType": "uint256",
-        "name": "_accountRoot",
+        "name": "_assetRoot",
         "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint32",
+            "name": "accountId",
+            "type": "uint32"
+          },
+          {
+            "internalType": "address",
+            "name": "l1Address",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "pubKeyX",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "pubKeyY",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "uint256",
+            "name": "nonce",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "collectionNonce",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct ExodusVerifier.AccountExitData",
+        "name": "_accountExitData",
+        "type": "tuple"
       },
       {
         "components": [
@@ -870,9 +993,14 @@
             "type": "uint256"
           }
         ],
-        "internalType": "struct ExodusVerifier.ExitNftData[]",
+        "internalType": "struct ExodusVerifier.NftExitData[]",
         "name": "_exitNfts",
         "type": "tuple[]"
+      },
+      {
+        "internalType": "uint256[32]",
+        "name": "_accountMerkleProof",
+        "type": "uint256[32]"
       },
       {
         "internalType": "uint256[40][]",
