@@ -126,8 +126,8 @@ func RevertBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
 	return tx.Hash().String(), nil
 }
 
-func PerformDesert(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB, nftRoot *big.Int,
-	exitData ExodusVerifierExitData, assetMerkleProof [16]*big.Int, accountMerkleProof [32]*big.Int,
+func PerformDesert(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB, storedBlockInfo StorageStoredBlockInfo, nftRoot *big.Int, assetExitData ExodusVerifierAssetExitData, accountExitData ExodusVerifierAccountExitData,
+	assetMerkleProof [16]*big.Int, accountMerkleProof [32]*big.Int,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
@@ -135,7 +135,7 @@ func PerformDesert(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *Z
 		return "", err
 	}
 	// call initialize
-	tx, err := instance.PerformDesert(transactOpts, nftRoot, exitData, assetMerkleProof, accountMerkleProof)
+	tx, err := instance.PerformDesert(transactOpts, storedBlockInfo, nftRoot, assetExitData, accountExitData, assetMerkleProof, accountMerkleProof)
 	if err != nil {
 		return "", err
 	}
@@ -143,7 +143,7 @@ func PerformDesert(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *Z
 }
 
 func PerformDesertNft(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB,
-	ownerAccountIndex *big.Int, accountRoot *big.Int, exitNfts []ExodusVerifierExitNftData, nftMerkleProofs [][40]*big.Int,
+	storedBlockInfo StorageStoredBlockInfo, assetRoot *big.Int, accountExitData ExodusVerifierAccountExitData, exitNfts []ExodusVerifierNftExitData, accountMerkleProof [32]*big.Int, nftMerkleProofs [][40]*big.Int,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
@@ -151,7 +151,7 @@ func PerformDesertNft(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance
 		return "", err
 	}
 	// call initialize
-	tx, err := instance.PerformDesertNft(transactOpts, ownerAccountIndex, accountRoot, exitNfts, nftMerkleProofs)
+	tx, err := instance.PerformDesertNft(transactOpts, storedBlockInfo, assetRoot, accountExitData, exitNfts, accountMerkleProof, nftMerkleProofs)
 	if err != nil {
 		return "", err
 	}
