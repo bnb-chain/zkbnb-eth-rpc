@@ -24,3 +24,16 @@ func ConstructTransactOpts(cli *rpc.ProviderClient, authCli *rpc.AuthClient, gas
 	transactOpts.Value = big.NewInt(0)
 	return transactOpts, nil
 }
+
+func ConstructTransactOptsWithNonce(authCli *rpc.AuthClient, gasPrice *big.Int, gasLimit uint64, nonce uint64) (transactOpts *bind.TransactOpts, err error) {
+	transactOpts, err = bind.NewKeyedTransactorWithChainID(authCli.PrivateKey, authCli.ChainId)
+	if err != nil {
+		return nil, err
+	}
+	transactOpts.Nonce = big.NewInt(int64(nonce))
+	transactOpts.GasPrice = gasPrice
+	transactOpts.GasLimit = gasLimit
+	transactOpts.From = authCli.Address
+	transactOpts.Value = big.NewInt(0)
+	return transactOpts, nil
+}
