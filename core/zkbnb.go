@@ -195,3 +195,16 @@ func CancelOutstandingDepositsForExodusMode(cli *rpc.ProviderClient, authCli *rp
 	}
 	return tx.Hash().String(), nil
 }
+
+func ActivateDesertMode(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB, gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
+	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
+	if err != nil {
+		return "", err
+	}
+	// call initialize
+	tx, err := instance.ActivateDesertMode(transactOpts)
+	if err != nil {
+		return "", err
+	}
+	return tx.Hash().String(), nil
+}
