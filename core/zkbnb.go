@@ -126,7 +126,7 @@ func RevertBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
 	return tx.Hash().String(), nil
 }
 
-func PerformDesert(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB, storedBlockInfo StorageStoredBlockInfo, nftRoot *big.Int, assetExitData ExodusVerifierAssetExitData, accountExitData ExodusVerifierAccountExitData,
+func PerformDesert(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB, storedBlockInfo StorageStoredBlockInfo, nftRoot *big.Int, assetExitData DesertVerifierAssetExitData, accountExitData DesertVerifierAccountExitData,
 	assetMerkleProof [16]*big.Int, accountMerkleProof [32]*big.Int,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
@@ -143,7 +143,7 @@ func PerformDesert(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *Z
 }
 
 func PerformDesertNft(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB,
-	storedBlockInfo StorageStoredBlockInfo, assetRoot *big.Int, accountExitData ExodusVerifierAccountExitData, exitNfts []ExodusVerifierNftExitData, accountMerkleProof [32]*big.Int, nftMerkleProofs [][40]*big.Int,
+	storedBlockInfo StorageStoredBlockInfo, assetRoot *big.Int, accountExitData DesertVerifierAccountExitData, exitNfts []DesertVerifierNftExitData, accountMerkleProof [32]*big.Int, nftMerkleProofs [][40]*big.Int,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
@@ -189,7 +189,7 @@ func CancelOutstandingDepositsForExodusMode(cli *rpc.ProviderClient, authCli *rp
 		return "", err
 	}
 	// call initialize
-	tx, err := instance.CancelOutstandingDepositsForExodusMode(transactOpts, priorityRequestId, depositsPubData)
+	tx, err := instance.CancelOutstandingDepositsForDesertMode(transactOpts, priorityRequestId, depositsPubData)
 	if err != nil {
 		return "", err
 	}
