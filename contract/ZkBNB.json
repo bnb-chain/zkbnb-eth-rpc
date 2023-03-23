@@ -485,7 +485,7 @@
         "type": "bytes[]"
       }
     ],
-    "name": "cancelOutstandingDepositsForExodusMode",
+    "name": "cancelOutstandingDepositsForDesertMode",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -797,9 +797,9 @@
       {
         "components": [
           {
-            "internalType": "uint32",
+            "internalType": "uint16",
             "name": "assetId",
-            "type": "uint32"
+            "type": "uint16"
           },
           {
             "internalType": "uint256",
@@ -812,7 +812,7 @@
             "type": "uint256"
           }
         ],
-        "internalType": "struct ExodusVerifier.AssetExitData",
+        "internalType": "struct DesertVerifier.AssetExitData",
         "name": "_assetExitData",
         "type": "tuple"
       },
@@ -849,7 +849,7 @@
             "type": "uint256"
           }
         ],
-        "internalType": "struct ExodusVerifier.AccountExitData",
+        "internalType": "struct DesertVerifier.AccountExitData",
         "name": "_accountExitData",
         "type": "tuple"
       },
@@ -951,16 +951,16 @@
             "type": "uint256"
           }
         ],
-        "internalType": "struct ExodusVerifier.AccountExitData",
+        "internalType": "struct DesertVerifier.AccountExitData",
         "name": "_accountExitData",
         "type": "tuple"
       },
       {
         "components": [
           {
-            "internalType": "uint64",
+            "internalType": "uint40",
             "name": "nftIndex",
-            "type": "uint64"
+            "type": "uint40"
           },
           {
             "internalType": "uint256",
@@ -993,7 +993,7 @@
             "type": "uint256"
           }
         ],
-        "internalType": "struct ExodusVerifier.NftExitData[]",
+        "internalType": "struct DesertVerifier.NftExitData[]",
         "name": "_exitNfts",
         "type": "tuple[]"
       },
