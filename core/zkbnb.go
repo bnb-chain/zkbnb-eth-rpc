@@ -1,7 +1,8 @@
 package core
 
 import (
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kms"
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -38,29 +39,8 @@ func CommitBlocks(
 }
 
 /*
-	CommitBlocks: commit blocks with signer outside the function
-*/
-func CommitBlocksWithSigner(
-	cli *rpc.ProviderClient, signer bind.SignerFn, address common.Address, instance *ZkBNB,
-	lastBlock StorageStoredBlockInfo, commitBlocksInfo []OldZkBNBCommitBlockInfo,
-	gasPrice *big.Int, gasLimit uint64,
-) (txHash string, err error) {
-	transactOpts, err := ConstructTransactOptsWithSigner(cli, signer, address, gasPrice, gasLimit)
-	if err != nil {
-		return "", err
-	}
-	// call initialize
-	tx, err := instance.CommitBlocks(transactOpts, lastBlock, commitBlocksInfo)
-	if err != nil {
-		return "", err
-	}
-	return tx.Hash().String(), nil
-}
-
-/*
 	CommitBlocks: commit blocks
 */
-
 func CommitBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
 	lastBlock StorageStoredBlockInfo, commitBlocksInfo []OldZkBNBCommitBlockInfo,
 	gasPrice *big.Int, gasLimit uint64, nonce uint64,
@@ -78,13 +58,13 @@ func CommitBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
 }
 
 /*
-	CommitBlocks: commit blocks with signer outside the function
+	CommitBlocks: commit blocks with kms signature facility
 */
-func CommitBlocksWithNonceAndSigner(signer bind.SignerFn, address common.Address, instance *ZkBNB,
+func CommitBlocksWithNonceAndKms(ctx context.Context, kmsSvc *kms.Client, keyId string, chainID *big.Int, address common.Address, instance *ZkBNB,
 	lastBlock StorageStoredBlockInfo, commitBlocksInfo []OldZkBNBCommitBlockInfo,
 	gasPrice *big.Int, gasLimit uint64, nonce uint64,
 ) (txHash string, err error) {
-	transactOpts, err := ConstructTransactOptsWithNonceAndSigner(signer, address, gasPrice, gasLimit, nonce)
+	transactOpts, err := ConstructTransactOptsWithNonceAndKms(ctx, kmsSvc, keyId, chainID, address, gasPrice, gasLimit, nonce)
 	if err != nil {
 		return "", err
 	}
@@ -117,26 +97,6 @@ func VerifyAndExecuteBlocks(
 }
 
 /*
-	VerifyAndExecuteBlocks: verify and execute blocks with signer outside the function
-*/
-func VerifyAndExecuteBlocksWithSigner(
-	cli *rpc.ProviderClient, signer bind.SignerFn, address common.Address, instance *ZkBNB,
-	verifyAndExecuteBlocksInfo []OldZkBNBVerifyAndExecuteBlockInfo, proofs []*big.Int,
-	gasPrice *big.Int, gasLimit uint64,
-) (txHash string, err error) {
-	transactOpts, err := ConstructTransactOptsWithSigner(cli, signer, address, gasPrice, gasLimit)
-	if err != nil {
-		return "", err
-	}
-	// call initialize
-	tx, err := instance.VerifyAndExecuteBlocks(transactOpts, verifyAndExecuteBlocksInfo, proofs)
-	if err != nil {
-		return "", err
-	}
-	return tx.Hash().String(), nil
-}
-
-/*
 	VerifyAndExecuteBlocks: verify and execute blocks
 */
 func VerifyAndExecuteBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
@@ -156,13 +116,13 @@ func VerifyAndExecuteBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
 }
 
 /*
-	VerifyAndExecuteBlocks: verify and execute blocks with signer outside the function
+	VerifyAndExecuteBlocks: verify and execute blocks with kms signature facility
 */
-func VerifyAndExecuteBlocksWithNonceAndSigner(signer bind.SignerFn, address common.Address, instance *ZkBNB,
-	verifyAndExecuteBlocksInfo []OldZkBNBVerifyAndExecuteBlockInfo, proofs []*big.Int,
+func VerifyAndExecuteBlocksWithNonceAndKms(ctx context.Context, kmsSvc *kms.Client, keyId string, chainID *big.Int, address common.Address, instance *ZkBNB,
+	verifyAndExecuteBlocksInfo []ZkBNBVerifyAndExecuteBlockInfo, proofs []*big.Int,
 	gasPrice *big.Int, gasLimit uint64, nonce uint64,
 ) (txHash string, err error) {
-	transactOpts, err := ConstructTransactOptsWithNonceAndSigner(signer, address, gasPrice, gasLimit, nonce)
+	transactOpts, err := ConstructTransactOptsWithNonceAndKms(ctx, kmsSvc, keyId, chainID, address, gasPrice, gasLimit, nonce)
 	if err != nil {
 		return "", err
 	}
@@ -194,32 +154,14 @@ func RevertBlocks(
 }
 
 /*
-	RevertBlocks: revert blocks with signer outside the function
+	RevertBlocks: revert blocks with kms signature facility
 */
-func RevertBlocksWithSigner(
-	cli *rpc.ProviderClient, signer bind.SignerFn, address common.Address, instance *ZkBNB,
+func RevertBlocksWithKms(
+	cli *rpc.ProviderClient, ctx context.Context, kmsSvc *kms.Client, keyId string, chainID *big.Int, address common.Address, instance *ZkBNB,
 	revertBlocks []StorageStoredBlockInfo,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
-	transactOpts, err := ConstructTransactOptsWithSigner(cli, signer, address, gasPrice, gasLimit)
-	if err != nil {
-		return "", err
-	}
-	tx, err := instance.RevertBlocks(transactOpts, revertBlocks)
-	if err != nil {
-		return "", err
-	}
-	return tx.Hash().String(), nil
-}
-
-/*
-	RevertBlocks: revert blocks with signer outside the function
-*/
-func RevertBlocksWithNonceAndSigner(signer bind.SignerFn, address common.Address, instance *ZkBNB,
-	revertBlocks []StorageStoredBlockInfo,
-	gasPrice *big.Int, gasLimit uint64, nonce uint64,
-) (txHash string, err error) {
-	transactOpts, err := ConstructTransactOptsWithNonceAndSigner(signer, address, gasPrice, gasLimit, nonce)
+	transactOpts, err := ConstructTransactOptsWithKms(cli, ctx, kmsSvc, keyId, chainID, address, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
