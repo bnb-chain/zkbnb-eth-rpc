@@ -1,6 +1,7 @@
 package core
 
 import (
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -207,4 +208,12 @@ func ActivateDesertMode(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instan
 		return "", err
 	}
 	return tx.Hash().String(), nil
+}
+
+func GetPendingBalance(instance *ZkBNB, address common.Address, assetAddr common.Address) (*big.Int, error) {
+	amount, err := instance.GetPendingBalance(&bind.CallOpts{}, address, assetAddr)
+	if err != nil {
+		return nil, err
+	}
+	return amount, nil
 }
