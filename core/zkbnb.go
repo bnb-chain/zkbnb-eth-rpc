@@ -42,7 +42,7 @@ func CommitBlocks(
 	CommitBlocks: commit blocks
 */
 func CommitBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
-	lastBlock StorageStoredBlockInfo, commitBlocksInfo []OldZkBNBCommitBlockInfo,
+	lastBlock StorageStoredBlockInfo, commitBlocksInfo []ZkBNBCommitBlockInfo,
 	gasPrice *big.Int, gasLimit uint64, nonce uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOptsWithNonce(authCli, gasPrice, gasLimit, nonce)
@@ -61,7 +61,7 @@ func CommitBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
 	CommitBlocks: commit blocks with kms signature facility
 */
 func CommitBlocksWithNonceAndKms(ctx context.Context, kmsSvc *kms.Client, keyId string, chainID *big.Int, address common.Address, instance *ZkBNB,
-	lastBlock StorageStoredBlockInfo, commitBlocksInfo []OldZkBNBCommitBlockInfo,
+	lastBlock StorageStoredBlockInfo, commitBlocksInfo []ZkBNBCommitBlockInfo,
 	gasPrice *big.Int, gasLimit uint64, nonce uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOptsWithNonceAndKms(ctx, kmsSvc, keyId, chainID, address, gasPrice, gasLimit, nonce)
