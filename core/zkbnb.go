@@ -184,7 +184,7 @@ func WithdrawPendingNFTBalance(cli *rpc.ProviderClient, authCli *rpc.AuthClient,
 	return tx.Hash().String(), nil
 }
 
-func CancelOutstandingDepositsForExodusMode(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB, priorityRequestId uint64, depositsPubData [][]byte, gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
+func CancelOutstandingDepositsForDesertMode(cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB, priorityRequestId uint64, depositsPubData [][]byte, gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOpts(cli, authCli, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
