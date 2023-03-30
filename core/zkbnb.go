@@ -77,6 +77,27 @@ func CommitBlocksWithNonceAndKms(ctx context.Context, kmsSvc *kms.Client, keyId 
 }
 
 /*
+	Estimate Gas for commit blocks with kms signature facility
+*/
+func EstimateCommitGasWithNonceAndKms(ctx context.Context, kmsSvc *kms.Client, keyId string, chainID *big.Int, address common.Address, instance *ZkBNB,
+	lastBlock StorageStoredBlockInfo, commitBlocksInfo []ZkBNBCommitBlockInfo,
+	gasPrice *big.Int, gasLimit uint64, nonce uint64,
+) (gas uint64, err error) {
+	transactOpts, err := ConstructTransactOptsWithNonceAndKms(ctx, kmsSvc, keyId, chainID, address, gasPrice, gasLimit, nonce)
+	if err != nil {
+		return 0, err
+	}
+	// Only for gas estimation and set NoSend = true
+	transactOpts.NoSend = true
+	// call initialize
+	tx, err := instance.CommitBlocks(transactOpts, lastBlock, commitBlocksInfo)
+	if err != nil {
+		return 0, err
+	}
+	return tx.Gas(), nil
+}
+
+/*
 	VerifyAndExecuteBlocks: verify and execute blocks
 */
 func VerifyAndExecuteBlocks(
@@ -132,6 +153,27 @@ func VerifyAndExecuteBlocksWithNonceAndKms(ctx context.Context, kmsSvc *kms.Clie
 		return "", err
 	}
 	return tx.Hash().String(), nil
+}
+
+/*
+	Estimate Gas for verifying and executing blocks with kms signature facility
+*/
+func EstimateVerifyAndExecuteWithNonceAndKms(ctx context.Context, kmsSvc *kms.Client, keyId string, chainID *big.Int, address common.Address, instance *ZkBNB,
+	verifyAndExecuteBlocksInfo []ZkBNBVerifyAndExecuteBlockInfo, proofs []*big.Int,
+	gasPrice *big.Int, gasLimit uint64, nonce uint64,
+) (gas uint64, err error) {
+	transactOpts, err := ConstructTransactOptsWithNonceAndKms(ctx, kmsSvc, keyId, chainID, address, gasPrice, gasLimit, nonce)
+	if err != nil {
+		return 0, err
+	}
+	// Only for gas estimation and set NoSend = true
+	transactOpts.NoSend = true
+	// call initialize
+	tx, err := instance.VerifyAndExecuteBlocks(transactOpts, verifyAndExecuteBlocksInfo, proofs)
+	if err != nil {
+		return 0, err
+	}
+	return tx.Gas(), nil
 }
 
 /*
