@@ -973,16 +973,6 @@
             "type": "uint256"
           },
           {
-            "internalType": "bytes32",
-            "name": "nftContentHash",
-            "type": "bytes32"
-          },
-          {
-            "internalType": "uint8",
-            "name": "nftContentType",
-            "type": "uint8"
-          },
-          {
             "internalType": "uint256",
             "name": "creatorTreasuryRate",
             "type": "uint256"
@@ -991,6 +981,21 @@
             "internalType": "uint256",
             "name": "collectionId",
             "type": "uint256"
+          },
+          {
+            "internalType": "bytes16",
+            "name": "nftContentHash1",
+            "type": "bytes16"
+          },
+          {
+            "internalType": "bytes16",
+            "name": "nftContentHash2",
+            "type": "bytes16"
+          },
+          {
+            "internalType": "uint8",
+            "name": "nftContentType",
+            "type": "uint8"
           }
         ],
         "internalType": "struct DesertVerifier.NftExitData[]",
