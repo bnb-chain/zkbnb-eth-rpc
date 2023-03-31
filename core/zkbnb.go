@@ -217,3 +217,19 @@ func GetPendingBalance(instance *ZkBNB, address common.Address, assetAddr common
 	}
 	return amount, nil
 }
+
+func FirstPriorityRequestId(instance *ZkBNB) (uint64, error) {
+	requestId, err := instance.FirstPriorityRequestId(&bind.CallOpts{})
+	if err != nil {
+		return 0, err
+	}
+	return requestId, nil
+}
+
+func TotalOpenPriorityRequests(instance *ZkBNB) (uint64, error) {
+	total, err := instance.TotalOpenPriorityRequests(&bind.CallOpts{})
+	if err != nil {
+		return 0, err
+	}
+	return total, nil
+}
