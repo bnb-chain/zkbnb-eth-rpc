@@ -34,6 +34,10 @@ func NewAuthClient(priKey string, chainId *big.Int) (authCli *AuthClient, err er
 	return &AuthClient{PrivateKey: privateKey, PublicKey: &publicKey, Address: address, ChainId: chainId}, nil
 }
 
+func (c *AuthClient) GetL1Address() common.Address {
+	return c.Address
+}
+
 func (c *AuthClient) ConstructTransactOpts(cli *ProviderClient, gasPrice *big.Int, gasLimit uint64) (transactOpts *bind.TransactOpts, err error) {
 	transactOpts, err = bind.NewKeyedTransactorWithChainID(c.PrivateKey, c.ChainId)
 	if err != nil {
