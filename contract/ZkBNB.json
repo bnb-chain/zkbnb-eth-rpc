@@ -802,9 +802,9 @@
             "type": "uint16"
           },
           {
-            "internalType": "uint256",
+            "internalType": "uint128",
             "name": "amount",
-            "type": "uint256"
+            "type": "uint128"
           },
           {
             "internalType": "uint256",
