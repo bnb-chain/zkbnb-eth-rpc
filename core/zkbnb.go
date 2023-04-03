@@ -8,20 +8,34 @@ import (
 )
 
 type ZkBNBClient struct {
-	Instance    *ZkBNB
-	Provider    *rpc.ProviderClient
-	Constructor TransactOptsConstructor
+	Instance                 *ZkBNB
+	Provider                 *rpc.ProviderClient
+	CommitConstructor        TransactOptsConstructor
+	VerifyConstructor        TransactOptsConstructor
+	RevertConstructor        TransactOptsConstructor
+	PerformConstructor       TransactOptsConstructor
+	WithdrawConstructor      TransactOptsConstructor
+	CancelDepositConstructor TransactOptsConstructor
+	ActivateConstructor      TransactOptsConstructor
 }
 
-func NewZkBNBClient(provider *rpc.ProviderClient, address string, constructor TransactOptsConstructor) (*ZkBNBClient, error) {
+func NewZkBNBClient(provider *rpc.ProviderClient, address string, commitConstructor, verifyConstructor,
+	revertConstructor, performConstructor, withdrawConstructor, cancelDepositConstructor,
+	activateConstructor TransactOptsConstructor) (*ZkBNBClient, error) {
 	instance, err := NewZkBNB(common.HexToAddress(address), *provider)
 	if err != nil {
 		return nil, err
 	}
 	client := &ZkBNBClient{
-		Instance:    instance,
-		Provider:    provider,
-		Constructor: constructor,
+		Instance:                 instance,
+		Provider:                 provider,
+		CommitConstructor:        commitConstructor,
+		VerifyConstructor:        verifyConstructor,
+		RevertConstructor:        revertConstructor,
+		PerformConstructor:       performConstructor,
+		WithdrawConstructor:      withdrawConstructor,
+		CancelDepositConstructor: cancelDepositConstructor,
+		ActivateConstructor:      activateConstructor,
 	}
 	return client, nil
 }
@@ -31,7 +45,7 @@ func NewZkBNBClient(provider *rpc.ProviderClient, address string, constructor Tr
 */
 func (c *ZkBNBClient) CommitBlocks(lastBlock StorageStoredBlockInfo, commitBlocksInfo []ZkBNBCommitBlockInfo,
 	gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
-	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
+	transactOpts, err := c.CommitConstructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
@@ -48,7 +62,7 @@ func (c *ZkBNBClient) CommitBlocks(lastBlock StorageStoredBlockInfo, commitBlock
 */
 func (c *ZkBNBClient) CommitBlocksWithNonce(lastBlock StorageStoredBlockInfo, commitBlocksInfo []ZkBNBCommitBlockInfo,
 	gasPrice *big.Int, gasLimit uint64, nonce uint64) (txHash string, err error) {
-	transactOpts, err := c.Constructor.ConstructTransactOptsWithNonce(gasPrice, gasLimit, nonce)
+	transactOpts, err := c.CommitConstructor.ConstructTransactOptsWithNonce(gasPrice, gasLimit, nonce)
 	if err != nil {
 		return "", err
 	}
@@ -66,7 +80,7 @@ func (c *ZkBNBClient) CommitBlocksWithNonce(lastBlock StorageStoredBlockInfo, co
 func (c *ZkBNBClient) EstimateCommitGasWithNonce(lastBlock StorageStoredBlockInfo, commitBlocksInfo []ZkBNBCommitBlockInfo,
 	gasPrice *big.Int, gasLimit uint64, nonce uint64,
 ) (gas uint64, err error) {
-	transactOpts, err := c.Constructor.ConstructTransactOptsWithNonce(gasPrice, gasLimit, nonce)
+	transactOpts, err := c.CommitConstructor.ConstructTransactOptsWithNonce(gasPrice, gasLimit, nonce)
 	if err != nil {
 		return 0, err
 	}
@@ -86,7 +100,7 @@ func (c *ZkBNBClient) EstimateCommitGasWithNonce(lastBlock StorageStoredBlockInf
 func (c *ZkBNBClient) VerifyAndExecuteBlocks(verifyAndExecuteBlocksInfo []ZkBNBVerifyAndExecuteBlockInfo, proofs []*big.Int,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
-	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
+	transactOpts, err := c.VerifyConstructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
@@ -103,7 +117,7 @@ func (c *ZkBNBClient) VerifyAndExecuteBlocks(verifyAndExecuteBlocksInfo []ZkBNBV
 */
 func (c *ZkBNBClient) VerifyAndExecuteBlocksWithNonce(verifyAndExecuteBlocksInfo []ZkBNBVerifyAndExecuteBlockInfo, proofs []*big.Int,
 	gasPrice *big.Int, gasLimit uint64, nonce uint64) (txHash string, err error) {
-	transactOpts, err := c.Constructor.ConstructTransactOptsWithNonce(gasPrice, gasLimit, nonce)
+	transactOpts, err := c.VerifyConstructor.ConstructTransactOptsWithNonce(gasPrice, gasLimit, nonce)
 	if err != nil {
 		return "", err
 	}
@@ -120,7 +134,7 @@ func (c *ZkBNBClient) VerifyAndExecuteBlocksWithNonce(verifyAndExecuteBlocksInfo
 */
 func (c *ZkBNBClient) EstimateVerifyAndExecuteWithNonce(verifyAndExecuteBlocksInfo []ZkBNBVerifyAndExecuteBlockInfo, proofs []*big.Int,
 	gasPrice *big.Int, gasLimit uint64, nonce uint64) (gas uint64, err error) {
-	transactOpts, err := c.Constructor.ConstructTransactOptsWithNonce(gasPrice, gasLimit, nonce)
+	transactOpts, err := c.VerifyConstructor.ConstructTransactOptsWithNonce(gasPrice, gasLimit, nonce)
 	if err != nil {
 		return 0, err
 	}
@@ -138,7 +152,7 @@ func (c *ZkBNBClient) EstimateVerifyAndExecuteWithNonce(verifyAndExecuteBlocksIn
 	RevertBlocks: revert blocks
 */
 func (c *ZkBNBClient) RevertBlocks(revertBlocks []StorageStoredBlockInfo, gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
-	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
+	transactOpts, err := c.RevertConstructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
@@ -155,7 +169,7 @@ func (c *ZkBNBClient) RevertBlocks(revertBlocks []StorageStoredBlockInfo, gasPri
 func (c *ZkBNBClient) PerformDesert(storedBlockInfo StorageStoredBlockInfo, nftRoot *big.Int, assetExitData DesertVerifierAssetExitData,
 	accountExitData DesertVerifierAccountExitData, assetMerkleProof [16]*big.Int, accountMerkleProof [32]*big.Int,
 	gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
-	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
+	transactOpts, err := c.PerformConstructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
@@ -173,7 +187,7 @@ func (c *ZkBNBClient) PerformDesert(storedBlockInfo StorageStoredBlockInfo, nftR
 func (c *ZkBNBClient) PerformDesertNft(storedBlockInfo StorageStoredBlockInfo, assetRoot *big.Int, accountExitData DesertVerifierAccountExitData,
 	exitNfts []DesertVerifierNftExitData, accountMerkleProof [32]*big.Int, nftMerkleProofs [][40]*big.Int,
 	gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
-	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
+	transactOpts, err := c.PerformConstructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
@@ -190,7 +204,7 @@ func (c *ZkBNBClient) PerformDesertNft(storedBlockInfo StorageStoredBlockInfo, a
 */
 func (c *ZkBNBClient) WithdrawPendingBalance(owner common.Address, token common.Address, amount *big.Int,
 	gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
-	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
+	transactOpts, err := c.WithdrawConstructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
@@ -206,7 +220,7 @@ func (c *ZkBNBClient) WithdrawPendingBalance(owner common.Address, token common.
 	WithdrawPendingNFTBalance: withdraw pending nft balance
 */
 func (c *ZkBNBClient) WithdrawPendingNFTBalance(nftIndex *big.Int, gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
-	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
+	transactOpts, err := c.WithdrawConstructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
@@ -223,7 +237,7 @@ func (c *ZkBNBClient) WithdrawPendingNFTBalance(nftIndex *big.Int, gasPrice *big
 */
 func (c *ZkBNBClient) CancelOutstandingDepositsForExodusMode(priorityRequestId uint64, depositsPubData [][]byte,
 	gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
-	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
+	transactOpts, err := c.CancelDepositConstructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
@@ -239,7 +253,7 @@ func (c *ZkBNBClient) CancelOutstandingDepositsForExodusMode(priorityRequestId u
 	ActivateDesertMode: activate desert mode
 */
 func (c *ZkBNBClient) ActivateDesertMode(gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
-	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
+	transactOpts, err := c.ActivateConstructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
