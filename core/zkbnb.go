@@ -3,33 +3,40 @@ package core
 import (
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
-
 	"github.com/bnb-chain/zkbnb-eth-rpc/rpc"
+	"github.com/ethereum/go-ethereum/common"
 )
 
-/*
-	LoadZkBNBInstance: load zkbnb instance if it is already deployed
-*/
-func LoadZkBNBInstance(cli *rpc.ProviderClient, addr string) (instance *ZkBNB, err error) {
-	instance, err = NewZkBNB(common.HexToAddress(addr), *cli)
-	return instance, err
+type ZkBNBClient struct {
+	Instance    *ZkBNB
+	Provider    *rpc.ProviderClient
+	Constructor TransactOptsConstructor
+}
+
+func NewZkBNBClient(provider *rpc.ProviderClient, address string, constructor TransactOptsConstructor) (*ZkBNBClient, error) {
+	instance, err := NewZkBNB(common.HexToAddress(address), *provider)
+	if err != nil {
+		return nil, err
+	}
+	client := &ZkBNBClient{
+		Instance:    instance,
+		Provider:    provider,
+		Constructor: constructor,
+	}
+	return client, nil
 }
 
 /*
 	CommitBlocks: commit blocks
 */
-func CommitBlocks(
-	cli *rpc.ProviderClient, constructor TransactOptsConstructor, instance *ZkBNB,
-	lastBlock StorageStoredBlockInfo, commitBlocksInfo []ZkBNBCommitBlockInfo,
-	gasPrice *big.Int, gasLimit uint64,
-) (txHash string, err error) {
-	transactOpts, err := constructor.ConstructTransactOpts(cli, gasPrice, gasLimit)
+func (c *ZkBNBClient) CommitBlocks(lastBlock StorageStoredBlockInfo, commitBlocksInfo []ZkBNBCommitBlockInfo,
+	gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
+	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
 	// call initialize
-	tx, err := instance.CommitBlocks(transactOpts, lastBlock, commitBlocksInfo)
+	tx, err := c.Instance.CommitBlocks(transactOpts, lastBlock, commitBlocksInfo)
 	if err != nil {
 		return "", err
 	}
@@ -39,16 +46,14 @@ func CommitBlocks(
 /*
 	CommitBlocks: commit blocks
 */
-func CommitBlocksWithNonce(constructor TransactOptsConstructor, instance *ZkBNB,
-	lastBlock StorageStoredBlockInfo, commitBlocksInfo []ZkBNBCommitBlockInfo,
-	gasPrice *big.Int, gasLimit uint64, nonce uint64,
-) (txHash string, err error) {
-	transactOpts, err := constructor.ConstructTransactOptsWithNonce(gasPrice, gasLimit, nonce)
+func (c *ZkBNBClient) CommitBlocksWithNonce(lastBlock StorageStoredBlockInfo, commitBlocksInfo []ZkBNBCommitBlockInfo,
+	gasPrice *big.Int, gasLimit uint64, nonce uint64) (txHash string, err error) {
+	transactOpts, err := c.Constructor.ConstructTransactOptsWithNonce(gasPrice, gasLimit, nonce)
 	if err != nil {
 		return "", err
 	}
 	// call initialize
-	tx, err := instance.CommitBlocks(transactOpts, lastBlock, commitBlocksInfo)
+	tx, err := c.Instance.CommitBlocks(transactOpts, lastBlock, commitBlocksInfo)
 	if err != nil {
 		return "", err
 	}
@@ -58,18 +63,17 @@ func CommitBlocksWithNonce(constructor TransactOptsConstructor, instance *ZkBNB,
 /*
 	Estimate Gas for commit blocks operation
 */
-func EstimateCommitGasWithNonce(constructor TransactOptsConstructor, instance *ZkBNB,
-	lastBlock StorageStoredBlockInfo, commitBlocksInfo []ZkBNBCommitBlockInfo,
+func (c *ZkBNBClient) EstimateCommitGasWithNonce(lastBlock StorageStoredBlockInfo, commitBlocksInfo []ZkBNBCommitBlockInfo,
 	gasPrice *big.Int, gasLimit uint64, nonce uint64,
 ) (gas uint64, err error) {
-	transactOpts, err := constructor.ConstructTransactOptsWithNonce(gasPrice, gasLimit, nonce)
+	transactOpts, err := c.Constructor.ConstructTransactOptsWithNonce(gasPrice, gasLimit, nonce)
 	if err != nil {
 		return 0, err
 	}
 	// Only for gas estimation and set NoSend = true
 	transactOpts.NoSend = true
 	// call initialize
-	tx, err := instance.CommitBlocks(transactOpts, lastBlock, commitBlocksInfo)
+	tx, err := c.Instance.CommitBlocks(transactOpts, lastBlock, commitBlocksInfo)
 	if err != nil {
 		return 0, err
 	}
@@ -79,16 +83,15 @@ func EstimateCommitGasWithNonce(constructor TransactOptsConstructor, instance *Z
 /*
 	VerifyAndExecuteBlocks: verify and execute blocks
 */
-func VerifyAndExecuteBlocks(cli *rpc.ProviderClient, constructor TransactOptsConstructor, instance *ZkBNB,
-	verifyAndExecuteBlocksInfo []ZkBNBVerifyAndExecuteBlockInfo, proofs []*big.Int,
+func (c *ZkBNBClient) VerifyAndExecuteBlocks(verifyAndExecuteBlocksInfo []ZkBNBVerifyAndExecuteBlockInfo, proofs []*big.Int,
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
-	transactOpts, err := constructor.ConstructTransactOpts(cli, gasPrice, gasLimit)
+	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
 	// call initialize
-	tx, err := instance.VerifyAndExecuteBlocks(transactOpts, verifyAndExecuteBlocksInfo, proofs)
+	tx, err := c.Instance.VerifyAndExecuteBlocks(transactOpts, verifyAndExecuteBlocksInfo, proofs)
 	if err != nil {
 		return "", err
 	}
@@ -98,16 +101,14 @@ func VerifyAndExecuteBlocks(cli *rpc.ProviderClient, constructor TransactOptsCon
 /*
 	VerifyAndExecuteBlocks: verify and execute blocks
 */
-func VerifyAndExecuteBlocksWithNonce(constructor TransactOptsConstructor, instance *ZkBNB,
-	verifyAndExecuteBlocksInfo []ZkBNBVerifyAndExecuteBlockInfo, proofs []*big.Int,
-	gasPrice *big.Int, gasLimit uint64, nonce uint64,
-) (txHash string, err error) {
-	transactOpts, err := constructor.ConstructTransactOptsWithNonce(gasPrice, gasLimit, nonce)
+func (c *ZkBNBClient) VerifyAndExecuteBlocksWithNonce(verifyAndExecuteBlocksInfo []ZkBNBVerifyAndExecuteBlockInfo, proofs []*big.Int,
+	gasPrice *big.Int, gasLimit uint64, nonce uint64) (txHash string, err error) {
+	transactOpts, err := c.Constructor.ConstructTransactOptsWithNonce(gasPrice, gasLimit, nonce)
 	if err != nil {
 		return "", err
 	}
 	// call initialize
-	tx, err := instance.VerifyAndExecuteBlocks(transactOpts, verifyAndExecuteBlocksInfo, proofs)
+	tx, err := c.Instance.VerifyAndExecuteBlocks(transactOpts, verifyAndExecuteBlocksInfo, proofs)
 	if err != nil {
 		return "", err
 	}
@@ -117,18 +118,16 @@ func VerifyAndExecuteBlocksWithNonce(constructor TransactOptsConstructor, instan
 /*
 	Estimate Gas for verifying and executing blocks with kms signature facility
 */
-func EstimateVerifyAndExecuteWithNonce(constructor TransactOptsConstructor, instance *ZkBNB,
-	verifyAndExecuteBlocksInfo []ZkBNBVerifyAndExecuteBlockInfo, proofs []*big.Int,
-	gasPrice *big.Int, gasLimit uint64, nonce uint64,
-) (gas uint64, err error) {
-	transactOpts, err := constructor.ConstructTransactOptsWithNonce(gasPrice, gasLimit, nonce)
+func (c *ZkBNBClient) EstimateVerifyAndExecuteWithNonce(verifyAndExecuteBlocksInfo []ZkBNBVerifyAndExecuteBlockInfo, proofs []*big.Int,
+	gasPrice *big.Int, gasLimit uint64, nonce uint64) (gas uint64, err error) {
+	transactOpts, err := c.Constructor.ConstructTransactOptsWithNonce(gasPrice, gasLimit, nonce)
 	if err != nil {
 		return 0, err
 	}
 	// Only for gas estimation and set NoSend = true
 	transactOpts.NoSend = true
 	// call initialize
-	tx, err := instance.VerifyAndExecuteBlocks(transactOpts, verifyAndExecuteBlocksInfo, proofs)
+	tx, err := c.Instance.VerifyAndExecuteBlocks(transactOpts, verifyAndExecuteBlocksInfo, proofs)
 	if err != nil {
 		return 0, err
 	}
@@ -138,16 +137,12 @@ func EstimateVerifyAndExecuteWithNonce(constructor TransactOptsConstructor, inst
 /*
 	RevertBlocks: revert blocks
 */
-func RevertBlocks(
-	cli *rpc.ProviderClient, constructor TransactOptsConstructor, instance *ZkBNB,
-	revertBlocks []StorageStoredBlockInfo,
-	gasPrice *big.Int, gasLimit uint64,
-) (txHash string, err error) {
-	transactOpts, err := constructor.ConstructTransactOpts(cli, gasPrice, gasLimit)
+func (c *ZkBNBClient) RevertBlocks(revertBlocks []StorageStoredBlockInfo, gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
+	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
-	tx, err := instance.RevertBlocks(transactOpts, revertBlocks)
+	tx, err := c.Instance.RevertBlocks(transactOpts, revertBlocks)
 	if err != nil {
 		return "", err
 	}
@@ -157,16 +152,15 @@ func RevertBlocks(
 /*
 	PerformDesert: perform desert
 */
-func PerformDesert(cli *rpc.ProviderClient, constructor TransactOptsConstructor, instance *ZkBNB, storedBlockInfo StorageStoredBlockInfo, nftRoot *big.Int, assetExitData DesertVerifierAssetExitData, accountExitData DesertVerifierAccountExitData,
-	assetMerkleProof [16]*big.Int, accountMerkleProof [32]*big.Int,
-	gasPrice *big.Int, gasLimit uint64,
-) (txHash string, err error) {
-	transactOpts, err := constructor.ConstructTransactOpts(cli, gasPrice, gasLimit)
+func (c *ZkBNBClient) PerformDesert(storedBlockInfo StorageStoredBlockInfo, nftRoot *big.Int, assetExitData DesertVerifierAssetExitData,
+	accountExitData DesertVerifierAccountExitData, assetMerkleProof [16]*big.Int, accountMerkleProof [32]*big.Int,
+	gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
+	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
 	// call initialize
-	tx, err := instance.PerformDesert(transactOpts, storedBlockInfo, nftRoot, assetExitData, accountExitData, assetMerkleProof, accountMerkleProof)
+	tx, err := c.Instance.PerformDesert(transactOpts, storedBlockInfo, nftRoot, assetExitData, accountExitData, assetMerkleProof, accountMerkleProof)
 	if err != nil {
 		return "", err
 	}
@@ -176,16 +170,15 @@ func PerformDesert(cli *rpc.ProviderClient, constructor TransactOptsConstructor,
 /*
 	PerformDesertNft: perform desert nft
 */
-func PerformDesertNft(cli *rpc.ProviderClient, constructor TransactOptsConstructor, instance *ZkBNB,
-	storedBlockInfo StorageStoredBlockInfo, assetRoot *big.Int, accountExitData DesertVerifierAccountExitData, exitNfts []DesertVerifierNftExitData, accountMerkleProof [32]*big.Int, nftMerkleProofs [][40]*big.Int,
-	gasPrice *big.Int, gasLimit uint64,
-) (txHash string, err error) {
-	transactOpts, err := constructor.ConstructTransactOpts(cli, gasPrice, gasLimit)
+func (c *ZkBNBClient) PerformDesertNft(storedBlockInfo StorageStoredBlockInfo, assetRoot *big.Int, accountExitData DesertVerifierAccountExitData,
+	exitNfts []DesertVerifierNftExitData, accountMerkleProof [32]*big.Int, nftMerkleProofs [][40]*big.Int,
+	gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
+	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
 	// call initialize
-	tx, err := instance.PerformDesertNft(transactOpts, storedBlockInfo, assetRoot, accountExitData, exitNfts, accountMerkleProof, nftMerkleProofs)
+	tx, err := c.Instance.PerformDesertNft(transactOpts, storedBlockInfo, assetRoot, accountExitData, exitNfts, accountMerkleProof, nftMerkleProofs)
 	if err != nil {
 		return "", err
 	}
@@ -195,13 +188,14 @@ func PerformDesertNft(cli *rpc.ProviderClient, constructor TransactOptsConstruct
 /*
 	WithdrawPendingBalance: withdraw pending balance
 */
-func WithdrawPendingBalance(cli *rpc.ProviderClient, constructor TransactOptsConstructor, instance *ZkBNB, owner common.Address, token common.Address, amount *big.Int, gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
-	transactOpts, err := constructor.ConstructTransactOpts(cli, gasPrice, gasLimit)
+func (c *ZkBNBClient) WithdrawPendingBalance(owner common.Address, token common.Address, amount *big.Int,
+	gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
+	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
 	// call initialize
-	tx, err := instance.WithdrawPendingBalance(transactOpts, owner, token, amount)
+	tx, err := c.Instance.WithdrawPendingBalance(transactOpts, owner, token, amount)
 	if err != nil {
 		return "", err
 	}
@@ -211,13 +205,13 @@ func WithdrawPendingBalance(cli *rpc.ProviderClient, constructor TransactOptsCon
 /*
 	WithdrawPendingNFTBalance: withdraw pending nft balance
 */
-func WithdrawPendingNFTBalance(cli *rpc.ProviderClient, constructor TransactOptsConstructor, instance *ZkBNB, nftIndex *big.Int, gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
-	transactOpts, err := constructor.ConstructTransactOpts(cli, gasPrice, gasLimit)
+func (c *ZkBNBClient) WithdrawPendingNFTBalance(nftIndex *big.Int, gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
+	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
 	// call initialize
-	tx, err := instance.WithdrawPendingNFTBalance(transactOpts, nftIndex)
+	tx, err := c.Instance.WithdrawPendingNFTBalance(transactOpts, nftIndex)
 	if err != nil {
 		return "", err
 	}
@@ -227,13 +221,14 @@ func WithdrawPendingNFTBalance(cli *rpc.ProviderClient, constructor TransactOpts
 /*
 	CancelOutstandingDepositsForExodusMode: cancel outstanding deposit
 */
-func CancelOutstandingDepositsForExodusMode(cli *rpc.ProviderClient, constructor TransactOptsConstructor, instance *ZkBNB, priorityRequestId uint64, depositsPubData [][]byte, gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
-	transactOpts, err := constructor.ConstructTransactOpts(cli, gasPrice, gasLimit)
+func (c *ZkBNBClient) CancelOutstandingDepositsForExodusMode(priorityRequestId uint64, depositsPubData [][]byte,
+	gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
+	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
 	// call initialize
-	tx, err := instance.CancelOutstandingDepositsForDesertMode(transactOpts, priorityRequestId, depositsPubData)
+	tx, err := c.Instance.CancelOutstandingDepositsForDesertMode(transactOpts, priorityRequestId, depositsPubData)
 	if err != nil {
 		return "", err
 	}
@@ -243,13 +238,13 @@ func CancelOutstandingDepositsForExodusMode(cli *rpc.ProviderClient, constructor
 /*
 	ActivateDesertMode: activate desert mode
 */
-func ActivateDesertMode(cli *rpc.ProviderClient, constructor TransactOptsConstructor, instance *ZkBNB, gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
-	transactOpts, err := constructor.ConstructTransactOpts(cli, gasPrice, gasLimit)
+func (c *ZkBNBClient) ActivateDesertMode(gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
+	transactOpts, err := c.Constructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
 	// call initialize
-	tx, err := instance.ActivateDesertMode(transactOpts)
+	tx, err := c.Instance.ActivateDesertMode(transactOpts)
 	if err != nil {
 		return "", err
 	}
