@@ -356,6 +356,31 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint16",
+        "name": "assetId",
+        "type": "uint16"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "recepient",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint128",
+        "name": "amount",
+        "type": "uint128"
+      }
+    ],
+    "name": "WithdrawalPending",
+    "type": "event"
+  },
+  {
     "inputs": [],
     "name": "MAX_ACCOUNT_INDEX",
     "outputs": [
@@ -968,19 +993,19 @@
             "type": "uint256"
           },
           {
-            "internalType": "uint256",
+            "internalType": "uint32",
             "name": "creatorAccountIndex",
-            "type": "uint256"
+            "type": "uint32"
           },
           {
-            "internalType": "uint256",
+            "internalType": "uint16",
             "name": "creatorTreasuryRate",
-            "type": "uint256"
+            "type": "uint16"
           },
           {
-            "internalType": "uint256",
+            "internalType": "uint16",
             "name": "collectionId",
-            "type": "uint256"
+            "type": "uint16"
           },
           {
             "internalType": "bytes16",
