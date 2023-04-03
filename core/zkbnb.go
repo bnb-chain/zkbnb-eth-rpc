@@ -33,6 +33,14 @@ func NewZkBNBClient(provider *rpc.ProviderClient, address string) (*ZkBNBClient,
 }
 
 /*
+	LoadZkBNBInstance: load zkbnb instance if it is already deployed
+*/
+func LoadZkBNBInstance(cli *rpc.ProviderClient, addr string) (instance *ZkBNB, err error) {
+	instance, err = NewZkBNB(common.HexToAddress(addr), *cli)
+	return instance, err
+}
+
+/*
 	CommitBlocks: commit blocks
 */
 func (c *ZkBNBClient) CommitBlocks(lastBlock StorageStoredBlockInfo, commitBlocksInfo []ZkBNBCommitBlockInfo,
