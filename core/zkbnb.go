@@ -288,3 +288,7 @@ func TotalOpenPriorityRequests(instance *ZkBNB) (uint64, error) {
 	}
 	return total, nil
 }
+
+func DesertMode(instance *ZkBNB) (bool, error) {
+	return instance.DesertMode(&bind.CallOpts{})
+}
