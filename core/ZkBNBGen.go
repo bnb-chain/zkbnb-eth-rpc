@@ -26,31 +26,36 @@ var (
 	_ = common.Big1
 	_ = types.BloomLookup
 	_ = event.NewSubscription
+	_ = abi.ConvertType
 )
 
-// OldZkBNBCommitBlockInfo is an auto generated low-level Go binding around an user-defined struct.
-type OldZkBNBCommitBlockInfo struct {
-	NewStateRoot      [32]byte
-	PublicData        []byte
-	Timestamp         *big.Int
-	PublicDataOffsets []uint32
-	BlockNumber       uint32
-	BlockSize         uint16
+// DesertVerifierAccountExitData is an auto generated low-level Go binding around an user-defined struct.
+type DesertVerifierAccountExitData struct {
+	AccountId       uint32
+	L1Address       common.Address
+	PubKeyX         [32]byte
+	PubKeyY         [32]byte
+	Nonce           *big.Int
+	CollectionNonce *big.Int
 }
 
-// OldZkBNBPairInfo is an auto generated low-level Go binding around an user-defined struct.
-type OldZkBNBPairInfo struct {
-	TokenA               common.Address
-	TokenB               common.Address
-	FeeRate              uint16
-	TreasuryAccountIndex uint32
-	TreasuryRate         uint16
+// DesertVerifierAssetExitData is an auto generated low-level Go binding around an user-defined struct.
+type DesertVerifierAssetExitData struct {
+	AssetId                  uint16
+	Amount                   *big.Int
+	OfferCanceledOrFinalized *big.Int
 }
 
-// OldZkBNBVerifyAndExecuteBlockInfo is an auto generated low-level Go binding around an user-defined struct.
-type OldZkBNBVerifyAndExecuteBlockInfo struct {
-	BlockHeader              StorageStoredBlockInfo
-	PendingOnchainOpsPubData [][]byte
+// DesertVerifierNftExitData is an auto generated low-level Go binding around an user-defined struct.
+type DesertVerifierNftExitData struct {
+	NftIndex            *big.Int
+	OwnerAccountIndex   *big.Int
+	CreatorAccountIndex uint32
+	CreatorTreasuryRate uint16
+	CollectionId        uint16
+	NftContentHash1     [16]byte
+	NftContentHash2     [16]byte
+	NftContentType      uint8
 }
 
 // StorageStoredBlockInfo is an auto generated low-level Go binding around an user-defined struct.
@@ -64,9 +69,31 @@ type StorageStoredBlockInfo struct {
 	Commitment                   [32]byte
 }
 
+// ZkBNBCommitBlockInfo is an auto generated low-level Go binding around an user-defined struct.
+type ZkBNBCommitBlockInfo struct {
+	NewStateRoot      [32]byte
+	PublicData        []byte
+	Timestamp         *big.Int
+	OnchainOperations []ZkBNBOnchainOperationData
+	BlockNumber       uint32
+	BlockSize         uint16
+}
+
+// ZkBNBOnchainOperationData is an auto generated low-level Go binding around an user-defined struct.
+type ZkBNBOnchainOperationData struct {
+	EthWitness       []byte
+	PublicDataOffset uint32
+}
+
+// ZkBNBVerifyAndExecuteBlockInfo is an auto generated low-level Go binding around an user-defined struct.
+type ZkBNBVerifyAndExecuteBlockInfo struct {
+	BlockHeader              StorageStoredBlockInfo
+	PendingOnchainOpsPubData [][]byte
+}
+
 // ZkBNBMetaData contains all meta data concerning the ZkBNB contract.
 var ZkBNBMetaData = &bind.MetaData{
-	ABI: "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"}],\"name\":\"BlockCommit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"}],\"name\":\"BlockVerification\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"totalBlocksVerified\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"totalBlocksCommitted\",\"type\":\"uint32\"}],\"name\":\"BlocksRevert\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"pairIndex\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"asset0Id\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"asset1Id\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"feeRate\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"treasuryAccountIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"treasuryRate\",\"type\":\"uint16\"}],\"name\":\"CreateTokenPair\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"accountName\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"Deposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"zkbnbBlockNumber\",\"type\":\"uint32\"},{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"accountIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"accountName\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"DepositCommit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"accountNameHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nftContentHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"nftTokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"creatorTreasuryRate\",\"type\":\"uint16\"}],\"name\":\"DepositNft\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"DesertMode\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"zkbnbBlockId\",\"type\":\"uint32\"},{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"accountId\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint16\",\"name\":\"tokenId\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"FullExitCommit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"factory\",\"type\":\"address\"}],\"name\":\"NewDefaultNFTFactory\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"_creatorAccountNameHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"_collectionId\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_factoryAddress\",\"type\":\"address\"}],\"name\":\"NewNFTFactory\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"serialId\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"enumTxTypes.TxType\",\"name\":\"txType\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"pubData\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"expirationBlock\",\"type\":\"uint256\"}],\"name\":\"NewPriorityRequest\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newNoticePeriod\",\"type\":\"uint256\"}],\"name\":\"NoticePeriodChange\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"zkbnbPubKeyX\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"zkbnbPubKeyY\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"accountIndex\",\"type\":\"uint32\"}],\"name\":\"RegisterZNS\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"pairIndex\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"feeRate\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"treasuryAccountIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"treasuryRate\",\"type\":\"uint16\"}],\"name\":\"UpdateTokenPair\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"accountIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"nftL1Address\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"toAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"nftL1TokenId\",\"type\":\"uint256\"}],\"name\":\"WithdrawNft\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"Withdrawal\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint40\",\"name\":\"nftIndex\",\"type\":\"uint40\"}],\"name\":\"WithdrawalNFTPending\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"MAX_ACCOUNT_INDEX\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_AMOUNT_OF_REGISTERED_ASSETS\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_DEPOSIT_AMOUNT\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"\",\"type\":\"uint128\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_FUNGIBLE_ASSET_ID\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_NFT_INDEX\",\"outputs\":[{\"internalType\":\"uint40\",\"name\":\"\",\"type\":\"uint40\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SECURITY_COUNCIL_MEMBERS_NUMBER\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SHORTEST_UPGRADE_NOTICE_PERIOD\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SPECIAL_ACCOUNT_ADDRESS\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SPECIAL_ACCOUNT_ID\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"TX_SIZE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"UPGRADE_NOTICE_PERIOD\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"WITHDRAWAL_GAS_LIMIT\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"activateDesertMode\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint16\",\"name\":\"blockSize\",\"type\":\"uint16\"},{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"uint64\",\"name\":\"priorityOperations\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"pendingOnchainOperationsHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"stateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"}],\"internalType\":\"structStorage.StoredBlockInfo\",\"name\":\"_lastCommittedBlockData\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"newStateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"publicData\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"uint32[]\",\"name\":\"publicDataOffsets\",\"type\":\"uint32[]\"},{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"uint16\",\"name\":\"blockSize\",\"type\":\"uint16\"}],\"internalType\":\"structOldZkBNB.CommitBlockInfo[]\",\"name\":\"_newBlocksData\",\"type\":\"tuple[]\"}],\"name\":\"commitBlocks\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_tokenA\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_tokenB\",\"type\":\"address\"}],\"name\":\"createPair\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"cutUpgradeNoticePeriod\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"defaultNFTFactory\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint104\",\"name\":\"_amount\",\"type\":\"uint104\"},{\"internalType\":\"string\",\"name\":\"_accountName\",\"type\":\"string\"}],\"name\":\"depositBEP20\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_accountName\",\"type\":\"string\"}],\"name\":\"depositBNB\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_accountName\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"_nftL1Address\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_nftL1TokenId\",\"type\":\"uint256\"}],\"name\":\"depositNft\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"desertMode\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"firstPriorityRequestId\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"accountNameHash\",\"type\":\"bytes32\"}],\"name\":\"getAddressByAccountNameHash\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_creatorAccountNameHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint32\",\"name\":\"_collectionId\",\"type\":\"uint32\"}],\"name\":\"getNFTFactory\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getNoticePeriod\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_assetAddr\",\"type\":\"address\"}],\"name\":\"getPendingBalance\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"\",\"type\":\"uint128\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"initializationParameters\",\"type\":\"bytes\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isReadyForUpgrade\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"name\":\"nftFactories\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"onERC721Received\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_zkbnbPubKeyX\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_zkbnbPubKeyY\",\"type\":\"bytes32\"}],\"name\":\"registerZNS\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_accountName\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"_asset\",\"type\":\"address\"}],\"name\":\"requestFullExit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_accountName\",\"type\":\"string\"},{\"internalType\":\"uint32\",\"name\":\"_nftIndex\",\"type\":\"uint32\"}],\"name\":\"requestFullExitNft\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint16\",\"name\":\"blockSize\",\"type\":\"uint16\"},{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"uint64\",\"name\":\"priorityOperations\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"pendingOnchainOperationsHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"stateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"}],\"internalType\":\"structStorage.StoredBlockInfo[]\",\"name\":\"_blocksToRevert\",\"type\":\"tuple[]\"}],\"name\":\"revertBlocks\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractNFTFactory\",\"name\":\"_factory\",\"type\":\"address\"}],\"name\":\"setDefaultNFTFactory\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stateRoot\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"name\":\"storedBlockHashes\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalBlocksCommitted\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalBlocksVerified\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalOpenPriorityRequests\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalTokenPairs\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"internalType\":\"uint128\",\"name\":\"_amount\",\"type\":\"uint128\"},{\"internalType\":\"uint128\",\"name\":\"_maxAmount\",\"type\":\"uint128\"}],\"name\":\"transferERC20\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"withdrawnAmount\",\"type\":\"uint128\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"tokenA\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"tokenB\",\"type\":\"address\"},{\"internalType\":\"uint16\",\"name\":\"feeRate\",\"type\":\"uint16\"},{\"internalType\":\"uint32\",\"name\":\"treasuryAccountIndex\",\"type\":\"uint32\"},{\"internalType\":\"uint16\",\"name\":\"treasuryRate\",\"type\":\"uint16\"}],\"internalType\":\"structOldZkBNB.PairInfo\",\"name\":\"_pairInfo\",\"type\":\"tuple\"}],\"name\":\"updatePairRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_newVerifierAddress\",\"type\":\"address\"}],\"name\":\"updateZkBNBVerifier\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"upgradeParameters\",\"type\":\"bytes\"}],\"name\":\"upgrade\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"upgradeCanceled\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"upgradeFinishes\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"upgradeNoticePeriodStarted\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"upgradePreparationStarted\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"uint16\",\"name\":\"blockSize\",\"type\":\"uint16\"},{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"uint64\",\"name\":\"priorityOperations\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"pendingOnchainOperationsHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"stateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"}],\"internalType\":\"structStorage.StoredBlockInfo\",\"name\":\"blockHeader\",\"type\":\"tuple\"},{\"internalType\":\"bytes[]\",\"name\":\"pendingOnchainOpsPubData\",\"type\":\"bytes[]\"}],\"internalType\":\"structOldZkBNB.VerifyAndExecuteBlockInfo[]\",\"name\":\"_blocks\",\"type\":\"tuple[]\"},{\"internalType\":\"uint256[]\",\"name\":\"_proofs\",\"type\":\"uint256[]\"}],\"name\":\"verifyAndExecuteBlocks\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"addresspayable\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint128\",\"name\":\"_amount\",\"type\":\"uint128\"}],\"name\":\"withdrawPendingBalance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint40\",\"name\":\"_nftIndex\",\"type\":\"uint40\"}],\"name\":\"withdrawPendingNFTBalance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+	ABI: "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"}],\"name\":\"BlockCommit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"}],\"name\":\"BlockVerification\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"totalBlocksVerified\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"totalBlocksCommitted\",\"type\":\"uint32\"}],\"name\":\"BlocksRevert\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"Deposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"zkbnbBlockNumber\",\"type\":\"uint32\"},{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"accountIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"accountName\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"DepositCommit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nftContentHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"nftTokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"creatorTreasuryRate\",\"type\":\"uint16\"}],\"name\":\"DepositNft\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"DesertMode\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"zkbnbBlockId\",\"type\":\"uint32\"},{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"accountId\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint16\",\"name\":\"tokenId\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"FullExitCommit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"version\",\"type\":\"uint8\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"serialId\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"enumTxTypes.TxType\",\"name\":\"txType\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"pubData\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"expirationBlock\",\"type\":\"uint256\"}],\"name\":\"NewPriorityRequest\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newNoticePeriod\",\"type\":\"uint256\"}],\"name\":\"NoticePeriodChange\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"zkbnbPubKeyX\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"zkbnbPubKeyY\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"accountIndex\",\"type\":\"uint32\"}],\"name\":\"RegisterZNS\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"accountIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"nftL1Address\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"toAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"nftL1TokenId\",\"type\":\"uint256\"}],\"name\":\"WithdrawNft\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"Withdrawal\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint40\",\"name\":\"nftIndex\",\"type\":\"uint40\"}],\"name\":\"WithdrawalNFTPending\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recepient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"}],\"name\":\"WithdrawalPending\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"MAX_ACCOUNT_INDEX\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_AMOUNT_OF_REGISTERED_ASSETS\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_DEPOSIT_AMOUNT\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"\",\"type\":\"uint128\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_FUNGIBLE_ASSET_ID\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_NFT_INDEX\",\"outputs\":[{\"internalType\":\"uint40\",\"name\":\"\",\"type\":\"uint40\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SPECIAL_ACCOUNT_ADDRESS\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SPECIAL_ACCOUNT_ID\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"WITHDRAWAL_GAS_LIMIT\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"activateDesertMode\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"_n\",\"type\":\"uint64\"},{\"internalType\":\"bytes[]\",\"name\":\"_depositsPubData\",\"type\":\"bytes[]\"}],\"name\":\"cancelOutstandingDepositsForDesertMode\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint16\",\"name\":\"blockSize\",\"type\":\"uint16\"},{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"uint64\",\"name\":\"priorityOperations\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"pendingOnchainOperationsHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"stateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"}],\"internalType\":\"structStorage.StoredBlockInfo\",\"name\":\"_lastCommittedBlockData\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"newStateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"publicData\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"bytes\",\"name\":\"ethWitness\",\"type\":\"bytes\"},{\"internalType\":\"uint32\",\"name\":\"publicDataOffset\",\"type\":\"uint32\"}],\"internalType\":\"structZkBNB.OnchainOperationData[]\",\"name\":\"onchainOperations\",\"type\":\"tuple[]\"},{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"uint16\",\"name\":\"blockSize\",\"type\":\"uint16\"}],\"internalType\":\"structZkBNB.CommitBlockInfo[]\",\"name\":\"_newBlocksData\",\"type\":\"tuple[]\"}],\"name\":\"commitBlocks\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint104\",\"name\":\"_amount\",\"type\":\"uint104\"},{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"}],\"name\":\"depositBEP20\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"}],\"name\":\"depositBNB\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_nftL1Address\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_nftL1TokenId\",\"type\":\"uint256\"}],\"name\":\"depositNft\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"desertMode\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"firstPriorityRequestId\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_assetAddr\",\"type\":\"address\"}],\"name\":\"getPendingBalance\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"\",\"type\":\"uint128\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"initializationParameters\",\"type\":\"bytes\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"onERC721Received\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint16\",\"name\":\"blockSize\",\"type\":\"uint16\"},{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"uint64\",\"name\":\"priorityOperations\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"pendingOnchainOperationsHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"stateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"}],\"internalType\":\"structStorage.StoredBlockInfo\",\"name\":\"_storedBlockInfo\",\"type\":\"tuple\"},{\"internalType\":\"uint256\",\"name\":\"_nftRoot\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"},{\"internalType\":\"uint128\",\"name\":\"amount\",\"type\":\"uint128\"},{\"internalType\":\"uint256\",\"name\":\"offerCanceledOrFinalized\",\"type\":\"uint256\"}],\"internalType\":\"structDesertVerifier.AssetExitData\",\"name\":\"_assetExitData\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"uint32\",\"name\":\"accountId\",\"type\":\"uint32\"},{\"internalType\":\"address\",\"name\":\"l1Address\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"pubKeyX\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"pubKeyY\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"collectionNonce\",\"type\":\"uint256\"}],\"internalType\":\"structDesertVerifier.AccountExitData\",\"name\":\"_accountExitData\",\"type\":\"tuple\"},{\"internalType\":\"uint256[16]\",\"name\":\"_assetMerkleProof\",\"type\":\"uint256[16]\"},{\"internalType\":\"uint256[32]\",\"name\":\"_accountMerkleProof\",\"type\":\"uint256[32]\"}],\"name\":\"performDesert\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint16\",\"name\":\"blockSize\",\"type\":\"uint16\"},{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"uint64\",\"name\":\"priorityOperations\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"pendingOnchainOperationsHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"stateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"}],\"internalType\":\"structStorage.StoredBlockInfo\",\"name\":\"_storedBlockInfo\",\"type\":\"tuple\"},{\"internalType\":\"uint256\",\"name\":\"_assetRoot\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"uint32\",\"name\":\"accountId\",\"type\":\"uint32\"},{\"internalType\":\"address\",\"name\":\"l1Address\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"pubKeyX\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"pubKeyY\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"collectionNonce\",\"type\":\"uint256\"}],\"internalType\":\"structDesertVerifier.AccountExitData\",\"name\":\"_accountExitData\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"uint40\",\"name\":\"nftIndex\",\"type\":\"uint40\"},{\"internalType\":\"uint256\",\"name\":\"ownerAccountIndex\",\"type\":\"uint256\"},{\"internalType\":\"uint32\",\"name\":\"creatorAccountIndex\",\"type\":\"uint32\"},{\"internalType\":\"uint16\",\"name\":\"creatorTreasuryRate\",\"type\":\"uint16\"},{\"internalType\":\"uint16\",\"name\":\"collectionId\",\"type\":\"uint16\"},{\"internalType\":\"bytes16\",\"name\":\"nftContentHash1\",\"type\":\"bytes16\"},{\"internalType\":\"bytes16\",\"name\":\"nftContentHash2\",\"type\":\"bytes16\"},{\"internalType\":\"uint8\",\"name\":\"nftContentType\",\"type\":\"uint8\"}],\"internalType\":\"structDesertVerifier.NftExitData[]\",\"name\":\"_exitNfts\",\"type\":\"tuple[]\"},{\"internalType\":\"uint256[32]\",\"name\":\"_accountMerkleProof\",\"type\":\"uint256[32]\"},{\"internalType\":\"uint256[40][]\",\"name\":\"_nftMerkleProofs\",\"type\":\"uint256[40][]\"}],\"name\":\"performDesertNft\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"_accountIndex\",\"type\":\"uint32\"},{\"internalType\":\"address\",\"name\":\"_asset\",\"type\":\"address\"}],\"name\":\"requestFullExit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"_accountIndex\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_nftIndex\",\"type\":\"uint32\"}],\"name\":\"requestFullExitNft\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint16\",\"name\":\"blockSize\",\"type\":\"uint16\"},{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"uint64\",\"name\":\"priorityOperations\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"pendingOnchainOperationsHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"stateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"}],\"internalType\":\"structStorage.StoredBlockInfo[]\",\"name\":\"_blocksToRevert\",\"type\":\"tuple[]\"}],\"name\":\"revertBlocks\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stateRoot\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"name\":\"storedBlockHashes\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalBlocksCommitted\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalBlocksVerified\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalOpenPriorityRequests\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"internalType\":\"uint128\",\"name\":\"_amount\",\"type\":\"uint128\"},{\"internalType\":\"uint128\",\"name\":\"_maxAmount\",\"type\":\"uint128\"}],\"name\":\"transferERC20\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"withdrawnAmount\",\"type\":\"uint128\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"upgradeParameters\",\"type\":\"bytes\"}],\"name\":\"upgrade\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"uint16\",\"name\":\"blockSize\",\"type\":\"uint16\"},{\"internalType\":\"uint32\",\"name\":\"blockNumber\",\"type\":\"uint32\"},{\"internalType\":\"uint64\",\"name\":\"priorityOperations\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"pendingOnchainOperationsHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"stateRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"}],\"internalType\":\"structStorage.StoredBlockInfo\",\"name\":\"blockHeader\",\"type\":\"tuple\"},{\"internalType\":\"bytes[]\",\"name\":\"pendingOnchainOpsPubData\",\"type\":\"bytes[]\"}],\"internalType\":\"structZkBNB.VerifyAndExecuteBlockInfo[]\",\"name\":\"_blocks\",\"type\":\"tuple[]\"},{\"internalType\":\"uint256[]\",\"name\":\"_proofs\",\"type\":\"uint256[]\"}],\"name\":\"verifyAndExecuteBlocks\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"addresspayable\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint128\",\"name\":\"_amount\",\"type\":\"uint128\"}],\"name\":\"withdrawPendingBalance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint40\",\"name\":\"_nftIndex\",\"type\":\"uint40\"}],\"name\":\"withdrawPendingNFTBalance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
 }
 
 // ZkBNBABI is the input ABI used to generate the binding from.
@@ -170,11 +197,11 @@ func NewZkBNBFilterer(address common.Address, filterer bind.ContractFilterer) (*
 
 // bindZkBNB binds a generic wrapper to an already deployed contract.
 func bindZkBNB(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := abi.JSON(strings.NewReader(ZkBNBABI))
+	parsed, err := ZkBNBMetaData.GetAbi()
 	if err != nil {
 		return nil, err
 	}
-	return bind.NewBoundContract(address, parsed, caller, transactor, filterer), nil
+	return bind.NewBoundContract(address, *parsed, caller, transactor, filterer), nil
 }
 
 // Call invokes the (constant) contract method with params as input values and
@@ -370,68 +397,6 @@ func (_ZkBNB *ZkBNBCallerSession) MAXNFTINDEX() (*big.Int, error) {
 	return _ZkBNB.Contract.MAXNFTINDEX(&_ZkBNB.CallOpts)
 }
 
-// SECURITYCOUNCILMEMBERSNUMBER is a free data retrieval call binding the contract method 0x4a51a71f.
-//
-// Solidity: function SECURITY_COUNCIL_MEMBERS_NUMBER() view returns(uint256)
-func (_ZkBNB *ZkBNBCaller) SECURITYCOUNCILMEMBERSNUMBER(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _ZkBNB.contract.Call(opts, &out, "SECURITY_COUNCIL_MEMBERS_NUMBER")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// SECURITYCOUNCILMEMBERSNUMBER is a free data retrieval call binding the contract method 0x4a51a71f.
-//
-// Solidity: function SECURITY_COUNCIL_MEMBERS_NUMBER() view returns(uint256)
-func (_ZkBNB *ZkBNBSession) SECURITYCOUNCILMEMBERSNUMBER() (*big.Int, error) {
-	return _ZkBNB.Contract.SECURITYCOUNCILMEMBERSNUMBER(&_ZkBNB.CallOpts)
-}
-
-// SECURITYCOUNCILMEMBERSNUMBER is a free data retrieval call binding the contract method 0x4a51a71f.
-//
-// Solidity: function SECURITY_COUNCIL_MEMBERS_NUMBER() view returns(uint256)
-func (_ZkBNB *ZkBNBCallerSession) SECURITYCOUNCILMEMBERSNUMBER() (*big.Int, error) {
-	return _ZkBNB.Contract.SECURITYCOUNCILMEMBERSNUMBER(&_ZkBNB.CallOpts)
-}
-
-// SHORTESTUPGRADENOTICEPERIOD is a free data retrieval call binding the contract method 0x85053581.
-//
-// Solidity: function SHORTEST_UPGRADE_NOTICE_PERIOD() view returns(uint256)
-func (_ZkBNB *ZkBNBCaller) SHORTESTUPGRADENOTICEPERIOD(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _ZkBNB.contract.Call(opts, &out, "SHORTEST_UPGRADE_NOTICE_PERIOD")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// SHORTESTUPGRADENOTICEPERIOD is a free data retrieval call binding the contract method 0x85053581.
-//
-// Solidity: function SHORTEST_UPGRADE_NOTICE_PERIOD() view returns(uint256)
-func (_ZkBNB *ZkBNBSession) SHORTESTUPGRADENOTICEPERIOD() (*big.Int, error) {
-	return _ZkBNB.Contract.SHORTESTUPGRADENOTICEPERIOD(&_ZkBNB.CallOpts)
-}
-
-// SHORTESTUPGRADENOTICEPERIOD is a free data retrieval call binding the contract method 0x85053581.
-//
-// Solidity: function SHORTEST_UPGRADE_NOTICE_PERIOD() view returns(uint256)
-func (_ZkBNB *ZkBNBCallerSession) SHORTESTUPGRADENOTICEPERIOD() (*big.Int, error) {
-	return _ZkBNB.Contract.SHORTESTUPGRADENOTICEPERIOD(&_ZkBNB.CallOpts)
-}
-
 // SPECIALACCOUNTADDRESS is a free data retrieval call binding the contract method 0x7ea399c1.
 //
 // Solidity: function SPECIAL_ACCOUNT_ADDRESS() view returns(address)
@@ -494,68 +459,6 @@ func (_ZkBNB *ZkBNBCallerSession) SPECIALACCOUNTID() (uint32, error) {
 	return _ZkBNB.Contract.SPECIALACCOUNTID(&_ZkBNB.CallOpts)
 }
 
-// TXSIZE is a free data retrieval call binding the contract method 0xe6e3c012.
-//
-// Solidity: function TX_SIZE() view returns(uint256)
-func (_ZkBNB *ZkBNBCaller) TXSIZE(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _ZkBNB.contract.Call(opts, &out, "TX_SIZE")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// TXSIZE is a free data retrieval call binding the contract method 0xe6e3c012.
-//
-// Solidity: function TX_SIZE() view returns(uint256)
-func (_ZkBNB *ZkBNBSession) TXSIZE() (*big.Int, error) {
-	return _ZkBNB.Contract.TXSIZE(&_ZkBNB.CallOpts)
-}
-
-// TXSIZE is a free data retrieval call binding the contract method 0xe6e3c012.
-//
-// Solidity: function TX_SIZE() view returns(uint256)
-func (_ZkBNB *ZkBNBCallerSession) TXSIZE() (*big.Int, error) {
-	return _ZkBNB.Contract.TXSIZE(&_ZkBNB.CallOpts)
-}
-
-// UPGRADENOTICEPERIOD is a free data retrieval call binding the contract method 0xcc375fb7.
-//
-// Solidity: function UPGRADE_NOTICE_PERIOD() view returns(uint256)
-func (_ZkBNB *ZkBNBCaller) UPGRADENOTICEPERIOD(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _ZkBNB.contract.Call(opts, &out, "UPGRADE_NOTICE_PERIOD")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// UPGRADENOTICEPERIOD is a free data retrieval call binding the contract method 0xcc375fb7.
-//
-// Solidity: function UPGRADE_NOTICE_PERIOD() view returns(uint256)
-func (_ZkBNB *ZkBNBSession) UPGRADENOTICEPERIOD() (*big.Int, error) {
-	return _ZkBNB.Contract.UPGRADENOTICEPERIOD(&_ZkBNB.CallOpts)
-}
-
-// UPGRADENOTICEPERIOD is a free data retrieval call binding the contract method 0xcc375fb7.
-//
-// Solidity: function UPGRADE_NOTICE_PERIOD() view returns(uint256)
-func (_ZkBNB *ZkBNBCallerSession) UPGRADENOTICEPERIOD() (*big.Int, error) {
-	return _ZkBNB.Contract.UPGRADENOTICEPERIOD(&_ZkBNB.CallOpts)
-}
-
 // WITHDRAWALGASLIMIT is a free data retrieval call binding the contract method 0xc701f955.
 //
 // Solidity: function WITHDRAWAL_GAS_LIMIT() view returns(uint256)
@@ -585,37 +488,6 @@ func (_ZkBNB *ZkBNBSession) WITHDRAWALGASLIMIT() (*big.Int, error) {
 // Solidity: function WITHDRAWAL_GAS_LIMIT() view returns(uint256)
 func (_ZkBNB *ZkBNBCallerSession) WITHDRAWALGASLIMIT() (*big.Int, error) {
 	return _ZkBNB.Contract.WITHDRAWALGASLIMIT(&_ZkBNB.CallOpts)
-}
-
-// DefaultNFTFactory is a free data retrieval call binding the contract method 0x940f19c0.
-//
-// Solidity: function defaultNFTFactory() view returns(address)
-func (_ZkBNB *ZkBNBCaller) DefaultNFTFactory(opts *bind.CallOpts) (common.Address, error) {
-	var out []interface{}
-	err := _ZkBNB.contract.Call(opts, &out, "defaultNFTFactory")
-
-	if err != nil {
-		return *new(common.Address), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
-
-	return out0, err
-
-}
-
-// DefaultNFTFactory is a free data retrieval call binding the contract method 0x940f19c0.
-//
-// Solidity: function defaultNFTFactory() view returns(address)
-func (_ZkBNB *ZkBNBSession) DefaultNFTFactory() (common.Address, error) {
-	return _ZkBNB.Contract.DefaultNFTFactory(&_ZkBNB.CallOpts)
-}
-
-// DefaultNFTFactory is a free data retrieval call binding the contract method 0x940f19c0.
-//
-// Solidity: function defaultNFTFactory() view returns(address)
-func (_ZkBNB *ZkBNBCallerSession) DefaultNFTFactory() (common.Address, error) {
-	return _ZkBNB.Contract.DefaultNFTFactory(&_ZkBNB.CallOpts)
 }
 
 // DesertMode is a free data retrieval call binding the contract method 0x02cfb563.
@@ -680,99 +552,6 @@ func (_ZkBNB *ZkBNBCallerSession) FirstPriorityRequestId() (uint64, error) {
 	return _ZkBNB.Contract.FirstPriorityRequestId(&_ZkBNB.CallOpts)
 }
 
-// GetAddressByAccountNameHash is a free data retrieval call binding the contract method 0x0b8f1c0c.
-//
-// Solidity: function getAddressByAccountNameHash(bytes32 accountNameHash) view returns(address)
-func (_ZkBNB *ZkBNBCaller) GetAddressByAccountNameHash(opts *bind.CallOpts, accountNameHash [32]byte) (common.Address, error) {
-	var out []interface{}
-	err := _ZkBNB.contract.Call(opts, &out, "getAddressByAccountNameHash", accountNameHash)
-
-	if err != nil {
-		return *new(common.Address), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
-
-	return out0, err
-
-}
-
-// GetAddressByAccountNameHash is a free data retrieval call binding the contract method 0x0b8f1c0c.
-//
-// Solidity: function getAddressByAccountNameHash(bytes32 accountNameHash) view returns(address)
-func (_ZkBNB *ZkBNBSession) GetAddressByAccountNameHash(accountNameHash [32]byte) (common.Address, error) {
-	return _ZkBNB.Contract.GetAddressByAccountNameHash(&_ZkBNB.CallOpts, accountNameHash)
-}
-
-// GetAddressByAccountNameHash is a free data retrieval call binding the contract method 0x0b8f1c0c.
-//
-// Solidity: function getAddressByAccountNameHash(bytes32 accountNameHash) view returns(address)
-func (_ZkBNB *ZkBNBCallerSession) GetAddressByAccountNameHash(accountNameHash [32]byte) (common.Address, error) {
-	return _ZkBNB.Contract.GetAddressByAccountNameHash(&_ZkBNB.CallOpts, accountNameHash)
-}
-
-// GetNFTFactory is a free data retrieval call binding the contract method 0x76b4da60.
-//
-// Solidity: function getNFTFactory(bytes32 _creatorAccountNameHash, uint32 _collectionId) view returns(address)
-func (_ZkBNB *ZkBNBCaller) GetNFTFactory(opts *bind.CallOpts, _creatorAccountNameHash [32]byte, _collectionId uint32) (common.Address, error) {
-	var out []interface{}
-	err := _ZkBNB.contract.Call(opts, &out, "getNFTFactory", _creatorAccountNameHash, _collectionId)
-
-	if err != nil {
-		return *new(common.Address), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
-
-	return out0, err
-
-}
-
-// GetNFTFactory is a free data retrieval call binding the contract method 0x76b4da60.
-//
-// Solidity: function getNFTFactory(bytes32 _creatorAccountNameHash, uint32 _collectionId) view returns(address)
-func (_ZkBNB *ZkBNBSession) GetNFTFactory(_creatorAccountNameHash [32]byte, _collectionId uint32) (common.Address, error) {
-	return _ZkBNB.Contract.GetNFTFactory(&_ZkBNB.CallOpts, _creatorAccountNameHash, _collectionId)
-}
-
-// GetNFTFactory is a free data retrieval call binding the contract method 0x76b4da60.
-//
-// Solidity: function getNFTFactory(bytes32 _creatorAccountNameHash, uint32 _collectionId) view returns(address)
-func (_ZkBNB *ZkBNBCallerSession) GetNFTFactory(_creatorAccountNameHash [32]byte, _collectionId uint32) (common.Address, error) {
-	return _ZkBNB.Contract.GetNFTFactory(&_ZkBNB.CallOpts, _creatorAccountNameHash, _collectionId)
-}
-
-// GetNoticePeriod is a free data retrieval call binding the contract method 0x2a3174f4.
-//
-// Solidity: function getNoticePeriod() pure returns(uint256)
-func (_ZkBNB *ZkBNBCaller) GetNoticePeriod(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _ZkBNB.contract.Call(opts, &out, "getNoticePeriod")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// GetNoticePeriod is a free data retrieval call binding the contract method 0x2a3174f4.
-//
-// Solidity: function getNoticePeriod() pure returns(uint256)
-func (_ZkBNB *ZkBNBSession) GetNoticePeriod() (*big.Int, error) {
-	return _ZkBNB.Contract.GetNoticePeriod(&_ZkBNB.CallOpts)
-}
-
-// GetNoticePeriod is a free data retrieval call binding the contract method 0x2a3174f4.
-//
-// Solidity: function getNoticePeriod() pure returns(uint256)
-func (_ZkBNB *ZkBNBCallerSession) GetNoticePeriod() (*big.Int, error) {
-	return _ZkBNB.Contract.GetNoticePeriod(&_ZkBNB.CallOpts)
-}
-
 // GetPendingBalance is a free data retrieval call binding the contract method 0x5aca41f6.
 //
 // Solidity: function getPendingBalance(address _address, address _assetAddr) view returns(uint128)
@@ -804,66 +583,35 @@ func (_ZkBNB *ZkBNBCallerSession) GetPendingBalance(_address common.Address, _as
 	return _ZkBNB.Contract.GetPendingBalance(&_ZkBNB.CallOpts, _address, _assetAddr)
 }
 
-// IsReadyForUpgrade is a free data retrieval call binding the contract method 0x8773334c.
+// OnERC721Received is a free data retrieval call binding the contract method 0x150b7a02.
 //
-// Solidity: function isReadyForUpgrade() view returns(bool)
-func (_ZkBNB *ZkBNBCaller) IsReadyForUpgrade(opts *bind.CallOpts) (bool, error) {
+// Solidity: function onERC721Received(address operator, address from, uint256 tokenId, bytes data) pure returns(bytes4)
+func (_ZkBNB *ZkBNBCaller) OnERC721Received(opts *bind.CallOpts, operator common.Address, from common.Address, tokenId *big.Int, data []byte) ([4]byte, error) {
 	var out []interface{}
-	err := _ZkBNB.contract.Call(opts, &out, "isReadyForUpgrade")
+	err := _ZkBNB.contract.Call(opts, &out, "onERC721Received", operator, from, tokenId, data)
 
 	if err != nil {
-		return *new(bool), err
+		return *new([4]byte), err
 	}
 
-	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+	out0 := *abi.ConvertType(out[0], new([4]byte)).(*[4]byte)
 
 	return out0, err
 
 }
 
-// IsReadyForUpgrade is a free data retrieval call binding the contract method 0x8773334c.
+// OnERC721Received is a free data retrieval call binding the contract method 0x150b7a02.
 //
-// Solidity: function isReadyForUpgrade() view returns(bool)
-func (_ZkBNB *ZkBNBSession) IsReadyForUpgrade() (bool, error) {
-	return _ZkBNB.Contract.IsReadyForUpgrade(&_ZkBNB.CallOpts)
+// Solidity: function onERC721Received(address operator, address from, uint256 tokenId, bytes data) pure returns(bytes4)
+func (_ZkBNB *ZkBNBSession) OnERC721Received(operator common.Address, from common.Address, tokenId *big.Int, data []byte) ([4]byte, error) {
+	return _ZkBNB.Contract.OnERC721Received(&_ZkBNB.CallOpts, operator, from, tokenId, data)
 }
 
-// IsReadyForUpgrade is a free data retrieval call binding the contract method 0x8773334c.
+// OnERC721Received is a free data retrieval call binding the contract method 0x150b7a02.
 //
-// Solidity: function isReadyForUpgrade() view returns(bool)
-func (_ZkBNB *ZkBNBCallerSession) IsReadyForUpgrade() (bool, error) {
-	return _ZkBNB.Contract.IsReadyForUpgrade(&_ZkBNB.CallOpts)
-}
-
-// NftFactories is a free data retrieval call binding the contract method 0x16335e06.
-//
-// Solidity: function nftFactories(bytes32 , uint32 ) view returns(address)
-func (_ZkBNB *ZkBNBCaller) NftFactories(opts *bind.CallOpts, arg0 [32]byte, arg1 uint32) (common.Address, error) {
-	var out []interface{}
-	err := _ZkBNB.contract.Call(opts, &out, "nftFactories", arg0, arg1)
-
-	if err != nil {
-		return *new(common.Address), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
-
-	return out0, err
-
-}
-
-// NftFactories is a free data retrieval call binding the contract method 0x16335e06.
-//
-// Solidity: function nftFactories(bytes32 , uint32 ) view returns(address)
-func (_ZkBNB *ZkBNBSession) NftFactories(arg0 [32]byte, arg1 uint32) (common.Address, error) {
-	return _ZkBNB.Contract.NftFactories(&_ZkBNB.CallOpts, arg0, arg1)
-}
-
-// NftFactories is a free data retrieval call binding the contract method 0x16335e06.
-//
-// Solidity: function nftFactories(bytes32 , uint32 ) view returns(address)
-func (_ZkBNB *ZkBNBCallerSession) NftFactories(arg0 [32]byte, arg1 uint32) (common.Address, error) {
-	return _ZkBNB.Contract.NftFactories(&_ZkBNB.CallOpts, arg0, arg1)
+// Solidity: function onERC721Received(address operator, address from, uint256 tokenId, bytes data) pure returns(bytes4)
+func (_ZkBNB *ZkBNBCallerSession) OnERC721Received(operator common.Address, from common.Address, tokenId *big.Int, data []byte) ([4]byte, error) {
+	return _ZkBNB.Contract.OnERC721Received(&_ZkBNB.CallOpts, operator, from, tokenId, data)
 }
 
 // StateRoot is a free data retrieval call binding the contract method 0x9588eca2.
@@ -1021,37 +769,6 @@ func (_ZkBNB *ZkBNBCallerSession) TotalOpenPriorityRequests() (uint64, error) {
 	return _ZkBNB.Contract.TotalOpenPriorityRequests(&_ZkBNB.CallOpts)
 }
 
-// TotalTokenPairs is a free data retrieval call binding the contract method 0xd0ad718d.
-//
-// Solidity: function totalTokenPairs() view returns(uint16)
-func (_ZkBNB *ZkBNBCaller) TotalTokenPairs(opts *bind.CallOpts) (uint16, error) {
-	var out []interface{}
-	err := _ZkBNB.contract.Call(opts, &out, "totalTokenPairs")
-
-	if err != nil {
-		return *new(uint16), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(uint16)).(*uint16)
-
-	return out0, err
-
-}
-
-// TotalTokenPairs is a free data retrieval call binding the contract method 0xd0ad718d.
-//
-// Solidity: function totalTokenPairs() view returns(uint16)
-func (_ZkBNB *ZkBNBSession) TotalTokenPairs() (uint16, error) {
-	return _ZkBNB.Contract.TotalTokenPairs(&_ZkBNB.CallOpts)
-}
-
-// TotalTokenPairs is a free data retrieval call binding the contract method 0xd0ad718d.
-//
-// Solidity: function totalTokenPairs() view returns(uint16)
-func (_ZkBNB *ZkBNBCallerSession) TotalTokenPairs() (uint16, error) {
-	return _ZkBNB.Contract.TotalTokenPairs(&_ZkBNB.CallOpts)
-}
-
 // ActivateDesertMode is a paid mutator transaction binding the contract method 0x22b22256.
 //
 // Solidity: function activateDesertMode() returns(bool)
@@ -1073,130 +790,109 @@ func (_ZkBNB *ZkBNBTransactorSession) ActivateDesertMode() (*types.Transaction, 
 	return _ZkBNB.Contract.ActivateDesertMode(&_ZkBNB.TransactOpts)
 }
 
-// CommitBlocks is a paid mutator transaction binding the contract method 0x2a54f972.
+// CancelOutstandingDepositsForDesertMode is a paid mutator transaction binding the contract method 0x1b6592fa.
 //
-// Solidity: function commitBlocks((uint16,uint32,uint64,bytes32,uint256,bytes32,bytes32) _lastCommittedBlockData, (bytes32,bytes,uint256,uint32[],uint32,uint16)[] _newBlocksData) returns()
-func (_ZkBNB *ZkBNBTransactor) CommitBlocks(opts *bind.TransactOpts, _lastCommittedBlockData StorageStoredBlockInfo, _newBlocksData []OldZkBNBCommitBlockInfo) (*types.Transaction, error) {
+// Solidity: function cancelOutstandingDepositsForDesertMode(uint64 _n, bytes[] _depositsPubData) returns()
+func (_ZkBNB *ZkBNBTransactor) CancelOutstandingDepositsForDesertMode(opts *bind.TransactOpts, _n uint64, _depositsPubData [][]byte) (*types.Transaction, error) {
+	return _ZkBNB.contract.Transact(opts, "cancelOutstandingDepositsForDesertMode", _n, _depositsPubData)
+}
+
+// CancelOutstandingDepositsForDesertMode is a paid mutator transaction binding the contract method 0x1b6592fa.
+//
+// Solidity: function cancelOutstandingDepositsForDesertMode(uint64 _n, bytes[] _depositsPubData) returns()
+func (_ZkBNB *ZkBNBSession) CancelOutstandingDepositsForDesertMode(_n uint64, _depositsPubData [][]byte) (*types.Transaction, error) {
+	return _ZkBNB.Contract.CancelOutstandingDepositsForDesertMode(&_ZkBNB.TransactOpts, _n, _depositsPubData)
+}
+
+// CancelOutstandingDepositsForDesertMode is a paid mutator transaction binding the contract method 0x1b6592fa.
+//
+// Solidity: function cancelOutstandingDepositsForDesertMode(uint64 _n, bytes[] _depositsPubData) returns()
+func (_ZkBNB *ZkBNBTransactorSession) CancelOutstandingDepositsForDesertMode(_n uint64, _depositsPubData [][]byte) (*types.Transaction, error) {
+	return _ZkBNB.Contract.CancelOutstandingDepositsForDesertMode(&_ZkBNB.TransactOpts, _n, _depositsPubData)
+}
+
+// CommitBlocks is a paid mutator transaction binding the contract method 0x23c4d62d.
+//
+// Solidity: function commitBlocks((uint16,uint32,uint64,bytes32,uint256,bytes32,bytes32) _lastCommittedBlockData, (bytes32,bytes,uint256,(bytes,uint32)[],uint32,uint16)[] _newBlocksData) returns()
+func (_ZkBNB *ZkBNBTransactor) CommitBlocks(opts *bind.TransactOpts, _lastCommittedBlockData StorageStoredBlockInfo, _newBlocksData []ZkBNBCommitBlockInfo) (*types.Transaction, error) {
 	return _ZkBNB.contract.Transact(opts, "commitBlocks", _lastCommittedBlockData, _newBlocksData)
 }
 
-// CommitBlocks is a paid mutator transaction binding the contract method 0x2a54f972.
+// CommitBlocks is a paid mutator transaction binding the contract method 0x23c4d62d.
 //
-// Solidity: function commitBlocks((uint16,uint32,uint64,bytes32,uint256,bytes32,bytes32) _lastCommittedBlockData, (bytes32,bytes,uint256,uint32[],uint32,uint16)[] _newBlocksData) returns()
-func (_ZkBNB *ZkBNBSession) CommitBlocks(_lastCommittedBlockData StorageStoredBlockInfo, _newBlocksData []OldZkBNBCommitBlockInfo) (*types.Transaction, error) {
+// Solidity: function commitBlocks((uint16,uint32,uint64,bytes32,uint256,bytes32,bytes32) _lastCommittedBlockData, (bytes32,bytes,uint256,(bytes,uint32)[],uint32,uint16)[] _newBlocksData) returns()
+func (_ZkBNB *ZkBNBSession) CommitBlocks(_lastCommittedBlockData StorageStoredBlockInfo, _newBlocksData []ZkBNBCommitBlockInfo) (*types.Transaction, error) {
 	return _ZkBNB.Contract.CommitBlocks(&_ZkBNB.TransactOpts, _lastCommittedBlockData, _newBlocksData)
 }
 
-// CommitBlocks is a paid mutator transaction binding the contract method 0x2a54f972.
+// CommitBlocks is a paid mutator transaction binding the contract method 0x23c4d62d.
 //
-// Solidity: function commitBlocks((uint16,uint32,uint64,bytes32,uint256,bytes32,bytes32) _lastCommittedBlockData, (bytes32,bytes,uint256,uint32[],uint32,uint16)[] _newBlocksData) returns()
-func (_ZkBNB *ZkBNBTransactorSession) CommitBlocks(_lastCommittedBlockData StorageStoredBlockInfo, _newBlocksData []OldZkBNBCommitBlockInfo) (*types.Transaction, error) {
+// Solidity: function commitBlocks((uint16,uint32,uint64,bytes32,uint256,bytes32,bytes32) _lastCommittedBlockData, (bytes32,bytes,uint256,(bytes,uint32)[],uint32,uint16)[] _newBlocksData) returns()
+func (_ZkBNB *ZkBNBTransactorSession) CommitBlocks(_lastCommittedBlockData StorageStoredBlockInfo, _newBlocksData []ZkBNBCommitBlockInfo) (*types.Transaction, error) {
 	return _ZkBNB.Contract.CommitBlocks(&_ZkBNB.TransactOpts, _lastCommittedBlockData, _newBlocksData)
 }
 
-// CreatePair is a paid mutator transaction binding the contract method 0xc9c65396.
+// DepositBEP20 is a paid mutator transaction binding the contract method 0x10ff3764.
 //
-// Solidity: function createPair(address _tokenA, address _tokenB) returns()
-func (_ZkBNB *ZkBNBTransactor) CreatePair(opts *bind.TransactOpts, _tokenA common.Address, _tokenB common.Address) (*types.Transaction, error) {
-	return _ZkBNB.contract.Transact(opts, "createPair", _tokenA, _tokenB)
+// Solidity: function depositBEP20(address _token, uint104 _amount, address _to) returns()
+func (_ZkBNB *ZkBNBTransactor) DepositBEP20(opts *bind.TransactOpts, _token common.Address, _amount *big.Int, _to common.Address) (*types.Transaction, error) {
+	return _ZkBNB.contract.Transact(opts, "depositBEP20", _token, _amount, _to)
 }
 
-// CreatePair is a paid mutator transaction binding the contract method 0xc9c65396.
+// DepositBEP20 is a paid mutator transaction binding the contract method 0x10ff3764.
 //
-// Solidity: function createPair(address _tokenA, address _tokenB) returns()
-func (_ZkBNB *ZkBNBSession) CreatePair(_tokenA common.Address, _tokenB common.Address) (*types.Transaction, error) {
-	return _ZkBNB.Contract.CreatePair(&_ZkBNB.TransactOpts, _tokenA, _tokenB)
+// Solidity: function depositBEP20(address _token, uint104 _amount, address _to) returns()
+func (_ZkBNB *ZkBNBSession) DepositBEP20(_token common.Address, _amount *big.Int, _to common.Address) (*types.Transaction, error) {
+	return _ZkBNB.Contract.DepositBEP20(&_ZkBNB.TransactOpts, _token, _amount, _to)
 }
 
-// CreatePair is a paid mutator transaction binding the contract method 0xc9c65396.
+// DepositBEP20 is a paid mutator transaction binding the contract method 0x10ff3764.
 //
-// Solidity: function createPair(address _tokenA, address _tokenB) returns()
-func (_ZkBNB *ZkBNBTransactorSession) CreatePair(_tokenA common.Address, _tokenB common.Address) (*types.Transaction, error) {
-	return _ZkBNB.Contract.CreatePair(&_ZkBNB.TransactOpts, _tokenA, _tokenB)
+// Solidity: function depositBEP20(address _token, uint104 _amount, address _to) returns()
+func (_ZkBNB *ZkBNBTransactorSession) DepositBEP20(_token common.Address, _amount *big.Int, _to common.Address) (*types.Transaction, error) {
+	return _ZkBNB.Contract.DepositBEP20(&_ZkBNB.TransactOpts, _token, _amount, _to)
 }
 
-// CutUpgradeNoticePeriod is a paid mutator transaction binding the contract method 0x3e71e1e7.
+// DepositBNB is a paid mutator transaction binding the contract method 0x684a5843.
 //
-// Solidity: function cutUpgradeNoticePeriod() returns()
-func (_ZkBNB *ZkBNBTransactor) CutUpgradeNoticePeriod(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _ZkBNB.contract.Transact(opts, "cutUpgradeNoticePeriod")
+// Solidity: function depositBNB(address _to) payable returns()
+func (_ZkBNB *ZkBNBTransactor) DepositBNB(opts *bind.TransactOpts, _to common.Address) (*types.Transaction, error) {
+	return _ZkBNB.contract.Transact(opts, "depositBNB", _to)
 }
 
-// CutUpgradeNoticePeriod is a paid mutator transaction binding the contract method 0x3e71e1e7.
+// DepositBNB is a paid mutator transaction binding the contract method 0x684a5843.
 //
-// Solidity: function cutUpgradeNoticePeriod() returns()
-func (_ZkBNB *ZkBNBSession) CutUpgradeNoticePeriod() (*types.Transaction, error) {
-	return _ZkBNB.Contract.CutUpgradeNoticePeriod(&_ZkBNB.TransactOpts)
+// Solidity: function depositBNB(address _to) payable returns()
+func (_ZkBNB *ZkBNBSession) DepositBNB(_to common.Address) (*types.Transaction, error) {
+	return _ZkBNB.Contract.DepositBNB(&_ZkBNB.TransactOpts, _to)
 }
 
-// CutUpgradeNoticePeriod is a paid mutator transaction binding the contract method 0x3e71e1e7.
+// DepositBNB is a paid mutator transaction binding the contract method 0x684a5843.
 //
-// Solidity: function cutUpgradeNoticePeriod() returns()
-func (_ZkBNB *ZkBNBTransactorSession) CutUpgradeNoticePeriod() (*types.Transaction, error) {
-	return _ZkBNB.Contract.CutUpgradeNoticePeriod(&_ZkBNB.TransactOpts)
+// Solidity: function depositBNB(address _to) payable returns()
+func (_ZkBNB *ZkBNBTransactorSession) DepositBNB(_to common.Address) (*types.Transaction, error) {
+	return _ZkBNB.Contract.DepositBNB(&_ZkBNB.TransactOpts, _to)
 }
 
-// DepositBEP20 is a paid mutator transaction binding the contract method 0x1caf5d25.
+// DepositNft is a paid mutator transaction binding the contract method 0x82a5b1aa.
 //
-// Solidity: function depositBEP20(address _token, uint104 _amount, string _accountName) returns()
-func (_ZkBNB *ZkBNBTransactor) DepositBEP20(opts *bind.TransactOpts, _token common.Address, _amount *big.Int, _accountName string) (*types.Transaction, error) {
-	return _ZkBNB.contract.Transact(opts, "depositBEP20", _token, _amount, _accountName)
+// Solidity: function depositNft(address _to, address _nftL1Address, uint256 _nftL1TokenId) returns()
+func (_ZkBNB *ZkBNBTransactor) DepositNft(opts *bind.TransactOpts, _to common.Address, _nftL1Address common.Address, _nftL1TokenId *big.Int) (*types.Transaction, error) {
+	return _ZkBNB.contract.Transact(opts, "depositNft", _to, _nftL1Address, _nftL1TokenId)
 }
 
-// DepositBEP20 is a paid mutator transaction binding the contract method 0x1caf5d25.
+// DepositNft is a paid mutator transaction binding the contract method 0x82a5b1aa.
 //
-// Solidity: function depositBEP20(address _token, uint104 _amount, string _accountName) returns()
-func (_ZkBNB *ZkBNBSession) DepositBEP20(_token common.Address, _amount *big.Int, _accountName string) (*types.Transaction, error) {
-	return _ZkBNB.Contract.DepositBEP20(&_ZkBNB.TransactOpts, _token, _amount, _accountName)
+// Solidity: function depositNft(address _to, address _nftL1Address, uint256 _nftL1TokenId) returns()
+func (_ZkBNB *ZkBNBSession) DepositNft(_to common.Address, _nftL1Address common.Address, _nftL1TokenId *big.Int) (*types.Transaction, error) {
+	return _ZkBNB.Contract.DepositNft(&_ZkBNB.TransactOpts, _to, _nftL1Address, _nftL1TokenId)
 }
 
-// DepositBEP20 is a paid mutator transaction binding the contract method 0x1caf5d25.
+// DepositNft is a paid mutator transaction binding the contract method 0x82a5b1aa.
 //
-// Solidity: function depositBEP20(address _token, uint104 _amount, string _accountName) returns()
-func (_ZkBNB *ZkBNBTransactorSession) DepositBEP20(_token common.Address, _amount *big.Int, _accountName string) (*types.Transaction, error) {
-	return _ZkBNB.Contract.DepositBEP20(&_ZkBNB.TransactOpts, _token, _amount, _accountName)
-}
-
-// DepositBNB is a paid mutator transaction binding the contract method 0x51344683.
-//
-// Solidity: function depositBNB(string _accountName) payable returns()
-func (_ZkBNB *ZkBNBTransactor) DepositBNB(opts *bind.TransactOpts, _accountName string) (*types.Transaction, error) {
-	return _ZkBNB.contract.Transact(opts, "depositBNB", _accountName)
-}
-
-// DepositBNB is a paid mutator transaction binding the contract method 0x51344683.
-//
-// Solidity: function depositBNB(string _accountName) payable returns()
-func (_ZkBNB *ZkBNBSession) DepositBNB(_accountName string) (*types.Transaction, error) {
-	return _ZkBNB.Contract.DepositBNB(&_ZkBNB.TransactOpts, _accountName)
-}
-
-// DepositBNB is a paid mutator transaction binding the contract method 0x51344683.
-//
-// Solidity: function depositBNB(string _accountName) payable returns()
-func (_ZkBNB *ZkBNBTransactorSession) DepositBNB(_accountName string) (*types.Transaction, error) {
-	return _ZkBNB.Contract.DepositBNB(&_ZkBNB.TransactOpts, _accountName)
-}
-
-// DepositNft is a paid mutator transaction binding the contract method 0xfb99514b.
-//
-// Solidity: function depositNft(string _accountName, address _nftL1Address, uint256 _nftL1TokenId) returns()
-func (_ZkBNB *ZkBNBTransactor) DepositNft(opts *bind.TransactOpts, _accountName string, _nftL1Address common.Address, _nftL1TokenId *big.Int) (*types.Transaction, error) {
-	return _ZkBNB.contract.Transact(opts, "depositNft", _accountName, _nftL1Address, _nftL1TokenId)
-}
-
-// DepositNft is a paid mutator transaction binding the contract method 0xfb99514b.
-//
-// Solidity: function depositNft(string _accountName, address _nftL1Address, uint256 _nftL1TokenId) returns()
-func (_ZkBNB *ZkBNBSession) DepositNft(_accountName string, _nftL1Address common.Address, _nftL1TokenId *big.Int) (*types.Transaction, error) {
-	return _ZkBNB.Contract.DepositNft(&_ZkBNB.TransactOpts, _accountName, _nftL1Address, _nftL1TokenId)
-}
-
-// DepositNft is a paid mutator transaction binding the contract method 0xfb99514b.
-//
-// Solidity: function depositNft(string _accountName, address _nftL1Address, uint256 _nftL1TokenId) returns()
-func (_ZkBNB *ZkBNBTransactorSession) DepositNft(_accountName string, _nftL1Address common.Address, _nftL1TokenId *big.Int) (*types.Transaction, error) {
-	return _ZkBNB.Contract.DepositNft(&_ZkBNB.TransactOpts, _accountName, _nftL1Address, _nftL1TokenId)
+// Solidity: function depositNft(address _to, address _nftL1Address, uint256 _nftL1TokenId) returns()
+func (_ZkBNB *ZkBNBTransactorSession) DepositNft(_to common.Address, _nftL1Address common.Address, _nftL1TokenId *big.Int) (*types.Transaction, error) {
+	return _ZkBNB.Contract.DepositNft(&_ZkBNB.TransactOpts, _to, _nftL1Address, _nftL1TokenId)
 }
 
 // Initialize is a paid mutator transaction binding the contract method 0x439fab91.
@@ -1220,88 +916,88 @@ func (_ZkBNB *ZkBNBTransactorSession) Initialize(initializationParameters []byte
 	return _ZkBNB.Contract.Initialize(&_ZkBNB.TransactOpts, initializationParameters)
 }
 
-// OnERC721Received is a paid mutator transaction binding the contract method 0x150b7a02.
+// PerformDesert is a paid mutator transaction binding the contract method 0x877af728.
 //
-// Solidity: function onERC721Received(address operator, address from, uint256 tokenId, bytes data) returns(bytes4)
-func (_ZkBNB *ZkBNBTransactor) OnERC721Received(opts *bind.TransactOpts, operator common.Address, from common.Address, tokenId *big.Int, data []byte) (*types.Transaction, error) {
-	return _ZkBNB.contract.Transact(opts, "onERC721Received", operator, from, tokenId, data)
+// Solidity: function performDesert((uint16,uint32,uint64,bytes32,uint256,bytes32,bytes32) _storedBlockInfo, uint256 _nftRoot, (uint16,uint128,uint256) _assetExitData, (uint32,address,bytes32,bytes32,uint256,uint256) _accountExitData, uint256[16] _assetMerkleProof, uint256[32] _accountMerkleProof) returns()
+func (_ZkBNB *ZkBNBTransactor) PerformDesert(opts *bind.TransactOpts, _storedBlockInfo StorageStoredBlockInfo, _nftRoot *big.Int, _assetExitData DesertVerifierAssetExitData, _accountExitData DesertVerifierAccountExitData, _assetMerkleProof [16]*big.Int, _accountMerkleProof [32]*big.Int) (*types.Transaction, error) {
+	return _ZkBNB.contract.Transact(opts, "performDesert", _storedBlockInfo, _nftRoot, _assetExitData, _accountExitData, _assetMerkleProof, _accountMerkleProof)
 }
 
-// OnERC721Received is a paid mutator transaction binding the contract method 0x150b7a02.
+// PerformDesert is a paid mutator transaction binding the contract method 0x877af728.
 //
-// Solidity: function onERC721Received(address operator, address from, uint256 tokenId, bytes data) returns(bytes4)
-func (_ZkBNB *ZkBNBSession) OnERC721Received(operator common.Address, from common.Address, tokenId *big.Int, data []byte) (*types.Transaction, error) {
-	return _ZkBNB.Contract.OnERC721Received(&_ZkBNB.TransactOpts, operator, from, tokenId, data)
+// Solidity: function performDesert((uint16,uint32,uint64,bytes32,uint256,bytes32,bytes32) _storedBlockInfo, uint256 _nftRoot, (uint16,uint128,uint256) _assetExitData, (uint32,address,bytes32,bytes32,uint256,uint256) _accountExitData, uint256[16] _assetMerkleProof, uint256[32] _accountMerkleProof) returns()
+func (_ZkBNB *ZkBNBSession) PerformDesert(_storedBlockInfo StorageStoredBlockInfo, _nftRoot *big.Int, _assetExitData DesertVerifierAssetExitData, _accountExitData DesertVerifierAccountExitData, _assetMerkleProof [16]*big.Int, _accountMerkleProof [32]*big.Int) (*types.Transaction, error) {
+	return _ZkBNB.Contract.PerformDesert(&_ZkBNB.TransactOpts, _storedBlockInfo, _nftRoot, _assetExitData, _accountExitData, _assetMerkleProof, _accountMerkleProof)
 }
 
-// OnERC721Received is a paid mutator transaction binding the contract method 0x150b7a02.
+// PerformDesert is a paid mutator transaction binding the contract method 0x877af728.
 //
-// Solidity: function onERC721Received(address operator, address from, uint256 tokenId, bytes data) returns(bytes4)
-func (_ZkBNB *ZkBNBTransactorSession) OnERC721Received(operator common.Address, from common.Address, tokenId *big.Int, data []byte) (*types.Transaction, error) {
-	return _ZkBNB.Contract.OnERC721Received(&_ZkBNB.TransactOpts, operator, from, tokenId, data)
+// Solidity: function performDesert((uint16,uint32,uint64,bytes32,uint256,bytes32,bytes32) _storedBlockInfo, uint256 _nftRoot, (uint16,uint128,uint256) _assetExitData, (uint32,address,bytes32,bytes32,uint256,uint256) _accountExitData, uint256[16] _assetMerkleProof, uint256[32] _accountMerkleProof) returns()
+func (_ZkBNB *ZkBNBTransactorSession) PerformDesert(_storedBlockInfo StorageStoredBlockInfo, _nftRoot *big.Int, _assetExitData DesertVerifierAssetExitData, _accountExitData DesertVerifierAccountExitData, _assetMerkleProof [16]*big.Int, _accountMerkleProof [32]*big.Int) (*types.Transaction, error) {
+	return _ZkBNB.Contract.PerformDesert(&_ZkBNB.TransactOpts, _storedBlockInfo, _nftRoot, _assetExitData, _accountExitData, _assetMerkleProof, _accountMerkleProof)
 }
 
-// RegisterZNS is a paid mutator transaction binding the contract method 0x3fdeb67d.
+// PerformDesertNft is a paid mutator transaction binding the contract method 0xf395f300.
 //
-// Solidity: function registerZNS(string _name, address _owner, bytes32 _zkbnbPubKeyX, bytes32 _zkbnbPubKeyY) payable returns()
-func (_ZkBNB *ZkBNBTransactor) RegisterZNS(opts *bind.TransactOpts, _name string, _owner common.Address, _zkbnbPubKeyX [32]byte, _zkbnbPubKeyY [32]byte) (*types.Transaction, error) {
-	return _ZkBNB.contract.Transact(opts, "registerZNS", _name, _owner, _zkbnbPubKeyX, _zkbnbPubKeyY)
+// Solidity: function performDesertNft((uint16,uint32,uint64,bytes32,uint256,bytes32,bytes32) _storedBlockInfo, uint256 _assetRoot, (uint32,address,bytes32,bytes32,uint256,uint256) _accountExitData, (uint40,uint256,uint32,uint16,uint16,bytes16,bytes16,uint8)[] _exitNfts, uint256[32] _accountMerkleProof, uint256[40][] _nftMerkleProofs) returns()
+func (_ZkBNB *ZkBNBTransactor) PerformDesertNft(opts *bind.TransactOpts, _storedBlockInfo StorageStoredBlockInfo, _assetRoot *big.Int, _accountExitData DesertVerifierAccountExitData, _exitNfts []DesertVerifierNftExitData, _accountMerkleProof [32]*big.Int, _nftMerkleProofs [][40]*big.Int) (*types.Transaction, error) {
+	return _ZkBNB.contract.Transact(opts, "performDesertNft", _storedBlockInfo, _assetRoot, _accountExitData, _exitNfts, _accountMerkleProof, _nftMerkleProofs)
 }
 
-// RegisterZNS is a paid mutator transaction binding the contract method 0x3fdeb67d.
+// PerformDesertNft is a paid mutator transaction binding the contract method 0xf395f300.
 //
-// Solidity: function registerZNS(string _name, address _owner, bytes32 _zkbnbPubKeyX, bytes32 _zkbnbPubKeyY) payable returns()
-func (_ZkBNB *ZkBNBSession) RegisterZNS(_name string, _owner common.Address, _zkbnbPubKeyX [32]byte, _zkbnbPubKeyY [32]byte) (*types.Transaction, error) {
-	return _ZkBNB.Contract.RegisterZNS(&_ZkBNB.TransactOpts, _name, _owner, _zkbnbPubKeyX, _zkbnbPubKeyY)
+// Solidity: function performDesertNft((uint16,uint32,uint64,bytes32,uint256,bytes32,bytes32) _storedBlockInfo, uint256 _assetRoot, (uint32,address,bytes32,bytes32,uint256,uint256) _accountExitData, (uint40,uint256,uint32,uint16,uint16,bytes16,bytes16,uint8)[] _exitNfts, uint256[32] _accountMerkleProof, uint256[40][] _nftMerkleProofs) returns()
+func (_ZkBNB *ZkBNBSession) PerformDesertNft(_storedBlockInfo StorageStoredBlockInfo, _assetRoot *big.Int, _accountExitData DesertVerifierAccountExitData, _exitNfts []DesertVerifierNftExitData, _accountMerkleProof [32]*big.Int, _nftMerkleProofs [][40]*big.Int) (*types.Transaction, error) {
+	return _ZkBNB.Contract.PerformDesertNft(&_ZkBNB.TransactOpts, _storedBlockInfo, _assetRoot, _accountExitData, _exitNfts, _accountMerkleProof, _nftMerkleProofs)
 }
 
-// RegisterZNS is a paid mutator transaction binding the contract method 0x3fdeb67d.
+// PerformDesertNft is a paid mutator transaction binding the contract method 0xf395f300.
 //
-// Solidity: function registerZNS(string _name, address _owner, bytes32 _zkbnbPubKeyX, bytes32 _zkbnbPubKeyY) payable returns()
-func (_ZkBNB *ZkBNBTransactorSession) RegisterZNS(_name string, _owner common.Address, _zkbnbPubKeyX [32]byte, _zkbnbPubKeyY [32]byte) (*types.Transaction, error) {
-	return _ZkBNB.Contract.RegisterZNS(&_ZkBNB.TransactOpts, _name, _owner, _zkbnbPubKeyX, _zkbnbPubKeyY)
+// Solidity: function performDesertNft((uint16,uint32,uint64,bytes32,uint256,bytes32,bytes32) _storedBlockInfo, uint256 _assetRoot, (uint32,address,bytes32,bytes32,uint256,uint256) _accountExitData, (uint40,uint256,uint32,uint16,uint16,bytes16,bytes16,uint8)[] _exitNfts, uint256[32] _accountMerkleProof, uint256[40][] _nftMerkleProofs) returns()
+func (_ZkBNB *ZkBNBTransactorSession) PerformDesertNft(_storedBlockInfo StorageStoredBlockInfo, _assetRoot *big.Int, _accountExitData DesertVerifierAccountExitData, _exitNfts []DesertVerifierNftExitData, _accountMerkleProof [32]*big.Int, _nftMerkleProofs [][40]*big.Int) (*types.Transaction, error) {
+	return _ZkBNB.Contract.PerformDesertNft(&_ZkBNB.TransactOpts, _storedBlockInfo, _assetRoot, _accountExitData, _exitNfts, _accountMerkleProof, _nftMerkleProofs)
 }
 
-// RequestFullExit is a paid mutator transaction binding the contract method 0x8da64c7f.
+// RequestFullExit is a paid mutator transaction binding the contract method 0xab9b2adf.
 //
-// Solidity: function requestFullExit(string _accountName, address _asset) returns()
-func (_ZkBNB *ZkBNBTransactor) RequestFullExit(opts *bind.TransactOpts, _accountName string, _asset common.Address) (*types.Transaction, error) {
-	return _ZkBNB.contract.Transact(opts, "requestFullExit", _accountName, _asset)
+// Solidity: function requestFullExit(uint32 _accountIndex, address _asset) returns()
+func (_ZkBNB *ZkBNBTransactor) RequestFullExit(opts *bind.TransactOpts, _accountIndex uint32, _asset common.Address) (*types.Transaction, error) {
+	return _ZkBNB.contract.Transact(opts, "requestFullExit", _accountIndex, _asset)
 }
 
-// RequestFullExit is a paid mutator transaction binding the contract method 0x8da64c7f.
+// RequestFullExit is a paid mutator transaction binding the contract method 0xab9b2adf.
 //
-// Solidity: function requestFullExit(string _accountName, address _asset) returns()
-func (_ZkBNB *ZkBNBSession) RequestFullExit(_accountName string, _asset common.Address) (*types.Transaction, error) {
-	return _ZkBNB.Contract.RequestFullExit(&_ZkBNB.TransactOpts, _accountName, _asset)
+// Solidity: function requestFullExit(uint32 _accountIndex, address _asset) returns()
+func (_ZkBNB *ZkBNBSession) RequestFullExit(_accountIndex uint32, _asset common.Address) (*types.Transaction, error) {
+	return _ZkBNB.Contract.RequestFullExit(&_ZkBNB.TransactOpts, _accountIndex, _asset)
 }
 
-// RequestFullExit is a paid mutator transaction binding the contract method 0x8da64c7f.
+// RequestFullExit is a paid mutator transaction binding the contract method 0xab9b2adf.
 //
-// Solidity: function requestFullExit(string _accountName, address _asset) returns()
-func (_ZkBNB *ZkBNBTransactorSession) RequestFullExit(_accountName string, _asset common.Address) (*types.Transaction, error) {
-	return _ZkBNB.Contract.RequestFullExit(&_ZkBNB.TransactOpts, _accountName, _asset)
+// Solidity: function requestFullExit(uint32 _accountIndex, address _asset) returns()
+func (_ZkBNB *ZkBNBTransactorSession) RequestFullExit(_accountIndex uint32, _asset common.Address) (*types.Transaction, error) {
+	return _ZkBNB.Contract.RequestFullExit(&_ZkBNB.TransactOpts, _accountIndex, _asset)
 }
 
-// RequestFullExitNft is a paid mutator transaction binding the contract method 0x1bd24317.
+// RequestFullExitNft is a paid mutator transaction binding the contract method 0xfca3ae8e.
 //
-// Solidity: function requestFullExitNft(string _accountName, uint32 _nftIndex) returns()
-func (_ZkBNB *ZkBNBTransactor) RequestFullExitNft(opts *bind.TransactOpts, _accountName string, _nftIndex uint32) (*types.Transaction, error) {
-	return _ZkBNB.contract.Transact(opts, "requestFullExitNft", _accountName, _nftIndex)
+// Solidity: function requestFullExitNft(uint32 _accountIndex, uint32 _nftIndex) returns()
+func (_ZkBNB *ZkBNBTransactor) RequestFullExitNft(opts *bind.TransactOpts, _accountIndex uint32, _nftIndex uint32) (*types.Transaction, error) {
+	return _ZkBNB.contract.Transact(opts, "requestFullExitNft", _accountIndex, _nftIndex)
 }
 
-// RequestFullExitNft is a paid mutator transaction binding the contract method 0x1bd24317.
+// RequestFullExitNft is a paid mutator transaction binding the contract method 0xfca3ae8e.
 //
-// Solidity: function requestFullExitNft(string _accountName, uint32 _nftIndex) returns()
-func (_ZkBNB *ZkBNBSession) RequestFullExitNft(_accountName string, _nftIndex uint32) (*types.Transaction, error) {
-	return _ZkBNB.Contract.RequestFullExitNft(&_ZkBNB.TransactOpts, _accountName, _nftIndex)
+// Solidity: function requestFullExitNft(uint32 _accountIndex, uint32 _nftIndex) returns()
+func (_ZkBNB *ZkBNBSession) RequestFullExitNft(_accountIndex uint32, _nftIndex uint32) (*types.Transaction, error) {
+	return _ZkBNB.Contract.RequestFullExitNft(&_ZkBNB.TransactOpts, _accountIndex, _nftIndex)
 }
 
-// RequestFullExitNft is a paid mutator transaction binding the contract method 0x1bd24317.
+// RequestFullExitNft is a paid mutator transaction binding the contract method 0xfca3ae8e.
 //
-// Solidity: function requestFullExitNft(string _accountName, uint32 _nftIndex) returns()
-func (_ZkBNB *ZkBNBTransactorSession) RequestFullExitNft(_accountName string, _nftIndex uint32) (*types.Transaction, error) {
-	return _ZkBNB.Contract.RequestFullExitNft(&_ZkBNB.TransactOpts, _accountName, _nftIndex)
+// Solidity: function requestFullExitNft(uint32 _accountIndex, uint32 _nftIndex) returns()
+func (_ZkBNB *ZkBNBTransactorSession) RequestFullExitNft(_accountIndex uint32, _nftIndex uint32) (*types.Transaction, error) {
+	return _ZkBNB.Contract.RequestFullExitNft(&_ZkBNB.TransactOpts, _accountIndex, _nftIndex)
 }
 
 // RevertBlocks is a paid mutator transaction binding the contract method 0x97a2eabe.
@@ -1325,27 +1021,6 @@ func (_ZkBNB *ZkBNBTransactorSession) RevertBlocks(_blocksToRevert []StorageStor
 	return _ZkBNB.Contract.RevertBlocks(&_ZkBNB.TransactOpts, _blocksToRevert)
 }
 
-// SetDefaultNFTFactory is a paid mutator transaction binding the contract method 0xce09e20d.
-//
-// Solidity: function setDefaultNFTFactory(address _factory) returns()
-func (_ZkBNB *ZkBNBTransactor) SetDefaultNFTFactory(opts *bind.TransactOpts, _factory common.Address) (*types.Transaction, error) {
-	return _ZkBNB.contract.Transact(opts, "setDefaultNFTFactory", _factory)
-}
-
-// SetDefaultNFTFactory is a paid mutator transaction binding the contract method 0xce09e20d.
-//
-// Solidity: function setDefaultNFTFactory(address _factory) returns()
-func (_ZkBNB *ZkBNBSession) SetDefaultNFTFactory(_factory common.Address) (*types.Transaction, error) {
-	return _ZkBNB.Contract.SetDefaultNFTFactory(&_ZkBNB.TransactOpts, _factory)
-}
-
-// SetDefaultNFTFactory is a paid mutator transaction binding the contract method 0xce09e20d.
-//
-// Solidity: function setDefaultNFTFactory(address _factory) returns()
-func (_ZkBNB *ZkBNBTransactorSession) SetDefaultNFTFactory(_factory common.Address) (*types.Transaction, error) {
-	return _ZkBNB.Contract.SetDefaultNFTFactory(&_ZkBNB.TransactOpts, _factory)
-}
-
 // TransferERC20 is a paid mutator transaction binding the contract method 0x68809a23.
 //
 // Solidity: function transferERC20(address _token, address _to, uint128 _amount, uint128 _maxAmount) returns(uint128 withdrawnAmount)
@@ -1365,48 +1040,6 @@ func (_ZkBNB *ZkBNBSession) TransferERC20(_token common.Address, _to common.Addr
 // Solidity: function transferERC20(address _token, address _to, uint128 _amount, uint128 _maxAmount) returns(uint128 withdrawnAmount)
 func (_ZkBNB *ZkBNBTransactorSession) TransferERC20(_token common.Address, _to common.Address, _amount *big.Int, _maxAmount *big.Int) (*types.Transaction, error) {
 	return _ZkBNB.Contract.TransferERC20(&_ZkBNB.TransactOpts, _token, _to, _amount, _maxAmount)
-}
-
-// UpdatePairRate is a paid mutator transaction binding the contract method 0x13a05e23.
-//
-// Solidity: function updatePairRate((address,address,uint16,uint32,uint16) _pairInfo) returns()
-func (_ZkBNB *ZkBNBTransactor) UpdatePairRate(opts *bind.TransactOpts, _pairInfo OldZkBNBPairInfo) (*types.Transaction, error) {
-	return _ZkBNB.contract.Transact(opts, "updatePairRate", _pairInfo)
-}
-
-// UpdatePairRate is a paid mutator transaction binding the contract method 0x13a05e23.
-//
-// Solidity: function updatePairRate((address,address,uint16,uint32,uint16) _pairInfo) returns()
-func (_ZkBNB *ZkBNBSession) UpdatePairRate(_pairInfo OldZkBNBPairInfo) (*types.Transaction, error) {
-	return _ZkBNB.Contract.UpdatePairRate(&_ZkBNB.TransactOpts, _pairInfo)
-}
-
-// UpdatePairRate is a paid mutator transaction binding the contract method 0x13a05e23.
-//
-// Solidity: function updatePairRate((address,address,uint16,uint32,uint16) _pairInfo) returns()
-func (_ZkBNB *ZkBNBTransactorSession) UpdatePairRate(_pairInfo OldZkBNBPairInfo) (*types.Transaction, error) {
-	return _ZkBNB.Contract.UpdatePairRate(&_ZkBNB.TransactOpts, _pairInfo)
-}
-
-// UpdateZkBNBVerifier is a paid mutator transaction binding the contract method 0xc91cf162.
-//
-// Solidity: function updateZkBNBVerifier(address _newVerifierAddress) returns()
-func (_ZkBNB *ZkBNBTransactor) UpdateZkBNBVerifier(opts *bind.TransactOpts, _newVerifierAddress common.Address) (*types.Transaction, error) {
-	return _ZkBNB.contract.Transact(opts, "updateZkBNBVerifier", _newVerifierAddress)
-}
-
-// UpdateZkBNBVerifier is a paid mutator transaction binding the contract method 0xc91cf162.
-//
-// Solidity: function updateZkBNBVerifier(address _newVerifierAddress) returns()
-func (_ZkBNB *ZkBNBSession) UpdateZkBNBVerifier(_newVerifierAddress common.Address) (*types.Transaction, error) {
-	return _ZkBNB.Contract.UpdateZkBNBVerifier(&_ZkBNB.TransactOpts, _newVerifierAddress)
-}
-
-// UpdateZkBNBVerifier is a paid mutator transaction binding the contract method 0xc91cf162.
-//
-// Solidity: function updateZkBNBVerifier(address _newVerifierAddress) returns()
-func (_ZkBNB *ZkBNBTransactorSession) UpdateZkBNBVerifier(_newVerifierAddress common.Address) (*types.Transaction, error) {
-	return _ZkBNB.Contract.UpdateZkBNBVerifier(&_ZkBNB.TransactOpts, _newVerifierAddress)
 }
 
 // Upgrade is a paid mutator transaction binding the contract method 0x25394645.
@@ -1430,108 +1063,24 @@ func (_ZkBNB *ZkBNBTransactorSession) Upgrade(upgradeParameters []byte) (*types.
 	return _ZkBNB.Contract.Upgrade(&_ZkBNB.TransactOpts, upgradeParameters)
 }
 
-// UpgradeCanceled is a paid mutator transaction binding the contract method 0x871b8ff1.
-//
-// Solidity: function upgradeCanceled() returns()
-func (_ZkBNB *ZkBNBTransactor) UpgradeCanceled(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _ZkBNB.contract.Transact(opts, "upgradeCanceled")
-}
-
-// UpgradeCanceled is a paid mutator transaction binding the contract method 0x871b8ff1.
-//
-// Solidity: function upgradeCanceled() returns()
-func (_ZkBNB *ZkBNBSession) UpgradeCanceled() (*types.Transaction, error) {
-	return _ZkBNB.Contract.UpgradeCanceled(&_ZkBNB.TransactOpts)
-}
-
-// UpgradeCanceled is a paid mutator transaction binding the contract method 0x871b8ff1.
-//
-// Solidity: function upgradeCanceled() returns()
-func (_ZkBNB *ZkBNBTransactorSession) UpgradeCanceled() (*types.Transaction, error) {
-	return _ZkBNB.Contract.UpgradeCanceled(&_ZkBNB.TransactOpts)
-}
-
-// UpgradeFinishes is a paid mutator transaction binding the contract method 0xb269b9ae.
-//
-// Solidity: function upgradeFinishes() returns()
-func (_ZkBNB *ZkBNBTransactor) UpgradeFinishes(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _ZkBNB.contract.Transact(opts, "upgradeFinishes")
-}
-
-// UpgradeFinishes is a paid mutator transaction binding the contract method 0xb269b9ae.
-//
-// Solidity: function upgradeFinishes() returns()
-func (_ZkBNB *ZkBNBSession) UpgradeFinishes() (*types.Transaction, error) {
-	return _ZkBNB.Contract.UpgradeFinishes(&_ZkBNB.TransactOpts)
-}
-
-// UpgradeFinishes is a paid mutator transaction binding the contract method 0xb269b9ae.
-//
-// Solidity: function upgradeFinishes() returns()
-func (_ZkBNB *ZkBNBTransactorSession) UpgradeFinishes() (*types.Transaction, error) {
-	return _ZkBNB.Contract.UpgradeFinishes(&_ZkBNB.TransactOpts)
-}
-
-// UpgradeNoticePeriodStarted is a paid mutator transaction binding the contract method 0x3b154b73.
-//
-// Solidity: function upgradeNoticePeriodStarted() returns()
-func (_ZkBNB *ZkBNBTransactor) UpgradeNoticePeriodStarted(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _ZkBNB.contract.Transact(opts, "upgradeNoticePeriodStarted")
-}
-
-// UpgradeNoticePeriodStarted is a paid mutator transaction binding the contract method 0x3b154b73.
-//
-// Solidity: function upgradeNoticePeriodStarted() returns()
-func (_ZkBNB *ZkBNBSession) UpgradeNoticePeriodStarted() (*types.Transaction, error) {
-	return _ZkBNB.Contract.UpgradeNoticePeriodStarted(&_ZkBNB.TransactOpts)
-}
-
-// UpgradeNoticePeriodStarted is a paid mutator transaction binding the contract method 0x3b154b73.
-//
-// Solidity: function upgradeNoticePeriodStarted() returns()
-func (_ZkBNB *ZkBNBTransactorSession) UpgradeNoticePeriodStarted() (*types.Transaction, error) {
-	return _ZkBNB.Contract.UpgradeNoticePeriodStarted(&_ZkBNB.TransactOpts)
-}
-
-// UpgradePreparationStarted is a paid mutator transaction binding the contract method 0x78b91e70.
-//
-// Solidity: function upgradePreparationStarted() returns()
-func (_ZkBNB *ZkBNBTransactor) UpgradePreparationStarted(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _ZkBNB.contract.Transact(opts, "upgradePreparationStarted")
-}
-
-// UpgradePreparationStarted is a paid mutator transaction binding the contract method 0x78b91e70.
-//
-// Solidity: function upgradePreparationStarted() returns()
-func (_ZkBNB *ZkBNBSession) UpgradePreparationStarted() (*types.Transaction, error) {
-	return _ZkBNB.Contract.UpgradePreparationStarted(&_ZkBNB.TransactOpts)
-}
-
-// UpgradePreparationStarted is a paid mutator transaction binding the contract method 0x78b91e70.
-//
-// Solidity: function upgradePreparationStarted() returns()
-func (_ZkBNB *ZkBNBTransactorSession) UpgradePreparationStarted() (*types.Transaction, error) {
-	return _ZkBNB.Contract.UpgradePreparationStarted(&_ZkBNB.TransactOpts)
-}
-
 // VerifyAndExecuteBlocks is a paid mutator transaction binding the contract method 0xf9ea2e71.
 //
 // Solidity: function verifyAndExecuteBlocks(((uint16,uint32,uint64,bytes32,uint256,bytes32,bytes32),bytes[])[] _blocks, uint256[] _proofs) returns()
-func (_ZkBNB *ZkBNBTransactor) VerifyAndExecuteBlocks(opts *bind.TransactOpts, _blocks []OldZkBNBVerifyAndExecuteBlockInfo, _proofs []*big.Int) (*types.Transaction, error) {
+func (_ZkBNB *ZkBNBTransactor) VerifyAndExecuteBlocks(opts *bind.TransactOpts, _blocks []ZkBNBVerifyAndExecuteBlockInfo, _proofs []*big.Int) (*types.Transaction, error) {
 	return _ZkBNB.contract.Transact(opts, "verifyAndExecuteBlocks", _blocks, _proofs)
 }
 
 // VerifyAndExecuteBlocks is a paid mutator transaction binding the contract method 0xf9ea2e71.
 //
 // Solidity: function verifyAndExecuteBlocks(((uint16,uint32,uint64,bytes32,uint256,bytes32,bytes32),bytes[])[] _blocks, uint256[] _proofs) returns()
-func (_ZkBNB *ZkBNBSession) VerifyAndExecuteBlocks(_blocks []OldZkBNBVerifyAndExecuteBlockInfo, _proofs []*big.Int) (*types.Transaction, error) {
+func (_ZkBNB *ZkBNBSession) VerifyAndExecuteBlocks(_blocks []ZkBNBVerifyAndExecuteBlockInfo, _proofs []*big.Int) (*types.Transaction, error) {
 	return _ZkBNB.Contract.VerifyAndExecuteBlocks(&_ZkBNB.TransactOpts, _blocks, _proofs)
 }
 
 // VerifyAndExecuteBlocks is a paid mutator transaction binding the contract method 0xf9ea2e71.
 //
 // Solidity: function verifyAndExecuteBlocks(((uint16,uint32,uint64,bytes32,uint256,bytes32,bytes32),bytes[])[] _blocks, uint256[] _proofs) returns()
-func (_ZkBNB *ZkBNBTransactorSession) VerifyAndExecuteBlocks(_blocks []OldZkBNBVerifyAndExecuteBlockInfo, _proofs []*big.Int) (*types.Transaction, error) {
+func (_ZkBNB *ZkBNBTransactorSession) VerifyAndExecuteBlocks(_blocks []ZkBNBVerifyAndExecuteBlockInfo, _proofs []*big.Int) (*types.Transaction, error) {
 	return _ZkBNB.Contract.VerifyAndExecuteBlocks(&_ZkBNB.TransactOpts, _blocks, _proofs)
 }
 
@@ -1980,145 +1529,6 @@ func (_ZkBNB *ZkBNBFilterer) ParseBlocksRevert(log types.Log) (*ZkBNBBlocksRever
 	return event, nil
 }
 
-// ZkBNBCreateTokenPairIterator is returned from FilterCreateTokenPair and is used to iterate over the raw logs and unpacked data for CreateTokenPair events raised by the ZkBNB contract.
-type ZkBNBCreateTokenPairIterator struct {
-	Event *ZkBNBCreateTokenPair // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *ZkBNBCreateTokenPairIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(ZkBNBCreateTokenPair)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(ZkBNBCreateTokenPair)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *ZkBNBCreateTokenPairIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *ZkBNBCreateTokenPairIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// ZkBNBCreateTokenPair represents a CreateTokenPair event raised by the ZkBNB contract.
-type ZkBNBCreateTokenPair struct {
-	PairIndex            uint16
-	Asset0Id             uint16
-	Asset1Id             uint16
-	FeeRate              uint16
-	TreasuryAccountIndex uint32
-	TreasuryRate         uint16
-	Raw                  types.Log // Blockchain specific contextual infos
-}
-
-// FilterCreateTokenPair is a free log retrieval operation binding the contract event 0x82e21fd4ced46b510ee1bf5a34eea3dc34aa1f5460f53a25dd22828cde30e087.
-//
-// Solidity: event CreateTokenPair(uint16 pairIndex, uint16 asset0Id, uint16 asset1Id, uint16 feeRate, uint32 treasuryAccountIndex, uint16 treasuryRate)
-func (_ZkBNB *ZkBNBFilterer) FilterCreateTokenPair(opts *bind.FilterOpts) (*ZkBNBCreateTokenPairIterator, error) {
-
-	logs, sub, err := _ZkBNB.contract.FilterLogs(opts, "CreateTokenPair")
-	if err != nil {
-		return nil, err
-	}
-	return &ZkBNBCreateTokenPairIterator{contract: _ZkBNB.contract, event: "CreateTokenPair", logs: logs, sub: sub}, nil
-}
-
-// WatchCreateTokenPair is a free log subscription operation binding the contract event 0x82e21fd4ced46b510ee1bf5a34eea3dc34aa1f5460f53a25dd22828cde30e087.
-//
-// Solidity: event CreateTokenPair(uint16 pairIndex, uint16 asset0Id, uint16 asset1Id, uint16 feeRate, uint32 treasuryAccountIndex, uint16 treasuryRate)
-func (_ZkBNB *ZkBNBFilterer) WatchCreateTokenPair(opts *bind.WatchOpts, sink chan<- *ZkBNBCreateTokenPair) (event.Subscription, error) {
-
-	logs, sub, err := _ZkBNB.contract.WatchLogs(opts, "CreateTokenPair")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(ZkBNBCreateTokenPair)
-				if err := _ZkBNB.contract.UnpackLog(event, "CreateTokenPair", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseCreateTokenPair is a log parse operation binding the contract event 0x82e21fd4ced46b510ee1bf5a34eea3dc34aa1f5460f53a25dd22828cde30e087.
-//
-// Solidity: event CreateTokenPair(uint16 pairIndex, uint16 asset0Id, uint16 asset1Id, uint16 feeRate, uint32 treasuryAccountIndex, uint16 treasuryRate)
-func (_ZkBNB *ZkBNBFilterer) ParseCreateTokenPair(log types.Log) (*ZkBNBCreateTokenPair, error) {
-	event := new(ZkBNBCreateTokenPair)
-	if err := _ZkBNB.contract.UnpackLog(event, "CreateTokenPair", log); err != nil {
-		return nil, err
-	}
-	event.Raw = log
-	return event, nil
-}
-
 // ZkBNBDepositIterator is returned from FilterDeposit and is used to iterate over the raw logs and unpacked data for Deposit events raised by the ZkBNB contract.
 type ZkBNBDepositIterator struct {
 	Event *ZkBNBDeposit // Event containing the contract specifics and raw log
@@ -2188,15 +1598,15 @@ func (it *ZkBNBDepositIterator) Close() error {
 
 // ZkBNBDeposit represents a Deposit event raised by the ZkBNB contract.
 type ZkBNBDeposit struct {
-	AssetId     uint16
-	AccountName [32]byte
-	Amount      *big.Int
-	Raw         types.Log // Blockchain specific contextual infos
+	AssetId uint16
+	To      common.Address
+	Amount  *big.Int
+	Raw     types.Log // Blockchain specific contextual infos
 }
 
-// FilterDeposit is a free log retrieval operation binding the contract event 0xaa46d46658f805449ac7eaaf11d3eaebb6f508930128d276dfefcc8dc02a13c7.
+// FilterDeposit is a free log retrieval operation binding the contract event 0x19bfffca67bba360efb5a2e90ef97006a550aa25f2a4aa62b83434dcb9cae63b.
 //
-// Solidity: event Deposit(uint16 assetId, bytes32 accountName, uint128 amount)
+// Solidity: event Deposit(uint16 assetId, address to, uint128 amount)
 func (_ZkBNB *ZkBNBFilterer) FilterDeposit(opts *bind.FilterOpts) (*ZkBNBDepositIterator, error) {
 
 	logs, sub, err := _ZkBNB.contract.FilterLogs(opts, "Deposit")
@@ -2206,9 +1616,9 @@ func (_ZkBNB *ZkBNBFilterer) FilterDeposit(opts *bind.FilterOpts) (*ZkBNBDeposit
 	return &ZkBNBDepositIterator{contract: _ZkBNB.contract, event: "Deposit", logs: logs, sub: sub}, nil
 }
 
-// WatchDeposit is a free log subscription operation binding the contract event 0xaa46d46658f805449ac7eaaf11d3eaebb6f508930128d276dfefcc8dc02a13c7.
+// WatchDeposit is a free log subscription operation binding the contract event 0x19bfffca67bba360efb5a2e90ef97006a550aa25f2a4aa62b83434dcb9cae63b.
 //
-// Solidity: event Deposit(uint16 assetId, bytes32 accountName, uint128 amount)
+// Solidity: event Deposit(uint16 assetId, address to, uint128 amount)
 func (_ZkBNB *ZkBNBFilterer) WatchDeposit(opts *bind.WatchOpts, sink chan<- *ZkBNBDeposit) (event.Subscription, error) {
 
 	logs, sub, err := _ZkBNB.contract.WatchLogs(opts, "Deposit")
@@ -2243,9 +1653,9 @@ func (_ZkBNB *ZkBNBFilterer) WatchDeposit(opts *bind.WatchOpts, sink chan<- *ZkB
 	}), nil
 }
 
-// ParseDeposit is a log parse operation binding the contract event 0xaa46d46658f805449ac7eaaf11d3eaebb6f508930128d276dfefcc8dc02a13c7.
+// ParseDeposit is a log parse operation binding the contract event 0x19bfffca67bba360efb5a2e90ef97006a550aa25f2a4aa62b83434dcb9cae63b.
 //
-// Solidity: event Deposit(uint16 assetId, bytes32 accountName, uint128 amount)
+// Solidity: event Deposit(uint16 assetId, address to, uint128 amount)
 func (_ZkBNB *ZkBNBFilterer) ParseDeposit(log types.Log) (*ZkBNBDeposit, error) {
 	event := new(ZkBNBDeposit)
 	if err := _ZkBNB.contract.UnpackLog(event, "Deposit", log); err != nil {
@@ -2490,7 +1900,7 @@ func (it *ZkBNBDepositNftIterator) Close() error {
 
 // ZkBNBDepositNft represents a DepositNft event raised by the ZkBNB contract.
 type ZkBNBDepositNft struct {
-	AccountNameHash     [32]byte
+	To                  common.Address
 	NftContentHash      [32]byte
 	TokenAddress        common.Address
 	NftTokenId          *big.Int
@@ -2498,9 +1908,9 @@ type ZkBNBDepositNft struct {
 	Raw                 types.Log // Blockchain specific contextual infos
 }
 
-// FilterDepositNft is a free log retrieval operation binding the contract event 0x42f9fbd77faf066fde386943aaafcc841fba6b755dc5da7939a046cbc493c24f.
+// FilterDepositNft is a free log retrieval operation binding the contract event 0xb56226c9bf0f6973433206e903ba8b6c0ba30634b6b71fdc5c52518f9541aee2.
 //
-// Solidity: event DepositNft(bytes32 accountNameHash, bytes32 nftContentHash, address tokenAddress, uint256 nftTokenId, uint16 creatorTreasuryRate)
+// Solidity: event DepositNft(address to, bytes32 nftContentHash, address tokenAddress, uint256 nftTokenId, uint16 creatorTreasuryRate)
 func (_ZkBNB *ZkBNBFilterer) FilterDepositNft(opts *bind.FilterOpts) (*ZkBNBDepositNftIterator, error) {
 
 	logs, sub, err := _ZkBNB.contract.FilterLogs(opts, "DepositNft")
@@ -2510,9 +1920,9 @@ func (_ZkBNB *ZkBNBFilterer) FilterDepositNft(opts *bind.FilterOpts) (*ZkBNBDepo
 	return &ZkBNBDepositNftIterator{contract: _ZkBNB.contract, event: "DepositNft", logs: logs, sub: sub}, nil
 }
 
-// WatchDepositNft is a free log subscription operation binding the contract event 0x42f9fbd77faf066fde386943aaafcc841fba6b755dc5da7939a046cbc493c24f.
+// WatchDepositNft is a free log subscription operation binding the contract event 0xb56226c9bf0f6973433206e903ba8b6c0ba30634b6b71fdc5c52518f9541aee2.
 //
-// Solidity: event DepositNft(bytes32 accountNameHash, bytes32 nftContentHash, address tokenAddress, uint256 nftTokenId, uint16 creatorTreasuryRate)
+// Solidity: event DepositNft(address to, bytes32 nftContentHash, address tokenAddress, uint256 nftTokenId, uint16 creatorTreasuryRate)
 func (_ZkBNB *ZkBNBFilterer) WatchDepositNft(opts *bind.WatchOpts, sink chan<- *ZkBNBDepositNft) (event.Subscription, error) {
 
 	logs, sub, err := _ZkBNB.contract.WatchLogs(opts, "DepositNft")
@@ -2547,9 +1957,9 @@ func (_ZkBNB *ZkBNBFilterer) WatchDepositNft(opts *bind.WatchOpts, sink chan<- *
 	}), nil
 }
 
-// ParseDepositNft is a log parse operation binding the contract event 0x42f9fbd77faf066fde386943aaafcc841fba6b755dc5da7939a046cbc493c24f.
+// ParseDepositNft is a log parse operation binding the contract event 0xb56226c9bf0f6973433206e903ba8b6c0ba30634b6b71fdc5c52518f9541aee2.
 //
-// Solidity: event DepositNft(bytes32 accountNameHash, bytes32 nftContentHash, address tokenAddress, uint256 nftTokenId, uint16 creatorTreasuryRate)
+// Solidity: event DepositNft(address to, bytes32 nftContentHash, address tokenAddress, uint256 nftTokenId, uint16 creatorTreasuryRate)
 func (_ZkBNB *ZkBNBFilterer) ParseDepositNft(log types.Log) (*ZkBNBDepositNft, error) {
 	event := new(ZkBNBDepositNft)
 	if err := _ZkBNB.contract.UnpackLog(event, "DepositNft", log); err != nil {
@@ -2858,9 +2268,9 @@ func (_ZkBNB *ZkBNBFilterer) ParseFullExitCommit(log types.Log) (*ZkBNBFullExitC
 	return event, nil
 }
 
-// ZkBNBNewDefaultNFTFactoryIterator is returned from FilterNewDefaultNFTFactory and is used to iterate over the raw logs and unpacked data for NewDefaultNFTFactory events raised by the ZkBNB contract.
-type ZkBNBNewDefaultNFTFactoryIterator struct {
-	Event *ZkBNBNewDefaultNFTFactory // Event containing the contract specifics and raw log
+// ZkBNBInitializedIterator is returned from FilterInitialized and is used to iterate over the raw logs and unpacked data for Initialized events raised by the ZkBNB contract.
+type ZkBNBInitializedIterator struct {
+	Event *ZkBNBInitialized // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -2874,7 +2284,7 @@ type ZkBNBNewDefaultNFTFactoryIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *ZkBNBNewDefaultNFTFactoryIterator) Next() bool {
+func (it *ZkBNBInitializedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -2883,7 +2293,7 @@ func (it *ZkBNBNewDefaultNFTFactoryIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(ZkBNBNewDefaultNFTFactory)
+			it.Event = new(ZkBNBInitialized)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -2898,7 +2308,7 @@ func (it *ZkBNBNewDefaultNFTFactoryIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(ZkBNBNewDefaultNFTFactory)
+		it.Event = new(ZkBNBInitialized)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -2914,51 +2324,41 @@ func (it *ZkBNBNewDefaultNFTFactoryIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *ZkBNBNewDefaultNFTFactoryIterator) Error() error {
+func (it *ZkBNBInitializedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *ZkBNBNewDefaultNFTFactoryIterator) Close() error {
+func (it *ZkBNBInitializedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// ZkBNBNewDefaultNFTFactory represents a NewDefaultNFTFactory event raised by the ZkBNB contract.
-type ZkBNBNewDefaultNFTFactory struct {
-	Factory common.Address
+// ZkBNBInitialized represents a Initialized event raised by the ZkBNB contract.
+type ZkBNBInitialized struct {
+	Version uint8
 	Raw     types.Log // Blockchain specific contextual infos
 }
 
-// FilterNewDefaultNFTFactory is a free log retrieval operation binding the contract event 0xadf2ec6c092b7101c958de6b55caf4818f26a946e94fa556cbe3b3f29ff9f2ee.
+// FilterInitialized is a free log retrieval operation binding the contract event 0x7f26b83ff96e1f2b6a682f133852f6798a09c465da95921460cefb3847402498.
 //
-// Solidity: event NewDefaultNFTFactory(address indexed factory)
-func (_ZkBNB *ZkBNBFilterer) FilterNewDefaultNFTFactory(opts *bind.FilterOpts, factory []common.Address) (*ZkBNBNewDefaultNFTFactoryIterator, error) {
+// Solidity: event Initialized(uint8 version)
+func (_ZkBNB *ZkBNBFilterer) FilterInitialized(opts *bind.FilterOpts) (*ZkBNBInitializedIterator, error) {
 
-	var factoryRule []interface{}
-	for _, factoryItem := range factory {
-		factoryRule = append(factoryRule, factoryItem)
-	}
-
-	logs, sub, err := _ZkBNB.contract.FilterLogs(opts, "NewDefaultNFTFactory", factoryRule)
+	logs, sub, err := _ZkBNB.contract.FilterLogs(opts, "Initialized")
 	if err != nil {
 		return nil, err
 	}
-	return &ZkBNBNewDefaultNFTFactoryIterator{contract: _ZkBNB.contract, event: "NewDefaultNFTFactory", logs: logs, sub: sub}, nil
+	return &ZkBNBInitializedIterator{contract: _ZkBNB.contract, event: "Initialized", logs: logs, sub: sub}, nil
 }
 
-// WatchNewDefaultNFTFactory is a free log subscription operation binding the contract event 0xadf2ec6c092b7101c958de6b55caf4818f26a946e94fa556cbe3b3f29ff9f2ee.
+// WatchInitialized is a free log subscription operation binding the contract event 0x7f26b83ff96e1f2b6a682f133852f6798a09c465da95921460cefb3847402498.
 //
-// Solidity: event NewDefaultNFTFactory(address indexed factory)
-func (_ZkBNB *ZkBNBFilterer) WatchNewDefaultNFTFactory(opts *bind.WatchOpts, sink chan<- *ZkBNBNewDefaultNFTFactory, factory []common.Address) (event.Subscription, error) {
+// Solidity: event Initialized(uint8 version)
+func (_ZkBNB *ZkBNBFilterer) WatchInitialized(opts *bind.WatchOpts, sink chan<- *ZkBNBInitialized) (event.Subscription, error) {
 
-	var factoryRule []interface{}
-	for _, factoryItem := range factory {
-		factoryRule = append(factoryRule, factoryItem)
-	}
-
-	logs, sub, err := _ZkBNB.contract.WatchLogs(opts, "NewDefaultNFTFactory", factoryRule)
+	logs, sub, err := _ZkBNB.contract.WatchLogs(opts, "Initialized")
 	if err != nil {
 		return nil, err
 	}
@@ -2968,8 +2368,8 @@ func (_ZkBNB *ZkBNBFilterer) WatchNewDefaultNFTFactory(opts *bind.WatchOpts, sin
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(ZkBNBNewDefaultNFTFactory)
-				if err := _ZkBNB.contract.UnpackLog(event, "NewDefaultNFTFactory", log); err != nil {
+				event := new(ZkBNBInitialized)
+				if err := _ZkBNB.contract.UnpackLog(event, "Initialized", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -2990,158 +2390,12 @@ func (_ZkBNB *ZkBNBFilterer) WatchNewDefaultNFTFactory(opts *bind.WatchOpts, sin
 	}), nil
 }
 
-// ParseNewDefaultNFTFactory is a log parse operation binding the contract event 0xadf2ec6c092b7101c958de6b55caf4818f26a946e94fa556cbe3b3f29ff9f2ee.
+// ParseInitialized is a log parse operation binding the contract event 0x7f26b83ff96e1f2b6a682f133852f6798a09c465da95921460cefb3847402498.
 //
-// Solidity: event NewDefaultNFTFactory(address indexed factory)
-func (_ZkBNB *ZkBNBFilterer) ParseNewDefaultNFTFactory(log types.Log) (*ZkBNBNewDefaultNFTFactory, error) {
-	event := new(ZkBNBNewDefaultNFTFactory)
-	if err := _ZkBNB.contract.UnpackLog(event, "NewDefaultNFTFactory", log); err != nil {
-		return nil, err
-	}
-	event.Raw = log
-	return event, nil
-}
-
-// ZkBNBNewNFTFactoryIterator is returned from FilterNewNFTFactory and is used to iterate over the raw logs and unpacked data for NewNFTFactory events raised by the ZkBNB contract.
-type ZkBNBNewNFTFactoryIterator struct {
-	Event *ZkBNBNewNFTFactory // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *ZkBNBNewNFTFactoryIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(ZkBNBNewNFTFactory)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(ZkBNBNewNFTFactory)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *ZkBNBNewNFTFactoryIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *ZkBNBNewNFTFactoryIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// ZkBNBNewNFTFactory represents a NewNFTFactory event raised by the ZkBNB contract.
-type ZkBNBNewNFTFactory struct {
-	CreatorAccountNameHash [32]byte
-	CollectionId           uint32
-	FactoryAddress         common.Address
-	Raw                    types.Log // Blockchain specific contextual infos
-}
-
-// FilterNewNFTFactory is a free log retrieval operation binding the contract event 0xaa31b08b26b4240f7d2837e3fb6359824b509a4e4c5a5766af80f63c319add7e.
-//
-// Solidity: event NewNFTFactory(bytes32 indexed _creatorAccountNameHash, uint32 _collectionId, address _factoryAddress)
-func (_ZkBNB *ZkBNBFilterer) FilterNewNFTFactory(opts *bind.FilterOpts, _creatorAccountNameHash [][32]byte) (*ZkBNBNewNFTFactoryIterator, error) {
-
-	var _creatorAccountNameHashRule []interface{}
-	for _, _creatorAccountNameHashItem := range _creatorAccountNameHash {
-		_creatorAccountNameHashRule = append(_creatorAccountNameHashRule, _creatorAccountNameHashItem)
-	}
-
-	logs, sub, err := _ZkBNB.contract.FilterLogs(opts, "NewNFTFactory", _creatorAccountNameHashRule)
-	if err != nil {
-		return nil, err
-	}
-	return &ZkBNBNewNFTFactoryIterator{contract: _ZkBNB.contract, event: "NewNFTFactory", logs: logs, sub: sub}, nil
-}
-
-// WatchNewNFTFactory is a free log subscription operation binding the contract event 0xaa31b08b26b4240f7d2837e3fb6359824b509a4e4c5a5766af80f63c319add7e.
-//
-// Solidity: event NewNFTFactory(bytes32 indexed _creatorAccountNameHash, uint32 _collectionId, address _factoryAddress)
-func (_ZkBNB *ZkBNBFilterer) WatchNewNFTFactory(opts *bind.WatchOpts, sink chan<- *ZkBNBNewNFTFactory, _creatorAccountNameHash [][32]byte) (event.Subscription, error) {
-
-	var _creatorAccountNameHashRule []interface{}
-	for _, _creatorAccountNameHashItem := range _creatorAccountNameHash {
-		_creatorAccountNameHashRule = append(_creatorAccountNameHashRule, _creatorAccountNameHashItem)
-	}
-
-	logs, sub, err := _ZkBNB.contract.WatchLogs(opts, "NewNFTFactory", _creatorAccountNameHashRule)
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(ZkBNBNewNFTFactory)
-				if err := _ZkBNB.contract.UnpackLog(event, "NewNFTFactory", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseNewNFTFactory is a log parse operation binding the contract event 0xaa31b08b26b4240f7d2837e3fb6359824b509a4e4c5a5766af80f63c319add7e.
-//
-// Solidity: event NewNFTFactory(bytes32 indexed _creatorAccountNameHash, uint32 _collectionId, address _factoryAddress)
-func (_ZkBNB *ZkBNBFilterer) ParseNewNFTFactory(log types.Log) (*ZkBNBNewNFTFactory, error) {
-	event := new(ZkBNBNewNFTFactory)
-	if err := _ZkBNB.contract.UnpackLog(event, "NewNFTFactory", log); err != nil {
+// Solidity: event Initialized(uint8 version)
+func (_ZkBNB *ZkBNBFilterer) ParseInitialized(log types.Log) (*ZkBNBInitialized, error) {
+	event := new(ZkBNBInitialized)
+	if err := _ZkBNB.contract.UnpackLog(event, "Initialized", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
@@ -3559,143 +2813,6 @@ func (_ZkBNB *ZkBNBFilterer) ParseRegisterZNS(log types.Log) (*ZkBNBRegisterZNS,
 	return event, nil
 }
 
-// ZkBNBUpdateTokenPairIterator is returned from FilterUpdateTokenPair and is used to iterate over the raw logs and unpacked data for UpdateTokenPair events raised by the ZkBNB contract.
-type ZkBNBUpdateTokenPairIterator struct {
-	Event *ZkBNBUpdateTokenPair // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *ZkBNBUpdateTokenPairIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(ZkBNBUpdateTokenPair)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(ZkBNBUpdateTokenPair)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *ZkBNBUpdateTokenPairIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *ZkBNBUpdateTokenPairIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// ZkBNBUpdateTokenPair represents a UpdateTokenPair event raised by the ZkBNB contract.
-type ZkBNBUpdateTokenPair struct {
-	PairIndex            uint16
-	FeeRate              uint16
-	TreasuryAccountIndex uint32
-	TreasuryRate         uint16
-	Raw                  types.Log // Blockchain specific contextual infos
-}
-
-// FilterUpdateTokenPair is a free log retrieval operation binding the contract event 0x8727712867f019c156b0c25f308498ea1524b635902129b0acd3e9ff2c96f1c8.
-//
-// Solidity: event UpdateTokenPair(uint16 pairIndex, uint16 feeRate, uint32 treasuryAccountIndex, uint16 treasuryRate)
-func (_ZkBNB *ZkBNBFilterer) FilterUpdateTokenPair(opts *bind.FilterOpts) (*ZkBNBUpdateTokenPairIterator, error) {
-
-	logs, sub, err := _ZkBNB.contract.FilterLogs(opts, "UpdateTokenPair")
-	if err != nil {
-		return nil, err
-	}
-	return &ZkBNBUpdateTokenPairIterator{contract: _ZkBNB.contract, event: "UpdateTokenPair", logs: logs, sub: sub}, nil
-}
-
-// WatchUpdateTokenPair is a free log subscription operation binding the contract event 0x8727712867f019c156b0c25f308498ea1524b635902129b0acd3e9ff2c96f1c8.
-//
-// Solidity: event UpdateTokenPair(uint16 pairIndex, uint16 feeRate, uint32 treasuryAccountIndex, uint16 treasuryRate)
-func (_ZkBNB *ZkBNBFilterer) WatchUpdateTokenPair(opts *bind.WatchOpts, sink chan<- *ZkBNBUpdateTokenPair) (event.Subscription, error) {
-
-	logs, sub, err := _ZkBNB.contract.WatchLogs(opts, "UpdateTokenPair")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(ZkBNBUpdateTokenPair)
-				if err := _ZkBNB.contract.UnpackLog(event, "UpdateTokenPair", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseUpdateTokenPair is a log parse operation binding the contract event 0x8727712867f019c156b0c25f308498ea1524b635902129b0acd3e9ff2c96f1c8.
-//
-// Solidity: event UpdateTokenPair(uint16 pairIndex, uint16 feeRate, uint32 treasuryAccountIndex, uint16 treasuryRate)
-func (_ZkBNB *ZkBNBFilterer) ParseUpdateTokenPair(log types.Log) (*ZkBNBUpdateTokenPair, error) {
-	event := new(ZkBNBUpdateTokenPair)
-	if err := _ZkBNB.contract.UnpackLog(event, "UpdateTokenPair", log); err != nil {
-		return nil, err
-	}
-	event.Raw = log
-	return event, nil
-}
-
 // ZkBNBWithdrawNftIterator is returned from FilterWithdrawNft and is used to iterate over the raw logs and unpacked data for WithdrawNft events raised by the ZkBNB contract.
 type ZkBNBWithdrawNftIterator struct {
 	Event *ZkBNBWithdrawNft // Event containing the contract specifics and raw log
@@ -4106,6 +3223,160 @@ func (_ZkBNB *ZkBNBFilterer) WatchWithdrawalNFTPending(opts *bind.WatchOpts, sin
 func (_ZkBNB *ZkBNBFilterer) ParseWithdrawalNFTPending(log types.Log) (*ZkBNBWithdrawalNFTPending, error) {
 	event := new(ZkBNBWithdrawalNFTPending)
 	if err := _ZkBNB.contract.UnpackLog(event, "WithdrawalNFTPending", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// ZkBNBWithdrawalPendingIterator is returned from FilterWithdrawalPending and is used to iterate over the raw logs and unpacked data for WithdrawalPending events raised by the ZkBNB contract.
+type ZkBNBWithdrawalPendingIterator struct {
+	Event *ZkBNBWithdrawalPending // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *ZkBNBWithdrawalPendingIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(ZkBNBWithdrawalPending)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(ZkBNBWithdrawalPending)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *ZkBNBWithdrawalPendingIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *ZkBNBWithdrawalPendingIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// ZkBNBWithdrawalPending represents a WithdrawalPending event raised by the ZkBNB contract.
+type ZkBNBWithdrawalPending struct {
+	AssetId   uint16
+	Recepient common.Address
+	Amount    *big.Int
+	Raw       types.Log // Blockchain specific contextual infos
+}
+
+// FilterWithdrawalPending is a free log retrieval operation binding the contract event 0x822cba452e09c71c51db196553ac44d860c4d2d66e311eff0066a7910c0dc870.
+//
+// Solidity: event WithdrawalPending(uint16 indexed assetId, address indexed recepient, uint128 amount)
+func (_ZkBNB *ZkBNBFilterer) FilterWithdrawalPending(opts *bind.FilterOpts, assetId []uint16, recepient []common.Address) (*ZkBNBWithdrawalPendingIterator, error) {
+
+	var assetIdRule []interface{}
+	for _, assetIdItem := range assetId {
+		assetIdRule = append(assetIdRule, assetIdItem)
+	}
+	var recepientRule []interface{}
+	for _, recepientItem := range recepient {
+		recepientRule = append(recepientRule, recepientItem)
+	}
+
+	logs, sub, err := _ZkBNB.contract.FilterLogs(opts, "WithdrawalPending", assetIdRule, recepientRule)
+	if err != nil {
+		return nil, err
+	}
+	return &ZkBNBWithdrawalPendingIterator{contract: _ZkBNB.contract, event: "WithdrawalPending", logs: logs, sub: sub}, nil
+}
+
+// WatchWithdrawalPending is a free log subscription operation binding the contract event 0x822cba452e09c71c51db196553ac44d860c4d2d66e311eff0066a7910c0dc870.
+//
+// Solidity: event WithdrawalPending(uint16 indexed assetId, address indexed recepient, uint128 amount)
+func (_ZkBNB *ZkBNBFilterer) WatchWithdrawalPending(opts *bind.WatchOpts, sink chan<- *ZkBNBWithdrawalPending, assetId []uint16, recepient []common.Address) (event.Subscription, error) {
+
+	var assetIdRule []interface{}
+	for _, assetIdItem := range assetId {
+		assetIdRule = append(assetIdRule, assetIdItem)
+	}
+	var recepientRule []interface{}
+	for _, recepientItem := range recepient {
+		recepientRule = append(recepientRule, recepientItem)
+	}
+
+	logs, sub, err := _ZkBNB.contract.WatchLogs(opts, "WithdrawalPending", assetIdRule, recepientRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(ZkBNBWithdrawalPending)
+				if err := _ZkBNB.contract.UnpackLog(event, "WithdrawalPending", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseWithdrawalPending is a log parse operation binding the contract event 0x822cba452e09c71c51db196553ac44d860c4d2d66e311eff0066a7910c0dc870.
+//
+// Solidity: event WithdrawalPending(uint16 indexed assetId, address indexed recepient, uint128 amount)
+func (_ZkBNB *ZkBNBFilterer) ParseWithdrawalPending(log types.Log) (*ZkBNBWithdrawalPending, error) {
+	event := new(ZkBNBWithdrawalPending)
+	if err := _ZkBNB.contract.UnpackLog(event, "WithdrawalPending", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log

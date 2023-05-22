@@ -30,7 +30,7 @@ var (
 
 // GovernanceMetaData contains all meta data concerning the Governance contract.
 var GovernanceMetaData = &bind.MetaData{
-	ABI: "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"paused\",\"type\":\"bool\"}],\"name\":\"AssetPausedUpdate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"}],\"name\":\"NewAsset\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"contractAssetGovernance\",\"name\":\"newAssetGovernance\",\"type\":\"address\"}],\"name\":\"NewAssetGovernance\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newGovernor\",\"type\":\"address\"}],\"name\":\"NewGovernor\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"validatorAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"}],\"name\":\"ValidatorStatusUpdate\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"MAX_ACCOUNT_INDEX\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_AMOUNT_OF_REGISTERED_ASSETS\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_DEPOSIT_AMOUNT\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"\",\"type\":\"uint128\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_FUNGIBLE_ASSET_ID\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_NFT_INDEX\",\"outputs\":[{\"internalType\":\"uint40\",\"name\":\"\",\"type\":\"uint40\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SECURITY_COUNCIL_MEMBERS_NUMBER\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SHORTEST_UPGRADE_NOTICE_PERIOD\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SPECIAL_ACCOUNT_ADDRESS\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SPECIAL_ACCOUNT_ID\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"TX_SIZE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"UPGRADE_NOTICE_PERIOD\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"WITHDRAWAL_GAS_LIMIT\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_asset\",\"type\":\"address\"}],\"name\":\"addAsset\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"name\":\"assetAddresses\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"assetGovernance\",\"outputs\":[{\"internalType\":\"contractAssetGovernance\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"assetsList\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractAssetGovernance\",\"name\":\"_newAssetGovernance\",\"type\":\"address\"}],\"name\":\"changeAssetGovernance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_newGovernor\",\"type\":\"address\"}],\"name\":\"changeGovernor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"initializationParameters\",\"type\":\"bytes\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"isAddressExists\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"networkGovernor\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"name\":\"pausedAssets\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"}],\"name\":\"requireActiveValidator\",\"outputs\":[],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"}],\"name\":\"requireGovernor\",\"outputs\":[],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_assetAddress\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"_assetPaused\",\"type\":\"bool\"}],\"name\":\"setAssetPaused\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_validator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"_active\",\"type\":\"bool\"}],\"name\":\"setValidator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalAssets\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"upgradeParameters\",\"type\":\"bytes\"}],\"name\":\"upgrade\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_assetAddr\",\"type\":\"address\"}],\"name\":\"validateAssetAddress\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"}],\"name\":\"validateAssetTokenLister\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"validators\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
+	ABI: "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"paused\",\"type\":\"bool\"}],\"name\":\"AssetPausedUpdate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"version\",\"type\":\"uint8\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"factory\",\"type\":\"address\"}],\"name\":\"NFTFactoryDeployed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"factory\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"collectionId\",\"type\":\"uint32\"}],\"name\":\"NFTFactoryRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"assetAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint16\",\"name\":\"assetId\",\"type\":\"uint16\"}],\"name\":\"NewAsset\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"contractAssetGovernance\",\"name\":\"newAssetGovernance\",\"type\":\"address\"}],\"name\":\"NewAssetGovernance\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newGovernor\",\"type\":\"address\"}],\"name\":\"NewGovernor\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"factory\",\"type\":\"address\"}],\"name\":\"SetDefaultNFTFactory\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"zkBNBAddress\",\"type\":\"address\"}],\"name\":\"SetZkBNB\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"validatorAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"}],\"name\":\"ValidatorStatusUpdate\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"MAX_ACCOUNT_INDEX\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_AMOUNT_OF_REGISTERED_ASSETS\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_DEPOSIT_AMOUNT\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"\",\"type\":\"uint128\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_FUNGIBLE_ASSET_ID\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_NFT_INDEX\",\"outputs\":[{\"internalType\":\"uint40\",\"name\":\"\",\"type\":\"uint40\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SPECIAL_ACCOUNT_ADDRESS\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SPECIAL_ACCOUNT_ID\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"WITHDRAWAL_GAS_LIMIT\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_asset\",\"type\":\"address\"}],\"name\":\"addAsset\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"name\":\"assetAddresses\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"assetGovernance\",\"outputs\":[{\"internalType\":\"contractAssetGovernance\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"assetsList\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractAssetGovernance\",\"name\":\"_newAssetGovernance\",\"type\":\"address\"}],\"name\":\"changeAssetGovernance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_newGovernor\",\"type\":\"address\"}],\"name\":\"changeGovernor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"defaultNFTFactory\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"_collectionId\",\"type\":\"uint32\"},{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_symbol\",\"type\":\"string\"}],\"name\":\"deployAndRegisterNFTFactory\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_creatorAddress\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"_collectionId\",\"type\":\"uint32\"}],\"name\":\"getNFTFactory\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"nftContentType\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"nftContentHash\",\"type\":\"bytes32\"}],\"name\":\"getNftTokenURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"tokenURI\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"initializationParameters\",\"type\":\"bytes\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"}],\"name\":\"isActiveValidator\",\"outputs\":[],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"isAddressExists\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"networkGovernor\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"name\":\"nftBaseURIs\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"name\":\"nftFactories\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"nftFactoryCreators\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"name\":\"pausedAssets\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_creatorAddress\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"_collectionId\",\"type\":\"uint32\"}],\"name\":\"registerDefaultNFTFactory\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"_collectionId\",\"type\":\"uint32\"},{\"internalType\":\"address\",\"name\":\"_factoryAddress\",\"type\":\"address\"}],\"name\":\"registerNFTFactory\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"}],\"name\":\"requireGovernor\",\"outputs\":[],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_assetAddress\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"_assetPaused\",\"type\":\"bool\"}],\"name\":\"setAssetPaused\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_factoryAddress\",\"type\":\"address\"}],\"name\":\"setDefaultNFTFactory\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_validator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"_active\",\"type\":\"bool\"}],\"name\":\"setValidator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_zkBNBAddress\",\"type\":\"address\"}],\"name\":\"setZkBNBAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalAssets\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"nftContentType\",\"type\":\"uint8\"},{\"internalType\":\"string\",\"name\":\"baseURI\",\"type\":\"string\"}],\"name\":\"updateBaseURI\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"upgradeParameters\",\"type\":\"bytes\"}],\"name\":\"upgrade\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_assetAddr\",\"type\":\"address\"}],\"name\":\"validateAssetAddress\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"validators\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"zkBNBAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
 }
 
 // GovernanceABI is the input ABI used to generate the binding from.
@@ -334,68 +334,6 @@ func (_Governance *GovernanceCallerSession) MAXNFTINDEX() (*big.Int, error) {
 	return _Governance.Contract.MAXNFTINDEX(&_Governance.CallOpts)
 }
 
-// SECURITYCOUNCILMEMBERSNUMBER is a free data retrieval call binding the contract method 0x4a51a71f.
-//
-// Solidity: function SECURITY_COUNCIL_MEMBERS_NUMBER() view returns(uint256)
-func (_Governance *GovernanceCaller) SECURITYCOUNCILMEMBERSNUMBER(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _Governance.contract.Call(opts, &out, "SECURITY_COUNCIL_MEMBERS_NUMBER")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// SECURITYCOUNCILMEMBERSNUMBER is a free data retrieval call binding the contract method 0x4a51a71f.
-//
-// Solidity: function SECURITY_COUNCIL_MEMBERS_NUMBER() view returns(uint256)
-func (_Governance *GovernanceSession) SECURITYCOUNCILMEMBERSNUMBER() (*big.Int, error) {
-	return _Governance.Contract.SECURITYCOUNCILMEMBERSNUMBER(&_Governance.CallOpts)
-}
-
-// SECURITYCOUNCILMEMBERSNUMBER is a free data retrieval call binding the contract method 0x4a51a71f.
-//
-// Solidity: function SECURITY_COUNCIL_MEMBERS_NUMBER() view returns(uint256)
-func (_Governance *GovernanceCallerSession) SECURITYCOUNCILMEMBERSNUMBER() (*big.Int, error) {
-	return _Governance.Contract.SECURITYCOUNCILMEMBERSNUMBER(&_Governance.CallOpts)
-}
-
-// SHORTESTUPGRADENOTICEPERIOD is a free data retrieval call binding the contract method 0x85053581.
-//
-// Solidity: function SHORTEST_UPGRADE_NOTICE_PERIOD() view returns(uint256)
-func (_Governance *GovernanceCaller) SHORTESTUPGRADENOTICEPERIOD(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _Governance.contract.Call(opts, &out, "SHORTEST_UPGRADE_NOTICE_PERIOD")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// SHORTESTUPGRADENOTICEPERIOD is a free data retrieval call binding the contract method 0x85053581.
-//
-// Solidity: function SHORTEST_UPGRADE_NOTICE_PERIOD() view returns(uint256)
-func (_Governance *GovernanceSession) SHORTESTUPGRADENOTICEPERIOD() (*big.Int, error) {
-	return _Governance.Contract.SHORTESTUPGRADENOTICEPERIOD(&_Governance.CallOpts)
-}
-
-// SHORTESTUPGRADENOTICEPERIOD is a free data retrieval call binding the contract method 0x85053581.
-//
-// Solidity: function SHORTEST_UPGRADE_NOTICE_PERIOD() view returns(uint256)
-func (_Governance *GovernanceCallerSession) SHORTESTUPGRADENOTICEPERIOD() (*big.Int, error) {
-	return _Governance.Contract.SHORTESTUPGRADENOTICEPERIOD(&_Governance.CallOpts)
-}
-
 // SPECIALACCOUNTADDRESS is a free data retrieval call binding the contract method 0x7ea399c1.
 //
 // Solidity: function SPECIAL_ACCOUNT_ADDRESS() view returns(address)
@@ -456,68 +394,6 @@ func (_Governance *GovernanceSession) SPECIALACCOUNTID() (uint32, error) {
 // Solidity: function SPECIAL_ACCOUNT_ID() view returns(uint32)
 func (_Governance *GovernanceCallerSession) SPECIALACCOUNTID() (uint32, error) {
 	return _Governance.Contract.SPECIALACCOUNTID(&_Governance.CallOpts)
-}
-
-// TXSIZE is a free data retrieval call binding the contract method 0xe6e3c012.
-//
-// Solidity: function TX_SIZE() view returns(uint256)
-func (_Governance *GovernanceCaller) TXSIZE(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _Governance.contract.Call(opts, &out, "TX_SIZE")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// TXSIZE is a free data retrieval call binding the contract method 0xe6e3c012.
-//
-// Solidity: function TX_SIZE() view returns(uint256)
-func (_Governance *GovernanceSession) TXSIZE() (*big.Int, error) {
-	return _Governance.Contract.TXSIZE(&_Governance.CallOpts)
-}
-
-// TXSIZE is a free data retrieval call binding the contract method 0xe6e3c012.
-//
-// Solidity: function TX_SIZE() view returns(uint256)
-func (_Governance *GovernanceCallerSession) TXSIZE() (*big.Int, error) {
-	return _Governance.Contract.TXSIZE(&_Governance.CallOpts)
-}
-
-// UPGRADENOTICEPERIOD is a free data retrieval call binding the contract method 0xcc375fb7.
-//
-// Solidity: function UPGRADE_NOTICE_PERIOD() view returns(uint256)
-func (_Governance *GovernanceCaller) UPGRADENOTICEPERIOD(opts *bind.CallOpts) (*big.Int, error) {
-	var out []interface{}
-	err := _Governance.contract.Call(opts, &out, "UPGRADE_NOTICE_PERIOD")
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// UPGRADENOTICEPERIOD is a free data retrieval call binding the contract method 0xcc375fb7.
-//
-// Solidity: function UPGRADE_NOTICE_PERIOD() view returns(uint256)
-func (_Governance *GovernanceSession) UPGRADENOTICEPERIOD() (*big.Int, error) {
-	return _Governance.Contract.UPGRADENOTICEPERIOD(&_Governance.CallOpts)
-}
-
-// UPGRADENOTICEPERIOD is a free data retrieval call binding the contract method 0xcc375fb7.
-//
-// Solidity: function UPGRADE_NOTICE_PERIOD() view returns(uint256)
-func (_Governance *GovernanceCallerSession) UPGRADENOTICEPERIOD() (*big.Int, error) {
-	return _Governance.Contract.UPGRADENOTICEPERIOD(&_Governance.CallOpts)
 }
 
 // WITHDRAWALGASLIMIT is a free data retrieval call binding the contract method 0xc701f955.
@@ -644,6 +520,128 @@ func (_Governance *GovernanceCallerSession) AssetsList(arg0 common.Address) (uin
 	return _Governance.Contract.AssetsList(&_Governance.CallOpts, arg0)
 }
 
+// DefaultNFTFactory is a free data retrieval call binding the contract method 0x940f19c0.
+//
+// Solidity: function defaultNFTFactory() view returns(address)
+func (_Governance *GovernanceCaller) DefaultNFTFactory(opts *bind.CallOpts) (common.Address, error) {
+	var out []interface{}
+	err := _Governance.contract.Call(opts, &out, "defaultNFTFactory")
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
+}
+
+// DefaultNFTFactory is a free data retrieval call binding the contract method 0x940f19c0.
+//
+// Solidity: function defaultNFTFactory() view returns(address)
+func (_Governance *GovernanceSession) DefaultNFTFactory() (common.Address, error) {
+	return _Governance.Contract.DefaultNFTFactory(&_Governance.CallOpts)
+}
+
+// DefaultNFTFactory is a free data retrieval call binding the contract method 0x940f19c0.
+//
+// Solidity: function defaultNFTFactory() view returns(address)
+func (_Governance *GovernanceCallerSession) DefaultNFTFactory() (common.Address, error) {
+	return _Governance.Contract.DefaultNFTFactory(&_Governance.CallOpts)
+}
+
+// GetNFTFactory is a free data retrieval call binding the contract method 0x51a1d990.
+//
+// Solidity: function getNFTFactory(address _creatorAddress, uint32 _collectionId) view returns(address)
+func (_Governance *GovernanceCaller) GetNFTFactory(opts *bind.CallOpts, _creatorAddress common.Address, _collectionId uint32) (common.Address, error) {
+	var out []interface{}
+	err := _Governance.contract.Call(opts, &out, "getNFTFactory", _creatorAddress, _collectionId)
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
+}
+
+// GetNFTFactory is a free data retrieval call binding the contract method 0x51a1d990.
+//
+// Solidity: function getNFTFactory(address _creatorAddress, uint32 _collectionId) view returns(address)
+func (_Governance *GovernanceSession) GetNFTFactory(_creatorAddress common.Address, _collectionId uint32) (common.Address, error) {
+	return _Governance.Contract.GetNFTFactory(&_Governance.CallOpts, _creatorAddress, _collectionId)
+}
+
+// GetNFTFactory is a free data retrieval call binding the contract method 0x51a1d990.
+//
+// Solidity: function getNFTFactory(address _creatorAddress, uint32 _collectionId) view returns(address)
+func (_Governance *GovernanceCallerSession) GetNFTFactory(_creatorAddress common.Address, _collectionId uint32) (common.Address, error) {
+	return _Governance.Contract.GetNFTFactory(&_Governance.CallOpts, _creatorAddress, _collectionId)
+}
+
+// GetNftTokenURI is a free data retrieval call binding the contract method 0xc55d3608.
+//
+// Solidity: function getNftTokenURI(uint8 nftContentType, bytes32 nftContentHash) view returns(string tokenURI)
+func (_Governance *GovernanceCaller) GetNftTokenURI(opts *bind.CallOpts, nftContentType uint8, nftContentHash [32]byte) (string, error) {
+	var out []interface{}
+	err := _Governance.contract.Call(opts, &out, "getNftTokenURI", nftContentType, nftContentHash)
+
+	if err != nil {
+		return *new(string), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(string)).(*string)
+
+	return out0, err
+
+}
+
+// GetNftTokenURI is a free data retrieval call binding the contract method 0xc55d3608.
+//
+// Solidity: function getNftTokenURI(uint8 nftContentType, bytes32 nftContentHash) view returns(string tokenURI)
+func (_Governance *GovernanceSession) GetNftTokenURI(nftContentType uint8, nftContentHash [32]byte) (string, error) {
+	return _Governance.Contract.GetNftTokenURI(&_Governance.CallOpts, nftContentType, nftContentHash)
+}
+
+// GetNftTokenURI is a free data retrieval call binding the contract method 0xc55d3608.
+//
+// Solidity: function getNftTokenURI(uint8 nftContentType, bytes32 nftContentHash) view returns(string tokenURI)
+func (_Governance *GovernanceCallerSession) GetNftTokenURI(nftContentType uint8, nftContentHash [32]byte) (string, error) {
+	return _Governance.Contract.GetNftTokenURI(&_Governance.CallOpts, nftContentType, nftContentHash)
+}
+
+// IsActiveValidator is a free data retrieval call binding the contract method 0x40550a1c.
+//
+// Solidity: function isActiveValidator(address _address) view returns()
+func (_Governance *GovernanceCaller) IsActiveValidator(opts *bind.CallOpts, _address common.Address) error {
+	var out []interface{}
+	err := _Governance.contract.Call(opts, &out, "isActiveValidator", _address)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// IsActiveValidator is a free data retrieval call binding the contract method 0x40550a1c.
+//
+// Solidity: function isActiveValidator(address _address) view returns()
+func (_Governance *GovernanceSession) IsActiveValidator(_address common.Address) error {
+	return _Governance.Contract.IsActiveValidator(&_Governance.CallOpts, _address)
+}
+
+// IsActiveValidator is a free data retrieval call binding the contract method 0x40550a1c.
+//
+// Solidity: function isActiveValidator(address _address) view returns()
+func (_Governance *GovernanceCallerSession) IsActiveValidator(_address common.Address) error {
+	return _Governance.Contract.IsActiveValidator(&_Governance.CallOpts, _address)
+}
+
 // IsAddressExists is a free data retrieval call binding the contract method 0x321e182b.
 //
 // Solidity: function isAddressExists(address ) view returns(bool)
@@ -706,6 +704,99 @@ func (_Governance *GovernanceCallerSession) NetworkGovernor() (common.Address, e
 	return _Governance.Contract.NetworkGovernor(&_Governance.CallOpts)
 }
 
+// NftBaseURIs is a free data retrieval call binding the contract method 0xeae9ce8b.
+//
+// Solidity: function nftBaseURIs(uint8 ) view returns(string)
+func (_Governance *GovernanceCaller) NftBaseURIs(opts *bind.CallOpts, arg0 uint8) (string, error) {
+	var out []interface{}
+	err := _Governance.contract.Call(opts, &out, "nftBaseURIs", arg0)
+
+	if err != nil {
+		return *new(string), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(string)).(*string)
+
+	return out0, err
+
+}
+
+// NftBaseURIs is a free data retrieval call binding the contract method 0xeae9ce8b.
+//
+// Solidity: function nftBaseURIs(uint8 ) view returns(string)
+func (_Governance *GovernanceSession) NftBaseURIs(arg0 uint8) (string, error) {
+	return _Governance.Contract.NftBaseURIs(&_Governance.CallOpts, arg0)
+}
+
+// NftBaseURIs is a free data retrieval call binding the contract method 0xeae9ce8b.
+//
+// Solidity: function nftBaseURIs(uint8 ) view returns(string)
+func (_Governance *GovernanceCallerSession) NftBaseURIs(arg0 uint8) (string, error) {
+	return _Governance.Contract.NftBaseURIs(&_Governance.CallOpts, arg0)
+}
+
+// NftFactories is a free data retrieval call binding the contract method 0x6ea680c6.
+//
+// Solidity: function nftFactories(address , uint32 ) view returns(address)
+func (_Governance *GovernanceCaller) NftFactories(opts *bind.CallOpts, arg0 common.Address, arg1 uint32) (common.Address, error) {
+	var out []interface{}
+	err := _Governance.contract.Call(opts, &out, "nftFactories", arg0, arg1)
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
+}
+
+// NftFactories is a free data retrieval call binding the contract method 0x6ea680c6.
+//
+// Solidity: function nftFactories(address , uint32 ) view returns(address)
+func (_Governance *GovernanceSession) NftFactories(arg0 common.Address, arg1 uint32) (common.Address, error) {
+	return _Governance.Contract.NftFactories(&_Governance.CallOpts, arg0, arg1)
+}
+
+// NftFactories is a free data retrieval call binding the contract method 0x6ea680c6.
+//
+// Solidity: function nftFactories(address , uint32 ) view returns(address)
+func (_Governance *GovernanceCallerSession) NftFactories(arg0 common.Address, arg1 uint32) (common.Address, error) {
+	return _Governance.Contract.NftFactories(&_Governance.CallOpts, arg0, arg1)
+}
+
+// NftFactoryCreators is a free data retrieval call binding the contract method 0x53720841.
+//
+// Solidity: function nftFactoryCreators(address ) view returns(address)
+func (_Governance *GovernanceCaller) NftFactoryCreators(opts *bind.CallOpts, arg0 common.Address) (common.Address, error) {
+	var out []interface{}
+	err := _Governance.contract.Call(opts, &out, "nftFactoryCreators", arg0)
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
+}
+
+// NftFactoryCreators is a free data retrieval call binding the contract method 0x53720841.
+//
+// Solidity: function nftFactoryCreators(address ) view returns(address)
+func (_Governance *GovernanceSession) NftFactoryCreators(arg0 common.Address) (common.Address, error) {
+	return _Governance.Contract.NftFactoryCreators(&_Governance.CallOpts, arg0)
+}
+
+// NftFactoryCreators is a free data retrieval call binding the contract method 0x53720841.
+//
+// Solidity: function nftFactoryCreators(address ) view returns(address)
+func (_Governance *GovernanceCallerSession) NftFactoryCreators(arg0 common.Address) (common.Address, error) {
+	return _Governance.Contract.NftFactoryCreators(&_Governance.CallOpts, arg0)
+}
+
 // PausedAssets is a free data retrieval call binding the contract method 0x31d8687b.
 //
 // Solidity: function pausedAssets(uint16 ) view returns(bool)
@@ -735,35 +826,6 @@ func (_Governance *GovernanceSession) PausedAssets(arg0 uint16) (bool, error) {
 // Solidity: function pausedAssets(uint16 ) view returns(bool)
 func (_Governance *GovernanceCallerSession) PausedAssets(arg0 uint16) (bool, error) {
 	return _Governance.Contract.PausedAssets(&_Governance.CallOpts, arg0)
-}
-
-// RequireActiveValidator is a free data retrieval call binding the contract method 0x4b18bd0f.
-//
-// Solidity: function requireActiveValidator(address _address) view returns()
-func (_Governance *GovernanceCaller) RequireActiveValidator(opts *bind.CallOpts, _address common.Address) error {
-	var out []interface{}
-	err := _Governance.contract.Call(opts, &out, "requireActiveValidator", _address)
-
-	if err != nil {
-		return err
-	}
-
-	return err
-
-}
-
-// RequireActiveValidator is a free data retrieval call binding the contract method 0x4b18bd0f.
-//
-// Solidity: function requireActiveValidator(address _address) view returns()
-func (_Governance *GovernanceSession) RequireActiveValidator(_address common.Address) error {
-	return _Governance.Contract.RequireActiveValidator(&_Governance.CallOpts, _address)
-}
-
-// RequireActiveValidator is a free data retrieval call binding the contract method 0x4b18bd0f.
-//
-// Solidity: function requireActiveValidator(address _address) view returns()
-func (_Governance *GovernanceCallerSession) RequireActiveValidator(_address common.Address) error {
-	return _Governance.Contract.RequireActiveValidator(&_Governance.CallOpts, _address)
 }
 
 // RequireGovernor is a free data retrieval call binding the contract method 0xf5f84ed4.
@@ -888,6 +950,37 @@ func (_Governance *GovernanceCallerSession) Validators(arg0 common.Address) (boo
 	return _Governance.Contract.Validators(&_Governance.CallOpts, arg0)
 }
 
+// ZkBNBAddress is a free data retrieval call binding the contract method 0x45a77bce.
+//
+// Solidity: function zkBNBAddress() view returns(address)
+func (_Governance *GovernanceCaller) ZkBNBAddress(opts *bind.CallOpts) (common.Address, error) {
+	var out []interface{}
+	err := _Governance.contract.Call(opts, &out, "zkBNBAddress")
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
+}
+
+// ZkBNBAddress is a free data retrieval call binding the contract method 0x45a77bce.
+//
+// Solidity: function zkBNBAddress() view returns(address)
+func (_Governance *GovernanceSession) ZkBNBAddress() (common.Address, error) {
+	return _Governance.Contract.ZkBNBAddress(&_Governance.CallOpts)
+}
+
+// ZkBNBAddress is a free data retrieval call binding the contract method 0x45a77bce.
+//
+// Solidity: function zkBNBAddress() view returns(address)
+func (_Governance *GovernanceCallerSession) ZkBNBAddress() (common.Address, error) {
+	return _Governance.Contract.ZkBNBAddress(&_Governance.CallOpts)
+}
+
 // AddAsset is a paid mutator transaction binding the contract method 0x298410e5.
 //
 // Solidity: function addAsset(address _asset) returns()
@@ -951,6 +1044,27 @@ func (_Governance *GovernanceTransactorSession) ChangeGovernor(_newGovernor comm
 	return _Governance.Contract.ChangeGovernor(&_Governance.TransactOpts, _newGovernor)
 }
 
+// DeployAndRegisterNFTFactory is a paid mutator transaction binding the contract method 0xa19f4b48.
+//
+// Solidity: function deployAndRegisterNFTFactory(uint32 _collectionId, string _name, string _symbol) returns()
+func (_Governance *GovernanceTransactor) DeployAndRegisterNFTFactory(opts *bind.TransactOpts, _collectionId uint32, _name string, _symbol string) (*types.Transaction, error) {
+	return _Governance.contract.Transact(opts, "deployAndRegisterNFTFactory", _collectionId, _name, _symbol)
+}
+
+// DeployAndRegisterNFTFactory is a paid mutator transaction binding the contract method 0xa19f4b48.
+//
+// Solidity: function deployAndRegisterNFTFactory(uint32 _collectionId, string _name, string _symbol) returns()
+func (_Governance *GovernanceSession) DeployAndRegisterNFTFactory(_collectionId uint32, _name string, _symbol string) (*types.Transaction, error) {
+	return _Governance.Contract.DeployAndRegisterNFTFactory(&_Governance.TransactOpts, _collectionId, _name, _symbol)
+}
+
+// DeployAndRegisterNFTFactory is a paid mutator transaction binding the contract method 0xa19f4b48.
+//
+// Solidity: function deployAndRegisterNFTFactory(uint32 _collectionId, string _name, string _symbol) returns()
+func (_Governance *GovernanceTransactorSession) DeployAndRegisterNFTFactory(_collectionId uint32, _name string, _symbol string) (*types.Transaction, error) {
+	return _Governance.Contract.DeployAndRegisterNFTFactory(&_Governance.TransactOpts, _collectionId, _name, _symbol)
+}
+
 // Initialize is a paid mutator transaction binding the contract method 0x439fab91.
 //
 // Solidity: function initialize(bytes initializationParameters) returns()
@@ -970,6 +1084,48 @@ func (_Governance *GovernanceSession) Initialize(initializationParameters []byte
 // Solidity: function initialize(bytes initializationParameters) returns()
 func (_Governance *GovernanceTransactorSession) Initialize(initializationParameters []byte) (*types.Transaction, error) {
 	return _Governance.Contract.Initialize(&_Governance.TransactOpts, initializationParameters)
+}
+
+// RegisterDefaultNFTFactory is a paid mutator transaction binding the contract method 0xce1d2505.
+//
+// Solidity: function registerDefaultNFTFactory(address _creatorAddress, uint32 _collectionId) returns()
+func (_Governance *GovernanceTransactor) RegisterDefaultNFTFactory(opts *bind.TransactOpts, _creatorAddress common.Address, _collectionId uint32) (*types.Transaction, error) {
+	return _Governance.contract.Transact(opts, "registerDefaultNFTFactory", _creatorAddress, _collectionId)
+}
+
+// RegisterDefaultNFTFactory is a paid mutator transaction binding the contract method 0xce1d2505.
+//
+// Solidity: function registerDefaultNFTFactory(address _creatorAddress, uint32 _collectionId) returns()
+func (_Governance *GovernanceSession) RegisterDefaultNFTFactory(_creatorAddress common.Address, _collectionId uint32) (*types.Transaction, error) {
+	return _Governance.Contract.RegisterDefaultNFTFactory(&_Governance.TransactOpts, _creatorAddress, _collectionId)
+}
+
+// RegisterDefaultNFTFactory is a paid mutator transaction binding the contract method 0xce1d2505.
+//
+// Solidity: function registerDefaultNFTFactory(address _creatorAddress, uint32 _collectionId) returns()
+func (_Governance *GovernanceTransactorSession) RegisterDefaultNFTFactory(_creatorAddress common.Address, _collectionId uint32) (*types.Transaction, error) {
+	return _Governance.Contract.RegisterDefaultNFTFactory(&_Governance.TransactOpts, _creatorAddress, _collectionId)
+}
+
+// RegisterNFTFactory is a paid mutator transaction binding the contract method 0x908a4da7.
+//
+// Solidity: function registerNFTFactory(uint32 _collectionId, address _factoryAddress) returns()
+func (_Governance *GovernanceTransactor) RegisterNFTFactory(opts *bind.TransactOpts, _collectionId uint32, _factoryAddress common.Address) (*types.Transaction, error) {
+	return _Governance.contract.Transact(opts, "registerNFTFactory", _collectionId, _factoryAddress)
+}
+
+// RegisterNFTFactory is a paid mutator transaction binding the contract method 0x908a4da7.
+//
+// Solidity: function registerNFTFactory(uint32 _collectionId, address _factoryAddress) returns()
+func (_Governance *GovernanceSession) RegisterNFTFactory(_collectionId uint32, _factoryAddress common.Address) (*types.Transaction, error) {
+	return _Governance.Contract.RegisterNFTFactory(&_Governance.TransactOpts, _collectionId, _factoryAddress)
+}
+
+// RegisterNFTFactory is a paid mutator transaction binding the contract method 0x908a4da7.
+//
+// Solidity: function registerNFTFactory(uint32 _collectionId, address _factoryAddress) returns()
+func (_Governance *GovernanceTransactorSession) RegisterNFTFactory(_collectionId uint32, _factoryAddress common.Address) (*types.Transaction, error) {
+	return _Governance.Contract.RegisterNFTFactory(&_Governance.TransactOpts, _collectionId, _factoryAddress)
 }
 
 // SetAssetPaused is a paid mutator transaction binding the contract method 0x2520ce5a.
@@ -993,6 +1149,27 @@ func (_Governance *GovernanceTransactorSession) SetAssetPaused(_assetAddress com
 	return _Governance.Contract.SetAssetPaused(&_Governance.TransactOpts, _assetAddress, _assetPaused)
 }
 
+// SetDefaultNFTFactory is a paid mutator transaction binding the contract method 0xce09e20d.
+//
+// Solidity: function setDefaultNFTFactory(address _factoryAddress) returns()
+func (_Governance *GovernanceTransactor) SetDefaultNFTFactory(opts *bind.TransactOpts, _factoryAddress common.Address) (*types.Transaction, error) {
+	return _Governance.contract.Transact(opts, "setDefaultNFTFactory", _factoryAddress)
+}
+
+// SetDefaultNFTFactory is a paid mutator transaction binding the contract method 0xce09e20d.
+//
+// Solidity: function setDefaultNFTFactory(address _factoryAddress) returns()
+func (_Governance *GovernanceSession) SetDefaultNFTFactory(_factoryAddress common.Address) (*types.Transaction, error) {
+	return _Governance.Contract.SetDefaultNFTFactory(&_Governance.TransactOpts, _factoryAddress)
+}
+
+// SetDefaultNFTFactory is a paid mutator transaction binding the contract method 0xce09e20d.
+//
+// Solidity: function setDefaultNFTFactory(address _factoryAddress) returns()
+func (_Governance *GovernanceTransactorSession) SetDefaultNFTFactory(_factoryAddress common.Address) (*types.Transaction, error) {
+	return _Governance.Contract.SetDefaultNFTFactory(&_Governance.TransactOpts, _factoryAddress)
+}
+
 // SetValidator is a paid mutator transaction binding the contract method 0x4623c91d.
 //
 // Solidity: function setValidator(address _validator, bool _active) returns()
@@ -1014,6 +1191,48 @@ func (_Governance *GovernanceTransactorSession) SetValidator(_validator common.A
 	return _Governance.Contract.SetValidator(&_Governance.TransactOpts, _validator, _active)
 }
 
+// SetZkBNBAddress is a paid mutator transaction binding the contract method 0xb4984eba.
+//
+// Solidity: function setZkBNBAddress(address _zkBNBAddress) returns()
+func (_Governance *GovernanceTransactor) SetZkBNBAddress(opts *bind.TransactOpts, _zkBNBAddress common.Address) (*types.Transaction, error) {
+	return _Governance.contract.Transact(opts, "setZkBNBAddress", _zkBNBAddress)
+}
+
+// SetZkBNBAddress is a paid mutator transaction binding the contract method 0xb4984eba.
+//
+// Solidity: function setZkBNBAddress(address _zkBNBAddress) returns()
+func (_Governance *GovernanceSession) SetZkBNBAddress(_zkBNBAddress common.Address) (*types.Transaction, error) {
+	return _Governance.Contract.SetZkBNBAddress(&_Governance.TransactOpts, _zkBNBAddress)
+}
+
+// SetZkBNBAddress is a paid mutator transaction binding the contract method 0xb4984eba.
+//
+// Solidity: function setZkBNBAddress(address _zkBNBAddress) returns()
+func (_Governance *GovernanceTransactorSession) SetZkBNBAddress(_zkBNBAddress common.Address) (*types.Transaction, error) {
+	return _Governance.Contract.SetZkBNBAddress(&_Governance.TransactOpts, _zkBNBAddress)
+}
+
+// UpdateBaseURI is a paid mutator transaction binding the contract method 0x795302d3.
+//
+// Solidity: function updateBaseURI(uint8 nftContentType, string baseURI) returns()
+func (_Governance *GovernanceTransactor) UpdateBaseURI(opts *bind.TransactOpts, nftContentType uint8, baseURI string) (*types.Transaction, error) {
+	return _Governance.contract.Transact(opts, "updateBaseURI", nftContentType, baseURI)
+}
+
+// UpdateBaseURI is a paid mutator transaction binding the contract method 0x795302d3.
+//
+// Solidity: function updateBaseURI(uint8 nftContentType, string baseURI) returns()
+func (_Governance *GovernanceSession) UpdateBaseURI(nftContentType uint8, baseURI string) (*types.Transaction, error) {
+	return _Governance.Contract.UpdateBaseURI(&_Governance.TransactOpts, nftContentType, baseURI)
+}
+
+// UpdateBaseURI is a paid mutator transaction binding the contract method 0x795302d3.
+//
+// Solidity: function updateBaseURI(uint8 nftContentType, string baseURI) returns()
+func (_Governance *GovernanceTransactorSession) UpdateBaseURI(nftContentType uint8, baseURI string) (*types.Transaction, error) {
+	return _Governance.Contract.UpdateBaseURI(&_Governance.TransactOpts, nftContentType, baseURI)
+}
+
 // Upgrade is a paid mutator transaction binding the contract method 0x25394645.
 //
 // Solidity: function upgrade(bytes upgradeParameters) returns()
@@ -1033,27 +1252,6 @@ func (_Governance *GovernanceSession) Upgrade(upgradeParameters []byte) (*types.
 // Solidity: function upgrade(bytes upgradeParameters) returns()
 func (_Governance *GovernanceTransactorSession) Upgrade(upgradeParameters []byte) (*types.Transaction, error) {
 	return _Governance.Contract.Upgrade(&_Governance.TransactOpts, upgradeParameters)
-}
-
-// ValidateAssetTokenLister is a paid mutator transaction binding the contract method 0xc2001b38.
-//
-// Solidity: function validateAssetTokenLister(address _address) returns()
-func (_Governance *GovernanceTransactor) ValidateAssetTokenLister(opts *bind.TransactOpts, _address common.Address) (*types.Transaction, error) {
-	return _Governance.contract.Transact(opts, "validateAssetTokenLister", _address)
-}
-
-// ValidateAssetTokenLister is a paid mutator transaction binding the contract method 0xc2001b38.
-//
-// Solidity: function validateAssetTokenLister(address _address) returns()
-func (_Governance *GovernanceSession) ValidateAssetTokenLister(_address common.Address) (*types.Transaction, error) {
-	return _Governance.Contract.ValidateAssetTokenLister(&_Governance.TransactOpts, _address)
-}
-
-// ValidateAssetTokenLister is a paid mutator transaction binding the contract method 0xc2001b38.
-//
-// Solidity: function validateAssetTokenLister(address _address) returns()
-func (_Governance *GovernanceTransactorSession) ValidateAssetTokenLister(_address common.Address) (*types.Transaction, error) {
-	return _Governance.Contract.ValidateAssetTokenLister(&_Governance.TransactOpts, _address)
 }
 
 // GovernanceAssetPausedUpdateIterator is returned from FilterAssetPausedUpdate and is used to iterate over the raw logs and unpacked data for AssetPausedUpdate events raised by the Governance contract.
@@ -1185,6 +1383,455 @@ func (_Governance *GovernanceFilterer) WatchAssetPausedUpdate(opts *bind.WatchOp
 func (_Governance *GovernanceFilterer) ParseAssetPausedUpdate(log types.Log) (*GovernanceAssetPausedUpdate, error) {
 	event := new(GovernanceAssetPausedUpdate)
 	if err := _Governance.contract.UnpackLog(event, "AssetPausedUpdate", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// GovernanceInitializedIterator is returned from FilterInitialized and is used to iterate over the raw logs and unpacked data for Initialized events raised by the Governance contract.
+type GovernanceInitializedIterator struct {
+	Event *GovernanceInitialized // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *GovernanceInitializedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(GovernanceInitialized)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(GovernanceInitialized)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *GovernanceInitializedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *GovernanceInitializedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// GovernanceInitialized represents a Initialized event raised by the Governance contract.
+type GovernanceInitialized struct {
+	Version uint8
+	Raw     types.Log // Blockchain specific contextual infos
+}
+
+// FilterInitialized is a free log retrieval operation binding the contract event 0x7f26b83ff96e1f2b6a682f133852f6798a09c465da95921460cefb3847402498.
+//
+// Solidity: event Initialized(uint8 version)
+func (_Governance *GovernanceFilterer) FilterInitialized(opts *bind.FilterOpts) (*GovernanceInitializedIterator, error) {
+
+	logs, sub, err := _Governance.contract.FilterLogs(opts, "Initialized")
+	if err != nil {
+		return nil, err
+	}
+	return &GovernanceInitializedIterator{contract: _Governance.contract, event: "Initialized", logs: logs, sub: sub}, nil
+}
+
+// WatchInitialized is a free log subscription operation binding the contract event 0x7f26b83ff96e1f2b6a682f133852f6798a09c465da95921460cefb3847402498.
+//
+// Solidity: event Initialized(uint8 version)
+func (_Governance *GovernanceFilterer) WatchInitialized(opts *bind.WatchOpts, sink chan<- *GovernanceInitialized) (event.Subscription, error) {
+
+	logs, sub, err := _Governance.contract.WatchLogs(opts, "Initialized")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(GovernanceInitialized)
+				if err := _Governance.contract.UnpackLog(event, "Initialized", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseInitialized is a log parse operation binding the contract event 0x7f26b83ff96e1f2b6a682f133852f6798a09c465da95921460cefb3847402498.
+//
+// Solidity: event Initialized(uint8 version)
+func (_Governance *GovernanceFilterer) ParseInitialized(log types.Log) (*GovernanceInitialized, error) {
+	event := new(GovernanceInitialized)
+	if err := _Governance.contract.UnpackLog(event, "Initialized", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// GovernanceNFTFactoryDeployedIterator is returned from FilterNFTFactoryDeployed and is used to iterate over the raw logs and unpacked data for NFTFactoryDeployed events raised by the Governance contract.
+type GovernanceNFTFactoryDeployedIterator struct {
+	Event *GovernanceNFTFactoryDeployed // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *GovernanceNFTFactoryDeployedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(GovernanceNFTFactoryDeployed)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(GovernanceNFTFactoryDeployed)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *GovernanceNFTFactoryDeployedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *GovernanceNFTFactoryDeployedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// GovernanceNFTFactoryDeployed represents a NFTFactoryDeployed event raised by the Governance contract.
+type GovernanceNFTFactoryDeployed struct {
+	Creator common.Address
+	Factory common.Address
+	Raw     types.Log // Blockchain specific contextual infos
+}
+
+// FilterNFTFactoryDeployed is a free log retrieval operation binding the contract event 0xfddff3e939c9f69735b6bfc38166b08dadd5f35ff5bb0f7dbe9952af495d1dd6.
+//
+// Solidity: event NFTFactoryDeployed(address indexed creator, address indexed factory)
+func (_Governance *GovernanceFilterer) FilterNFTFactoryDeployed(opts *bind.FilterOpts, creator []common.Address, factory []common.Address) (*GovernanceNFTFactoryDeployedIterator, error) {
+
+	var creatorRule []interface{}
+	for _, creatorItem := range creator {
+		creatorRule = append(creatorRule, creatorItem)
+	}
+	var factoryRule []interface{}
+	for _, factoryItem := range factory {
+		factoryRule = append(factoryRule, factoryItem)
+	}
+
+	logs, sub, err := _Governance.contract.FilterLogs(opts, "NFTFactoryDeployed", creatorRule, factoryRule)
+	if err != nil {
+		return nil, err
+	}
+	return &GovernanceNFTFactoryDeployedIterator{contract: _Governance.contract, event: "NFTFactoryDeployed", logs: logs, sub: sub}, nil
+}
+
+// WatchNFTFactoryDeployed is a free log subscription operation binding the contract event 0xfddff3e939c9f69735b6bfc38166b08dadd5f35ff5bb0f7dbe9952af495d1dd6.
+//
+// Solidity: event NFTFactoryDeployed(address indexed creator, address indexed factory)
+func (_Governance *GovernanceFilterer) WatchNFTFactoryDeployed(opts *bind.WatchOpts, sink chan<- *GovernanceNFTFactoryDeployed, creator []common.Address, factory []common.Address) (event.Subscription, error) {
+
+	var creatorRule []interface{}
+	for _, creatorItem := range creator {
+		creatorRule = append(creatorRule, creatorItem)
+	}
+	var factoryRule []interface{}
+	for _, factoryItem := range factory {
+		factoryRule = append(factoryRule, factoryItem)
+	}
+
+	logs, sub, err := _Governance.contract.WatchLogs(opts, "NFTFactoryDeployed", creatorRule, factoryRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(GovernanceNFTFactoryDeployed)
+				if err := _Governance.contract.UnpackLog(event, "NFTFactoryDeployed", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseNFTFactoryDeployed is a log parse operation binding the contract event 0xfddff3e939c9f69735b6bfc38166b08dadd5f35ff5bb0f7dbe9952af495d1dd6.
+//
+// Solidity: event NFTFactoryDeployed(address indexed creator, address indexed factory)
+func (_Governance *GovernanceFilterer) ParseNFTFactoryDeployed(log types.Log) (*GovernanceNFTFactoryDeployed, error) {
+	event := new(GovernanceNFTFactoryDeployed)
+	if err := _Governance.contract.UnpackLog(event, "NFTFactoryDeployed", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// GovernanceNFTFactoryRegisteredIterator is returned from FilterNFTFactoryRegistered and is used to iterate over the raw logs and unpacked data for NFTFactoryRegistered events raised by the Governance contract.
+type GovernanceNFTFactoryRegisteredIterator struct {
+	Event *GovernanceNFTFactoryRegistered // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *GovernanceNFTFactoryRegisteredIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(GovernanceNFTFactoryRegistered)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(GovernanceNFTFactoryRegistered)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *GovernanceNFTFactoryRegisteredIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *GovernanceNFTFactoryRegisteredIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// GovernanceNFTFactoryRegistered represents a NFTFactoryRegistered event raised by the Governance contract.
+type GovernanceNFTFactoryRegistered struct {
+	Creator      common.Address
+	Factory      common.Address
+	CollectionId uint32
+	Raw          types.Log // Blockchain specific contextual infos
+}
+
+// FilterNFTFactoryRegistered is a free log retrieval operation binding the contract event 0xc2901d375e871c0dbead69c4a53755a9483632fb9e7ff2cad559aaf0ebe23580.
+//
+// Solidity: event NFTFactoryRegistered(address indexed creator, address indexed factory, uint32 indexed collectionId)
+func (_Governance *GovernanceFilterer) FilterNFTFactoryRegistered(opts *bind.FilterOpts, creator []common.Address, factory []common.Address, collectionId []uint32) (*GovernanceNFTFactoryRegisteredIterator, error) {
+
+	var creatorRule []interface{}
+	for _, creatorItem := range creator {
+		creatorRule = append(creatorRule, creatorItem)
+	}
+	var factoryRule []interface{}
+	for _, factoryItem := range factory {
+		factoryRule = append(factoryRule, factoryItem)
+	}
+	var collectionIdRule []interface{}
+	for _, collectionIdItem := range collectionId {
+		collectionIdRule = append(collectionIdRule, collectionIdItem)
+	}
+
+	logs, sub, err := _Governance.contract.FilterLogs(opts, "NFTFactoryRegistered", creatorRule, factoryRule, collectionIdRule)
+	if err != nil {
+		return nil, err
+	}
+	return &GovernanceNFTFactoryRegisteredIterator{contract: _Governance.contract, event: "NFTFactoryRegistered", logs: logs, sub: sub}, nil
+}
+
+// WatchNFTFactoryRegistered is a free log subscription operation binding the contract event 0xc2901d375e871c0dbead69c4a53755a9483632fb9e7ff2cad559aaf0ebe23580.
+//
+// Solidity: event NFTFactoryRegistered(address indexed creator, address indexed factory, uint32 indexed collectionId)
+func (_Governance *GovernanceFilterer) WatchNFTFactoryRegistered(opts *bind.WatchOpts, sink chan<- *GovernanceNFTFactoryRegistered, creator []common.Address, factory []common.Address, collectionId []uint32) (event.Subscription, error) {
+
+	var creatorRule []interface{}
+	for _, creatorItem := range creator {
+		creatorRule = append(creatorRule, creatorItem)
+	}
+	var factoryRule []interface{}
+	for _, factoryItem := range factory {
+		factoryRule = append(factoryRule, factoryItem)
+	}
+	var collectionIdRule []interface{}
+	for _, collectionIdItem := range collectionId {
+		collectionIdRule = append(collectionIdRule, collectionIdItem)
+	}
+
+	logs, sub, err := _Governance.contract.WatchLogs(opts, "NFTFactoryRegistered", creatorRule, factoryRule, collectionIdRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(GovernanceNFTFactoryRegistered)
+				if err := _Governance.contract.UnpackLog(event, "NFTFactoryRegistered", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseNFTFactoryRegistered is a log parse operation binding the contract event 0xc2901d375e871c0dbead69c4a53755a9483632fb9e7ff2cad559aaf0ebe23580.
+//
+// Solidity: event NFTFactoryRegistered(address indexed creator, address indexed factory, uint32 indexed collectionId)
+func (_Governance *GovernanceFilterer) ParseNFTFactoryRegistered(log types.Log) (*GovernanceNFTFactoryRegistered, error) {
+	event := new(GovernanceNFTFactoryRegistered)
+	if err := _Governance.contract.UnpackLog(event, "NFTFactoryRegistered", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
@@ -1588,6 +2235,294 @@ func (_Governance *GovernanceFilterer) WatchNewGovernor(opts *bind.WatchOpts, si
 func (_Governance *GovernanceFilterer) ParseNewGovernor(log types.Log) (*GovernanceNewGovernor, error) {
 	event := new(GovernanceNewGovernor)
 	if err := _Governance.contract.UnpackLog(event, "NewGovernor", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// GovernanceSetDefaultNFTFactoryIterator is returned from FilterSetDefaultNFTFactory and is used to iterate over the raw logs and unpacked data for SetDefaultNFTFactory events raised by the Governance contract.
+type GovernanceSetDefaultNFTFactoryIterator struct {
+	Event *GovernanceSetDefaultNFTFactory // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *GovernanceSetDefaultNFTFactoryIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(GovernanceSetDefaultNFTFactory)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(GovernanceSetDefaultNFTFactory)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *GovernanceSetDefaultNFTFactoryIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *GovernanceSetDefaultNFTFactoryIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// GovernanceSetDefaultNFTFactory represents a SetDefaultNFTFactory event raised by the Governance contract.
+type GovernanceSetDefaultNFTFactory struct {
+	Factory common.Address
+	Raw     types.Log // Blockchain specific contextual infos
+}
+
+// FilterSetDefaultNFTFactory is a free log retrieval operation binding the contract event 0x9678384f56a2d29e9db5747e5910c194dde921293922f2463582d8c25b965330.
+//
+// Solidity: event SetDefaultNFTFactory(address indexed factory)
+func (_Governance *GovernanceFilterer) FilterSetDefaultNFTFactory(opts *bind.FilterOpts, factory []common.Address) (*GovernanceSetDefaultNFTFactoryIterator, error) {
+
+	var factoryRule []interface{}
+	for _, factoryItem := range factory {
+		factoryRule = append(factoryRule, factoryItem)
+	}
+
+	logs, sub, err := _Governance.contract.FilterLogs(opts, "SetDefaultNFTFactory", factoryRule)
+	if err != nil {
+		return nil, err
+	}
+	return &GovernanceSetDefaultNFTFactoryIterator{contract: _Governance.contract, event: "SetDefaultNFTFactory", logs: logs, sub: sub}, nil
+}
+
+// WatchSetDefaultNFTFactory is a free log subscription operation binding the contract event 0x9678384f56a2d29e9db5747e5910c194dde921293922f2463582d8c25b965330.
+//
+// Solidity: event SetDefaultNFTFactory(address indexed factory)
+func (_Governance *GovernanceFilterer) WatchSetDefaultNFTFactory(opts *bind.WatchOpts, sink chan<- *GovernanceSetDefaultNFTFactory, factory []common.Address) (event.Subscription, error) {
+
+	var factoryRule []interface{}
+	for _, factoryItem := range factory {
+		factoryRule = append(factoryRule, factoryItem)
+	}
+
+	logs, sub, err := _Governance.contract.WatchLogs(opts, "SetDefaultNFTFactory", factoryRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(GovernanceSetDefaultNFTFactory)
+				if err := _Governance.contract.UnpackLog(event, "SetDefaultNFTFactory", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseSetDefaultNFTFactory is a log parse operation binding the contract event 0x9678384f56a2d29e9db5747e5910c194dde921293922f2463582d8c25b965330.
+//
+// Solidity: event SetDefaultNFTFactory(address indexed factory)
+func (_Governance *GovernanceFilterer) ParseSetDefaultNFTFactory(log types.Log) (*GovernanceSetDefaultNFTFactory, error) {
+	event := new(GovernanceSetDefaultNFTFactory)
+	if err := _Governance.contract.UnpackLog(event, "SetDefaultNFTFactory", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// GovernanceSetZkBNBIterator is returned from FilterSetZkBNB and is used to iterate over the raw logs and unpacked data for SetZkBNB events raised by the Governance contract.
+type GovernanceSetZkBNBIterator struct {
+	Event *GovernanceSetZkBNB // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *GovernanceSetZkBNBIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(GovernanceSetZkBNB)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(GovernanceSetZkBNB)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *GovernanceSetZkBNBIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *GovernanceSetZkBNBIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// GovernanceSetZkBNB represents a SetZkBNB event raised by the Governance contract.
+type GovernanceSetZkBNB struct {
+	ZkBNBAddress common.Address
+	Raw          types.Log // Blockchain specific contextual infos
+}
+
+// FilterSetZkBNB is a free log retrieval operation binding the contract event 0x6f4238f8a4f3b44662cd7d9a2585ac104a4a6f4fec21659ba741da73ef1602a5.
+//
+// Solidity: event SetZkBNB(address indexed zkBNBAddress)
+func (_Governance *GovernanceFilterer) FilterSetZkBNB(opts *bind.FilterOpts, zkBNBAddress []common.Address) (*GovernanceSetZkBNBIterator, error) {
+
+	var zkBNBAddressRule []interface{}
+	for _, zkBNBAddressItem := range zkBNBAddress {
+		zkBNBAddressRule = append(zkBNBAddressRule, zkBNBAddressItem)
+	}
+
+	logs, sub, err := _Governance.contract.FilterLogs(opts, "SetZkBNB", zkBNBAddressRule)
+	if err != nil {
+		return nil, err
+	}
+	return &GovernanceSetZkBNBIterator{contract: _Governance.contract, event: "SetZkBNB", logs: logs, sub: sub}, nil
+}
+
+// WatchSetZkBNB is a free log subscription operation binding the contract event 0x6f4238f8a4f3b44662cd7d9a2585ac104a4a6f4fec21659ba741da73ef1602a5.
+//
+// Solidity: event SetZkBNB(address indexed zkBNBAddress)
+func (_Governance *GovernanceFilterer) WatchSetZkBNB(opts *bind.WatchOpts, sink chan<- *GovernanceSetZkBNB, zkBNBAddress []common.Address) (event.Subscription, error) {
+
+	var zkBNBAddressRule []interface{}
+	for _, zkBNBAddressItem := range zkBNBAddress {
+		zkBNBAddressRule = append(zkBNBAddressRule, zkBNBAddressItem)
+	}
+
+	logs, sub, err := _Governance.contract.WatchLogs(opts, "SetZkBNB", zkBNBAddressRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(GovernanceSetZkBNB)
+				if err := _Governance.contract.UnpackLog(event, "SetZkBNB", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseSetZkBNB is a log parse operation binding the contract event 0x6f4238f8a4f3b44662cd7d9a2585ac104a4a6f4fec21659ba741da73ef1602a5.
+//
+// Solidity: event SetZkBNB(address indexed zkBNBAddress)
+func (_Governance *GovernanceFilterer) ParseSetZkBNB(log types.Log) (*GovernanceSetZkBNB, error) {
+	event := new(GovernanceSetZkBNB)
+	if err := _Governance.contract.UnpackLog(event, "SetZkBNB", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
