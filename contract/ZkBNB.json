@@ -1,5 +1,10 @@
 [
   {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
     "anonymous": false,
     "inputs": [
       {
@@ -421,38 +426,12 @@
   },
   {
     "inputs": [],
-    "name": "MAX_FUNGIBLE_ASSET_ID",
-    "outputs": [
-      {
-        "internalType": "uint32",
-        "name": "",
-        "type": "uint32"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "MAX_NFT_INDEX",
     "outputs": [
       {
         "internalType": "uint40",
         "name": "",
         "type": "uint40"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "SPECIAL_ACCOUNT_ADDRESS",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -702,6 +681,30 @@
   {
     "inputs": [
       {
+        "internalType": "uint8",
+        "name": "nftContentType",
+        "type": "uint8"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "nftContentHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getNftTokenURI",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "tokenURI",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "_address",
         "type": "address"
@@ -815,230 +818,17 @@
         "type": "tuple"
       },
       {
-        "internalType": "uint256",
-        "name": "_nftRoot",
-        "type": "uint256"
+        "internalType": "bytes",
+        "name": "_pubdata",
+        "type": "bytes"
       },
       {
-        "components": [
-          {
-            "internalType": "uint16",
-            "name": "assetId",
-            "type": "uint16"
-          },
-          {
-            "internalType": "uint128",
-            "name": "amount",
-            "type": "uint128"
-          },
-          {
-            "internalType": "uint256",
-            "name": "offerCanceledOrFinalized",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct DesertVerifier.AssetExitData",
-        "name": "_assetExitData",
-        "type": "tuple"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint32",
-            "name": "accountId",
-            "type": "uint32"
-          },
-          {
-            "internalType": "address",
-            "name": "l1Address",
-            "type": "address"
-          },
-          {
-            "internalType": "bytes32",
-            "name": "pubKeyX",
-            "type": "bytes32"
-          },
-          {
-            "internalType": "bytes32",
-            "name": "pubKeyY",
-            "type": "bytes32"
-          },
-          {
-            "internalType": "uint256",
-            "name": "nonce",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "collectionNonce",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct DesertVerifier.AccountExitData",
-        "name": "_accountExitData",
-        "type": "tuple"
-      },
-      {
-        "internalType": "uint256[16]",
-        "name": "_assetMerkleProof",
-        "type": "uint256[16]"
-      },
-      {
-        "internalType": "uint256[32]",
-        "name": "_accountMerkleProof",
-        "type": "uint256[32]"
+        "internalType": "uint256[]",
+        "name": "_proofs",
+        "type": "uint256[]"
       }
     ],
     "name": "performDesert",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "components": [
-          {
-            "internalType": "uint16",
-            "name": "blockSize",
-            "type": "uint16"
-          },
-          {
-            "internalType": "uint32",
-            "name": "blockNumber",
-            "type": "uint32"
-          },
-          {
-            "internalType": "uint64",
-            "name": "priorityOperations",
-            "type": "uint64"
-          },
-          {
-            "internalType": "bytes32",
-            "name": "pendingOnchainOperationsHash",
-            "type": "bytes32"
-          },
-          {
-            "internalType": "uint256",
-            "name": "timestamp",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bytes32",
-            "name": "stateRoot",
-            "type": "bytes32"
-          },
-          {
-            "internalType": "bytes32",
-            "name": "commitment",
-            "type": "bytes32"
-          }
-        ],
-        "internalType": "struct Storage.StoredBlockInfo",
-        "name": "_storedBlockInfo",
-        "type": "tuple"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_assetRoot",
-        "type": "uint256"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint32",
-            "name": "accountId",
-            "type": "uint32"
-          },
-          {
-            "internalType": "address",
-            "name": "l1Address",
-            "type": "address"
-          },
-          {
-            "internalType": "bytes32",
-            "name": "pubKeyX",
-            "type": "bytes32"
-          },
-          {
-            "internalType": "bytes32",
-            "name": "pubKeyY",
-            "type": "bytes32"
-          },
-          {
-            "internalType": "uint256",
-            "name": "nonce",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "collectionNonce",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct DesertVerifier.AccountExitData",
-        "name": "_accountExitData",
-        "type": "tuple"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint40",
-            "name": "nftIndex",
-            "type": "uint40"
-          },
-          {
-            "internalType": "uint256",
-            "name": "ownerAccountIndex",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint32",
-            "name": "creatorAccountIndex",
-            "type": "uint32"
-          },
-          {
-            "internalType": "uint16",
-            "name": "creatorTreasuryRate",
-            "type": "uint16"
-          },
-          {
-            "internalType": "uint16",
-            "name": "collectionId",
-            "type": "uint16"
-          },
-          {
-            "internalType": "bytes16",
-            "name": "nftContentHash1",
-            "type": "bytes16"
-          },
-          {
-            "internalType": "bytes16",
-            "name": "nftContentHash2",
-            "type": "bytes16"
-          },
-          {
-            "internalType": "uint8",
-            "name": "nftContentType",
-            "type": "uint8"
-          }
-        ],
-        "internalType": "struct DesertVerifier.NftExitData[]",
-        "name": "_exitNfts",
-        "type": "tuple[]"
-      },
-      {
-        "internalType": "uint256[32]",
-        "name": "_accountMerkleProof",
-        "type": "uint256[32]"
-      },
-      {
-        "internalType": "uint256[40][]",
-        "name": "_nftMerkleProofs",
-        "type": "uint256[40][]"
-      }
-    ],
-    "name": "performDesertNft",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
