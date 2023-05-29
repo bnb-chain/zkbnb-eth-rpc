@@ -166,33 +166,14 @@ func (c *ZkBNBClient) RevertBlocks(revertBlocks []StorageStoredBlockInfo, gasPri
 /*
 	PerformDesert: perform desert
 */
-func (c *ZkBNBClient) PerformDesert(storedBlockInfo StorageStoredBlockInfo, nftRoot *big.Int, assetExitData DesertVerifierAssetExitData,
-	accountExitData DesertVerifierAccountExitData, assetMerkleProof [16]*big.Int, accountMerkleProof [32]*big.Int,
+func (c *ZkBNBClient) PerformDesert(storedBlockInfo StorageStoredBlockInfo, pubData []byte, proofs []*big.Int,
 	gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
 	transactOpts, err := c.PerformConstructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
 	if err != nil {
 		return "", err
 	}
 	// call initialize
-	tx, err := c.Instance.PerformDesert(transactOpts, storedBlockInfo, nftRoot, assetExitData, accountExitData, assetMerkleProof, accountMerkleProof)
-	if err != nil {
-		return "", err
-	}
-	return tx.Hash().String(), nil
-}
-
-/*
-	PerformDesertNft: perform desert nft
-*/
-func (c *ZkBNBClient) PerformDesertNft(storedBlockInfo StorageStoredBlockInfo, assetRoot *big.Int, accountExitData DesertVerifierAccountExitData,
-	exitNfts []DesertVerifierNftExitData, accountMerkleProof [32]*big.Int, nftMerkleProofs [][40]*big.Int,
-	gasPrice *big.Int, gasLimit uint64) (txHash string, err error) {
-	transactOpts, err := c.PerformConstructor.ConstructTransactOpts(c.Provider, gasPrice, gasLimit)
-	if err != nil {
-		return "", err
-	}
-	// call initialize
-	tx, err := c.Instance.PerformDesertNft(transactOpts, storedBlockInfo, assetRoot, accountExitData, exitNfts, accountMerkleProof, nftMerkleProofs)
+	tx, err := c.Instance.PerformDesert(transactOpts, storedBlockInfo, pubData, proofs)
 	if err != nil {
 		return "", err
 	}
